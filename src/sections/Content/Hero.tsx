@@ -32,16 +32,14 @@ export default function HeroFlats({
     <div>
       <div className="mx-auto flex flex-col items-center gap-8">
         <div
-          className={`flex w-full xl:container mx-5 py-20 md:mx-10 xl:mx-auto z-10 ${
-            image
-              ? PLACEMENT[placement]
-              : "flex-col items-center justify-center text-center"
-          } lg:py-36 gap-12 md:gap-20 items-center`}
+          className={`z-10 mx-5 flex w-full py-20 md:mx-10 xl:container xl:mx-auto ${
+            image ? PLACEMENT[placement] : "flex-col items-center justify-center text-center"
+          } items-center gap-12 md:gap-20 lg:py-36`}
         >
           {image && (
             <Image
               width={640}
-              className="w-full lg:w-1/2 object-fit"
+              className="object-fit w-full lg:w-1/2"
               sizes="(max-width: 640px) 100vw, 30vw"
               src={image}
               alt={image}
@@ -50,7 +48,7 @@ export default function HeroFlats({
             />
           )}
           <div
-            className={`mx-6 lg:mx-auto lg:w-full space-y-4 gap-4 ${
+            className={`mx-6 gap-4 space-y-4 lg:mx-auto lg:w-full ${
               image
                 ? "lg:w-1/2 lg:max-w-xl"
                 : "flex flex-col items-center justify-center lg:max-w-3xl"
@@ -61,29 +59,21 @@ export default function HeroFlats({
               dangerouslySetInnerHTML={{
                 __html: title,
               }}
-            >
-            </div>
-            <p className="text-zinc-400 text-base md:text-lg leading-[150%]">
-              {description}
-            </p>
-            <div className="flex flex-col items-center lg:items-start lg:flex-row gap-4">
+            ></div>
+            <p className="text-zinc-400 text-base leading-[150%] md:text-lg">{description}</p>
+            <div className="flex flex-col items-center gap-4 lg:flex-row lg:items-start">
               {cta?.map((item) => (
                 <a
                   key={item?.id}
                   id={item?.id}
                   href={item?.href}
                   target={item?.href.includes("http") ? "_blank" : "_self"}
-                  className={`group relative overflow-hidden rounded-full hover:bg-gradient-to-r px-6 py-2 lg:px-8 lg:py-3 transition-all duration-300 ease-out ${
-                    item.variant === "Reverse"
-                      ? "bg-secondary text-white"
-                      : "bg-accent text-black"
+                  className={`group relative overflow-hidden rounded-full px-6 py-2 transition-all duration-300 ease-out hover:bg-gradient-to-r lg:px-8 lg:py-3 ${
+                    item.variant === "Reverse" ? "bg-secondary text-white" : "bg-accent text-black"
                   }`}
                 >
-                  <span className="ease absolute right-0 -mt-12 h-32 w-8 translate-x-12 rotate-12 bg-white opacity-10 transition-all duration-1000 group-hover:-translate-x-40">
-                  </span>
-                  <span className="relative font-medium lg:text-xl">
-                    {item?.text}
-                  </span>
+                  <span className="ease absolute right-0 -mt-12 h-32 w-8 translate-x-12 rotate-12 bg-white opacity-10 transition-all duration-1000 group-hover:-translate-x-40"></span>
+                  <span className="relative font-medium lg:text-xl">{item?.text}</span>
                 </a>
               ))}
             </div>

@@ -22,8 +22,8 @@ function ProductSlider({ products, itemListName }: Props) {
           gridTemplateColumns: "min-content 1fr min-content",
         }}
       >
-        <div className="col-start-1 col-span-3 row-start-1 row-span-1">
-          <Slider className="carousel carousel-center sm:carousel-end gap-5 sm:gap-10 w-full">
+        <div className="col-span-3 col-start-1 row-span-1 row-start-1">
+          <Slider className="carousel w-full carousel-center gap-5 sm:carousel-end sm:gap-10">
             {products?.map((product, index) => (
               <Slider.Item
                 index={index}
@@ -44,14 +44,14 @@ function ProductSlider({ products, itemListName }: Props) {
           </Slider>
         </div>
 
-        <div className="col-start-1 col-span-1 row-start-1 row-span-1 z-10 self-center p-2 relative bottom-[15%]">
-          <Slider.PrevButton className="hidden sm:flex disabled:invisible btn btn-outline btn-sm btn-circle no-animation">
+        <div className="relative bottom-[15%] z-10 col-span-1 col-start-1 row-span-1 row-start-1 self-center p-2">
+          <Slider.PrevButton className="no-animation btn hidden btn-circle btn-outline btn-sm disabled:invisible sm:flex">
             <Icon id="chevron-right" className="rotate-180" />
           </Slider.PrevButton>
         </div>
 
-        <div className="col-start-3 col-span-1 row-start-1 row-span-1 z-10 self-center p-2 relative bottom-[15%]">
-          <Slider.NextButton className="hidden sm:flex disabled:invisible btn btn-outline btn-sm btn-circle no-animation">
+        <div className="relative bottom-[15%] z-10 col-span-1 col-start-3 row-span-1 row-start-1 self-center p-2">
+          <Slider.NextButton className="no-animation btn hidden btn-circle btn-outline btn-sm disabled:invisible sm:flex">
             <Icon id="chevron-right" />
           </Slider.NextButton>
         </div>

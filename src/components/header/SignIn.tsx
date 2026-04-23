@@ -10,7 +10,7 @@ interface Props {
 function SignIn({ variant }: Props) {
   const { isAuthenticated } = useUser();
   const className = clx(
-    "btn btn-sm font-thin btn-ghost no-animation",
+    "no-animation btn font-thin btn-ghost btn-sm",
     variant === "mobile" && "btn-square",
   );
 

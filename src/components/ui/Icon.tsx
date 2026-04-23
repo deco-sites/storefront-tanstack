@@ -28,15 +28,9 @@ interface Props extends React.SVGAttributes<SVGSVGElement> {
   size?: number;
 }
 
-function Icon(
-  { id, size = 24, width, height, ...otherProps }: Props,
-) {
+function Icon({ id, size = 24, width, height, ...otherProps }: Props) {
   return (
-    <svg
-      {...otherProps}
-      width={width ?? size}
-      height={height ?? size}
-    >
+    <svg {...otherProps} width={width ?? size} height={height ?? size}>
       <use href={`/sprites.svg#${id}`} />
     </svg>
   );

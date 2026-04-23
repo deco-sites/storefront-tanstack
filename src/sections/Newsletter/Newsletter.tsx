@@ -88,11 +88,9 @@ async function subscribeNewsletter(_email: string): Promise<void> {
 
 function Notice({ title, description }: NoticeProps) {
   return (
-    <div className="flex flex-col justify-center items-center sm:items-start gap-4">
-      <span className="text-3xl font-semibold text-center sm:text-start">
-        {title}
-      </span>
-      <span className="text-sm font-normal text-base-400 text-center sm:text-start">
+    <div className="flex flex-col items-center justify-center gap-4 sm:items-start">
+      <span className="text-center text-3xl font-semibold sm:text-start">{title}</span>
+      <span className="text-base-400 text-center text-sm font-normal sm:text-start">
         {description}
       </span>
     </div>
@@ -112,7 +110,7 @@ export default function Newsletter({ notices, form }: Props) {
     const isSuccess = subscribe.isSuccess;
     return (
       <Section.Container className="bg-base-200">
-        <div className="p-14 flex flex-col sm:flex-row items-center justify-center gap-5 sm:gap-10">
+        <div className="flex flex-col items-center justify-center gap-5 p-14 sm:flex-row sm:gap-10">
           <Icon
             size={80}
             className={clx(isSuccess ? "text-success" : "text-error")}
@@ -126,7 +124,7 @@ export default function Newsletter({ notices, form }: Props) {
 
   return (
     <Section.Container className="bg-base-200">
-      <div className="p-14 grid grid-flow-row sm:grid-cols-2 gap-10 sm:gap-20 place-items-center">
+      <div className="grid grid-flow-row place-items-center gap-10 p-14 sm:grid-cols-2 sm:gap-20">
         <Notice {...empty} />
 
         <form
@@ -136,22 +134,18 @@ export default function Newsletter({ notices, form }: Props) {
             const email = `${data.get("email") ?? ""}`.trim();
             if (email) subscribe.mutate(email);
           }}
-          className="flex flex-col sm:flex-row gap-4 w-full"
+          className="flex w-full flex-col gap-4 sm:flex-row"
         >
           <input
             name="email"
             type="email"
             required
-            className="input input-bordered grow"
+            className="input-bordered input grow"
             placeholder={placeholder}
             disabled={subscribe.isPending}
           />
 
-          <button
-            className="btn btn-primary"
-            type="submit"
-            disabled={subscribe.isPending}
-          >
+          <button className="btn btn-primary" type="submit" disabled={subscribe.isPending}>
             {subscribe.isPending ? (
               <span className="loading loading-spinner" />
             ) : (

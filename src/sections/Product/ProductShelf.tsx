@@ -2,9 +2,7 @@
 import type { Product } from "@decocms/apps/commerce/types";
 import { mapProductToAnalyticsItem } from "@decocms/apps/commerce/utils/productToAnalyticsItem";
 import ProductSlider from "../../components/product/ProductSlider";
-import Section, {
-  Props as SectionHeaderProps,
-} from "../../components/ui/Section";
+import Section, { Props as SectionHeaderProps } from "../../components/ui/Section";
 import { useOffer } from "@decocms/apps/commerce/sdk/useOffer";
 import { useSendEvent } from "../../sdk/useSendEvent";
 import { type LoadingFallbackProps } from "~/types/deco";
@@ -23,8 +21,8 @@ export default function ProductShelf({ products, title, cta }: Props) {
             index,
             product,
             // eslint-disable-next-line react-hooks/rules-of-hooks -- useOffer is a misnamed pure helper from @decocms/apps, not a React hook
-            ...(useOffer(product.offers)),
-          })
+            ...useOffer(product.offers),
+          }),
         ),
       },
     },
@@ -40,9 +38,7 @@ export default function ProductShelf({ products, title, cta }: Props) {
     </Section.Container>
   );
 }
-export const LoadingFallback = (
-  { title, cta }: LoadingFallbackProps<Props>,
-) => (
+export const LoadingFallback = ({ title, cta }: LoadingFallbackProps<Props>) => (
   <Section.Container>
     <Section.Header title={title} cta={cta} />
     <Section.Placeholder height="471px" />;

@@ -16,9 +16,7 @@ import type { Person } from "./user.types";
 const CUSTOMER_COOKIE = "secure_customer_sig";
 const ONE_WEEK_S = 7 * 24 * 60 * 60;
 
-const toPerson = (
-  u: Awaited<ReturnType<typeof shopifyUserLoader>>,
-): Person | null => {
+const toPerson = (u: Awaited<ReturnType<typeof shopifyUserLoader>>): Person | null => {
   if (!u) return null;
   return {
     "@id": u["@id"],
@@ -67,11 +65,9 @@ export const signInServerFn = createServerFn({ method: "POST" })
       password: ctx.data.password,
       requestHeaders: request.headers,
     });
-    const token = result?.customerAccessTokenCreate?.customerAccessToken
-      ?.accessToken;
+    const token = result?.customerAccessTokenCreate?.customerAccessToken?.accessToken;
     if (!token) {
-      const msg = result?.customerAccessTokenCreate?.customerUserErrors?.[0]
-        ?.message;
+      const msg = result?.customerAccessTokenCreate?.customerUserErrors?.[0]?.message;
       throw new Error(msg ?? "Invalid email or password");
     }
     persistAccessToken(token);
@@ -81,12 +77,7 @@ export const signInServerFn = createServerFn({ method: "POST" })
 
 export const signUpServerFn = createServerFn({ method: "POST" })
   .inputValidator(
-    (input: {
-      email: string;
-      password: string;
-      firstName?: string;
-      lastName?: string;
-    }) => input,
+    (input: { email: string; password: string; firstName?: string; lastName?: string }) => input,
   )
   .handler(async (ctx): Promise<Person | null> => {
     const request = getRequest();
@@ -107,8 +98,7 @@ export const signUpServerFn = createServerFn({ method: "POST" })
       password: ctx.data.password,
       requestHeaders: request.headers,
     });
-    const token = signin?.customerAccessTokenCreate?.customerAccessToken
-      ?.accessToken;
+    const token = signin?.customerAccessTokenCreate?.customerAccessToken?.accessToken;
     if (!token) {
       throw new Error("Account created, but auto sign-in failed.");
     }
@@ -146,10 +136,9 @@ export const recoverPasswordServerFn = createServerFn({ method: "POST" })
   .inputValidator((input: { email: string }) => input)
   .handler(async (ctx): Promise<{ ok: true }> => {
     const client = getShopifyClient();
-    const data = await client.query<RecoverResult>(
-      RECOVER_PASSWORD_MUTATION,
-      { email: ctx.data.email },
-    );
+    const data = await client.query<RecoverResult>(RECOVER_PASSWORD_MUTATION, {
+      email: ctx.data.email,
+    });
     const errs = data?.customerRecover?.customerUserErrors;
     if (errs?.length) {
       throw new Error(errs[0].message ?? "Could not send recovery email.");

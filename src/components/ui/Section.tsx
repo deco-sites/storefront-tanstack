@@ -16,13 +16,8 @@ function Header({ title, cta }: Props) {
   }
 
   return (
-    <div
-      className={clx(
-        "flex justify-between items-center gap-2",
-        "px-5 sm:px-0",
-      )}
-    >
-      <span className="text-2xl sm:text-3xl font-semibold">{title}</span>
+    <div className={clx("flex items-center justify-between gap-2", "px-5 sm:px-0")}>
+      <span className="text-2xl font-semibold sm:text-3xl">{title}</span>
       {cta && (
         <a className="text-sm font-medium text-primary" href={cta}>
           See all
@@ -32,16 +27,8 @@ function Header({ title, cta }: Props) {
   );
 }
 
-function Tabbed(
-  { children }: {
-    children: JSX.Element;
-  },
-) {
-  return (
-    <>
-      {children}
-    </>
-  );
+function Tabbed({ children }: { children: JSX.Element }) {
+  return <>{children}</>;
 }
 
 function Container({ className: _class, ...props }: React.JSX.IntrinsicElements["div"]) {
@@ -49,16 +36,14 @@ function Container({ className: _class, ...props }: React.JSX.IntrinsicElements[
     <div
       {...props}
       className={clx(
-        "container flex flex-col gap-4 sm:gap-6 w-full py-5 sm:py-10",
+        "container flex w-full flex-col gap-4 py-5 sm:gap-6 sm:py-10",
         _class?.toString(),
       )}
     />
   );
 }
 
-function Placeholder(
-  { height, className: _class }: { height: string; className?: string },
-) {
+function Placeholder({ height, className: _class }: { height: string; className?: string }) {
   return (
     <div
       style={{
@@ -66,7 +51,7 @@ function Placeholder(
         containIntrinsicSize: height,
         contentVisibility: "auto",
       }}
-      className={clx("flex justify-center items-center", _class)}
+      className={clx("flex items-center justify-center", _class)}
     >
       <span className="loading loading-spinner" />
     </div>

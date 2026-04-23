@@ -12,14 +12,14 @@ interface Props {
 const colors: Record<string, Record<string, string>> = {
   "azul-clara": { backgroundColor: "#87CEFA" },
   "azul-marinho": { backgroundColor: "#000080" },
-  "branca": { backgroundColor: "#FFFFFF" },
-  "cinza": { backgroundColor: "#808080" },
+  branca: { backgroundColor: "#FFFFFF" },
+  cinza: { backgroundColor: "#808080" },
   "cinza-escura": { backgroundColor: "#A9A9A9" },
-  "laranja": { backgroundColor: "#FFA500" },
-  "marrom": { backgroundColor: "#A52A2A" },
-  "preta": { backgroundColor: "#161616" },
+  laranja: { backgroundColor: "#FFA500" },
+  marrom: { backgroundColor: "#A52A2A" },
+  preta: { backgroundColor: "#161616" },
   "verde-clara": { backgroundColor: "#90EE90" },
-  "vermelha": { backgroundColor: "#FF0000" },
+  vermelha: { backgroundColor: "#FF0000" },
 };
 
 const variants = {
@@ -30,19 +30,12 @@ const variants = {
 
 function Avatar({ content, variant = "default" }: Props) {
   return (
-    <div className="avatar placeholder">
+    <div className="placeholder avatar">
       <div
-        className={clx(
-          "h-6 w-6",
-          "rounded-full",
-          "ring-1 ring-offset-2",
-          variants[variant],
-        )}
+        className={clx("h-6 w-6", "rounded-full", "ring-1 ring-offset-2", variants[variant])}
         style={colors[content]}
       >
-        <span className="uppercase">
-          {colors[content] ? "" : content.substring(0, 2)}
-        </span>
+        <span className="uppercase">{colors[content] ? "" : content.substring(0, 2)}</span>
       </div>
     </div>
   );

@@ -11,17 +11,12 @@ export interface Props {
   isLoading?: boolean;
 }
 
-export default function ProductPrice({
-  price = 0,
-  listPrice,
-  currencyCode,
-  isLoading,
-}: Props) {
+export default function ProductPrice({ price = 0, listPrice, currencyCode, isLoading }: Props) {
   if (isLoading) {
     return (
       <div className="flex gap-3 pt-1" aria-hidden="true">
-        <div className="skeleton h-9 w-32 rounded" />
-        <div className="skeleton h-5 w-20 self-end rounded" />
+        <div className="h-9 w-32 skeleton rounded" />
+        <div className="h-5 w-20 skeleton self-end rounded" />
       </div>
     );
   }
@@ -30,11 +25,11 @@ export default function ProductPrice({
 
   return (
     <div className="flex gap-3 pt-1">
-      <span className="text-3xl font-semibold text-base-400">
+      <span className="text-base-400 text-3xl font-semibold">
         {formatPrice(price, currencyCode)}
       </span>
       {showCompare ? (
-        <span className="line-through text-sm font-medium text-gray-400 self-end">
+        <span className="self-end text-sm font-medium text-gray-400 line-through">
           {formatPrice(listPrice, currencyCode)}
         </span>
       ) : null}

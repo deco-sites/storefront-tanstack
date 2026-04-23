@@ -2,10 +2,7 @@ import { usePlatform } from "../apps/site";
 import { EMPTY_WISHLIST, type WishlistState } from "../platform/wishlist";
 import { readWishlistCookie } from "./_cookie";
 
-async function loader(
-  _props?: unknown,
-  req?: Request,
-): Promise<WishlistState> {
+async function loader(_props?: unknown, req?: Request): Promise<WishlistState> {
   const platform = usePlatform();
 
   if (platform === "vtex") {

@@ -1,9 +1,7 @@
 import React, { useId, useRef } from "react";
 import { clx } from "~/sdk/clx";
 
-function QuantitySelector(
-  { id, disabled, ...props }: React.JSX.IntrinsicElements["input"],
-) {
+function QuantitySelector({ id, disabled, ...props }: React.JSX.IntrinsicElements["input"]) {
   const fallbackId = useId();
   const inputId = id ?? fallbackId;
   const inputRef = useRef<HTMLInputElement>(null);
@@ -21,10 +19,10 @@ function QuantitySelector(
   };
 
   return (
-    <div className="join border rounded w-full">
+    <div className="join w-full rounded border">
       <button
         type="button"
-        className="btn btn-square btn-ghost no-animation"
+        className="no-animation btn btn-square btn-ghost"
         onClick={() => step(-1)}
         disabled={disabled}
         aria-label="Decrease quantity"
@@ -34,16 +32,16 @@ function QuantitySelector(
       <div
         data-tip={`Quantity must be between ${props.min} and ${props.max}`}
         className={clx(
-          "flex-grow join-item",
-          "flex justify-center items-center",
-          "has-[:invalid]:tooltip has-[:invalid]:tooltip-error has-[:invalid]:tooltip-open has-[:invalid]:tooltip-bottom",
+          "join-item flex-grow",
+          "flex items-center justify-center",
+          "has-[:invalid]:tooltip-open has-[:invalid]:tooltip has-[:invalid]:tooltip-bottom has-[:invalid]:tooltip-error",
         )}
       >
         <input
           ref={inputRef}
           id={inputId}
           className={clx(
-            "input text-center flex-grow [appearance:textfield]",
+            "input flex-grow [appearance:textfield] text-center",
             "invalid:input-error",
           )}
           disabled={disabled}
@@ -54,7 +52,7 @@ function QuantitySelector(
       </div>
       <button
         type="button"
-        className="btn btn-square btn-ghost no-animation"
+        className="no-animation btn btn-square btn-ghost"
         onClick={() => step(1)}
         disabled={disabled}
         aria-label="Increase quantity"

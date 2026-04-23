@@ -78,15 +78,10 @@ function ShoppableBanner(props: Props) {
 
   return (
     <div className="container">
-      <div className="card lg:card-side rounded grid grid-cols-1 lg:grid-cols-2">
+      <div className="card grid grid-cols-1 rounded lg:card-side lg:grid-cols-2">
         <figure className="relative">
           <Picture>
-            <Source
-              media="(max-width: 767px)"
-              src={image?.mobile}
-              width={150}
-              height={150}
-            />
+            <Source media="(max-width: 767px)" src={image?.mobile} width={150} height={150} />
             <Source
               media="(min-width: 768px)"
               src={image?.desktop ? image?.desktop : image?.mobile}
@@ -94,7 +89,7 @@ function ShoppableBanner(props: Props) {
               height={227}
             />
             <img
-              className="w-full h-full object-cover"
+              className="h-full w-full object-cover"
               sizes="(max-width: 640px) 100vw, 30vw"
               src={image?.mobile}
               alt={image?.altText}
@@ -106,7 +101,7 @@ function ShoppableBanner(props: Props) {
             <>
               <a
                 href={link}
-                className="absolute w-min btn btn-accent rounded-full hover:rounded text-accent no-animation hover:scale-125 hover:text-accent-content md:scale-[30%] sm:hidden"
+                className="no-animation btn absolute w-min rounded-full text-accent btn-accent hover:scale-125 hover:rounded hover:text-accent-content sm:hidden md:scale-[30%]"
                 style={{
                   left: `${mobile.x}%`,
                   top: `${mobile.y}%`,
@@ -116,7 +111,7 @@ function ShoppableBanner(props: Props) {
               </a>
               <a
                 href={link}
-                className="absolute w-min btn btn-accent rounded-full hover:rounded text-accent no-animation hover:scale-125 hover:text-accent-content md:scale-[30%] hidden sm:inline-flex"
+                className="no-animation btn absolute hidden w-min rounded-full text-accent btn-accent hover:scale-125 hover:rounded hover:text-accent-content sm:inline-flex md:scale-[30%]"
                 style={{
                   left: `${desktop?.x ?? mobile.x}%`,
                   top: `${desktop?.y ?? mobile.y}%`,
@@ -127,15 +122,13 @@ function ShoppableBanner(props: Props) {
             </>
           ))}
         </figure>
-        <div className="flex flex-col justify-center gap-6 py-20 px-8 bg-neutral-content">
-          <h2 className={`card-title flex ${title?.layout?.position}`}>
-            {title?.content}
-          </h2>
-          <p className={`text-base-content ${text?.layout?.position}`}>
-            {text?.content}
-          </p>
+        <div className="flex flex-col justify-center gap-6 bg-neutral-content px-8 py-20">
+          <h2 className={`card-title flex ${title?.layout?.position}`}>{title?.content}</h2>
+          <p className={`text-base-content ${text?.layout?.position}`}>{text?.content}</p>
           <div className={`card-actions ${link?.layout?.position}`}>
-            <a className="underline" href={link?.href}>{link?.text}</a>
+            <a className="underline" href={link?.href}>
+              {link?.text}
+            </a>
           </div>
         </div>
       </div>

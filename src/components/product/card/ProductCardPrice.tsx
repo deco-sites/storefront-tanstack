@@ -6,22 +6,16 @@ export interface Props {
   currencyCode?: string;
 }
 
-export default function ProductCardPrice({
-  price = 0,
-  listPrice,
-  currencyCode,
-}: Props) {
+export default function ProductCardPrice({ price = 0, listPrice, currencyCode }: Props) {
   const showCompare = listPrice != null && listPrice > price;
   return (
     <div className="flex gap-2 pt-2">
       {showCompare ? (
-        <span className="line-through font-normal text-gray-400">
+        <span className="font-normal text-gray-400 line-through">
           {formatPrice(listPrice, currencyCode)}
         </span>
       ) : null}
-      <span className="font-medium text-base-400">
-        {formatPrice(price, currencyCode)}
-      </span>
+      <span className="text-base-400 font-medium">{formatPrice(price, currencyCode)}</span>
     </div>
   );
 }

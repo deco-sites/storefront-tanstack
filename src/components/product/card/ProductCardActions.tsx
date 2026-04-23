@@ -6,7 +6,7 @@ import { useSendEvent } from "../../../sdk/useSendEvent";
 
 const BUTTON_CLASS = clx(
   "btn",
-  "btn-outline justify-start border-none !text-sm !font-medium px-0 no-animation w-full",
+  "no-animation w-full justify-start border-none px-0 !text-sm !font-medium btn-outline",
   "hover:!bg-transparent",
   "disabled:!bg-transparent disabled:!opacity-50",
 );
@@ -18,12 +18,7 @@ export interface Props {
   inStock: boolean;
 }
 
-export default function ProductCardActions({
-  productID,
-  href,
-  analyticsItem,
-  inStock,
-}: Props) {
+export default function ProductCardActions({ productID, href, analyticsItem, inStock }: Props) {
   const addToCart = useAddToCart();
 
   const eventAttrs = useSendEvent({
@@ -36,10 +31,7 @@ export default function ProductCardActions({
       <Link
         to={href}
         preload="intent"
-        className={clx(
-          BUTTON_CLASS,
-          "btn-error hover:!text-error disabled:!text-error",
-        )}
+        className={clx(BUTTON_CLASS, "btn-error hover:!text-error disabled:!text-error")}
       >
         Sold out
       </Link>

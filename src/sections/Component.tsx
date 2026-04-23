@@ -10,9 +10,6 @@ export type ComponentProps<
   ActionFunc extends (...args: any[]) => any = LoaderFunc,
 > = SectionProps<LoaderFunc, ActionFunc>;
 
-export function useComponent<T>(
-  _href: string,
-  _props?: T,
-): Record<string, string> {
+export function useComponent<T>(_href: string, _props?: T): Record<string, string> {
   return {};
 }

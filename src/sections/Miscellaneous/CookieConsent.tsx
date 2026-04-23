@@ -110,27 +110,22 @@ function CookieConsent({
   return (
     <div
       className={clx(
-        "transform-gpu transition fixed bottom-0 w-screen z-50 sm:flex",
+        "fixed bottom-0 z-50 w-screen transform-gpu transition sm:flex",
         "sm:bottom-2 sm:justify-center",
         visible ? "translate-y-0" : "translate-y-[200%]",
       )}
     >
       <div
         className={clx(
-          "p-4 mx-4 my-2 flex flex-col gap-4 shadow bg-base-100 rounded border border-base-200",
+          "mx-4 my-2 flex flex-col gap-4 rounded border border-base-200 bg-base-100 p-4 shadow",
           "sm:flex-row sm:items-end",
         )}
       >
-        <div className={clx("flex-auto flex flex-col gap-4", "sm:gap-2")}>
+        <div className={clx("flex flex-auto flex-col gap-4", "sm:gap-2")}>
           <h3 className="text-xl">{title}</h3>
-          {text && (
-            <div
-              className="text-base"
-              dangerouslySetInnerHTML={{ __html: text }}
-            />
-          )}
+          {text && <div className="text-base" dangerouslySetInnerHTML={{ __html: text }} />}
 
-          <a href={policy.link} className="text-sm link link-secondary">
+          <a href={policy.link} className="link text-sm link-secondary">
             {policy.text}
           </a>
         </div>
@@ -139,11 +134,7 @@ function CookieConsent({
           <button type="button" className="btn" onClick={accept}>
             {buttons.allowText}
           </button>
-          <button
-            type="button"
-            className="btn btn-outline"
-            onClick={() => setVisible(false)}
-          >
+          <button type="button" className="btn btn-outline" onClick={() => setVisible(false)}>
             {buttons.cancelText}
           </button>
         </div>

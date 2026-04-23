@@ -1,23 +1,14 @@
 import { RequestContext } from "@decocms/start/sdk/requestContext";
 import { usePlatform } from "../../apps/site";
-import {
-  EMPTY_WISHLIST,
-  type WishlistState,
-} from "../../platform/wishlist";
-import {
-  readWishlistCookie,
-  serializeWishlistCookie,
-} from "../../loaders/_cookie";
+import { EMPTY_WISHLIST, type WishlistState } from "../../platform/wishlist";
+import { readWishlistCookie, serializeWishlistCookie } from "../../loaders/_cookie";
 
 interface Props {
   productID: string;
   productGroupID: string;
 }
 
-async function action(
-  props: Props,
-  req?: Request,
-): Promise<WishlistState> {
+async function action(props: Props, req?: Request): Promise<WishlistState> {
   if (!props?.productID) throw new Error("productID is required");
 
   const request = req ?? RequestContext.current?.request;
@@ -42,14 +33,11 @@ async function action(
   const current = request ? readWishlistCookie(request) : EMPTY_WISHLIST;
   const next: WishlistState = current.productIDs.includes(props.productID)
     ? {
-      productIDs: current.productIDs.filter((id) => id !== props.productID),
-    }
+        productIDs: current.productIDs.filter((id) => id !== props.productID),
+      }
     : { productIDs: [...current.productIDs, props.productID] };
 
-  RequestContext.responseHeaders.append(
-    "Set-Cookie",
-    serializeWishlistCookie(next),
-  );
+  RequestContext.responseHeaders.append("Set-Cookie", serializeWishlistCookie(next));
   return next;
 }
 

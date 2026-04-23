@@ -11,9 +11,7 @@ export interface Props {
   id?: string;
 }
 
-function Drawer(
-  { children, aside, open, className: _class = "", id }: Props,
-) {
+function Drawer({ children, aside, open, className: _class = "", id }: Props) {
   const fallbackId = useId();
   const toggleId = id ?? fallbackId;
 
@@ -35,14 +33,12 @@ function Drawer(
         aria-label={open ? "open drawer" : "closed drawer"}
       />
 
-      <div className="drawer-content">
-        {children}
-      </div>
+      <div className="drawer-content">{children}</div>
 
       <aside
         data-aside
         className={clx(
-          "drawer-side h-full z-40 overflow-hidden",
+          "drawer-side z-40 h-full overflow-hidden",
           "[[data-aside]&_section]:contents",
         )}
       >
@@ -53,7 +49,11 @@ function Drawer(
   );
 }
 
-function Aside({ title, drawer, children }: {
+function Aside({
+  title,
+  drawer,
+  children,
+}: {
   title: string;
   drawer: string;
   children: ReactNode;
@@ -61,12 +61,12 @@ function Aside({ title, drawer, children }: {
   return (
     <div
       data-aside
-      className="bg-base-100 grid grid-rows-[auto_1fr] h-full divide-y"
+      className="grid h-full grid-rows-[auto_1fr] divide-y bg-base-100"
       style={{ maxWidth: "100vw" }}
     >
-      <div className="flex justify-between items-center">
+      <div className="flex items-center justify-between">
         <h1 className="px-4 py-3">
-          <span className="font-medium text-2xl">{title}</span>
+          <span className="text-2xl font-medium">{title}</span>
         </h1>
         <label htmlFor={drawer} aria-label="X" className="btn btn-ghost">
           <Icon id="close" />

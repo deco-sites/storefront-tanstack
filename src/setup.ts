@@ -12,10 +12,7 @@
 
 import "./cache-config";
 
-import {
-  registerCommerceLoaders,
-  applySectionConventions,
-} from "@decocms/start/cms";
+import { registerCommerceLoaders, applySectionConventions } from "@decocms/start/cms";
 import { createSiteSetup } from "@decocms/start/setup";
 import { autoconfigApps } from "@decocms/start/apps";
 import { createInstrumentedFetch } from "@decocms/start/sdk/instrumentedFetch";
@@ -120,10 +117,10 @@ registerCommerceLoaders({
 // + `@decocms/apps/shopify/loaders/cart.getCart`), so no loader entry is
 // needed here for minicart.
 registerCommerceLoaders({
-  "site/loaders/user.ts":     async () => (await import("./loaders/user")).default(),
-  "site/loaders/user":        async () => (await import("./loaders/user")).default(),
+  "site/loaders/user.ts": async () => (await import("./loaders/user")).default(),
+  "site/loaders/user": async () => (await import("./loaders/user")).default(),
   "site/loaders/wishlist.ts": async () => (await import("./loaders/wishlist")).default(),
-  "site/loaders/wishlist":    async () => (await import("./loaders/wishlist")).default(),
+  "site/loaders/wishlist": async () => (await import("./loaders/wishlist")).default(),
 });
 
 // -- Site-local actions (registered via additive invoke handler registry) --
