@@ -1,58 +1,34 @@
+import { Link } from "@tanstack/react-router";
 import { clx } from "~/sdk/clx";
-import { useId } from "react";
+import { useUser } from "../../platform/user";
 import Icon from "../ui/Icon";
-import { useScript } from "@decocms/start/sdk/useScript";
-const onLoad = (containerID: string) => {
-  window.STOREFRONT.USER.subscribe((sdk) => {
-    const container = document.getElementById(containerID) as HTMLDivElement;
-    const nodes = container.querySelectorAll<HTMLAnchorElement>("a");
-    const login = nodes.item(0);
-    const account = nodes.item(1);
-    const user = sdk.getUser();
-    if (user?.email) {
-      login.classList.add("hidden");
-      account.classList.remove("hidden");
-    } else {
-      login.classList.remove("hidden");
-      account.classList.add("hidden");
-    }
-  });
-};
-function SignIn({ variant }: {
+
+interface Props {
   variant: "mobile" | "desktop";
-}) {
-  const id = useId();
-  return (
-    <div id={id}>
-      <a
-        className={clx(
-          "btn btn-sm font-thin btn-ghost no-animation",
-          variant === "mobile" && "btn-square",
-        )}
-        href="/login"
-        aria-label="Login"
-      >
-        <Icon id="account_circle" />
-        {variant === "desktop" && <span>Sign in</span>}
-      </a>
-      <a
-        className={clx(
-          "hidden",
-          "btn btn-sm font-thin btn-ghost no-animation",
-          variant === "mobile" && "btn-square",
-        )}
-        href="/account"
-        aria-label="Account"
-      >
+}
+
+function SignIn({ variant }: Props) {
+  const { isAuthenticated } = useUser();
+  const className = clx(
+    "btn btn-sm font-thin btn-ghost no-animation",
+    variant === "mobile" && "btn-square",
+  );
+
+  if (isAuthenticated) {
+    return (
+      <Link to="/account" preload="intent" className={className} aria-label="Account">
         <Icon id="account_circle" />
         {variant === "desktop" && <span>My account</span>}
-      </a>
-      <script
-        type="module"
-        suppressHydrationWarning
-        dangerouslySetInnerHTML={{ __html: useScript(onLoad, id) }}
-      />
-    </div>
+      </Link>
+    );
+  }
+
+  return (
+    <Link to="/login" preload="intent" className={className} aria-label="Login">
+      <Icon id="account_circle" />
+      {variant === "desktop" && <span>Sign in</span>}
+    </Link>
   );
 }
+
 export default SignIn;

@@ -1,29 +1,24 @@
 /**
- * We use a custom route at /s?q= to perform the search. This component
- * redirects the user to /s?q={term} when the user either clicks on the
- * button or submits the form. Make sure this page exists in deco.cx/admin
- * of yout site. If not, create a new page on this route and add the appropriate
- * loader.
- *
- * Note that this is the most performatic way to perform a search, since
- * no JavaScript is shipped to the browser!
+ * Search form. Submits to /s?q=<term>; as the user types, suggestions are
+ * fetched via HTMX (kept for now — the suggestions migration is its own task).
  */
+import { useEffect, useId, useRef } from "react";
 import { Suggestion } from "@decocms/apps/commerce/types";
 import {
   SEARCHBAR_INPUT_FORM_ID,
   SEARCHBAR_POPUP_ID,
 } from "../../../constants";
-import { useId } from "react";
 import { useComponent } from "../../../sections/Component";
 import Icon from "../../ui/Icon";
 import { Props as SuggestionProps } from "./Suggestions";
-import { useScript } from "@decocms/start/sdk/useScript";
 import { asResolved } from "~/types/deco";
 import { type Resolved } from "~/types/deco";
+
 // When user clicks on the search button, navigate it to
 export const ACTION = "/s";
 // Querystring param used when navigating the user
 export const NAME = "q";
+
 export interface SearchbarProps {
   /**
    * @title Placeholder
@@ -34,42 +29,53 @@ export interface SearchbarProps {
   /** @description Loader to run when suggesting new elements */
   loader: Resolved<Suggestion | null>;
 }
-const script = (formId: string, name: string, popupId: string) => {
-  const form = document.getElementById(formId) as HTMLFormElement | null;
-  const input = form?.elements.namedItem(name) as HTMLInputElement | null;
-  form?.addEventListener("submit", () => {
-    const search_term = input?.value;
-    if (search_term) {
-      window.DECO.events.dispatch({
-        name: "search",
-        params: { search_term },
-      });
-    }
-  });
-  // Keyboard event listeners
-  addEventListener("keydown", (e: KeyboardEvent) => {
-    const isK = e.key === "k" || e.key === "K" || e.keyCode === 75;
-    // Open Searchbar on meta+k
-    if (e.metaKey === true && isK) {
-      const input = document.getElementById(popupId) as HTMLInputElement | null;
-      if (input) {
-        input.checked = true;
-        document.getElementById(formId)?.focus();
-      }
-    }
-  });
-};
+
 const Suggestions = "./Suggestions.tsx";
+
 export default function Searchbar(
   { placeholder = "What are you looking for?", loader }: SearchbarProps,
 ) {
   const slot = useId();
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      const isK = e.key === "k" || e.key === "K";
+      if (e.metaKey && isK) {
+        const popup = document.getElementById(
+          SEARCHBAR_POPUP_ID,
+        ) as HTMLInputElement | null;
+        if (popup) {
+          popup.checked = true;
+          inputRef.current?.focus();
+        }
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, []);
+
+  const onSubmit = () => {
+    const term = inputRef.current?.value;
+    if (term) {
+      window.DECO?.events.dispatch({
+        name: "search",
+        params: { search_term: term },
+      });
+    }
+  };
+
   return (
     <div
       className="w-full grid gap-8 px-4 py-6"
       style={{ gridTemplateRows: "min-content auto" }}
     >
-      <form id={SEARCHBAR_INPUT_FORM_ID} action={ACTION} className="join">
+      <form
+        id={SEARCHBAR_INPUT_FORM_ID}
+        action={ACTION}
+        className="join"
+        onSubmit={onSubmit}
+      >
         <button
           type="submit"
           className="btn join-item btn-square no-animation"
@@ -81,6 +87,7 @@ export default function Searchbar(
           <Icon id="search" className="inline [.htmx-request_&]:hidden" />
         </button>
         <input
+          ref={inputRef}
           autoFocus
           tabIndex={0}
           className="input input-bordered join-item grow"
@@ -106,20 +113,6 @@ export default function Searchbar(
 
       {/* Suggestions slot */}
       <div id={slot} />
-
-      {/* Send search events as the user types */}
-      <script
-        type="module"
-        suppressHydrationWarning
-        dangerouslySetInnerHTML={{
-          __html: useScript(
-            script,
-            SEARCHBAR_INPUT_FORM_ID,
-            NAME,
-            SEARCHBAR_POPUP_ID,
-          ),
-        }}
-      />
     </div>
   );
 }

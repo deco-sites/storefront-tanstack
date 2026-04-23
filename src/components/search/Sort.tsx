@@ -1,11 +1,15 @@
-import { ProductListingPage } from "@decocms/apps/commerce/types";
-import { useScript } from "@decocms/start/sdk/useScript";
+import type { ProductListingPage } from "@decocms/apps/commerce/types";
+import { useNavigate } from "@tanstack/react-router";
+
 const SORT_QUERY_PARAM = "sort";
 const PAGE_QUERY_PARAM = "page";
+
 export type Props = Pick<ProductListingPage, "sortOptions"> & {
   url: string;
 };
+
 const BASE_FALLBACK = "http://localhost";
+
 const parseUrl = (href: string | undefined): URL | null => {
   if (!href) return null;
   try {
@@ -14,51 +18,64 @@ const parseUrl = (href: string | undefined): URL | null => {
     return null;
   }
 };
-const getUrl = (href: string, value: string) => {
+
+const getNavTarget = (href: string, value: string) => {
   const url = parseUrl(href);
-  if (!url) return "#";
+  if (!url) return null;
   url.searchParams.delete(PAGE_QUERY_PARAM);
   url.searchParams.set(SORT_QUERY_PARAM, value);
-  // Keep output relative when input was relative (no protocol/host in original)
-  const isRelative = href.startsWith("/") || !href.includes("://");
-  return isRelative ? `${url.pathname}${url.search}` : url.href;
+  // Pass `to` (pathname) and `search` (object) separately. Strict-typed
+  // routes don't parse the `?...` portion of `to`, so packing search into
+  // the path string would skip `loaderDeps` and the loader wouldn't re-run.
+  return {
+    to: url.pathname,
+    search: Object.fromEntries(url.searchParams),
+  };
 };
+
 const labels: Record<string, string> = {
-  "relevance:desc": "Relevância",
-  "price:desc": "Maior Preço",
-  "price:asc": "Menor Preço",
-  "orders:desc": "Mais vendidos",
-  "name:desc": "Nome - de Z a A",
-  "name:asc": "Nome - de A a Z",
-  "release:desc": "Lançamento",
-  "discount:desc": "Maior desconto",
+  "relevance:desc": "Relevance",
+  "price:desc": "Highest price",
+  "price:asc": "Lowest price",
+  "orders:desc": "Best sellers",
+  "name:desc": "Name — Z to A",
+  "name:asc": "Name — A to Z",
+  "release:desc": "Newest",
+  "discount:desc": "Biggest discount",
 };
-function Sort({ sortOptions, url }: Props) {
+
+export default function Sort({ sortOptions, url }: Props) {
+  const navigate = useNavigate();
   const parsed = parseUrl(url);
-  const currentSort = parsed?.searchParams.get(SORT_QUERY_PARAM) ?? "";
-  const current = getUrl(url, currentSort);
+  const urlSort = parsed?.searchParams.get(SORT_QUERY_PARAM) ?? "";
+
   const options = sortOptions?.map(({ value, label }) => ({
-    value: getUrl(url, value),
+    target: getNavTarget(url, value),
+    value,
     label,
   })) ?? [];
+
+  // Fall back to the first option when the URL has no sort param so the
+  // <select> stays a controlled component without React warnings.
+  const currentSort = options.some((o) => o.value === urlSort)
+    ? urlSort
+    : (options[0]?.value ?? "");
+
   return (
     <>
       <label htmlFor="sort" className="sr-only">Sort by</label>
       <select
+        id="sort"
         name="sort"
         className="select w-full max-w-sm rounded-lg"
-        hx-on:change={useScript(() => {
-          const select = event!.currentTarget as HTMLSelectElement;
-          window.location.href = select.value;
-        })}
+        value={currentSort}
+        onChange={(e) => {
+          const next = options.find((o) => o.value === e.currentTarget.value);
+          if (next?.target) navigate(next.target);
+        }}
       >
         {options.map(({ value, label }) => (
-          <option
-            key={value}
-            label={labels[label] ?? label}
-            value={value}
-            selected={value === current}
-          >
+          <option key={value} label={labels[label] ?? label} value={value}>
             {label}
           </option>
         ))}
@@ -66,4 +83,3 @@ function Sort({ sortOptions, url }: Props) {
     </>
   );
 }
-export default Sort;

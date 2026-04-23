@@ -2,7 +2,7 @@ import { Product } from "@decocms/apps/commerce/types";
 import { clx } from "~/sdk/clx";
 import Icon from "../ui/Icon";
 import Slider from "../ui/Slider";
-import ProductCard from "./ProductCard";
+import ProductCard from "./card/ProductCard";
 import { useId } from "react";
 
 interface Props {

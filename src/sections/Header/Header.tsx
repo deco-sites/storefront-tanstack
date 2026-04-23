@@ -5,6 +5,7 @@ import Alert from "../../components/header/Alert";
 import Bag from "../../components/header/Bag";
 import Menu from "../../components/header/Menu";
 import NavItem from "../../components/header/NavItem";
+import SignIn from "../../components/header/SignIn";
 import Searchbar, {
   type SearchbarProps,
 } from "../../components/search/Searchbar/Form";
@@ -89,7 +90,8 @@ const Desktop = ({ navItems, logo, searchbar, loading }: Props) => (
           </span>
         </label>
 
-        <div className="flex gap-4 place-self-end">
+        <div className="flex gap-4 place-self-end items-center">
+          <SignIn variant="desktop" />
           <Bag />
         </div>
       </div>
@@ -183,6 +185,7 @@ const Mobile = ({ logo, searchbar, navItems, loading }: Props) => (
       >
         <Icon id="search" />
       </label>
+      <SignIn variant="mobile" />
       <Bag />
     </div>
   </>

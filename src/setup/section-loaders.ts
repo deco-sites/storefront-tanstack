@@ -22,4 +22,10 @@ registerSectionLoaders({
     const mod: any = await import("~/sections/Social/InstagramPosts");
     return typeof mod.loader === "function" ? mod.loader(props, req) : props;
   },
+  // SearchResult needs the request URL to rebase filter/sort/pagination links
+  // (commerce loaders return URLs with the wrong origin/pathname).
+  "site/sections/Product/SearchResult.tsx": async (props: any, req: Request) => {
+    const mod: any = await import("~/sections/Product/SearchResult");
+    return typeof mod.loader === "function" ? mod.loader(props, req) : props;
+  },
 });

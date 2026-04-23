@@ -5,6 +5,14 @@
 // Custom-wired entries should be excluded via --exclude and added manually in setup.ts.
 
 export const siteLoaders: Record<string, (props: any) => Promise<any>> = {
+  "site/actions/shipping/simulate": async (props: any) => {
+    const mod = await import("../../actions/shipping/simulate");
+    return mod.default(props);
+  },
+  "site/actions/shipping/simulate.ts": async (props: any) => {
+    const mod = await import("../../actions/shipping/simulate");
+    return mod.default(props);
+  },
   "site/actions/wishlist/submit": async (props: any) => {
     const mod = await import("../../actions/wishlist/submit");
     return mod.default(props);

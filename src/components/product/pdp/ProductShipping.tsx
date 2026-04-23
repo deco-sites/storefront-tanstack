@@ -1,16 +1,13 @@
-import type { SKU } from "@decocms/apps/vtex/utils/types";
-import ShippingSimulationForm from "../../shipping/Form";
+import ShippingSimulator, {
+  type Props as ShippingSimulatorProps,
+} from "../../shipping/ShippingSimulator";
 
-export interface Props {
-  sku: string;
-  seller?: string;
-}
+export type ShippingConfig = ShippingSimulatorProps;
 
-export default function ProductShipping({ sku, seller = "1" }: Props) {
-  const items: SKU[] = [{ id: Number(sku), quantity: 1, seller }];
+export default function ProductShipping(props: ShippingConfig) {
   return (
     <div className="mt-8">
-      <ShippingSimulationForm items={items} />
+      <ShippingSimulator {...props} />
     </div>
   );
 }

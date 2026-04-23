@@ -1,29 +1,33 @@
-import React from "react";
-import { type JSX } from "react";
+import React, { useId, useRef } from "react";
 import { clx } from "~/sdk/clx";
-import { useId } from "react";
-import { useScript } from "@decocms/start/sdk/useScript";
-const onClick = (delta: number) => {
-  // doidera!
-  event!.stopPropagation();
-  const button = event!.currentTarget as HTMLButtonElement;
-  const input = button.parentElement
-    ?.querySelector<HTMLInputElement>('input[type="number"]')!;
-  const min = Number(input.min) || -Infinity;
-  const max = Number(input.max) || Infinity;
-  input.value = `${Math.min(Math.max(input.valueAsNumber + delta, min), max)}`;
-  input.dispatchEvent(new Event("change", { bubbles: true }));
-};
+
 function QuantitySelector(
-  { id = useId(), disabled, ...props }: React.JSX.IntrinsicElements["input"],
+  { id, disabled, ...props }: React.JSX.IntrinsicElements["input"],
 ) {
+  const fallbackId = useId();
+  const inputId = id ?? fallbackId;
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const step = (delta: number) => {
+    const input = inputRef.current;
+    if (!input) return;
+    const min = Number(input.min);
+    const max = Number(input.max);
+    const lo = Number.isFinite(min) ? min : -Infinity;
+    const hi = Number.isFinite(max) ? max : Infinity;
+    const next = Math.min(Math.max(input.valueAsNumber + delta, lo), hi);
+    input.value = `${next}`;
+    input.dispatchEvent(new Event("change", { bubbles: true }));
+  };
+
   return (
     <div className="join border rounded w-full">
       <button
         type="button"
         className="btn btn-square btn-ghost no-animation"
-        hx-on:click={useScript(onClick, -1)}
+        onClick={() => step(-1)}
         disabled={disabled}
+        aria-label="Decrease quantity"
       >
         -
       </button>
@@ -36,7 +40,8 @@ function QuantitySelector(
         )}
       >
         <input
-          id={id}
+          ref={inputRef}
+          id={inputId}
           className={clx(
             "input text-center flex-grow [appearance:textfield]",
             "invalid:input-error",
@@ -50,8 +55,9 @@ function QuantitySelector(
       <button
         type="button"
         className="btn btn-square btn-ghost no-animation"
-        hx-on:click={useScript(onClick, 1)}
+        onClick={() => step(1)}
         disabled={disabled}
+        aria-label="Increase quantity"
       >
         +
       </button>

@@ -25,11 +25,10 @@ import { LoadingFallback as _fb8 } from "../../sections/Newsletter/Newsletter";
 import { LoadingFallback as _fb9 } from "../../sections/Product/ProductDetails";
 import { LoadingFallback as _fb10 } from "../../sections/Product/ProductShelf";
 import { LoadingFallback as _fb11 } from "../../sections/Product/ProductShelfTabbed";
-import { LoadingFallback as _fb12 } from "../../sections/Product/SearchResult";
-import { LoadingFallback as _fb13 } from "../../sections/Product/ShelfWithImage";
-import { LoadingFallback as _fb14 } from "../../sections/Product/Wishlist";
-import { LoadingFallback as _fb15 } from "../../sections/Social/InstagramPosts";
-import { LoadingFallback as _fb16 } from "../../sections/Social/WhatsApp";
+import { LoadingFallback as _fb12 } from "../../sections/Product/ShelfWithImage";
+import { LoadingFallback as _fb13 } from "../../sections/Product/Wishlist";
+import { LoadingFallback as _fb14 } from "../../sections/Social/InstagramPosts";
+import { LoadingFallback as _fb15 } from "../../sections/Social/WhatsApp";
 
 export interface SectionMetaEntry {
   eager?: boolean;
@@ -56,7 +55,7 @@ export const sectionMeta: Record<string, SectionMetaEntry> = {
   "site/sections/Product/ProductDetails.tsx": { hasLoadingFallback: true },
   "site/sections/Product/ProductShelf.tsx": { hasLoadingFallback: true },
   "site/sections/Product/ProductShelfTabbed.tsx": { hasLoadingFallback: true },
-  "site/sections/Product/SearchResult.tsx": { cache: "listing", hasLoadingFallback: true },
+  "site/sections/Product/SearchResult.tsx": { eager: true },
   "site/sections/Product/ShelfWithImage.tsx": { hasLoadingFallback: true },
   "site/sections/Product/Wishlist.tsx": { hasLoadingFallback: true },
   "site/sections/Social/InstagramPosts.tsx": { hasLoadingFallback: true },
@@ -85,10 +84,9 @@ export const loadingFallbacks: Record<string, React.ComponentType<any>> = {
   "site/sections/Product/ProductDetails.tsx": _fb9,
   "site/sections/Product/ProductShelf.tsx": _fb10,
   "site/sections/Product/ProductShelfTabbed.tsx": _fb11,
-  "site/sections/Product/SearchResult.tsx": _fb12,
-  "site/sections/Product/ShelfWithImage.tsx": _fb13,
-  "site/sections/Product/Wishlist.tsx": _fb14,
-  "site/sections/Social/InstagramPosts.tsx": _fb15,
-  "site/sections/Social/WhatsApp.tsx": _fb16,
+  "site/sections/Product/ShelfWithImage.tsx": _fb12,
+  "site/sections/Product/Wishlist.tsx": _fb13,
+  "site/sections/Social/InstagramPosts.tsx": _fb14,
+  "site/sections/Social/WhatsApp.tsx": _fb15,
   "site/sections/Theme/Theme.tsx": _sync2.LoadingFallback,
 };

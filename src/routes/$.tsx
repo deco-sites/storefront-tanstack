@@ -6,6 +6,12 @@ const routeConfig = cmsRouteConfig({
   siteName: "Storefront-tanstack",
   defaultTitle: "Storefront-tanstack",
   ignoreSearchParams: ["skuId"],
+  // Keep the previous route UI visible while the loader re-runs on filter/sort
+  // navigation. Without this, framework defaults (pendingMs=200) flash the
+  // pending UI. The SearchResult section refetches its own data via TanStack
+  // Query (see useProductListingPage), so only the products grid swaps.
+  pendingMs: 60_000,
+  pendingMinMs: 0,
 });
 
 export const Route = createFileRoute("/$")({
