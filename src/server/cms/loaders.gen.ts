@@ -5,28 +5,12 @@
 // Custom-wired entries should be excluded via --exclude and added manually in setup.ts.
 
 export const siteLoaders: Record<string, (props: any) => Promise<any>> = {
-  "site/actions/minicart/submit": async (props: any) => {
-    const mod = await import("../../actions/minicart/submit");
-    return mod.default(props);
-  },
-  "site/actions/minicart/submit.ts": async (props: any) => {
-    const mod = await import("../../actions/minicart/submit");
-    return mod.default(props);
-  },
   "site/actions/wishlist/submit": async (props: any) => {
     const mod = await import("../../actions/wishlist/submit");
     return mod.default(props);
   },
   "site/actions/wishlist/submit.ts": async (props: any) => {
     const mod = await import("../../actions/wishlist/submit");
-    return mod.default(props);
-  },
-  "site/loaders/minicart": async (props: any) => {
-    const mod = await import("../../loaders/minicart");
-    return mod.default(props);
-  },
-  "site/loaders/minicart.ts": async (props: any) => {
-    const mod = await import("../../loaders/minicart");
     return mod.default(props);
   },
   "site/loaders/user": async (props: any) => {

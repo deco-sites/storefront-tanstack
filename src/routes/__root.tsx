@@ -2,13 +2,14 @@ import { createRootRouteWithContext } from "@tanstack/react-router";
 import type { QueryClient } from "@tanstack/react-query";
 import { DecoRootLayout } from "@decocms/start/hooks";
 import { CART_QUERY_KEY, getCartServerFn } from "../platform/cart";
+import MinicartDrawer from "../components/minicart/MinicartDrawer";
 // @ts-ignore Vite ?url import
 import appCss from "../styles/app.css?url";
 
-// Compat stub for header/minicart/wishlist components still reading
-// `window.STOREFRONT.*` during hydration. The PDP's real cart (TanStack
-// Query + platform/cart/) ignores this. Follow-up: migrate Bag/Minicart/
-// useWishlist, then delete.
+// Compat stub for user/wishlist components still reading `window.STOREFRONT.*`
+// during hydration. Cart is now fully migrated to TanStack Query
+// (platform/cart/) and ignores this. Follow-up: migrate useUser/useWishlist,
+// then delete this stub entirely.
 const STOREFRONT_STUB = `
 (function(){
   if (window.STOREFRONT) return;
@@ -56,9 +57,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootLayout() {
   return (
-    <DecoRootLayout
-      lang="pt-BR"
-      siteName="storefront-tanstack"
-    />
+    <DecoRootLayout lang="pt-BR" siteName="storefront-tanstack">
+      <MinicartDrawer />
+    </DecoRootLayout>
   );
 }

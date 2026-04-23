@@ -69,9 +69,10 @@ applySectionConventions({
 await autoconfigApps(generatedBlocks, APP_REGISTRY);
 
 // -- Site-local loaders (not shipped by an app, still stubbed for Phase 6) --
+// Cart is now served by TanStack Query via `platform/cart/` (server functions
+// + `@decocms/apps/shopify/loaders/cart.getCart`), so no loader entry is
+// needed here for minicart.
 registerCommerceLoaders({
-  "site/loaders/minicart.ts": async () => (await import("./loaders/minicart")).default(),
-  "site/loaders/minicart":    async () => (await import("./loaders/minicart")).default(),
   "site/loaders/user.ts":     async () => (await import("./loaders/user")).default(),
   "site/loaders/user":        async () => (await import("./loaders/user")).default(),
   "site/loaders/wishlist.ts": async () => (await import("./loaders/wishlist")).default(),
