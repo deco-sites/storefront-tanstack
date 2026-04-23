@@ -4,13 +4,13 @@
   name: "light";
   default: true;
   color-scheme: light;
-  --color-primary: #3141AC;
-  --color-secondary: #BADFED;
-  --color-accent: #DECD8F;
-  --color-neutral: #FBF5F1;
-  --color-base-100: #F8F9FD;
-  --color-base-200: #FAFAFA;
-  --color-base-300: #5C5C5C;
+  --color-primary: #3141ac;
+  --color-secondary: #badfed;
+  --color-accent: #decd8f;
+  --color-neutral: #fbf5f1;
+  --color-base-100: #f8f9fd;
+  --color-base-200: #fafafa;
+  --color-base-300: #5c5c5c;
   --color-info: #2e72d2;
   --color-success: #008060;
   --color-warning: #ffc453;
@@ -73,11 +73,21 @@ ol.carousel {
   padding-inline: 1rem;
   width: 100%;
 
-  @media (width >= 640px) { max-width: 640px; }
-  @media (width >= 768px) { max-width: 768px; }
-  @media (width >= 1024px) { max-width: 1024px; }
-  @media (width >= 1280px) { max-width: 1280px; }
-  @media (width >= 1536px) { max-width: 1536px; }
+  @media (width >= 640px) {
+    max-width: 640px;
+  }
+  @media (width >= 768px) {
+    max-width: 768px;
+  }
+  @media (width >= 1024px) {
+    max-width: 1024px;
+  }
+  @media (width >= 1280px) {
+    max-width: 1280px;
+  }
+  @media (width >= 1536px) {
+    max-width: 1536px;
+  }
 }
 
 /* Deferred section visibility — reduces layout shift while loading */

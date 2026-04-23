@@ -22,6 +22,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "knip": "knip",
+    "prepare": "lefthook install",
     "clean": "rm -rf node_modules .cache dist .wrangler/state node_modules/.vite && npm install",
     "tailwind:lint": "tsx scripts/tailwind-lint.ts",
     "tailwind:fix": "tsx scripts/tailwind-lint.ts --fix"
