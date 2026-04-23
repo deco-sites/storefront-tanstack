@@ -11,10 +11,6 @@ import { clx } from "~/sdk/clx";
 // useSetEarlyHints was a Deco Fresh-only hook; edge hints are now set via cacheHeaders.
 const useSetEarlyHints = () => (_hint: string) => {};
 
-// Fresh's `_app.tsx` exported a revision string used for cache busting.
-// TanStack Start handles asset hashing via Vite, so we keep a stable fallback.
-const revision = "1";
-
 export interface ThemeColors {
   /**
    * @format color-input

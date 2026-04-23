@@ -24,7 +24,6 @@ import { APP_REGISTRY } from "@decocms/apps/registry";
 import { blocks as generatedBlocks } from "./server/cms/blocks.gen";
 import { sectionMeta, syncComponents, loadingFallbacks } from "./server/cms/sections.gen";
 import { PreviewProviders } from "@decocms/start/hooks";
-// @ts-ignore Vite ?url import
 import appCss from "./styles/app.css?url";
 
 import "./setup/section-loaders";

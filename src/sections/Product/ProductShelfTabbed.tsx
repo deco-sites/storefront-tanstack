@@ -1,3 +1,4 @@
+/* eslint-disable react-compiler/react-compiler -- file uses misnamed deco helper (useOffer) that triggers react-hooks rule disable */
 import type { Product } from "@decocms/apps/commerce/types";
 import { mapProductToAnalyticsItem } from "@decocms/apps/commerce/utils/productToAnalyticsItem";
 import ProductSlider from "../../components/product/ProductSlider";
@@ -34,6 +35,7 @@ export default function TabbedProductShelf(
           mapProductToAnalyticsItem({
             index,
             product,
+            // eslint-disable-next-line react-hooks/rules-of-hooks -- useOffer is a misnamed pure helper from @decocms/apps, not a React hook
             ...(useOffer(product.offers)),
           })
         ) ?? [],

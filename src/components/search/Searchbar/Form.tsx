@@ -1,3 +1,4 @@
+/* eslint-disable react-compiler/react-compiler -- file uses misnamed deco helper (useComponent) that triggers react-hooks rule disable */
 /**
  * Search form. Submits to /s?q=<term>; as the user types, suggestions are
  * fetched via HTMX (kept for now — the suggestions migration is its own task).
@@ -95,6 +96,7 @@ export default function Searchbar(
           placeholder={placeholder}
           autoComplete="off"
           hx-target={`#${slot}`}
+          // eslint-disable-next-line react-hooks/rules-of-hooks -- useComponent is a misnamed HTMX URL builder from @decocms/apps, not a React hook
           hx-post={loader && useComponent<SuggestionProps>(Suggestions, {
             loader: asResolved(loader),
           })}

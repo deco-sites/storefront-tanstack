@@ -127,14 +127,18 @@ function useSlider(
           }
           if (!infinite) {
             if (index === 0) {
-              entry.isIntersecting
-                ? prev?.setAttribute("disabled", "")
-                : prev?.removeAttribute("disabled");
+              if (entry.isIntersecting) {
+                prev?.setAttribute("disabled", "");
+              } else {
+                prev?.removeAttribute("disabled");
+              }
             }
             if (index === items.length - 1) {
-              entry.isIntersecting
-                ? next?.setAttribute("disabled", "")
-                : next?.removeAttribute("disabled");
+              if (entry.isIntersecting) {
+                next?.setAttribute("disabled", "");
+              } else {
+                next?.removeAttribute("disabled");
+              }
             }
           }
         }),

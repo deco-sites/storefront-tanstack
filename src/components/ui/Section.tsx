@@ -32,10 +32,6 @@ function Header({ title, cta }: Props) {
   );
 }
 
-interface Tab {
-  title: string;
-}
-
 function Tabbed(
   { children }: {
     children: JSX.Element;

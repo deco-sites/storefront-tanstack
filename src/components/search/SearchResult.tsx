@@ -1,3 +1,4 @@
+/* eslint-disable react-compiler/react-compiler -- file uses misnamed deco helpers (useOffer) that trigger react-hooks rule disables */
 import type { ProductListingPage } from "@decocms/apps/commerce/types";
 import { mapProductToAnalyticsItem } from "@decocms/apps/commerce/utils/productToAnalyticsItem";
 import { useId } from "react";
@@ -79,6 +80,7 @@ function Result({
         item_list_id: breadcrumb.itemListElement?.at(-1)?.item,
         items: products?.map((product, index) =>
           mapProductToAnalyticsItem({
+            // eslint-disable-next-line react-hooks/rules-of-hooks -- useOffer is a misnamed pure helper from @decocms/apps, not a React hook
             ...useOffer(product.offers),
             index: offset + index,
             product,

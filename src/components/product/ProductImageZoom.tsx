@@ -12,11 +12,13 @@ export interface Props {
   images: ImageObject[];
 }
 
-function ProductImageZoom({ images, width, height, id = useId() }: Props) {
-  const container = `${id}-container`;
+function ProductImageZoom({ images, width, height, id }: Props) {
+  const fallbackId = useId();
+  const resolvedId = id ?? fallbackId;
+  const container = `${resolvedId}-container`;
 
   return (
-    <Modal id={id}>
+    <Modal id={resolvedId}>
       <div
         id={container}
         className="modal-box w-11/12 max-w-7xl grid grid-cols-[48px_1fr_48px] grid-rows-1 place-items-center"

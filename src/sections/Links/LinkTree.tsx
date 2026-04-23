@@ -113,7 +113,7 @@ function Links(props: Props) {
   );
 
   const maybeLink = header?.logo?.link
-    ? <a href={header?.logo?.link!} target="_blank">{logo}</a>
+    ? <a href={header.logo.link} target="_blank">{logo}</a>
     : logo;
 
   const ColorsNeutralAndHover = {

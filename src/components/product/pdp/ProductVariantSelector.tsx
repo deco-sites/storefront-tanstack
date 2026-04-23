@@ -1,4 +1,3 @@
-import { useId } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import type { Product } from "@decocms/apps/commerce/types";
 import { useVariantPossibilities } from "@decocms/apps/commerce/sdk/useVariantPossibilities";
@@ -73,7 +72,6 @@ function Swatch({ value, checked }: { value: string; checked: boolean }) {
 }
 
 export default function ProductVariantSelector({ product, config }: Props) {
-  const id = useId();
   const preloadStrategy = config?.preloadStrategy ?? "intent";
   const showLabels = config?.showLabels ?? true;
 
