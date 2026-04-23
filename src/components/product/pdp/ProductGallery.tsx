@@ -1,5 +1,4 @@
 import { useId } from "react";
-import { useRouterState } from "@tanstack/react-router";
 import type { ImageObject } from "@decocms/apps/commerce/types";
 import Image from "~/components/ui/Image";
 import { clx } from "~/sdk/clx";
@@ -39,7 +38,6 @@ const DEFAULT_HEIGHT = 615;
 export default function ProductGallery({ images, config }: Props) {
   const id = useId();
   const zoomId = `${id}-zoom`;
-  const isLoading = useRouterState({ select: (s) => s.isLoading });
 
   const aspectRatio = config?.aspectRatio ?? `${DEFAULT_WIDTH} / ${DEFAULT_HEIGHT}`;
   const enableZoom = config?.enableZoom ?? true;
@@ -51,12 +49,7 @@ export default function ProductGallery({ images, config }: Props) {
     <>
       <div
         id={id}
-        data-loading={isLoading ? "true" : undefined}
-        className={clx(
-          "grid grid-flow-row sm:grid-flow-col grid-cols-1 sm:grid-cols-[min-content_1fr] gap-5",
-          "transition-opacity duration-150",
-          "data-[loading=true]:opacity-60",
-        )}
+        className="grid grid-flow-row sm:grid-flow-col grid-cols-1 sm:grid-cols-[min-content_1fr] gap-5"
       >
         <div className="col-start-1 col-span-1 sm:col-start-2">
           <div className="relative h-min grow">

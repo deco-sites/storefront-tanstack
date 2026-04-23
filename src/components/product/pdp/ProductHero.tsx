@@ -1,6 +1,7 @@
 import type { ProductDetailsPage } from "@decocms/apps/commerce/types";
 import { useOffer } from "@decocms/apps/commerce/sdk/useOffer";
 import { mapProductToAnalyticsItem } from "@decocms/apps/commerce/utils/productToAnalyticsItem";
+import { useRouterState } from "@tanstack/react-router";
 import { useSendEvent } from "../../../sdk/useSendEvent";
 import { clx } from "~/sdk/clx";
 import ProductActions, { type ActionsCopyConfig } from "./ProductActions";
@@ -43,6 +44,8 @@ export default function ProductHero({
   variantSelectorConfig,
   copy,
 }: Props) {
+  const isLoading = useRouterState({ select: (s) => s.isLoading });
+
   const { breadcrumbList, product } = page;
   const { offers, isVariantOf } = product;
 
@@ -106,12 +109,17 @@ export default function ProductHero({
       </div>
 
       <div className="sm:col-span-2 flex flex-col">
-        <ProductDiscountBadge percent={percent} config={discountBadgeConfig} />
-        <ProductTitle name={title} />
+        <ProductDiscountBadge
+          percent={percent}
+          config={discountBadgeConfig}
+          isLoading={isLoading}
+        />
+        <ProductTitle name={title} isLoading={isLoading} />
         <ProductPrice
           price={price}
           listPrice={listPrice}
           currencyCode={offers?.priceCurrency}
+          isLoading={isLoading}
         />
 
         {hasValidVariants ? (

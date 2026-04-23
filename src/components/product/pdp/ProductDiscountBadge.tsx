@@ -29,9 +29,14 @@ export interface DiscountBadgeConfig {
 export interface Props {
   percent: number;
   config?: DiscountBadgeConfig;
+  /**
+   * Hide the badge while a variant navigation is pending — the next
+   * variant's percent may differ, so we avoid showing the stale value.
+   */
+  isLoading?: boolean;
 }
 
-export default function ProductDiscountBadge({ percent, config }: Props) {
+export default function ProductDiscountBadge({ percent, config, isLoading }: Props) {
   const merged = {
     show: true,
     labelFormat: "{percent} % off",
@@ -40,7 +45,7 @@ export default function ProductDiscountBadge({ percent, config }: Props) {
     ...config,
   };
 
-  const active = merged.show && percent > 0;
+  const active = merged.show && percent > 0 && !isLoading;
   const label = merged.labelFormat.replace("{percent}", String(percent));
 
   return (
