@@ -1,0 +1,20 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "entry": [
+    "src/worker-entry.ts",
+    "src/router.tsx",
+    "src/server.ts",
+    "src/setup.ts",
+    "src/routes/**/*.{ts,tsx}",
+    "src/sections/**/*.{ts,tsx}",
+    "src/loaders/**/*.ts",
+    "src/actions/**/*.ts",
+    "src/apps/**/*.ts"
+  ],
+  "project": ["src/**/*.{ts,tsx}"],
+  "ignore": [
+    "src/**/*.gen.ts",
+    "src/**/*.gen.json",
+    "src/routeTree.gen.ts"
+  ]
+}
