@@ -1,11 +1,4 @@
-export type { Person, UserState } from "./user.types";
-export {
-  getUserServerFn,
-  recoverPasswordServerFn,
-  signInServerFn,
-  signOutServerFn,
-  signUpServerFn,
-} from "./user.actions";
+export { getUserServerFn } from "./user.actions";
 export {
   USER_QUERY_KEY,
   useRecoverPassword,

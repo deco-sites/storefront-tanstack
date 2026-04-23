@@ -39,7 +39,3 @@ function createNestedInvokeProxy(path: string[] = []): any {
 }
 
 export const invoke = createNestedInvokeProxy() as any;
-
-export const Runtime = {
-  invoke,
-};

@@ -21,18 +21,3 @@ export type LoadingFallbackProps<T = unknown> = T & {
 export function asResolved<T>(value: T): T {
   return value;
 }
-
-export function isDeferred(value: unknown): boolean {
-  return false;
-}
-
-export const context = {
-  isDeploy: false,
-  platform: "tanstack-start" as const,
-  site: "storefront-tanstack",
-  siteId: 0,
-};
-
-export function redirect(_url: string, _status?: number): never {
-  throw new Error("redirect is not supported in TanStack Start -- use router navigation instead");
-}
