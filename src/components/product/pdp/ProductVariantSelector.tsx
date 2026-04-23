@@ -1,4 +1,3 @@
-import { useId } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import type { Product } from "@decocms/apps/commerce/types";
 import { useVariantPossibilities } from "@decocms/apps/commerce/sdk/useVariantPossibilities";
@@ -51,10 +50,7 @@ function Swatch({ value, checked }: { value: string; checked: boolean }) {
     return (
       <span
         style={{ backgroundColor: color }}
-        className={clx(
-          "block w-12 h-12 rounded-full border border-[#C9CFCF]",
-          baseRing,
-        )}
+        className={clx("block h-12 w-12 rounded-full border border-[#C9CFCF]", baseRing)}
         aria-label={value}
       />
     );
@@ -63,7 +59,7 @@ function Swatch({ value, checked }: { value: string; checked: boolean }) {
   return (
     <span
       className={clx(
-        "btn btn-ghost border-[#C9CFCF] hover:bg-base-200 hover:border-[#C9CFCF] w-12 h-12",
+        "btn h-12 w-12 border-[#C9CFCF] btn-ghost hover:border-[#C9CFCF] hover:bg-base-200",
         baseRing,
       )}
     >
@@ -73,7 +69,6 @@ function Swatch({ value, checked }: { value: string; checked: boolean }) {
 }
 
 export default function ProductVariantSelector({ product, config }: Props) {
-  const id = useId();
   const preloadStrategy = config?.preloadStrategy ?? "intent";
   const showLabels = config?.showLabels ?? true;
 
@@ -101,8 +96,7 @@ export default function ProductVariantSelector({ product, config }: Props) {
             <ul className="flex flex-row gap-4">
               {entries.map(([value, link]) => {
                 const href = relative(link);
-                const checked =
-                  href === currentPath || href === currentProductPath;
+                const checked = href === currentPath || href === currentProductPath;
                 return (
                   <li key={value}>
                     <Link

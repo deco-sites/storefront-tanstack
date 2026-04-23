@@ -1,3 +1,4 @@
+/* eslint-disable react-compiler/react-compiler -- file uses misnamed deco helpers (useOffer) that trigger react-hooks rule disables */
 import type { ProductListingPage } from "@decocms/apps/commerce/types";
 import { mapProductToAnalyticsItem } from "@decocms/apps/commerce/utils/productToAnalyticsItem";
 import { useId } from "react";
@@ -37,7 +38,7 @@ export interface Props {
 
 function NotFound() {
   return (
-    <div className="w-full flex justify-center items-center py-10">
+    <div className="flex w-full items-center justify-center py-10">
       <span>Not Found!</span>
     </div>
   );
@@ -64,11 +65,7 @@ function Result({
   const perPage = pageInfo?.recordPerPage || products.length;
   const zeroIndexedOffsetPage = pageInfo.currentPage - startingPage;
   const offset = zeroIndexedOffsetPage * perPage;
-  const { prev, next } = rebasePaginationHrefs(
-    pageInfo.previousPage,
-    pageInfo.nextPage,
-    href,
-  );
+  const { prev, next } = rebasePaginationHrefs(pageInfo.previousPage, pageInfo.nextPage, href);
 
   const viewItemListEvent = useSendEvent({
     on: "view",
@@ -79,11 +76,12 @@ function Result({
         item_list_id: breadcrumb.itemListElement?.at(-1)?.item,
         items: products?.map((product, index) =>
           mapProductToAnalyticsItem({
+            // eslint-disable-next-line react-hooks/rules-of-hooks -- useOffer is a misnamed pure helper from @decocms/apps, not a React hook
             ...useOffer(product.offers),
             index: offset + index,
             product,
             breadcrumbList: breadcrumb,
-          })
+          }),
         ),
       },
     },
@@ -91,16 +89,14 @@ function Result({
 
   return (
     <div {...viewItemListEvent} className="w-full">
-      <div className="container flex flex-col gap-4 sm:gap-5 w-full py-4 sm:py-5 px-5 sm:px-0">
+      <div className="container flex w-full flex-col gap-4 px-5 py-4 sm:gap-5 sm:px-0 sm:py-5">
         <Breadcrumb itemListElement={breadcrumb?.itemListElement} />
 
         <SearchFilterDrawer id={filterDrawerId} filters={filters} baseUrl={href} />
 
         <div className="grid grid-cols-1 sm:grid-cols-[250px_1fr]">
-          <aside className="hidden sm:flex place-self-start flex-col gap-9">
-            <span className="text-base font-semibold h-12 flex items-center">
-              Filters
-            </span>
+          <aside className="hidden flex-col gap-9 place-self-start sm:flex">
+            <span className="flex h-12 items-center text-base font-semibold">Filters</span>
             <Filters filters={filters} baseUrl={href} />
           </aside>
 
@@ -113,9 +109,11 @@ function Result({
               filterDrawerId={filterDrawerId}
             />
 
-            {isRouteLoading
-              ? <SearchResultGridSkeleton count={Math.min(perPage, 12) || 8} />
-              : <SearchResultGrid products={products} offset={offset} />}
+            {isRouteLoading ? (
+              <SearchResultGridSkeleton count={Math.min(perPage, 12) || 8} />
+            ) : (
+              <SearchResultGrid products={products} offset={offset} />
+            )}
 
             <div className="grid place-items-center pt-2 sm:pt-10">
               <SearchPagination
@@ -137,10 +135,7 @@ export const loader = (props: Props, req: Request) => ({
   url: req.url,
 });
 
-export default function SearchResult({
-  page,
-  ...props
-}: SectionProps<typeof loader>) {
+export default function SearchResult({ page, ...props }: SectionProps<typeof loader>) {
   if (!page) return <NotFound />;
   return <Result {...props} page={page} />;
 }

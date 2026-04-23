@@ -21,45 +21,31 @@ export interface Props {
 function Banner({ title, description, images, cta }: Props) {
   return (
     <Section.Container>
-      <div className="relative bg-base-200 mx-5 sm:mx-0">
+      <div className="relative mx-5 bg-base-200 sm:mx-0">
         <Picture>
-          <Source
-            media="(max-width: 640px)"
-            src={images.mobile}
-            width={335}
-            height={572}
-          />
-          <Source
-            media="(min-width: 640px)"
-            src={images.desktop}
-            width={1320}
-            height={480}
-          />
+          <Source media="(max-width: 640px)" src={images.mobile} width={335} height={572} />
+          <Source media="(min-width: 640px)" src={images.desktop} width={1320} height={480} />
           <img src={images.desktop} alt={title} className="w-full object-cover" />
         </Picture>
 
         <div
           className={clx(
-            "absolute left-0 top-0",
-            "p-5 sm:p-10 md:py-20 md:px-[60px]",
+            "absolute top-0 left-0",
+            "p-5 sm:p-10 md:px-[60px] md:py-20",
             "flex flex-col",
-            "h-full max-w-full sm:max-w-[33%] md:max-w-[50%] justify-center",
+            "h-full max-w-full justify-center sm:max-w-[33%] md:max-w-[50%]",
           )}
         >
-          {title && <span className="font-bold text-7xl text-primary">{title}
-          </span>}
+          {title && <span className="text-7xl font-bold text-primary">{title}</span>}
           {description && (
             <span
-              className="font-normal text-sm md: pt-4 pb-12"
+              className="md: pt-4 pb-12 text-sm font-normal"
               dangerouslySetInnerHTML={{ __html: description }}
             />
           )}
           <div className="">
             {cta && (
-              <a
-                href={cta.href}
-                className="btn btn-primary no-animatio w-fit border-0 min-w-45"
-              >
+              <a href={cta.href} className="no-animatio btn w-fit min-w-45 border-0 btn-primary">
                 {cta.label}
               </a>
             )}

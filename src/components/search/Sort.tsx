@@ -49,11 +49,12 @@ export default function Sort({ sortOptions, url }: Props) {
   const parsed = parseUrl(url);
   const urlSort = parsed?.searchParams.get(SORT_QUERY_PARAM) ?? "";
 
-  const options = sortOptions?.map(({ value, label }) => ({
-    target: getNavTarget(url, value),
-    value,
-    label,
-  })) ?? [];
+  const options =
+    sortOptions?.map(({ value, label }) => ({
+      target: getNavTarget(url, value),
+      value,
+      label,
+    })) ?? [];
 
   // Fall back to the first option when the URL has no sort param so the
   // <select> stays a controlled component without React warnings.
@@ -63,7 +64,9 @@ export default function Sort({ sortOptions, url }: Props) {
 
   return (
     <>
-      <label htmlFor="sort" className="sr-only">Sort by</label>
+      <label htmlFor="sort" className="sr-only">
+        Sort by
+      </label>
       <select
         id="sort"
         name="sort"

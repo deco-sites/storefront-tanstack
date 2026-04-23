@@ -48,8 +48,7 @@ const decoWorker = createDecoWorkerEntry(serverEntry, {
     const cookies = getCookies(request.headers);
     const rawDevice = detectDevice(request.headers.get("user-agent") ?? "");
     // SegmentKey only splits mobile vs desktop — collapse tablet to mobile
-    const device: "mobile" | "desktop" =
-      rawDevice === "desktop" ? "desktop" : "mobile";
+    const device: "mobile" | "desktop" = rawDevice === "desktop" ? "desktop" : "mobile";
 
     return {
       device,

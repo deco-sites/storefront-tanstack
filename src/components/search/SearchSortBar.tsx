@@ -17,7 +17,7 @@ export default function SearchSortBar({
   filterDrawerId,
 }: Props) {
   return (
-    <div className="flex justify-between items-end gap-4">
+    <div className="flex items-end justify-between gap-4">
       <div className="flex flex-col gap-2">
         <span className="text-sm font-normal">
           {recordPerPage} of {totalRecords} results
@@ -26,10 +26,7 @@ export default function SearchSortBar({
       </div>
 
       {filterDrawerId && (
-        <label
-          htmlFor={filterDrawerId}
-          className="btn btn-ghost sm:hidden"
-        >
+        <label htmlFor={filterDrawerId} className="btn btn-ghost sm:hidden">
           Filters
         </label>
       )}

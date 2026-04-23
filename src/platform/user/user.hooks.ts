@@ -29,8 +29,7 @@ export function useUser() {
 export function useSignIn() {
   const qc = useQueryClient();
   return useMutation({
-    mutationFn: (input: { email: string; password: string }) =>
-      signInServerFn({ data: input }),
+    mutationFn: (input: { email: string; password: string }) => signInServerFn({ data: input }),
     onSuccess: (user: UserState) => {
       qc.setQueryData(USER_QUERY_KEY, user);
     },
@@ -64,7 +63,6 @@ export function useSignOut() {
 
 export function useRecoverPassword() {
   return useMutation({
-    mutationFn: (input: { email: string }) =>
-      recoverPasswordServerFn({ data: input }),
+    mutationFn: (input: { email: string }) => recoverPasswordServerFn({ data: input }),
   });
 }

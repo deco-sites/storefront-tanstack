@@ -14,13 +14,13 @@ function ShelfWithImage({ section, image }: Props) {
   return (
     <div className="container">
       <div className="grid grid-cols-1 md:grid-cols-2">
-        <div className="md:max-w-xs mx-auto flex items-center">
+        <div className="mx-auto flex items-center md:max-w-xs">
           <section.Component {...section.props} />
         </div>
         <a href={image.href}>
           <Image
             src={image.src}
-            className="w-full h-full object-cover"
+            className="h-full w-full object-cover"
             width={720}
             height={640}
             alt={image.alt}

@@ -23,12 +23,7 @@ export function rebasePaginationHrefs(
   };
 }
 
-export default function SearchPagination({
-  currentPage,
-  prev,
-  next,
-  variant,
-}: Props) {
+export default function SearchPagination({ currentPage, prev, next, variant }: Props) {
   if (variant === "show-more") {
     return (
       <div className="flex flex-col items-center gap-4">
@@ -67,11 +62,11 @@ export default function SearchPagination({
         rel="prev"
         aria-label="previous page"
         aria-disabled={!prev}
-        className={clx("btn btn-ghost join-item", !prev && "btn-disabled")}
+        className={clx("btn join-item btn-ghost", !prev && "btn-disabled")}
       >
         <Icon id="chevron-right" className="rotate-180" />
       </Link>
-      <span className="btn btn-ghost join-item">Page {currentPage}</span>
+      <span className="btn join-item btn-ghost">Page {currentPage}</span>
       <Link
         to={next?.to ?? "#"}
         search={next?.search}
@@ -79,7 +74,7 @@ export default function SearchPagination({
         rel="next"
         aria-label="next page"
         aria-disabled={!next}
-        className={clx("btn btn-ghost join-item", !next && "btn-disabled")}
+        className={clx("btn join-item btn-ghost", !next && "btn-disabled")}
       >
         <Icon id="chevron-right" />
       </Link>

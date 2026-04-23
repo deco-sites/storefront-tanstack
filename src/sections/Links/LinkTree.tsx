@@ -70,13 +70,7 @@ export interface Neutral {
 
 export interface Social {
   href: string;
-  label:
-    | "Instagram"
-    | "Facebook"
-    | "Linkedin"
-    | "WhatsApp"
-    | "Discord"
-    | "Tiktok";
+  label: "Instagram" | "Facebook" | "Linkedin" | "WhatsApp" | "Discord" | "Tiktok";
   /** @format color */
   iconColor?: string;
   /** @description width of the SVG line */
@@ -112,72 +106,50 @@ function Links(props: Props) {
     />
   );
 
-  const maybeLink = header?.logo?.link
-    ? <a href={header?.logo?.link!} target="_blank">{logo}</a>
-    : logo;
+  const maybeLink = header?.logo?.link ? (
+    <a href={header.logo.link} target="_blank">
+      {logo}
+    </a>
+  ) : (
+    logo
+  );
 
   const ColorsNeutralAndHover = {
     color: links.style?.textColor,
-    backgroundImage: `linear-gradient(to right, ${
-      links.style?.gradientColors.neutral.map((color) => color.color).join(
-        ", ",
-      )
-    })`,
+    backgroundImage: `linear-gradient(to right, ${links.style?.gradientColors.neutral
+      .map((color) => color.color)
+      .join(", ")})`,
   };
 
   return (
     <BaseContainer background={background}>
-      <header className="flex flex-col justify-center items-center gap-4">
-        {header?.logo?.img && (
-          <div className="rounded-full p-4">
-            {maybeLink}
-          </div>
-        )}
+      <header className="flex flex-col items-center justify-center gap-4">
+        {header?.logo?.img && <div className="rounded-full p-4">{maybeLink}</div>}
 
         {header?.title && (
-          <h1
-            className="text-5xl font-bold text-center"
-            style={{ color: header.textColor }}
-          >
+          <h1 className="text-center text-5xl font-bold" style={{ color: header.textColor }}>
             {header?.title}
           </h1>
         )}
 
-        {header?.description && (
-          <p
-            style={{ color: header.textColor }}
-          >
-            {header?.description}
-          </p>
-        )}
+        {header?.description && <p style={{ color: header.textColor }}>{header?.description}</p>}
       </header>
 
       <main className="w-full">
-        <ul className="flex flex-col justify-center items-center gap-4">
+        <ul className="flex flex-col items-center justify-center gap-4">
           {links?.items?.map((link) => (
             <li className="w-full">
               <a
                 target="_blank"
                 href={link.href}
-                className="group h-13 px-6 rounded-full flex justify-start items-center font-bold gap-4"
+                className="group flex h-13 items-center justify-start gap-4 rounded-full px-6 font-bold"
                 style={ColorsNeutralAndHover}
               >
-                {Boolean(link.icon) && (
-                  <Icon
-                    size={20}
-                    id={link.icon!}
-                  />
-                )}
+                {Boolean(link.icon) && <Icon size={20} id={link.icon!} />}
 
-                <span className="w-full text-center text-sm">
-                  {link.label}
-                </span>
+                <span className="w-full text-center text-sm">{link.label}</span>
 
-                <Icon
-                  size={20}
-                  id="share"
-                  className="opacity-0 group-hover:opacity-100"
-                />
+                <Icon size={20} id="share" className="opacity-0 group-hover:opacity-100" />
               </a>
             </li>
           ))}
@@ -185,14 +157,14 @@ function Links(props: Props) {
       </main>
 
       <footer className="flex flex-1 flex-col">
-        <ul className="flex flex-row gap-4 mb-10 justify-center items-center">
+        <ul className="mb-10 flex flex-row items-center justify-center gap-4">
           {social?.map((link) => (
             <li>
               <a
                 target="_blank"
                 href={link.href}
                 title={link.label}
-                className="text-white block rounded"
+                className="block rounded text-white"
               >
                 <Icon
                   size={20}
@@ -210,16 +182,10 @@ function Links(props: Props) {
           <div className="mt-auto">
             <a
               href={props.footer.url}
-              className="text-xs flex flex-row items-center justify-center gap-1"
+              className="flex flex-row items-center justify-center gap-1 text-xs"
               target="_blank"
             >
-              {props.footer.text && (
-                <p
-                  style={{ color: header.textColor }}
-                >
-                  {props.footer.text}
-                </p>
-              )}
+              {props.footer.text && <p style={{ color: header.textColor }}>{props.footer.text}</p>}
               {props.footer.image && (
                 <Image
                   src={props.footer.image || ""}
@@ -236,10 +202,7 @@ function Links(props: Props) {
   );
 }
 
-function BaseContainer(props: {
-  children?: ReactNode;
-  background?: Props["background"];
-}) {
+function BaseContainer(props: { children?: ReactNode; background?: Props["background"] }) {
   const { image } = props?.background ?? {};
   const baseClasses = "flex justify-center w-full min-h-screen";
   const inlineStyle = image ? { background: `url(${image})` } : undefined;
@@ -254,7 +217,7 @@ function BaseContainer(props: {
         backgroundColor: backgroundColors ? backgroundColors : undefined,
       }}
     >
-      <div className="flex flex-col items-center gap-12 p-10 max-w-[640px] w-full">
+      <div className="flex w-full max-w-[640px] flex-col items-center gap-12 p-10">
         {props.children}
       </div>
     </div>

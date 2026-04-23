@@ -31,13 +31,7 @@ const HEIGHT = 287;
 const ASPECT_RATIO = `${WIDTH} / ${HEIGHT}`;
 const SHOE_SIZE_VARIANT = "shoe size";
 
-export default function ProductCard({
-  product,
-  preload,
-  itemListName,
-  index,
-  className,
-}: Props) {
+export default function ProductCard({ product, preload, itemListName, index, className }: Props) {
   const { url, image: images, offers, isVariantOf } = product;
   const hasVariant = isVariantOf?.hasVariant ?? [];
   const title = isVariantOf?.name ?? product.name ?? "";
@@ -50,18 +44,14 @@ export default function ProductCard({
   const relativeUrl = relative(url) ?? "/";
 
   const [selectedHref, setSelectedHref] = useState(relativeUrl);
-  const selectedVariant = hasVariant.find(
-    (v) => relative(v.url) === selectedHref,
-  ) ?? product;
+  const selectedVariant = hasVariant.find((v) => relative(v.url) === selectedHref) ?? product;
   const variantImages = filterImagesForVariant(
     isVariantOf?.image ?? selectedVariant.image ?? images ?? [],
     selectedVariant.name,
   );
   const [front, back] = variantImages.length ? variantImages : (images ?? []);
 
-  const percent = listPrice && price
-    ? Math.round(((listPrice - price) / listPrice) * 100)
-    : 0;
+  const percent = listPrice && price ? Math.round(((listPrice - price) / listPrice) * 100) : 0;
 
   const analyticsItem = mapProductToAnalyticsItem({
     product,
@@ -79,14 +69,10 @@ export default function ProductCard({
   });
 
   const firstAttr = firstSku?.[0];
-  const showVariants = variants.length > 1 &&
-    firstAttr?.toLowerCase() !== SHOE_SIZE_VARIANT;
+  const showVariants = variants.length > 1 && firstAttr?.toLowerCase() !== SHOE_SIZE_VARIANT;
 
   return (
-    <div
-      {...event}
-      className={clx("card card-compact group text-sm", className)}
-    >
+    <div {...event} className={clx("card-compact group card text-sm", className)}>
       <figure
         className={clx(
           "relative bg-base-200",
@@ -109,10 +95,10 @@ export default function ProductCard({
           />
         )}
 
-        <div className="absolute top-0 left-0 w-full flex items-center justify-between">
+        <div className="absolute top-0 left-0 flex w-full items-center justify-between">
           <span
             className={clx(
-              "text-sm/4 font-normal text-black bg-error/15 text-center rounded-badge px-2 py-1",
+              "rounded-badge bg-error/15 px-2 py-1 text-center text-sm/4 font-normal text-black",
               inStock && "opacity-0",
             )}
           >
@@ -120,7 +106,7 @@ export default function ProductCard({
           </span>
           <span
             className={clx(
-              "text-sm/4 font-normal text-black bg-primary/15 text-center rounded-badge px-2 py-1",
+              "rounded-badge bg-primary/15 px-2 py-1 text-center text-sm/4 font-normal text-black",
               (percent < 1 || !inStock) && "opacity-0",
             )}
           >
@@ -128,7 +114,7 @@ export default function ProductCard({
           </span>
         </div>
 
-        <div className="absolute bottom-0 right-0">
+        <div className="absolute right-0 bottom-0">
           <WishlistButton item={analyticsItem} variant="icon" />
         </div>
       </figure>

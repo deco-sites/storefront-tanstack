@@ -1,8 +1,6 @@
 import { type ImageWidget } from "~/types/widgets";
 import Image from "~/components/ui/Image";
-import Section, {
-  type Props as SectionHeaderProps,
-} from "../../components/ui/Section";
+import Section, { type Props as SectionHeaderProps } from "../../components/ui/Section";
 
 export interface Image {
   image: ImageWidget;
@@ -33,7 +31,7 @@ function Logos({
     <Section.Container>
       <Section.Header title={title} cta={cta} />
 
-      <ul className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 px-5 sm:px-0">
+      <ul className="flex flex-wrap items-center justify-center gap-2 px-5 sm:gap-4 sm:px-0">
         {images.map((item) => (
           <li>
             <Image
@@ -41,7 +39,7 @@ function Logos({
               height={300}
               src={item.image}
               alt={item.alt}
-              className="w-full h-full object-cover"
+              className="h-full w-full object-cover"
             />
           </li>
         ))}

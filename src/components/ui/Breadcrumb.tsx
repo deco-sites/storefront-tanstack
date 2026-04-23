@@ -10,13 +10,15 @@ function Breadcrumb({ itemListElement = [] }: Props) {
   const items = [{ name: "Home", item: "/" }, ...itemListElement];
 
   return (
-    <div className="breadcrumbs py-0 text-xs font-normal text-base-400">
+    <div className="text-base-400 breadcrumbs py-0 text-xs font-normal">
       <ul>
         {items
           .filter(({ name, item }) => name && item)
           .map(({ name, item }) => (
             <li key={item}>
-              <Link to={relative(item) ?? "/"} preload="intent">{name}</Link>
+              <Link to={relative(item) ?? "/"} preload="intent">
+                {name}
+              </Link>
             </li>
           ))}
       </ul>

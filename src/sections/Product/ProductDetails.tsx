@@ -1,7 +1,5 @@
 import type { ProductDetailsPage } from "@decocms/apps/commerce/types";
-import ProductHero, {
-  type HeroCopyConfig,
-} from "../../components/product/pdp/ProductHero";
+import ProductHero, { type HeroCopyConfig } from "../../components/product/pdp/ProductHero";
 import type { DiscountBadgeConfig } from "../../components/product/pdp/ProductDiscountBadge";
 import type { GalleryConfig } from "../../components/product/pdp/ProductGallery";
 import type { VariantSelectorConfig } from "../../components/product/pdp/ProductVariantSelector";
@@ -66,10 +64,10 @@ export default function ProductDetails({
     const notFoundTitle = copy?.notFoundTitle ?? "Page not found";
     const goHomeLabel = copy?.goHomeLabel ?? "Go back to Home";
     return (
-      <div className="w-full flex justify-center items-center py-28">
+      <div className="flex w-full items-center justify-center py-28">
         <div className="flex flex-col items-center justify-center gap-6">
-          <span className="font-medium text-2xl">{notFoundTitle}</span>
-          <a href="/" className="btn no-animation">
+          <span className="text-2xl font-medium">{notFoundTitle}</span>
+          <a href="/" className="no-animation btn">
             {goHomeLabel}
           </a>
         </div>
@@ -78,7 +76,7 @@ export default function ProductDetails({
   }
 
   return (
-    <div className="container flex flex-col gap-4 sm:gap-5 w-full py-4 sm:py-5 px-5 sm:px-0">
+    <div className="container flex w-full flex-col gap-4 px-5 py-4 sm:gap-5 sm:px-0 sm:py-5">
       <Breadcrumb itemListElement={page.breadcrumbList.itemListElement} />
       <ProductHero
         page={page}

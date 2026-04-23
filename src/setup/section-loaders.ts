@@ -5,13 +5,7 @@
  * Complex loaders delegate to the section's own loader export.
  * Account sections use vtexAccountLoaders from @decocms/apps.
  */
-import {
-  registerSectionLoaders,
-  withDevice,
-  withMobile,
-  withSearchParam,
-  compose,
-} from "@decocms/start/cms";
+import { registerSectionLoaders } from "@decocms/start/cms";
 
 registerSectionLoaders({
   "site/sections/Newsletter/Newsletter.tsx": async (props: any, req: Request) => {
