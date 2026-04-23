@@ -1,0 +1,132 @@
+@import "tailwindcss";
+@plugin "daisyui";
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+  color-scheme: light;
+  --color-primary: #3141AC;
+  --color-secondary: #BADFED;
+  --color-accent: #DECD8F;
+  --color-neutral: #FBF5F1;
+  --color-base-100: #F8F9FD;
+  --color-base-200: #FAFAFA;
+  --color-base-300: #5C5C5C;
+  --color-info: #2e72d2;
+  --color-success: #008060;
+  --color-warning: #ffc453;
+  --color-error: #d82c0d;
+}
+
+/* Tailwind v4: reset default palette (old sites replaced it entirely via theme.colors)
+   then re-add only the colors used by this site. */
+@theme {
+  --color-*: initial;
+
+  --color-white: #fff;
+  --color-black: #000;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+  --color-inherit: inherit;
+  --font-sans: "Poiret One", ui-sans-serif, system-ui, sans-serif;
+
+  /* Gray scale (Tailwind v3 default, required for bg-gray-*, text-gray-*, etc.) */
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+  --color-gray-950: #030712;
+}
+
+/* DaisyUI v5: flatten depth/noise to match v4 look */
+:root {
+  --depth: 0;
+  --noise: 0;
+}
+
+/* DaisyUI v5 removed carousel overflow — re-add for horizontal scroll */
+.carousel {
+  -webkit-overflow-scrolling: touch;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+}
+
+.carousel > * {
+  scroll-snap-align: start;
+}
+
+ul.carousel,
+ol.carousel {
+  list-style: none;
+  padding: 0;
+}
+
+/* Container: replaces Tailwind v3 container plugin config */
+@utility container {
+  margin-inline: auto;
+  padding-inline: 1rem;
+  width: 100%;
+
+  @media (width >= 640px) { max-width: 640px; }
+  @media (width >= 768px) { max-width: 768px; }
+  @media (width >= 1024px) { max-width: 1024px; }
+  @media (width >= 1280px) { max-width: 1280px; }
+  @media (width >= 1536px) { max-width: 1536px; }
+}
+
+/* Deferred section visibility — reduces layout shift while loading */
+section[data-deferred="true"] {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 300px;
+}
+
+.deferred-section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 300px;
+}
+
+@view-transition {
+  navigation: auto;
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  img,
+  picture,
+  video,
+  canvas,
+  svg {
+    display: block;
+    max-width: 100%;
+  }
+
+  /* Drawer / modal scroll lock */
+  body:has(dialog[open]),
+  body:has(.drawer-toggle:checked) {
+    overflow: hidden;
+  }
+}
+
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
