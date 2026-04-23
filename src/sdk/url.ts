@@ -11,7 +11,7 @@ export const relative = (link?: string | undefined) => {
  * platforms, keep the current page's pathname and only adopt the search
  * params built by the loader.
  */
-export const rebaseSearch = (
+const rebaseSearch = (
   loaderHref: string | undefined,
   basePath: string | undefined,
 ): string | undefined => {

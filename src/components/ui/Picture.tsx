@@ -5,7 +5,7 @@ import {
   type ImageProps,
 } from "@decocms/apps/commerce/components/Image";
 
-export interface PictureSourceProps {
+interface PictureSourceProps {
   src: string;
   width: number;
   height?: number;
@@ -14,7 +14,7 @@ export interface PictureSourceProps {
   sizes?: string;
 }
 
-export interface PictureProps extends Partial<Omit<ImageProps, "sizes">> {
+interface PictureProps extends Partial<Omit<ImageProps, "sizes">> {
   sources?: PictureSourceProps[];
   children?: React.ReactNode;
 }
@@ -57,7 +57,7 @@ export function Picture({
 
 // Legacy `<Source>` helper — kept for components that still use the old
 // compositional Picture API. Renders a native <source> with Deco srcset.
-export interface SourceProps {
+interface SourceProps {
   src: string;
   width: number;
   height?: number;

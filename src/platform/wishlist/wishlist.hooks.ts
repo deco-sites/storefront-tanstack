@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { invoke } from "../../runtime";
 import { EMPTY_WISHLIST, type WishlistState } from "./wishlist.types";
 
-export const WISHLIST_QUERY_KEY = ["wishlist"] as const;
+const WISHLIST_QUERY_KEY = ["wishlist"] as const;
 
 export function useWishlist() {
   const query = useQuery({
@@ -23,7 +23,7 @@ export function useWishlist() {
   };
 }
 
-export interface ToggleWishlistInput {
+interface ToggleWishlistInput {
   productID: string;
   productGroupID: string;
 }
