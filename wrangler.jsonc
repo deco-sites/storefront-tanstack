@@ -1,0 +1,18 @@
+{
+  "name": "storefront-tanstack-tanstack",
+  "compatibility_date": "2026-02-14",
+  "compatibility_flags": ["nodejs_compat", "no_handle_cross_request_promise_resolution"],
+  "main": "./src/worker-entry.ts",
+  "workers_dev": true,
+  "preview_urls": true,
+  // Uncomment for redirect/AB testing support via KV:
+  // "kv_namespaces": [
+  //   { "binding": "SITES_KV", "id": "YOUR_KV_NAMESPACE_ID" }
+  // ],
+  "observability": {
+    "logs": {
+      "enabled": true,
+      "invocation_logs": true
+    }
+  }
+}
