@@ -7,6 +7,7 @@ import Slider from "../../components/ui/Slider";
 import { clx } from "~/sdk/clx";
 import { useDevice } from "@decocms/start/sdk/useDevice";
 import { type LoadingFallbackProps } from "~/types/deco";
+import { Link } from "@tanstack/react-router";
 /** @titleBy label */
 export interface Item {
   image: ImageWidget;
@@ -18,7 +19,11 @@ export interface Props extends SectionHeaderProps {
 }
 function Card({ image, href, label }: Item) {
   return (
-    <a href={href} className="flex flex-col items-center justify-center gap-4">
+    <Link
+      to={href}
+      preload="intent"
+      className="flex flex-col items-center justify-center gap-4"
+    >
       <div className="w-44 h-44 rounded-full bg-base-200 flex justify-center items-center border border-transparent hover:border-primary">
         <Image
           src={image}
@@ -29,7 +34,7 @@ function Card({ image, href, label }: Item) {
         />
       </div>
       <span className="font-medium text-sm">{label}</span>
-    </a>
+    </Link>
   );
 }
 function CategoryGrid({ title, cta, items }: Props) {

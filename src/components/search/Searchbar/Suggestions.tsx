@@ -2,7 +2,7 @@ import { Suggestion } from "@decocms/apps/commerce/types";
 import type { AppContext } from "../../../apps/site";
 import { clx } from "~/sdk/clx";
 import { ComponentProps } from "../../../sections/Component";
-import ProductCard from "../../product/ProductCard";
+import ProductCard from "../../product/card/ProductCard";
 import Icon from "../../ui/Icon";
 import Slider from "../../ui/Slider";
 import { ACTION, NAME } from "./Form";

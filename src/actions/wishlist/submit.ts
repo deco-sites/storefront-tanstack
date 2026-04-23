@@ -1,51 +1,56 @@
-import { type AppContext, usePlatform } from "../../apps/site";
-import { type Wishlist } from "../../components/wishlist/Provider";
+import { RequestContext } from "@decocms/start/sdk/requestContext";
+import { usePlatform } from "../../apps/site";
+import {
+  EMPTY_WISHLIST,
+  type WishlistState,
+} from "../../platform/wishlist";
+import {
+  readWishlistCookie,
+  serializeWishlistCookie,
+} from "../../loaders/_cookie";
 
 interface Props {
   productID: string;
   productGroupID: string;
 }
 
-// Phase 6 TODO: replace `any` with the real VTEX context once we re-export
-// AppContextVTEX from @decocms/apps/vtex.
-type AppContextVTEX = AppContext & { invoke: (...args: any[]) => any };
-
 async function action(
   props: Props,
-  _req?: Request,
-  ctx: AppContext = {} as AppContext,
-): Promise<Wishlist> {
-  const { productID, productGroupID } = props;
+  req?: Request,
+): Promise<WishlistState> {
+  if (!props?.productID) throw new Error("productID is required");
+
+  const request = req ?? RequestContext.current?.request;
   const platform = usePlatform();
 
   if (platform === "vtex") {
-    const vtex = ctx as unknown as AppContextVTEX;
-
-    const list: any[] = await vtex.invoke("vtex/loaders/wishlist.ts");
-    const item = list.find((i: any) => i.sku === productID);
-
-    try {
-      const response = item
-        ? await vtex.invoke(
-          "vtex/actions/wishlist/removeItem.ts",
-          { id: item.id },
-        )
-        : await vtex.invoke(
-          "vtex/actions/wishlist/addItem.ts",
-          { sku: productID, productId: productGroupID },
-        );
-
-      return {
-        productIDs: response.map((item) => item.sku),
-      };
-    } catch {
-      return {
-        productIDs: list.map((item) => item.sku),
-      };
-    }
+    // TODO(consumer): real VTEX wishlist toggle, e.g.
+    //   const list = await invoke("vtex/loaders/wishlist.ts");
+    //   const item = list.find((i) => i.sku === props.productID);
+    //   const next = item
+    //     ? await invoke("vtex/actions/wishlist/removeItem.ts", { id: item.id })
+    //     : await invoke("vtex/actions/wishlist/addItem.ts", {
+    //         sku: props.productID, productId: props.productGroupID,
+    //       });
+    //   return { productIDs: next.map((i) => i.sku) };
+  }
+  if (platform === "wake") {
+    // TODO(consumer): wire wake wishlist endpoint here.
   }
 
-  throw new Error(`Unsupported platform: ${platform}`);
+  // Default: cookie-backed so the demo persists per-browser without a backend.
+  const current = request ? readWishlistCookie(request) : EMPTY_WISHLIST;
+  const next: WishlistState = current.productIDs.includes(props.productID)
+    ? {
+      productIDs: current.productIDs.filter((id) => id !== props.productID),
+    }
+    : { productIDs: [...current.productIDs, props.productID] };
+
+  RequestContext.responseHeaders.append(
+    "Set-Cookie",
+    serializeWishlistCookie(next),
+  );
+  return next;
 }
 
 export default action;

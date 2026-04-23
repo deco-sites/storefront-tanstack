@@ -1,4 +1,5 @@
 import type { BreadcrumbList } from "@decocms/apps/commerce/types";
+import { Link } from "@tanstack/react-router";
 import { relative } from "../../sdk/url";
 
 interface Props {
@@ -14,8 +15,8 @@ function Breadcrumb({ itemListElement = [] }: Props) {
         {items
           .filter(({ name, item }) => name && item)
           .map(({ name, item }) => (
-            <li>
-              <a href={relative(item)}>{name}</a>
+            <li key={item}>
+              <Link to={relative(item) ?? "/"} preload="intent">{name}</Link>
             </li>
           ))}
       </ul>

@@ -1,7 +1,7 @@
+import { useEffect, useState } from "react";
 import type { HTMLWidget } from "~/types/widgets";
 import Section from "../../components/ui/Section";
-import React, { useId } from "react";
-import { useScript } from "@decocms/start/sdk/useScript";
+
 export interface Props {
   /**
    * @title Text
@@ -13,57 +13,76 @@ export interface Props {
    * @format datetime
    */
   expiresAt?: string;
-  labels?: {
-    days?: string;
-    hours?: string;
-    minutes?: string;
-    seconds?: string;
-  };
+  /**
+   * @title Unit labels
+   * @description Localizable labels for the days/hours/minutes/seconds counters
+   */
+  labels?: LabelsConfig;
 }
-const snippet = (expiresAt: string, rootId: string) => {
-  const expirationDate = new Date(expiresAt).getTime();
-  const getDelta = () => {
-    const delta = expirationDate - new Date().getTime();
-    const days = Math.floor(delta / (1000 * 60 * 60 * 24));
-    const hours = Math.floor(
-      (delta % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
-    );
-    const minutes = Math.floor((delta % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((delta % (1000 * 60)) / 1000);
-    return {
-      days,
-      hours,
-      minutes,
-      seconds,
-    };
+
+export interface LabelsConfig {
+  /**
+   * @title Days label
+   * @default "Days"
+   */
+  days?: string;
+  /**
+   * @title Hours label
+   * @default "Hours"
+   */
+  hours?: string;
+  /**
+   * @title Minutes label
+   * @default "Minutes"
+   */
+  minutes?: string;
+  /**
+   * @title Seconds label
+   * @default "Seconds"
+   */
+  seconds?: string;
+}
+
+interface Delta {
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
+  expired: boolean;
+}
+
+const computeDelta = (target: number): Delta => {
+  const diff = target - Date.now();
+  if (diff < 0) {
+    return { days: 0, hours: 0, minutes: 0, seconds: 0, expired: true };
+  }
+  return {
+    days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+    hours: Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+    minutes: Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)),
+    seconds: Math.floor((diff % (1000 * 60)) / 1000),
+    expired: false,
   };
-  const setValue = (id: string, value: number) => {
-    const elem = document.getElementById(id);
-    if (!elem) {
-      return;
-    }
-    elem.style.setProperty("--value", value.toString());
-  };
-  const start = () =>
-    setInterval(() => {
-      const { days, hours, minutes, seconds } = getDelta();
-      const isExpired = days + hours + minutes + seconds < 0;
-      if (isExpired) {
-        const expired = document.getElementById(`${rootId}::expired`);
-        const counter = document.getElementById(`${rootId}::counter`);
-        expired && expired.classList.remove("hidden");
-        counter && counter.classList.add("hidden");
-      } else {
-        setValue(`${rootId}::days`, days);
-        setValue(`${rootId}::hours`, hours);
-        setValue(`${rootId}::minutes`, minutes);
-        setValue(`${rootId}::seconds`, seconds);
-      }
-    }, 1000);
-  document.readyState === "complete"
-    ? start()
-    : addEventListener("load", start);
 };
+
+function TimeUnit(
+  { value, label }: { value: number; label?: string },
+) {
+  return (
+    <div className="flex flex-col items-center">
+      <span className="countdown font-normal text-xl lg:text-2xl">
+        <span
+          className="text-6xl md:text-8xl font-thin text-base-content tracking-[-3px]"
+          style={{ "--value": value } as React.CSSProperties}
+        />
+      </span>
+      <span className="md:text-2xl text-base-content font-thin">
+        {label ?? ""}
+      </span>
+    </div>
+  );
+}
+
 function CampaignTimer({
   expiresAt = `${new Date()}`,
   labels = {
@@ -74,55 +93,41 @@ function CampaignTimer({
   },
   text = "",
 }: Props) {
-  const id = useId();
-  interface TimeComponentProps {
-    id: string;
-    label: string | undefined;
-    time: string;
-  }
-  const TimeComponent: React.FC<TimeComponentProps> = (
-    { id, label, time },
-  ) => (
-    <div className="flex flex-col items-center">
-      <span className="countdown font-normal text-xl lg:text-2xl">
-        <span
-          className="text-6xl md:text-8xl font-thin text-base-content tracking-[-3px]"
-          id={`${id}::${time}`}
-        />
-      </span>
-      <span className="md:text-2xl text-base-content font-thin">
-        {label || ""}
-      </span>
-    </div>
-  );
+  const target = new Date(expiresAt).getTime();
+  const [delta, setDelta] = useState<Delta>(() => computeDelta(target));
+
+  useEffect(() => {
+    if (delta.expired) return;
+    const timer = setInterval(() => {
+      const next = computeDelta(target);
+      setDelta(next);
+      if (next.expired) clearInterval(timer);
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [target, delta.expired]);
+
   return (
-    <>
-      <div>
-        <div className="container mx-auto flex flex-col lg:flex-row lg:items-center lg:justify-center gap-4 py-16 sm:px-10 lg:gap-16">
-          <div
-            id={`${id}::expired`}
-            className="hidden text-sm text-center lg:text-xl lg:text-left lg:max-w-lg"
-            dangerouslySetInnerHTML={{ __html: text || "Expired!" }}
-          >
-          </div>
-          <div className="flex flex-wrap gap-8 lg:gap-16 items-center justify-center lg:justify-normal">
-            <div id={`${id}::counter`}>
+    <div>
+      <div className="container mx-auto flex flex-col lg:flex-row lg:items-center lg:justify-center gap-4 py-16 sm:px-10 lg:gap-16">
+        {delta.expired
+          ? (
+            <div
+              className="text-sm text-center lg:text-xl lg:text-left lg:max-w-lg"
+              dangerouslySetInnerHTML={{ __html: text || "Expired!" }}
+            />
+          )
+          : (
+            <div className="flex flex-wrap gap-8 lg:gap-16 items-center justify-center lg:justify-normal">
               <div className="grid grid-flow-col gap-5 sm:gap-10 md:gap-20 text-center auto-cols-max items-center">
-                <TimeComponent id={id} label={labels?.days} time="days" />
-                <TimeComponent id={id} label={labels?.hours} time="hours" />
-                <TimeComponent id={id} label={labels?.minutes} time="minutes" />
-                <TimeComponent id={id} label={labels?.seconds} time="seconds" />
+                <TimeUnit value={delta.days} label={labels?.days} />
+                <TimeUnit value={delta.hours} label={labels?.hours} />
+                <TimeUnit value={delta.minutes} label={labels?.minutes} />
+                <TimeUnit value={delta.seconds} label={labels?.seconds} />
               </div>
             </div>
-          </div>
-        </div>
+          )}
       </div>
-      <script
-        type="module"
-        suppressHydrationWarning
-        dangerouslySetInnerHTML={{ __html: useScript(snippet, expiresAt, id) }}
-      />
-    </>
+    </div>
   );
 }
 export const LoadingFallback = () => <Section.Placeholder height="635px" />;

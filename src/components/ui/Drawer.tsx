@@ -1,8 +1,8 @@
-import { type ReactNode } from "react";
+import { useCallback, useId, type ReactNode } from "react";
 import { clx } from "~/sdk/clx";
-import { useId } from "react";
+import { useEscapeKey } from "../../sdk/useEscapeKey";
 import Icon from "./Icon";
-import { useScript } from "@decocms/start/sdk/useScript";
+
 export interface Props {
   open?: boolean;
   className?: string;
@@ -10,57 +10,49 @@ export interface Props {
   aside: ReactNode;
   id?: string;
 }
-const script = (id: string) => {
-  const handler = (e: KeyboardEvent) => {
-    if (e.key !== "Escape" && e.keyCode !== 27) {
-      return;
-    }
-    const input = document.getElementById(id) as HTMLInputElement | null;
-    if (!input) {
-      return;
-    }
-    input.checked = false;
-  };
-  addEventListener("keydown", handler);
-};
+
 function Drawer(
-  { children, aside, open, className: _class = "", id = useId() }: Props,
+  { children, aside, open, className: _class = "", id }: Props,
 ) {
+  const fallbackId = useId();
+  const toggleId = id ?? fallbackId;
+
+  const closeViaCheckbox = useCallback(() => {
+    const input = document.getElementById(toggleId) as HTMLInputElement | null;
+    if (input) input.checked = false;
+  }, [toggleId]);
+
+  useEscapeKey(closeViaCheckbox);
+
   return (
-    <>
-      <div className={clx("drawer", _class)}>
-        <input
-          id={id}
-          name={id}
-          checked={open}
-          type="checkbox"
-          className="drawer-toggle"
-          aria-label={open ? "open drawer" : "closed drawer"}
-        />
-
-        <div className="drawer-content">
-          {children}
-        </div>
-
-        <aside
-          data-aside
-          className={clx(
-            "drawer-side h-full z-40 overflow-hidden",
-            "[[data-aside]&_section]:contents",
-          )}
-        >
-          <label htmlFor={id} className="drawer-overlay" />
-          {aside}
-        </aside>
-      </div>
-      <script
-        type="module"
-        suppressHydrationWarning
-        dangerouslySetInnerHTML={{ __html: useScript(script, id) }}
+    <div className={clx("drawer", _class)}>
+      <input
+        id={toggleId}
+        name={toggleId}
+        defaultChecked={open}
+        type="checkbox"
+        className="drawer-toggle"
+        aria-label={open ? "open drawer" : "closed drawer"}
       />
-    </>
+
+      <div className="drawer-content">
+        {children}
+      </div>
+
+      <aside
+        data-aside
+        className={clx(
+          "drawer-side h-full z-40 overflow-hidden",
+          "[[data-aside]&_section]:contents",
+        )}
+      >
+        <label htmlFor={toggleId} className="drawer-overlay" />
+        {aside}
+      </aside>
+    </div>
   );
 }
+
 function Aside({ title, drawer, children }: {
   title: string;
   drawer: string;

@@ -52,7 +52,7 @@ export default function ProductHero({
   const title = isVariantOf?.name ?? product.name ?? "";
   const description = product.description || isVariantOf?.description;
 
-  const { price = 0, listPrice, seller = "1", availability } = useOffer(offers);
+  const { price = 0, listPrice, availability } = useOffer(offers);
   const isInStock = availability === "https://schema.org/InStock";
 
   const percent = listPrice && price
@@ -90,9 +90,11 @@ export default function ProductHero({
     },
   });
 
+  // Filter against the variant name (e.g. "Tote Bag — Yellow"), not the
+  // parent family name in `title` — otherwise no per-variant filtering happens.
   const images = filterImagesForVariant(
     isVariantOf?.image ?? product.image ?? [],
-    title,
+    product.name,
   );
 
   return (
@@ -138,7 +140,7 @@ export default function ProductHero({
           copy={copy}
         />
 
-        <ProductShipping sku={product.sku} seller={seller} />
+        <ProductShipping />
 
         <ProductDescription
           html={description}

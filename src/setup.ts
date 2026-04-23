@@ -68,6 +68,54 @@ applySectionConventions({
 // @decocms/apps/registry.ts, no change needed here.
 await autoconfigApps(generatedBlocks, APP_REGISTRY);
 
+// -- Commerce-loader overrides --
+// Shopify's productListingPage loader reads filters/sort/pagination from a
+// URL. The framework calls commerce loaders with `(props)` only — it injects
+// `__pageUrl` into props, but Shopify ignores it and falls back to a hardcoded
+// `https://localhost`, so server-side filtering never matches the real URL.
+// We wrap the loader to forward the request URL via the second positional arg.
+//
+// On CSR navigations, `__pageUrl` is unreliable for the home route ("/"):
+// `loadCmsPageInternal` derives it from `getRequestUrl()`, which returns the
+// `_serverFn/...` URL, not the user's page URL. The check
+// `realUrlPath.startsWith(basePath)` is too loose when basePath is "/".
+// To work around it, the home/catch-all loaders forward the real page URL
+// in the `x-deco-page-url` header so we can read it back here.
+import { RequestContext } from "@decocms/start/sdk/requestContext";
+import productListingPageLoader from "@decocms/apps/shopify/loaders/ProductListingPage";
+
+const SHOPIFY_PLP_KEY = "shopify/loaders/ProductListingPage";
+
+const PAGE_URL_HEADER = "x-deco-page-url";
+
+const resolvePageUrl = (props: any): URL | undefined => {
+  // 1. Trust the explicit page-URL header if present (CSR home workaround).
+  try {
+    const headerUrl = RequestContext.request.headers.get(PAGE_URL_HEADER);
+    if (headerUrl) return new URL(headerUrl, "http://localhost");
+  } catch {
+    // RequestContext may not be available in some isolated calls.
+  }
+  // 2. Framework-injected `__pageUrl` (correct for SSR + non-home CSR).
+  if (props?.__pageUrl) return new URL(props.__pageUrl, "http://localhost");
+  // 3. Last resort: the worker's request URL.
+  try {
+    return new URL(RequestContext.request.url);
+  } catch {
+    return undefined;
+  }
+};
+
+const wrappedShopifyPLP = async (props: any) => {
+  const pageUrl = resolvePageUrl(props);
+  return productListingPageLoader(props, pageUrl);
+};
+
+registerCommerceLoaders({
+  [SHOPIFY_PLP_KEY]: wrappedShopifyPLP,
+  [`${SHOPIFY_PLP_KEY}.ts`]: wrappedShopifyPLP,
+});
+
 // -- Site-local loaders (not shipped by an app, still stubbed for Phase 6) --
 // Cart is now served by TanStack Query via `platform/cart/` (server functions
 // + `@decocms/apps/shopify/loaders/cart.getCart`), so no loader entry is
@@ -77,4 +125,18 @@ registerCommerceLoaders({
   "site/loaders/user":        async () => (await import("./loaders/user")).default(),
   "site/loaders/wishlist.ts": async () => (await import("./loaders/wishlist")).default(),
   "site/loaders/wishlist":    async () => (await import("./loaders/wishlist")).default(),
+});
+
+// -- Site-local actions (registered via additive invoke handler registry) --
+import { registerInvokeHandlers } from "@decocms/start/admin";
+
+registerInvokeHandlers({
+  "site/actions/wishlist/submit.ts": async (props, req) =>
+    (await import("./actions/wishlist/submit")).default(props, req),
+  "site/actions/wishlist/submit": async (props, req) =>
+    (await import("./actions/wishlist/submit")).default(props, req),
+  "site/actions/shipping/simulate.ts": async (props, req) =>
+    (await import("./actions/shipping/simulate")).default(props, req),
+  "site/actions/shipping/simulate": async (props, req) =>
+    (await import("./actions/shipping/simulate")).default(props, req),
 });

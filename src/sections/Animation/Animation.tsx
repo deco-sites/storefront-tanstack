@@ -1,10 +1,17 @@
-import { useId } from "react";
-import { useScript } from "@decocms/start/sdk/useScript";
+import { useEffect, useRef, useState } from "react";
 import { type Section } from "~/types/deco";
+import { clx } from "~/sdk/clx";
+
 interface Children {
   section: Section;
 }
-interface Props {
+
+export interface Props {
+  /**
+   * @title Animation
+   * @description CSS animation applied when the section enters the viewport
+   * @default "fade-in"
+   */
   animationType?:
     | "fade-in"
     | "fade-in-bottom"
@@ -12,140 +19,98 @@ interface Props {
     | "slide-right"
     | "zoom-in";
   /**
+   * @title Duration (s)
+   * @description Animation duration in seconds
    * @default 0.3
    */
   duration?: string;
+  /**
+   * @title Wrapped section
+   * @description Section that will receive the animation on intersect
+   */
   children: Children;
 }
-const snippet = (id: string) => {
-  const observer = new IntersectionObserver(function (entries) {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("${animationClass}");
-        entry.target.classList.remove("opacity-0");
-        observer.disconnect();
-      }
-    });
-  }, { threshold: 0.50 });
-  const element = document.getElementById(id);
-  element && observer.observe(element);
+
+const animationByType: Record<NonNullable<Props["animationType"]>, string> = {
+  "fade-in": `
+    @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+    .animate-fade-in { animation: fade-in 1s ease-out; }
+  `,
+  "fade-in-bottom": `
+    @keyframes fade-in-bottom {
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in-bottom { animation: fade-in-bottom 1s ease-out; }
+  `,
+  "slide-left": `
+    @keyframes slide-left {
+      from { transform: translateX(100%); }
+      to { transform: translateX(0); }
+    }
+    .animate-slide-left { animation: slide-left 1s ease-out; }
+  `,
+  "slide-right": `
+    @keyframes slide-right {
+      from { transform: translateX(-100%); }
+      to { transform: translateX(0); }
+    }
+    .animate-slide-right { animation: slide-right 1s ease-out; }
+  `,
+  "zoom-in": `
+    @keyframes zoom-in {
+      from { transform: scale(0); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    .animate-zoom-in { animation: zoom-in 1s ease-out; }
+  `,
 };
+
 function Animation(
   { children, animationType = "fade-in", duration = "0.3" }: Props,
 ) {
   const { section } = children;
   const { Component, props } = section;
-  const id = useId();
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const node = ref.current;
+    if (!node || visible) return;
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+          return;
+        }
+      }
+    }, { threshold: 0.5 });
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [visible]);
+
   return (
     <>
-      <style
-        dangerouslySetInnerHTML={{ __html: animationByType[animationType] }}
-      >
-      </style>
+      <style dangerouslySetInnerHTML={{ __html: animationByType[animationType] }} />
       <div
-        id={id}
-        className="opacity-0"
-        style={{ animationDuration: duration + "s" }}
+        ref={ref}
+        className={clx(visible ? `animate-${animationType}` : "opacity-0")}
+        style={{ animationDuration: `${duration}s` }}
       >
         <Component {...props} />
       </div>
-      <script
-        type="module"
-        suppressHydrationWarning
-        dangerouslySetInnerHTML={{ __html: useScript(snippet, id) }}
-      />
     </>
   );
 }
 export default Animation;
-const animationByType = {
-  "fade-in": `    
-        @keyframes fade-in {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }   
-        .animate-fade-in {
-            animation: fade-in 1s ease-out;
-        }
-    `,
-  "fade-in-bottom": `
-        @keyframes fade-in-bottom {
-            from {
-                opacity: 0;
-                -webkit-transform: translateY(50px);
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                -webkit-transform: translateY(0);
-                transform: translateY(0);
-            }
-        }
-        
-        .animate-fade-in-bottom {
-            animation: fade-in-bottom 1s ease-out;
-        }
-    `,
-  "slide-left": `
-        @keyframes slide-left {
-            from {
-                transform: translateX(100%);
-            }
-            to {
-                transform: translateX(0);
-            }
-        }
 
-        .animate-slide-left {
-            animation: slide-left 1s ease-out;
-        }
-    `,
-  "slide-right": `
-        @keyframes slide-right {
-            from {
-                transform: translateX(-100%);
-            }
-            to {
-                transform: translateX(0);
-            }
-        }
-
-        .animate-slide-right {
-            animation: slide-right 1s ease-out;
-        }
-    `,
-  "zoom-in": `
-        @keyframes zoom-in {
-            from {
-                transform: scale(0);
-                opacity: 0;
-            }
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-
-        .animate-zoom-in {
-            animation: zoom-in 1s ease-out;
-        }
-    `,
-};
 export function Preview() {
-  const id = useId();
   return (
     <div>
-      <style
-        dangerouslySetInnerHTML={{ __html: animationByType["slide-left"] }}
-      >
-      </style>
+      <style dangerouslySetInnerHTML={{ __html: animationByType["slide-left"] }} />
       <div
-        id={id}
-        className="flex justify-center items-center"
+        className="flex justify-center items-center animate-slide-left"
         style={{ animationDuration: "2s" }}
       >
         <h1 className="text-9xl text-base-content font-semibold my-8">Animation</h1>

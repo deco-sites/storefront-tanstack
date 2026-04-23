@@ -145,7 +145,7 @@
           }
         }
       },
-      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvQW5pbWF0aW9uL0FuaW1hdGlvbi50c3g=@Props": {
+      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9BbmltYXRpb24vQW5pbWF0aW9uLnRzeA==@Props": {
         "type": "object",
         "properties": {
           "animationType": {
@@ -158,13 +158,16 @@
               "zoom-in"
             ],
             "nullable": true,
-            "title": "AnimationType"
+            "title": "Animation",
+            "description": "CSS animation applied when the section enters the viewport",
+            "default": "fade-in"
           },
           "duration": {
             "type": "string",
             "nullable": true,
-            "default": 0.3,
-            "title": "Duration"
+            "title": "Duration (s)",
+            "description": "Animation duration in seconds",
+            "default": 0.3
           },
           "children": {
             "type": "object",
@@ -177,7 +180,8 @@
             "required": [
               "section"
             ],
-            "title": "Children"
+            "title": "Wrapped section",
+            "description": "Section that will receive the animation on intersect"
           }
         },
         "required": [
@@ -189,7 +193,7 @@
         "type": "object",
         "allOf": [
           {
-            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvQW5pbWF0aW9uL0FuaW1hdGlvbi50c3g=@Props"
+            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9BbmltYXRpb24vQW5pbWF0aW9uLnRzeA==@Props"
           }
         ],
         "required": [
@@ -205,7 +209,7 @@
           }
         }
       },
-      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvQ2F0ZWdvcnkvQ2F0ZWdvcnlCYW5uZXIudHN4@Props": {
+      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9DYXRlZ29yeS9DYXRlZ29yeUJhbm5lci50c3g=@Props": {
         "type": "object",
         "properties": {
           "banners": {
@@ -274,7 +278,7 @@
         "type": "object",
         "allOf": [
           {
-            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvQ2F0ZWdvcnkvQ2F0ZWdvcnlCYW5uZXIudHN4@Props"
+            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9DYXRlZ29yeS9DYXRlZ29yeUJhbm5lci50c3g=@Props"
           }
         ],
         "required": [
@@ -290,7 +294,7 @@
           }
         }
       },
-      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvQ2F0ZWdvcnkvQ2F0ZWdvcnlHcmlkLnRzeA==@Props": {
+      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9DYXRlZ29yeS9DYXRlZ29yeUdyaWQudHN4@Props": {
         "type": "object",
         "properties": {
           "items": {
@@ -342,7 +346,7 @@
         "type": "object",
         "allOf": [
           {
-            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvQ2F0ZWdvcnkvQ2F0ZWdvcnlHcmlkLnRzeA==@Props"
+            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9DYXRlZ29yeS9DYXRlZ29yeUdyaWQudHN4@Props"
           }
         ],
         "required": [
@@ -358,7 +362,7 @@
           }
         }
       },
-      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvQ29tcG9uZW50LnRzeA==@Props": {
+      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9Db21wb25lbnQudHN4@Props": {
         "type": "object",
         "properties": {}
       },
@@ -367,7 +371,7 @@
         "type": "object",
         "allOf": [
           {
-            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvQ29tcG9uZW50LnRzeA==@Props"
+            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9Db21wb25lbnQudHN4@Props"
           }
         ],
         "required": [
@@ -383,7 +387,7 @@
           }
         }
       },
-      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvQ29udGVudC9GYXEudHN4@Props": {
+      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9Db250ZW50L0ZhcS50c3g=@Props": {
         "type": "object",
         "properties": {
           "questions": {
@@ -393,12 +397,14 @@
               "properties": {
                 "question": {
                   "type": "string",
-                  "title": "Question"
+                  "title": "Question",
+                  "description": "Heading shown on the collapsible item"
                 },
                 "answer": {
                   "type": "string",
-                  "format": "html",
-                  "title": "Answer"
+                  "title": "Answer",
+                  "description": "Rich-text body revealed when the question is expanded",
+                  "format": "html"
                 }
               },
               "required": [
@@ -407,7 +413,8 @@
               ]
             },
             "nullable": true,
-            "title": "Questions"
+            "title": "Questions",
+            "description": "List of FAQ entries rendered as a collapsible accordion"
           },
           "contact": {
             "type": "object",
@@ -415,24 +422,28 @@
               "title": {
                 "type": "string",
                 "nullable": true,
-                "title": "Title"
+                "title": "Title",
+                "description": "Heading for the post-FAQ contact block"
               },
               "description": {
                 "type": "string",
                 "nullable": true,
-                "format": "html",
-                "title": "Description"
+                "title": "Description",
+                "description": "Body text for the contact block",
+                "format": "html"
               },
               "link": {
                 "type": "object",
                 "properties": {
                   "text": {
                     "type": "string",
-                    "title": "Text"
+                    "title": "Link text",
+                    "description": "Anchor copy shown on the contact CTA"
                   },
                   "href": {
                     "type": "string",
-                    "title": "Href"
+                    "title": "Link URL",
+                    "description": "Internal route or external URL"
                   }
                 },
                 "required": [
@@ -440,11 +451,13 @@
                   "href"
                 ],
                 "nullable": true,
-                "title": "Link"
+                "title": "CTA",
+                "description": "Optional call-to-action link"
               }
             },
             "nullable": true,
-            "title": "Contact"
+            "title": "Contact block",
+            "description": "Optional follow-up section with title/description/CTA"
           },
           "title": {
             "type": "string",
@@ -465,7 +478,7 @@
         "type": "object",
         "allOf": [
           {
-            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvQ29udGVudC9GYXEudHN4@Props"
+            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9Db250ZW50L0ZhcS50c3g=@Props"
           }
         ],
         "required": [
@@ -481,7 +494,7 @@
           }
         }
       },
-      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvQ29udGVudC9IZXJvLnRzeA==@Props": {
+      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9Db250ZW50L0hlcm8udHN4@Props": {
         "type": "object",
         "properties": {
           "title": {
@@ -555,7 +568,7 @@
         "type": "object",
         "allOf": [
           {
-            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvQ29udGVudC9IZXJvLnRzeA==@Props"
+            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9Db250ZW50L0hlcm8udHN4@Props"
           }
         ],
         "required": [
@@ -571,7 +584,7 @@
           }
         }
       },
-      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvQ29udGVudC9JbnRyby50c3g=@Props": {
+      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9Db250ZW50L0ludHJvLnRzeA==@Props": {
         "type": "object",
         "properties": {
           "text": {
@@ -603,7 +616,7 @@
         "type": "object",
         "allOf": [
           {
-            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvQ29udGVudC9JbnRyby50c3g=@Props"
+            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9Db250ZW50L0ludHJvLnRzeA==@Props"
           }
         ],
         "required": [
@@ -619,7 +632,7 @@
           }
         }
       },
-      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvQ29udGVudC9Mb2dvcy50c3g=@Props": {
+      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9Db250ZW50L0xvZ29zLnRzeA==@Props": {
         "type": "object",
         "properties": {
           "images": {
@@ -664,7 +677,7 @@
         "type": "object",
         "allOf": [
           {
-            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvQ29udGVudC9Mb2dvcy50c3g=@Props"
+            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9Db250ZW50L0xvZ29zLnRzeA==@Props"
           }
         ],
         "required": [
@@ -680,7 +693,7 @@
           }
         }
       },
-      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvRm9vdGVyL0Zvb3Rlci50c3g=@Props": {
+      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9Gb290ZXIvRm9vdGVyLnRzeA==@Props": {
         "type": "object",
         "properties": {
           "links": {
@@ -823,7 +836,7 @@
         "type": "object",
         "allOf": [
           {
-            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvRm9vdGVyL0Zvb3Rlci50c3g=@Props"
+            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9Gb290ZXIvRm9vdGVyLnRzeA==@Props"
           }
         ],
         "required": [
@@ -839,7 +852,7 @@
           }
         }
       },
-      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvSGVhZGVyL0hlYWRlci50c3g=@Props": {
+      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9IZWFkZXIvSGVhZGVyLnRzeA==@Props": {
         "type": "object",
         "properties": {}
       },
@@ -848,7 +861,7 @@
         "type": "object",
         "allOf": [
           {
-            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvSGVhZGVyL0hlYWRlci50c3g=@Props"
+            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9IZWFkZXIvSGVhZGVyLnRzeA==@Props"
           }
         ],
         "required": [
@@ -864,7 +877,7 @@
           }
         }
       },
-      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvSW1hZ2VzL0Jhbm5lci50c3g=@Props": {
+      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9JbWFnZXMvQmFubmVyLnRzeA==@Props": {
         "type": "object",
         "properties": {
           "title": {
@@ -927,7 +940,7 @@
         "type": "object",
         "allOf": [
           {
-            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvSW1hZ2VzL0Jhbm5lci50c3g=@Props"
+            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9JbWFnZXMvQmFubmVyLnRzeA==@Props"
           }
         ],
         "required": [
@@ -943,7 +956,7 @@
           }
         }
       },
-      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvSW1hZ2VzL0Nhcm91c2VsLnRzeA==@Props": {
+      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9JbWFnZXMvQ2Fyb3VzZWwudHN4@Props": {
         "type": "object",
         "properties": {
           "images": {
@@ -1030,7 +1043,7 @@
         "type": "object",
         "allOf": [
           {
-            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvSW1hZ2VzL0Nhcm91c2VsLnRzeA==@Props"
+            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9JbWFnZXMvQ2Fyb3VzZWwudHN4@Props"
           }
         ],
         "required": [
@@ -1046,7 +1059,7 @@
           }
         }
       },
-      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvSW1hZ2VzL0ltYWdlR2FsbGVyeS50c3g=@Props": {
+      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9JbWFnZXMvSW1hZ2VHYWxsZXJ5LnRzeA==@Props": {
         "type": "object",
         "properties": {
           "banners": {
@@ -1106,7 +1119,7 @@
         "type": "object",
         "allOf": [
           {
-            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvSW1hZ2VzL0ltYWdlR2FsbGVyeS50c3g=@Props"
+            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9JbWFnZXMvSW1hZ2VHYWxsZXJ5LnRzeA==@Props"
           }
         ],
         "required": [
@@ -1122,7 +1135,7 @@
           }
         }
       },
-      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvSW1hZ2VzL1Nob3BwYWJsZUJhbm5lci50c3g=@Props": {
+      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9JbWFnZXMvU2hvcHBhYmxlQmFubmVyLnRzeA==@Props": {
         "type": "object",
         "properties": {
           "image": {
@@ -1314,7 +1327,7 @@
         "type": "object",
         "allOf": [
           {
-            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvSW1hZ2VzL1Nob3BwYWJsZUJhbm5lci50c3g=@Props"
+            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9JbWFnZXMvU2hvcHBhYmxlQmFubmVyLnRzeA==@Props"
           }
         ],
         "required": [
@@ -1330,7 +1343,7 @@
           }
         }
       },
-      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvTGlua3MvTGlua1RyZWUudHN4@Props": {
+      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9MaW5rcy9MaW5rVHJlZS50c3g=@Props": {
         "type": "object",
         "properties": {
           "header": {
@@ -1607,7 +1620,7 @@
         "type": "object",
         "allOf": [
           {
-            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvTGlua3MvTGlua1RyZWUudHN4@Props"
+            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9MaW5rcy9MaW5rVHJlZS50c3g=@Props"
           }
         ],
         "required": [
@@ -1623,7 +1636,7 @@
           }
         }
       },
-      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvTWlzY2VsbGFuZW91cy9DYW1wYWlnblRpbWVyLnRzeA==@Props": {
+      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9NaXNjZWxsYW5lb3VzL0NhbXBhaWduVGltZXIudHN4@Props": {
         "type": "object",
         "properties": {
           "text": {
@@ -1645,26 +1658,31 @@
               "days": {
                 "type": "string",
                 "nullable": true,
-                "title": "Days"
+                "title": "Days label",
+                "default": "Days"
               },
               "hours": {
                 "type": "string",
                 "nullable": true,
-                "title": "Hours"
+                "title": "Hours label",
+                "default": "Hours"
               },
               "minutes": {
                 "type": "string",
                 "nullable": true,
-                "title": "Minutes"
+                "title": "Minutes label",
+                "default": "Minutes"
               },
               "seconds": {
                 "type": "string",
                 "nullable": true,
-                "title": "Seconds"
+                "title": "Seconds label",
+                "default": "Seconds"
               }
             },
             "nullable": true,
-            "title": "Labels"
+            "title": "Unit labels",
+            "description": "Localizable labels for the days/hours/minutes/seconds counters"
           }
         }
       },
@@ -1673,7 +1691,7 @@
         "type": "object",
         "allOf": [
           {
-            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvTWlzY2VsbGFuZW91cy9DYW1wYWlnblRpbWVyLnRzeA==@Props"
+            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9NaXNjZWxsYW5lb3VzL0NhbXBhaWduVGltZXIudHN4@Props"
           }
         ],
         "required": [
@@ -1689,19 +1707,22 @@
           }
         }
       },
-      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvTWlzY2VsbGFuZW91cy9Db29raWVDb25zZW50LnRzeA==@Props": {
+      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9NaXNjZWxsYW5lb3VzL0Nvb2tpZUNvbnNlbnQudHN4@Props": {
         "type": "object",
         "properties": {
           "title": {
             "type": "string",
             "nullable": true,
-            "title": "Title"
+            "title": "Title",
+            "description": "Heading shown at the top of the consent banner",
+            "default": "Cookies"
           },
           "text": {
             "type": "string",
             "nullable": true,
-            "format": "html",
-            "title": "Text"
+            "title": "Body",
+            "description": "Rich-text consent message",
+            "format": "html"
           },
           "policy": {
             "type": "object",
@@ -1709,35 +1730,45 @@
               "text": {
                 "type": "string",
                 "nullable": true,
-                "title": "Text"
+                "title": "Policy link text",
+                "description": "Anchor text shown next to the consent message",
+                "default": "Learn more about our privacy policy"
               },
               "link": {
                 "type": "string",
                 "nullable": true,
-                "title": "Link"
+                "title": "Policy URL",
+                "description": "Internal link to the privacy policy page",
+                "default": "/privacy-policy"
               }
             },
             "nullable": true,
-            "title": "Policy"
+            "title": "Privacy policy",
+            "description": "Link shown beneath the message"
           },
           "buttons": {
             "type": "object",
             "properties": {
               "allowText": {
                 "type": "string",
-                "title": "AllowText"
+                "title": "Accept label",
+                "description": "Confirms cookie usage and dismisses the banner",
+                "default": "Accept"
               },
               "cancelText": {
                 "type": "string",
                 "nullable": true,
-                "title": "CancelText"
+                "title": "Dismiss label",
+                "description": "Closes the banner without accepting (re-shown next visit)",
+                "default": "Close"
               }
             },
             "required": [
               "allowText"
             ],
             "nullable": true,
-            "title": "Buttons"
+            "title": "Buttons",
+            "description": "Accept / dismiss button labels"
           },
           "layout": {
             "type": "object",
@@ -1751,7 +1782,9 @@
                   "Right"
                 ],
                 "nullable": true,
-                "title": "Position"
+                "title": "Banner position",
+                "description": "Where the banner sticks at the bottom of the viewport",
+                "default": "Expanded"
               },
               "content": {
                 "type": "string",
@@ -1760,11 +1793,14 @@
                   "Piled up"
                 ],
                 "nullable": true,
-                "title": "Content"
+                "title": "Content layout",
+                "description": "Stack the message and buttons in a row or column",
+                "default": "Tiled"
               }
             },
             "nullable": true,
-            "title": "Layout"
+            "title": "Layout",
+            "description": "Banner position and content arrangement"
           }
         }
       },
@@ -1773,7 +1809,7 @@
         "type": "object",
         "allOf": [
           {
-            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvTWlzY2VsbGFuZW91cy9Db29raWVDb25zZW50LnRzeA==@Props"
+            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9NaXNjZWxsYW5lb3VzL0Nvb2tpZUNvbnNlbnQudHN4@Props"
           }
         ],
         "required": [
@@ -1789,81 +1825,98 @@
           }
         }
       },
-      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvTmV3c2xldHRlci9OZXdzbGV0dGVyLnRzeA==@Props": {
+      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9OZXdzbGV0dGVyL05ld3NsZXR0ZXIudHN4@Props": {
         "type": "object",
         "properties": {
-          "empty": {
+          "notices": {
             "type": "object",
             "properties": {
-              "title": {
-                "type": "string",
+              "empty": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "nullable": true,
+                    "title": "Title",
+                    "description": "Bold heading shown for this notice state"
+                  },
+                  "description": {
+                    "type": "string",
+                    "nullable": true,
+                    "title": "Description",
+                    "description": "Subtext explaining the notice state"
+                  }
+                },
                 "nullable": true,
-                "title": "Title"
+                "title": "Empty state",
+                "description": "Initial pre-signup notice (call-to-action)"
               },
-              "description": {
-                "type": "string",
+              "success": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "nullable": true,
+                    "title": "Title",
+                    "description": "Bold heading shown for this notice state"
+                  },
+                  "description": {
+                    "type": "string",
+                    "nullable": true,
+                    "title": "Description",
+                    "description": "Subtext explaining the notice state"
+                  }
+                },
                 "nullable": true,
-                "title": "Description"
+                "title": "Success state",
+                "description": "Notice shown after a successful subscription"
+              },
+              "failed": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "nullable": true,
+                    "title": "Title",
+                    "description": "Bold heading shown for this notice state"
+                  },
+                  "description": {
+                    "type": "string",
+                    "nullable": true,
+                    "title": "Description",
+                    "description": "Subtext explaining the notice state"
+                  }
+                },
+                "nullable": true,
+                "title": "Failed state",
+                "description": "Notice shown when the subscription request fails"
               }
             },
             "nullable": true,
-            "title": "Empty"
+            "title": "Notices",
+            "description": "Empty / success / failed notice copies"
           },
-          "success": {
+          "form": {
             "type": "object",
             "properties": {
-              "title": {
+              "label": {
                 "type": "string",
                 "nullable": true,
-                "title": "Title"
+                "title": "Submit button label",
+                "description": "Text on the signup CTA",
+                "default": "Sign up"
               },
-              "description": {
+              "placeholder": {
                 "type": "string",
                 "nullable": true,
-                "title": "Description"
+                "title": "Email placeholder",
+                "description": "Placeholder shown inside the email input",
+                "default": "Enter your email address"
               }
             },
             "nullable": true,
-            "title": "Success"
-          },
-          "failed": {
-            "type": "object",
-            "properties": {
-              "title": {
-                "type": "string",
-                "nullable": true,
-                "title": "Title"
-              },
-              "description": {
-                "type": "string",
-                "nullable": true,
-                "title": "Description"
-              }
-            },
-            "nullable": true,
-            "title": "Failed"
-          },
-          "label": {
-            "type": "string",
-            "nullable": true,
-            "description": "Signup label",
-            "title": "Label"
-          },
-          "placeholder": {
-            "type": "string",
-            "nullable": true,
-            "description": "Input placeholder",
-            "title": "Placeholder"
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "success",
-              "failed"
-            ],
-            "nullable": true,
-            "hide": "true",
-            "title": "Status"
+            "title": "Form",
+            "description": "Submit label and placeholder copy"
           }
         }
       },
@@ -1872,7 +1925,7 @@
         "type": "object",
         "allOf": [
           {
-            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvTmV3c2xldHRlci9OZXdzbGV0dGVyLnRzeA==@Props"
+            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9OZXdzbGV0dGVyL05ld3NsZXR0ZXIudHN4@Props"
           }
         ],
         "required": [
@@ -1888,7 +1941,7 @@
           }
         }
       },
-      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvUHJvZHVjdC9Qcm9kdWN0RGV0YWlscy50c3g=@Props": {
+      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9Qcm9kdWN0L1Byb2R1Y3REZXRhaWxzLnRzeA==@Props": {
         "type": "object",
         "properties": {
           "page": {
@@ -3346,7 +3399,7 @@
         "type": "object",
         "allOf": [
           {
-            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvUHJvZHVjdC9Qcm9kdWN0RGV0YWlscy50c3g=@Props"
+            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9Qcm9kdWN0L1Byb2R1Y3REZXRhaWxzLnRzeA==@Props"
           }
         ],
         "required": [
@@ -3362,7 +3415,7 @@
           }
         }
       },
-      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvUHJvZHVjdC9Qcm9kdWN0U2hlbGYudHN4@Props": {
+      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9Qcm9kdWN0L1Byb2R1Y3RTaGVsZi50c3g=@Props": {
         "type": "object",
         "properties": {
           "products": {
@@ -4624,7 +4677,7 @@
         "type": "object",
         "allOf": [
           {
-            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvUHJvZHVjdC9Qcm9kdWN0U2hlbGYudHN4@Props"
+            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9Qcm9kdWN0L1Byb2R1Y3RTaGVsZi50c3g=@Props"
           }
         ],
         "required": [
@@ -4640,7 +4693,7 @@
           }
         }
       },
-      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvUHJvZHVjdC9Qcm9kdWN0U2hlbGZUYWJiZWQudHN4@Props": {
+      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9Qcm9kdWN0L1Byb2R1Y3RTaGVsZlRhYmJlZC50c3g=@Props": {
         "type": "object",
         "properties": {
           "tabs": {
@@ -5925,7 +5978,7 @@
         "type": "object",
         "allOf": [
           {
-            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvUHJvZHVjdC9Qcm9kdWN0U2hlbGZUYWJiZWQudHN4@Props"
+            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9Qcm9kdWN0L1Byb2R1Y3RTaGVsZlRhYmJlZC50c3g=@Props"
           }
         ],
         "required": [
@@ -5941,7 +5994,7 @@
           }
         }
       },
-      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvUHJvZHVjdC9TZWFyY2hSZXN1bHQudHN4@Props": {
+      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9Qcm9kdWN0L1NlYXJjaFJlc3VsdC50c3g=@Props": {
         "type": "object",
         "properties": {
           "page": {
@@ -7451,7 +7504,8 @@
                 ],
                 "nullable": true,
                 "title": "Pagination",
-                "description": "Format of the pagination"
+                "description": "Format of the pagination",
+                "default": "show-more"
               }
             },
             "nullable": true,
@@ -7464,18 +7518,9 @@
               1
             ],
             "nullable": true,
+            "title": "Starting page",
             "description": "0 for ?page=0 as your first page",
-            "title": "StartingPage"
-          },
-          "partial": {
-            "type": "string",
-            "enum": [
-              "hideMore",
-              "hideLess"
-            ],
-            "nullable": true,
-            "hidden": "true",
-            "title": "Partial"
+            "default": 0
           }
         },
         "required": [
@@ -7487,7 +7532,7 @@
         "type": "object",
         "allOf": [
           {
-            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvUHJvZHVjdC9TZWFyY2hSZXN1bHQudHN4@Props"
+            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9Qcm9kdWN0L1NlYXJjaFJlc3VsdC50c3g=@Props"
           }
         ],
         "required": [
@@ -7503,7 +7548,7 @@
           }
         }
       },
-      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvUHJvZHVjdC9TaGVsZldpdGhJbWFnZS50c3g=@Props": {
+      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9Qcm9kdWN0L1NoZWxmV2l0aEltYWdlLnRzeA==@Props": {
         "type": "object",
         "properties": {
           "section": {
@@ -7545,7 +7590,7 @@
         "type": "object",
         "allOf": [
           {
-            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvUHJvZHVjdC9TaGVsZldpdGhJbWFnZS50c3g=@Props"
+            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9Qcm9kdWN0L1NoZWxmV2l0aEltYWdlLnRzeA==@Props"
           }
         ],
         "required": [
@@ -7561,7 +7606,7 @@
           }
         }
       },
-      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvUHJvZHVjdC9XaXNobGlzdC50c3g=@Props": {
+      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9Qcm9kdWN0L1dpc2hsaXN0LnRzeA==@Props": {
         "type": "object",
         "properties": {
           "page": {
@@ -9071,7 +9116,8 @@
                 ],
                 "nullable": true,
                 "title": "Pagination",
-                "description": "Format of the pagination"
+                "description": "Format of the pagination",
+                "default": "show-more"
               }
             },
             "nullable": true,
@@ -9084,18 +9130,9 @@
               1
             ],
             "nullable": true,
+            "title": "Starting page",
             "description": "0 for ?page=0 as your first page",
-            "title": "StartingPage"
-          },
-          "partial": {
-            "type": "string",
-            "enum": [
-              "hideMore",
-              "hideLess"
-            ],
-            "nullable": true,
-            "hidden": "true",
-            "title": "Partial"
+            "default": 0
           }
         },
         "required": [
@@ -9107,7 +9144,7 @@
         "type": "object",
         "allOf": [
           {
-            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvUHJvZHVjdC9XaXNobGlzdC50c3g=@Props"
+            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9Qcm9kdWN0L1dpc2hsaXN0LnRzeA==@Props"
           }
         ],
         "required": [
@@ -9123,7 +9160,7 @@
           }
         }
       },
-      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvU29jaWFsL0luc3RhZ3JhbVBvc3RzLnRzeA==@Props": {
+      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9Tb2NpYWwvSW5zdGFncmFtUG9zdHMudHN4@Props": {
         "type": "object",
         "properties": {
           "facebookToken": {
@@ -9158,7 +9195,7 @@
         "type": "object",
         "allOf": [
           {
-            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvU29jaWFsL0luc3RhZ3JhbVBvc3RzLnRzeA==@Props"
+            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9Tb2NpYWwvSW5zdGFncmFtUG9zdHMudHN4@Props"
           }
         ],
         "required": [
@@ -9174,7 +9211,7 @@
           }
         }
       },
-      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvU29jaWFsL1doYXRzQXBwLnRzeA==@Props": {
+      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9Tb2NpYWwvV2hhdHNBcHAudHN4@Props": {
         "type": "object",
         "properties": {
           "phone": {
@@ -9189,7 +9226,7 @@
         "type": "object",
         "allOf": [
           {
-            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvU29jaWFsL1doYXRzQXBwLnRzeA==@Props"
+            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9Tb2NpYWwvV2hhdHNBcHAudHN4@Props"
           }
         ],
         "required": [
@@ -9205,7 +9242,7 @@
           }
         }
       },
-      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvVGhlbWUvVGhlbWUudHN4@Props": {
+      "ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9UaGVtZS9UaGVtZS50c3g=@Props": {
         "type": "object",
         "properties": {
           "colorScheme": {
@@ -9509,7 +9546,7 @@
         "type": "object",
         "allOf": [
           {
-            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvVGhlbWUvVGhlbWUudHN4@Props"
+            "$ref": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9UaGVtZS9UaGVtZS50c3g=@Props"
           }
         ],
         "required": [
@@ -9534,111 +9571,111 @@
           },
           {
             "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9BbmltYXRpb24vQW5pbWF0aW9uLnRzeA==",
-            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvQW5pbWF0aW9uL0FuaW1hdGlvbi50c3g=@Props"
+            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9BbmltYXRpb24vQW5pbWF0aW9uLnRzeA==@Props"
           },
           {
             "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9DYXRlZ29yeS9DYXRlZ29yeUJhbm5lci50c3g=",
-            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvQ2F0ZWdvcnkvQ2F0ZWdvcnlCYW5uZXIudHN4@Props"
+            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9DYXRlZ29yeS9DYXRlZ29yeUJhbm5lci50c3g=@Props"
           },
           {
             "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9DYXRlZ29yeS9DYXRlZ29yeUdyaWQudHN4",
-            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvQ2F0ZWdvcnkvQ2F0ZWdvcnlHcmlkLnRzeA==@Props"
+            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9DYXRlZ29yeS9DYXRlZ29yeUdyaWQudHN4@Props"
           },
           {
             "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Db21wb25lbnQudHN4",
-            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvQ29tcG9uZW50LnRzeA==@Props"
+            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9Db21wb25lbnQudHN4@Props"
           },
           {
             "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Db250ZW50L0ZhcS50c3g=",
-            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvQ29udGVudC9GYXEudHN4@Props"
+            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9Db250ZW50L0ZhcS50c3g=@Props"
           },
           {
             "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Db250ZW50L0hlcm8udHN4",
-            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvQ29udGVudC9IZXJvLnRzeA==@Props"
+            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9Db250ZW50L0hlcm8udHN4@Props"
           },
           {
             "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Db250ZW50L0ludHJvLnRzeA==",
-            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvQ29udGVudC9JbnRyby50c3g=@Props"
+            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9Db250ZW50L0ludHJvLnRzeA==@Props"
           },
           {
             "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Db250ZW50L0xvZ29zLnRzeA==",
-            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvQ29udGVudC9Mb2dvcy50c3g=@Props"
+            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9Db250ZW50L0xvZ29zLnRzeA==@Props"
           },
           {
             "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Gb290ZXIvRm9vdGVyLnRzeA==",
-            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvRm9vdGVyL0Zvb3Rlci50c3g=@Props"
+            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9Gb290ZXIvRm9vdGVyLnRzeA==@Props"
           },
           {
             "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9IZWFkZXIvSGVhZGVyLnRzeA==",
-            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvSGVhZGVyL0hlYWRlci50c3g=@Props"
+            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9IZWFkZXIvSGVhZGVyLnRzeA==@Props"
           },
           {
             "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9JbWFnZXMvQmFubmVyLnRzeA==",
-            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvSW1hZ2VzL0Jhbm5lci50c3g=@Props"
+            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9JbWFnZXMvQmFubmVyLnRzeA==@Props"
           },
           {
             "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9JbWFnZXMvQ2Fyb3VzZWwudHN4",
-            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvSW1hZ2VzL0Nhcm91c2VsLnRzeA==@Props"
+            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9JbWFnZXMvQ2Fyb3VzZWwudHN4@Props"
           },
           {
             "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9JbWFnZXMvSW1hZ2VHYWxsZXJ5LnRzeA==",
-            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvSW1hZ2VzL0ltYWdlR2FsbGVyeS50c3g=@Props"
+            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9JbWFnZXMvSW1hZ2VHYWxsZXJ5LnRzeA==@Props"
           },
           {
             "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9JbWFnZXMvU2hvcHBhYmxlQmFubmVyLnRzeA==",
-            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvSW1hZ2VzL1Nob3BwYWJsZUJhbm5lci50c3g=@Props"
+            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9JbWFnZXMvU2hvcHBhYmxlQmFubmVyLnRzeA==@Props"
           },
           {
             "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9MaW5rcy9MaW5rVHJlZS50c3g=",
-            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvTGlua3MvTGlua1RyZWUudHN4@Props"
+            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9MaW5rcy9MaW5rVHJlZS50c3g=@Props"
           },
           {
             "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9NaXNjZWxsYW5lb3VzL0NhbXBhaWduVGltZXIudHN4",
-            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvTWlzY2VsbGFuZW91cy9DYW1wYWlnblRpbWVyLnRzeA==@Props"
+            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9NaXNjZWxsYW5lb3VzL0NhbXBhaWduVGltZXIudHN4@Props"
           },
           {
             "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9NaXNjZWxsYW5lb3VzL0Nvb2tpZUNvbnNlbnQudHN4",
-            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvTWlzY2VsbGFuZW91cy9Db29raWVDb25zZW50LnRzeA==@Props"
+            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9NaXNjZWxsYW5lb3VzL0Nvb2tpZUNvbnNlbnQudHN4@Props"
           },
           {
             "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9OZXdzbGV0dGVyL05ld3NsZXR0ZXIudHN4",
-            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvTmV3c2xldHRlci9OZXdzbGV0dGVyLnRzeA==@Props"
+            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9OZXdzbGV0dGVyL05ld3NsZXR0ZXIudHN4@Props"
           },
           {
             "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Qcm9kdWN0L1Byb2R1Y3REZXRhaWxzLnRzeA==",
-            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvUHJvZHVjdC9Qcm9kdWN0RGV0YWlscy50c3g=@Props"
+            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9Qcm9kdWN0L1Byb2R1Y3REZXRhaWxzLnRzeA==@Props"
           },
           {
             "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Qcm9kdWN0L1Byb2R1Y3RTaGVsZi50c3g=",
-            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvUHJvZHVjdC9Qcm9kdWN0U2hlbGYudHN4@Props"
+            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9Qcm9kdWN0L1Byb2R1Y3RTaGVsZi50c3g=@Props"
           },
           {
             "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Qcm9kdWN0L1Byb2R1Y3RTaGVsZlRhYmJlZC50c3g=",
-            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvUHJvZHVjdC9Qcm9kdWN0U2hlbGZUYWJiZWQudHN4@Props"
+            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9Qcm9kdWN0L1Byb2R1Y3RTaGVsZlRhYmJlZC50c3g=@Props"
           },
           {
             "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Qcm9kdWN0L1NlYXJjaFJlc3VsdC50c3g=",
-            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvUHJvZHVjdC9TZWFyY2hSZXN1bHQudHN4@Props"
+            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9Qcm9kdWN0L1NlYXJjaFJlc3VsdC50c3g=@Props"
           },
           {
             "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Qcm9kdWN0L1NoZWxmV2l0aEltYWdlLnRzeA==",
-            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvUHJvZHVjdC9TaGVsZldpdGhJbWFnZS50c3g=@Props"
+            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9Qcm9kdWN0L1NoZWxmV2l0aEltYWdlLnRzeA==@Props"
           },
           {
             "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Qcm9kdWN0L1dpc2hsaXN0LnRzeA==",
-            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvUHJvZHVjdC9XaXNobGlzdC50c3g=@Props"
+            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9Qcm9kdWN0L1dpc2hsaXN0LnRzeA==@Props"
           },
           {
             "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Tb2NpYWwvSW5zdGFncmFtUG9zdHMudHN4",
-            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvU29jaWFsL0luc3RhZ3JhbVBvc3RzLnRzeA==@Props"
+            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9Tb2NpYWwvSW5zdGFncmFtUG9zdHMudHN4@Props"
           },
           {
             "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Tb2NpYWwvV2hhdHNBcHAudHN4",
-            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvU29jaWFsL1doYXRzQXBwLnRzeA==@Props"
+            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9Tb2NpYWwvV2hhdHNBcHAudHN4@Props"
           },
           {
             "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9UaGVtZS9UaGVtZS50c3g=",
-            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9kZWNvLXN0YXJ0L2FsZ2llcnMvLmNvbnRleHQvc3RvcmVmcm9udC10YW5zdGFjay9zcmMvc2VjdGlvbnMvVGhlbWUvVGhlbWUudHN4@Props"
+            "inputSchema": "#/definitions/ZmlsZTovLy8vVXNlcnMvam9uYXNqZXN1cy9jb25kdWN0b3Ivd29ya3NwYWNlcy9zdG9yZWZyb250LXRhbnN0YWNrL21pYW1pL3NyYy9zZWN0aW9ucy9UaGVtZS9UaGVtZS50c3g=@Props"
           }
         ]
       },

@@ -1,37 +1,35 @@
-import { ReactNode } from "react";
-import { useId } from "react";
-import { useScript } from "@decocms/start/sdk/useScript";
+import { useCallback, useId, type ReactNode } from "react";
+import { useEscapeKey } from "../../sdk/useEscapeKey";
+
 interface Props {
   open?: boolean;
   children?: ReactNode;
   id?: string;
 }
-const script = (id: string) => {
-  const handler = (e: KeyboardEvent) => {
-    if (e.key !== "Escape" && e.keyCode !== 27) {
-      return;
-    }
-    const input = document.getElementById(id) as HTMLInputElement | null;
-    if (!input) {
-      return;
-    }
-    input.checked = false;
-  };
-  addEventListener("keydown", handler);
-};
-function Modal({ children, open, id = useId() }: Props) {
+
+function Modal({ children, open, id }: Props) {
+  const fallbackId = useId();
+  const toggleId = id ?? fallbackId;
+
+  const closeViaCheckbox = useCallback(() => {
+    const input = document.getElementById(toggleId) as HTMLInputElement | null;
+    if (input) input.checked = false;
+  }, [toggleId]);
+
+  useEscapeKey(closeViaCheckbox);
+
   return (
     <>
-      <input id={id} checked={open} type="checkbox" className="modal-toggle" />
+      <input
+        id={toggleId}
+        defaultChecked={open}
+        type="checkbox"
+        className="modal-toggle"
+      />
       <div className="modal">
         {children}
-        <label className="modal-backdrop" htmlFor={id}>Close</label>
+        <label className="modal-backdrop" htmlFor={toggleId}>Close</label>
       </div>
-      <script
-        type="module"
-        suppressHydrationWarning
-        dangerouslySetInnerHTML={{ __html: useScript(script, id) }}
-      />
     </>
   );
 }
