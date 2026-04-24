@@ -68,6 +68,8 @@ This runs the full code-generation pipeline (blocks, schema, sections, loaders, 
 | `npm run typecheck`    | `tsc --noEmit` — no code emitted, only type errors               |
 | `npm run format`       | Format `src/**/*.{ts,tsx}` with Prettier                         |
 | `npm run tailwind:fix` | Auto-fix Tailwind class issues                                   |
+| `npm run knip`         | Find unused files, deps, and exports                             |
+| `npm run knip:fix`     | Auto-fix knip issues (removes unused exports)                    |
 | `npm run clean`        | Nuke all caches + reinstall                                      |
 
 ## Deploying
