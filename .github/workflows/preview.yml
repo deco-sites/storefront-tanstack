@@ -20,6 +20,8 @@ concurrency:
 jobs:
   preview:
     runs-on: ubuntu-latest
+    env:
+      HAS_CF_SECRETS: ${{ secrets.CLOUDFLARE_API_TOKEN != '' && secrets.CLOUDFLARE_ACCOUNT_ID != '' }}
     steps:
       - name: Resolve ref
         id: resolve
@@ -59,6 +61,7 @@ jobs:
 
       - name: Upload preview version
         id: deploy
+        if: env.HAS_CF_SECRETS == 'true'
         run: |
           set +e
           OUTPUT=$(npx wrangler versions upload --preview-alias ${{ steps.alias.outputs.alias }} 2>&1)
@@ -78,7 +81,7 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
       - name: Comment preview URL on PR
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' && env.HAS_CF_SECRETS == 'true'
         uses: marocchino/sticky-pull-request-comment@v2
         with:
           header: preview-url
@@ -89,3 +92,19 @@ jobs:
             |---|---|
             | **Version** | ${{ steps.deploy.outputs.preview_url }} |
             | **Alias** | ${{ steps.deploy.outputs.alias_url }} |
+
+      - name: Comment missing-secrets notice on PR
+        if: github.event_name == 'pull_request' && env.HAS_CF_SECRETS != 'true'
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: preview-url
+          message: |
+            ### Preview skipped
+
+            Cloudflare secrets are not configured for this repo. Previews are disabled until an admin sets them.
+
+            **To enable:** Settings → Secrets and variables → Actions, add:
+            - `CLOUDFLARE_API_TOKEN` — token with `Workers Scripts:Edit` permission
+            - `CLOUDFLARE_ACCOUNT_ID` — target Cloudflare account ID
+
+            The build itself passed, so this PR's code is still validated.
