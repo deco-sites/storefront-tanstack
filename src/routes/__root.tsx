@@ -4,7 +4,6 @@ import { DecoRootLayout } from "@decocms/start/hooks";
 import { CART_QUERY_KEY, getCartServerFn } from "../platform/cart";
 import { getUserServerFn, USER_QUERY_KEY } from "../platform/user";
 import MinicartDrawer from "../components/minicart/MinicartDrawer";
-// @ts-ignore Vite ?url import
 import appCss from "../styles/app.css?url";
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({

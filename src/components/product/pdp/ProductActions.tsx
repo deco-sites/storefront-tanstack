@@ -44,12 +44,7 @@ const DEFAULT_COPY = {
   errorLabel: "Try again",
 } satisfies Required<ActionsCopyConfig>;
 
-export default function ProductActions({
-  product,
-  analyticsItem,
-  isInStock,
-  copy,
-}: Props) {
+export default function ProductActions({ product, analyticsItem, isInStock, copy }: Props) {
   const { addToCartLabel, addingLabel, addedLabel, errorLabel } = {
     ...DEFAULT_COPY,
     ...copy,
@@ -78,16 +73,14 @@ export default function ProductActions({
         : addToCartLabel;
 
   return (
-    <div className="mt-4 sm:mt-10 flex flex-col gap-2">
+    <div className="mt-4 flex flex-col gap-2 sm:mt-10">
       <button
         type="button"
         {...eventAttrs}
-        onClick={() =>
-          addToCart.mutate({ merchandiseId: product.productID, quantity: 1 })
-        }
+        onClick={() => addToCart.mutate({ merchandiseId: product.productID, quantity: 1 })}
         disabled={addToCart.isPending}
         className={clx(
-          "btn btn-primary no-animation",
+          "no-animation btn btn-primary",
           addToCart.isSuccess && "btn-success",
           addToCart.isError && "btn-error",
         )}

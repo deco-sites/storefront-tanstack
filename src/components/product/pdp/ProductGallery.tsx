@@ -49,17 +49,13 @@ export default function ProductGallery({ images, config }: Props) {
     <>
       <div
         id={id}
-        className="grid grid-flow-row sm:grid-flow-col grid-cols-1 sm:grid-cols-[min-content_1fr] gap-5"
+        className="grid grid-flow-row grid-cols-1 gap-5 sm:grid-flow-col sm:grid-cols-[min-content_1fr]"
       >
-        <div className="col-start-1 col-span-1 sm:col-start-2">
+        <div className="col-span-1 col-start-1 sm:col-start-2">
           <div className="relative h-min grow">
-            <Slider className="carousel carousel-center gap-6 w-full">
+            <Slider className="carousel w-full carousel-center gap-6">
               {images.map((img, index) => (
-                <Slider.Item
-                  key={img.url ?? index}
-                  index={index}
-                  className="carousel-item w-full"
-                >
+                <Slider.Item key={img.url ?? index} index={index} className="carousel-item w-full">
                   <Image
                     className="w-full"
                     sizes="(max-width: 640px) 100vw, 40vw"
@@ -76,25 +72,22 @@ export default function ProductGallery({ images, config }: Props) {
             </Slider>
 
             <Slider.PrevButton
-              className="no-animation absolute left-2 top-1/2 btn btn-circle btn-outline disabled:invisible"
+              className="no-animation btn absolute top-1/2 left-2 btn-circle btn-outline disabled:invisible"
               disabled
             >
               <Icon id="chevron-right" className="rotate-180" />
             </Slider.PrevButton>
 
             <Slider.NextButton
-              className="no-animation absolute right-2 top-1/2 btn btn-circle btn-outline disabled:invisible"
+              className="no-animation btn absolute top-1/2 right-2 btn-circle btn-outline disabled:invisible"
               disabled={images.length < 2}
             >
               <Icon id="chevron-right" />
             </Slider.NextButton>
 
             {enableZoom ? (
-              <div className="absolute top-2 right-2 bg-base-100 rounded-full">
-                <label
-                  className="btn btn-ghost hidden sm:inline-flex"
-                  htmlFor={zoomId}
-                >
+              <div className="absolute top-2 right-2 rounded-full bg-base-100">
+                <label className="btn hidden btn-ghost sm:inline-flex" htmlFor={zoomId}>
                   <Icon id="pan_zoom" />
                 </label>
               </div>
@@ -102,22 +95,22 @@ export default function ProductGallery({ images, config }: Props) {
           </div>
         </div>
 
-        <div className="col-start-1 col-span-1">
+        <div className="col-span-1 col-start-1">
           <ul
             className={clx(
               "carousel carousel-center",
               "sm:carousel-vertical",
-              "gap-2 max-w-full",
+              "max-w-full gap-2",
               "overflow-x-auto sm:overflow-y-auto",
             )}
             style={{ maxHeight: "600px" }}
           >
             {images.map((img, index) => (
-              <li key={img.url ?? index} className="carousel-item w-16 h-16">
+              <li key={img.url ?? index} className="carousel-item h-16 w-16">
                 <Slider.Dot index={index}>
                   <Image
                     style={{ aspectRatio: "1 / 1" }}
-                    className="group-disabled:border-base-400 border rounded object-cover w-full h-full"
+                    className="group-disabled:border-base-400 h-full w-full rounded border object-cover"
                     width={64}
                     height={64}
                     src={img.url!}
@@ -136,7 +129,7 @@ export default function ProductGallery({ images, config }: Props) {
           id={zoomId}
           images={images}
           width={700}
-          height={Math.trunc(700 * DEFAULT_HEIGHT / DEFAULT_WIDTH)}
+          height={Math.trunc((700 * DEFAULT_HEIGHT) / DEFAULT_WIDTH)}
         />
       ) : null}
     </>
@@ -154,8 +147,6 @@ export function filterImagesForVariant(
 ): ImageObject[] {
   if (!images?.length) return [];
   if (!productName) return images;
-  const matches = images.filter((img) =>
-    productName.includes(img.alternateName || "")
-  );
+  const matches = images.filter((img) => productName.includes(img.alternateName || ""));
   return matches.length > 0 ? matches : images;
 }

@@ -49,15 +49,8 @@ export interface Props {
   interval?: number;
 }
 
-function BannerItem(
-  { image, lcp }: { image: Banner; lcp?: boolean },
-) {
-  const {
-    alt,
-    mobile,
-    desktop,
-    action,
-  } = image;
+function BannerItem({ image, lcp }: { image: Banner; lcp?: boolean }) {
+  const { alt, mobile, desktop, action } = image;
   const params = { promotion_name: image.alt };
   const setEarlyHint = useSetEarlyHints();
   const device = useDevice();
@@ -77,26 +70,22 @@ function BannerItem(
       {...selectPromotionEvent}
       href={action?.href ?? "#"}
       aria-label={action?.label}
-      className="relative block overflow-y-hidden w-full"
+      className="relative block w-full overflow-y-hidden"
     >
       {action && (
         <div
           className={clx(
-            "absolute h-full w-full top-0 left-0",
-            "flex flex-col justify-center items-center",
+            "absolute top-0 left-0 h-full w-full",
+            "flex flex-col items-center justify-center",
             "px-5 sm:px-0",
-            "sm:left-40 sm:items-start sm:max-w-96",
+            "sm:left-40 sm:max-w-96 sm:items-start",
           )}
         >
-          <span className="text-7xl font-bold text-base-100">
-            {action.title}
-          </span>
-          <span className="font-normal text-base text-base-100 pt-4 pb-12">
-            {action.subTitle}
-          </span>
+          <span className="text-7xl font-bold text-base-100">{action.title}</span>
+          <span className="pt-4 pb-12 text-base font-normal text-base-100">{action.subTitle}</span>
           <button
             type="button"
-            className="btn btn-primary btn-outline border-0 bg-base-100 min-w-45"
+            className="btn min-w-45 border-0 bg-base-100 btn-outline btn-primary"
             aria-label={action.label}
           >
             {action.label}
@@ -122,7 +111,7 @@ function BannerItem(
           sizes="100vw"
         />
         <img
-          className="object-cover w-full h-full"
+          className="h-full w-full object-cover"
           loading={lcp ? "eager" : "lazy"}
           // @ts-expect-error: fetchpriority is a valid HTML attribute not yet typed in preact
           fetchpriority={lcp ? "high" : "auto"}
@@ -143,13 +132,13 @@ function Carousel({ images = [], preload, interval }: Props) {
       className={clx(
         "grid",
         "grid-rows-[1fr_32px_1fr_64px]",
-        "grid-cols-[32px_1fr_32px] min-h-[660px]",
-        "sm:grid-cols-[112px_1fr_112px] sm:min-h-min",
+        "min-h-[660px] grid-cols-[32px_1fr_32px]",
+        "sm:min-h-min sm:grid-cols-[112px_1fr_112px]",
         "w-screen",
       )}
     >
       <div className="col-span-full row-span-full">
-        <Slider className="carousel carousel-center w-full gap-6">
+        <Slider className="carousel w-full carousel-center gap-6">
           {images.map((image, index) => (
             <Slider.Item index={index} className="carousel-item w-full">
               <BannerItem image={image} lcp={index === 0 && preload} />
@@ -158,40 +147,34 @@ function Carousel({ images = [], preload, interval }: Props) {
         </Slider>
       </div>
 
-      <div className="hidden sm:flex items-center justify-center z-10 col-start-1 row-start-2">
+      <div className="z-10 col-start-1 row-start-2 hidden items-center justify-center sm:flex">
         <Slider.PrevButton
-          className="btn btn-neutral btn-outline btn-circle no-animation btn-sm"
+          className="no-animation btn btn-circle btn-outline btn-sm btn-neutral"
           disabled={false}
         >
           <Icon id="chevron-right" className="rotate-180" />
         </Slider.PrevButton>
       </div>
 
-      <div className="hidden sm:flex items-center justify-center z-10 col-start-3 row-start-2">
+      <div className="z-10 col-start-3 row-start-2 hidden items-center justify-center sm:flex">
         <Slider.NextButton
-          className="btn btn-neutral btn-outline btn-circle no-animation btn-sm"
+          className="no-animation btn btn-circle btn-outline btn-sm btn-neutral"
           disabled={false}
         >
           <Icon id="chevron-right" />
         </Slider.NextButton>
       </div>
 
-      <ul
-        className={clx(
-          "col-span-full row-start-4 z-10",
-          "carousel justify-center gap-3",
-        )}
-      >
+      <ul className={clx("z-10 col-span-full row-start-4", "carousel justify-center gap-3")}>
         {images.map((_, index) => (
           <li className="carousel-item">
             <Slider.Dot
               index={index}
               className={clx(
-                "bg-black opacity-20 h-3 w-3 no-animation rounded-full",
-                "disabled:w-8 disabled:bg-base-100 disabled:opacity-100 transition-[width]",
+                "no-animation h-3 w-3 rounded-full bg-black opacity-20",
+                "transition-[width] disabled:w-8 disabled:bg-base-100 disabled:opacity-100",
               )}
-            >
-            </Slider.Dot>
+            ></Slider.Dot>
           </li>
         ))}
       </ul>
@@ -209,13 +192,13 @@ export function LoadingFallback() {
   return (
     <div className="w-full py-8">
       <div className="container mx-auto px-4">
-        <div className="h-6 w-48 bg-base-200 animate-pulse rounded mb-4" />
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="mb-4 h-6 w-48 animate-pulse rounded bg-base-200" />
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
           {Array.from({ length: 4 }).map((_, i) => (
             <div key={i} className="flex flex-col gap-2">
-              <div className="aspect-square bg-base-200 animate-pulse rounded" />
-              <div className="h-4 bg-base-200 animate-pulse rounded w-3/4" />
-              <div className="h-4 bg-base-200 animate-pulse rounded w-1/2" />
+              <div className="aspect-square animate-pulse rounded bg-base-200" />
+              <div className="h-4 w-3/4 animate-pulse rounded bg-base-200" />
+              <div className="h-4 w-1/2 animate-pulse rounded bg-base-200" />
             </div>
           ))}
         </div>

@@ -13,16 +13,7 @@ export interface Props {
 
 export default function ProductTitle({ name, isLoading, className }: Props) {
   if (isLoading) {
-    return (
-      <div
-        aria-hidden="true"
-        className="skeleton h-9 w-2/3 mt-4 rounded"
-      />
-    );
+    return <div aria-hidden="true" className="mt-4 h-9 w-2/3 skeleton rounded" />;
   }
-  return (
-    <h1 className={clx("text-3xl font-semibold pt-4", className)}>
-      {name}
-    </h1>
-  );
+  return <h1 className={clx("pt-4 text-3xl font-semibold", className)}>{name}</h1>;
 }

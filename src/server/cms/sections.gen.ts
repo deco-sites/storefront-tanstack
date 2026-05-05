@@ -42,8 +42,18 @@ export interface SectionMetaEntry {
 
 export const sectionMeta: Record<string, SectionMetaEntry> = {
   "site/sections/Category/CategoryGrid.tsx": { hasLoadingFallback: true },
-  "site/sections/Footer/Footer.tsx": { eager: true, sync: true, layout: true, hasLoadingFallback: true },
-  "site/sections/Header/Header.tsx": { eager: true, sync: true, layout: true, hasLoadingFallback: true },
+  "site/sections/Footer/Footer.tsx": {
+    eager: true,
+    sync: true,
+    layout: true,
+    hasLoadingFallback: true,
+  },
+  "site/sections/Header/Header.tsx": {
+    eager: true,
+    sync: true,
+    layout: true,
+    hasLoadingFallback: true,
+  },
   "site/sections/Images/Banner.tsx": { hasLoadingFallback: true },
   "site/sections/Images/Carousel.tsx": { cache: "listing", hasLoadingFallback: true },
   "site/sections/Images/ImageGallery.tsx": { hasLoadingFallback: true },
@@ -60,7 +70,12 @@ export const sectionMeta: Record<string, SectionMetaEntry> = {
   "site/sections/Product/Wishlist.tsx": { hasLoadingFallback: true },
   "site/sections/Social/InstagramPosts.tsx": { hasLoadingFallback: true },
   "site/sections/Social/WhatsApp.tsx": { hasLoadingFallback: true },
-  "site/sections/Theme/Theme.tsx": { eager: true, sync: true, layout: true, hasLoadingFallback: true },
+  "site/sections/Theme/Theme.tsx": {
+    eager: true,
+    sync: true,
+    layout: true,
+    hasLoadingFallback: true,
+  },
 };
 
 export const syncComponents: Record<string, any> = {

@@ -6,9 +6,7 @@ import Bag from "../../components/header/Bag";
 import Menu from "../../components/header/Menu";
 import NavItem from "../../components/header/NavItem";
 import SignIn from "../../components/header/SignIn";
-import Searchbar, {
-  type SearchbarProps,
-} from "../../components/search/Searchbar/Form";
+import Searchbar, { type SearchbarProps } from "../../components/search/Searchbar/Form";
 import Drawer from "../../components/ui/Drawer";
 import Icon from "../../components/ui/Icon";
 import Modal from "../../components/ui/Modal";
@@ -53,20 +51,20 @@ const Desktop = ({ navItems, logo, searchbar, loading }: Props) => (
   <>
     <Modal id={SEARCHBAR_POPUP_ID}>
       <div
-        className="absolute top-0 bg-base-100 container"
+        className="absolute top-0 container bg-base-100"
         style={{ marginTop: HEADER_HEIGHT_MOBILE }}
       >
-        {loading === "lazy"
-          ? (
-            <div className="flex justify-center items-center">
-              <span className="loading loading-spinner" />
-            </div>
-          )
-          : <Searchbar {...searchbar} />}
+        {loading === "lazy" ? (
+          <div className="flex items-center justify-center">
+            <span className="loading loading-spinner" />
+          </div>
+        ) : (
+          <Searchbar {...searchbar} />
+        )}
       </div>
     </Modal>
 
-    <div className="flex flex-col gap-4 pt-5 container border-b border-gray-300">
+    <div className="container flex flex-col gap-4 border-b border-gray-300 pt-5">
       <div className="grid grid-cols-3 place-items-center">
         <div className="place-self-start">
           <a href="/" aria-label="Store logo">
@@ -81,30 +79,26 @@ const Desktop = ({ navItems, logo, searchbar, loading }: Props) => (
 
         <label
           htmlFor={SEARCHBAR_POPUP_ID}
-          className="input input-bordered flex items-center gap-2 w-full"
+          className="input-bordered input flex w-full items-center gap-2"
           aria-label="search icon button"
         >
           <Icon id="search" />
-          <span className="text-base-400 truncate">
-            Search products, brands...
-          </span>
+          <span className="text-base-400 truncate">Search products, brands...</span>
         </label>
 
-        <div className="flex gap-4 place-self-end items-center">
+        <div className="flex items-center gap-4 place-self-end">
           <SignIn variant="desktop" />
           <Bag />
         </div>
       </div>
 
-      <div className="flex justify-between items-center">
+      <div className="flex items-center justify-between">
         <ul className="flex">
           {navItems?.slice(0, 10).map((item, index) => (
             <NavItem key={index} item={item} />
           ))}
         </ul>
-        <div>
-          {/* ship to */}
-        </div>
+        <div>{/* ship to */}</div>
       </div>
     </div>
   </>
@@ -116,13 +110,13 @@ const Mobile = ({ logo, searchbar, navItems, loading }: Props) => (
       aside={
         <Drawer.Aside title="Search" drawer={SEARCHBAR_DRAWER_ID}>
           <div className="w-screen overflow-y-auto">
-            {loading === "lazy"
-              ? (
-                <div className="h-full w-full flex items-center justify-center">
-                  <span className="loading loading-spinner" />
-                </div>
-              )
-              : <Searchbar {...searchbar} />}
+            {loading === "lazy" ? (
+              <div className="flex h-full w-full items-center justify-center">
+                <span className="loading loading-spinner" />
+              </div>
+            ) : (
+              <Searchbar {...searchbar} />
+            )}
           </div>
         </Drawer.Aside>
       }
@@ -131,32 +125,31 @@ const Mobile = ({ logo, searchbar, navItems, loading }: Props) => (
       id={SIDEMENU_DRAWER_ID}
       aside={
         <Drawer.Aside title="Menu" drawer={SIDEMENU_DRAWER_ID}>
-          {loading === "lazy"
-            ? (
-              <div
-                id={SIDEMENU_CONTAINER_ID}
-                className="h-full flex items-center justify-center"
-                style={{ minWidth: "100vw" }}
-              >
-                <span className="loading loading-spinner" />
-              </div>
-            )
-            : <Menu navItems={navItems ?? []} />}
+          {loading === "lazy" ? (
+            <div
+              id={SIDEMENU_CONTAINER_ID}
+              className="flex h-full items-center justify-center"
+              style={{ minWidth: "100vw" }}
+            >
+              <span className="loading loading-spinner" />
+            </div>
+          ) : (
+            <Menu navItems={navItems ?? []} />
+          )}
         </Drawer.Aside>
       }
     />
 
     <div
-      className="grid place-items-center w-screen px-5 gap-4"
+      className="grid w-screen place-items-center gap-4 px-5"
       style={{
         height: NAVBAR_HEIGHT_MOBILE,
-        gridTemplateColumns:
-          "min-content auto min-content min-content min-content",
+        gridTemplateColumns: "min-content auto min-content min-content min-content",
       }}
     >
       <label
         htmlFor={SIDEMENU_DRAWER_ID}
-        className="btn btn-square btn-sm btn-ghost"
+        className="btn btn-square btn-ghost btn-sm"
         aria-label="open menu"
       >
         <Icon id="menu" />
@@ -165,7 +158,7 @@ const Mobile = ({ logo, searchbar, navItems, loading }: Props) => (
       {logo && (
         <a
           href="/"
-          className="grow inline-flex items-center justify-center"
+          className="inline-flex grow items-center justify-center"
           style={{ minHeight: NAVBAR_HEIGHT_MOBILE }}
           aria-label="Store logo"
         >
@@ -180,7 +173,7 @@ const Mobile = ({ logo, searchbar, navItems, loading }: Props) => (
 
       <label
         htmlFor={SEARCHBAR_DRAWER_ID}
-        className="btn btn-square btn-sm btn-ghost"
+        className="btn btn-square btn-ghost btn-sm"
         aria-label="search icon button"
       >
         <Icon id="search" />
@@ -193,8 +186,7 @@ const Mobile = ({ logo, searchbar, navItems, loading }: Props) => (
 function Header({
   alerts = [],
   logo = {
-    src:
-      "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/986b61d4-3847-4867-93c8-b550cb459cc7",
+    src: "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/986b61d4-3847-4867-93c8-b550cb459cc7",
     width: 100,
     height: 16,
     alt: "Logo",
@@ -205,22 +197,22 @@ function Header({
   return (
     <header
       style={{
-        height: device === "desktop"
-          ? HEADER_HEIGHT_DESKTOP
-          : HEADER_HEIGHT_MOBILE,
+        height: device === "desktop" ? HEADER_HEIGHT_DESKTOP : HEADER_HEIGHT_MOBILE,
       }}
     >
-      <div className="bg-base-100 fixed w-full z-40">
+      <div className="fixed z-40 w-full bg-base-100">
         {alerts.length > 0 && <Alert alerts={alerts} />}
-        {device === "desktop"
-          ? <Desktop logo={logo} {...props} />
-          : <Mobile logo={logo} {...props} />}
+        {device === "desktop" ? (
+          <Desktop logo={logo} {...props} />
+        ) : (
+          <Mobile logo={logo} {...props} />
+        )}
       </div>
     </header>
   );
 }
 export const LoadingFallback = (props: LoadingFallbackProps<Props>) => (
-  <Header {...props as any} loading="lazy" />
+  <Header {...(props as any)} loading="lazy" />
 );
 export default Header;
 

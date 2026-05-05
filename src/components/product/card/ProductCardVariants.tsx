@@ -19,18 +19,12 @@ const SWATCH_COLORS: Record<string, string | undefined> = {
 
 function Ring({ value, checked }: { value: string; checked: boolean }) {
   const color = SWATCH_COLORS[value];
-  const base = clx(
-    "ring-2 ring-offset-2",
-    checked ? "ring-primary" : "ring-transparent",
-  );
+  const base = clx("ring-2 ring-offset-2", checked ? "ring-primary" : "ring-transparent");
   if (color) {
     return (
       <span
         style={{ backgroundColor: color }}
-        className={clx(
-          "block w-12 h-12 rounded-full border border-[#C9CFCF]",
-          base,
-        )}
+        className={clx("block h-12 w-12 rounded-full border border-[#C9CFCF]", base)}
         aria-label={value}
       />
     );
@@ -38,7 +32,7 @@ function Ring({ value, checked }: { value: string; checked: boolean }) {
   return (
     <span
       className={clx(
-        "btn btn-ghost border-[#C9CFCF] hover:bg-base-200 hover:border-[#C9CFCF] w-12 h-12",
+        "btn h-12 w-12 border-[#C9CFCF] btn-ghost hover:border-[#C9CFCF] hover:bg-base-200",
         base,
       )}
     >
@@ -54,15 +48,10 @@ export interface Props {
   onSelect: (href: string) => void;
 }
 
-export default function ProductCardVariants({
-  attrName,
-  variants,
-  selectedHref,
-  onSelect,
-}: Props) {
+export default function ProductCardVariants({ attrName, variants, selectedHref, onSelect }: Props) {
   const id = useId();
   return (
-    <ul className="flex items-center justify-start gap-2 pt-4 pb-1 pl-1 overflow-x-auto">
+    <ul className="flex items-center justify-start gap-2 overflow-x-auto pt-4 pb-1 pl-1">
       {variants.map(([value, link]) => {
         const href = relative(link) as string;
         const checked = href === selectedHref;

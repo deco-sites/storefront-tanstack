@@ -22,10 +22,7 @@ interface Props {
 
 const sanitize = (s: string) => (s ?? "").replace(/\D+/g, "");
 
-async function action(
-  props: Props,
-  _req?: Request,
-): Promise<ShippingSimulation> {
+async function action(props: Props, _req?: Request): Promise<ShippingSimulation> {
   const cep = sanitize(props.postalCode);
   if (cep.length < 4) throw new Error("Invalid postal code");
 

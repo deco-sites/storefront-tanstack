@@ -1,0 +1,12 @@
+dist
+.wrangler
+.tanstack
+node_modules
+bun.lock
+package-lock.json
+
+# Generated artifacts — do not format
+src/**/*.gen.ts
+src/**/*.gen.json
+src/routeTree.gen.ts
+worker-configuration.d.ts

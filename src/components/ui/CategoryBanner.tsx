@@ -44,32 +44,18 @@ function Banner(props: SectionProps<typeof loader>) {
   const { title, subtitle, image } = banner;
   return (
     <div className="grid grid-cols-1 grid-rows-1">
-      <Picture preload className="col-start-1 col-span-1 row-start-1 row-span-1">
-        <Source
-          src={image.mobile}
-          width={360}
-          height={120}
-          media="(max-width: 767px)"
-        />
-        <Source
-          src={image.desktop}
-          width={1440}
-          height={200}
-          media="(min-width: 767px)"
-        />
+      <Picture preload className="col-span-1 col-start-1 row-span-1 row-start-1">
+        <Source src={image.mobile} width={360} height={120} media="(max-width: 767px)" />
+        <Source src={image.desktop} width={1440} height={200} media="(min-width: 767px)" />
         <img className="w-full" src={image.desktop} alt={image.alt ?? title} />
       </Picture>
 
-      <div className="container flex flex-col items-center justify-center sm:items-start col-start-1 col-span-1 row-start-1 row-span-1 w-full">
+      <div className="col-span-1 col-start-1 row-span-1 row-start-1 container flex w-full flex-col items-center justify-center sm:items-start">
         <h1>
-          <span className="text-5xl font-medium text-base-100">
-            {title}
-          </span>
+          <span className="text-5xl font-medium text-base-100">{title}</span>
         </h1>
         <h2>
-          <span className="text-xl font-medium text-base-100">
-            {subtitle}
-          </span>
+          <span className="text-xl font-medium text-base-100">{subtitle}</span>
         </h2>
       </div>
     </div>
@@ -80,9 +66,7 @@ export interface Props {
 }
 export const loader = (props: Props, req: Request) => {
   const { banners } = { ...DEFAULT_PROPS, ...props };
-  const banner = banners.find(({ matcher }) =>
-    new URLPattern({ pathname: matcher }).test(req.url)
-  );
+  const banner = banners.find(({ matcher }) => new URLPattern({ pathname: matcher }).test(req.url));
   return { banner };
 };
 export default Banner;

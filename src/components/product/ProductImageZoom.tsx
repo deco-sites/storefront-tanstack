@@ -12,20 +12,22 @@ export interface Props {
   images: ImageObject[];
 }
 
-function ProductImageZoom({ images, width, height, id = useId() }: Props) {
-  const container = `${id}-container`;
+function ProductImageZoom({ images, width, height, id }: Props) {
+  const fallbackId = useId();
+  const resolvedId = id ?? fallbackId;
+  const container = `${resolvedId}-container`;
 
   return (
-    <Modal id={id}>
+    <Modal id={resolvedId}>
       <div
         id={container}
-        className="modal-box w-11/12 max-w-7xl grid grid-cols-[48px_1fr_48px] grid-rows-1 place-items-center"
+        className="modal-box grid w-11/12 max-w-7xl grid-cols-[48px_1fr_48px] grid-rows-1 place-items-center"
       >
-        <Slider className="carousel col-span-full col-start-1 row-start-1 row-span-full h-full w-full">
+        <Slider className="col-span-full col-start-1 row-span-full row-start-1 carousel h-full w-full">
           {images.map((image, index) => (
             <Slider.Item
               index={index}
-              className="carousel-item w-full h-full justify-center items-center"
+              className="carousel-item h-full w-full items-center justify-center"
             >
               <Image
                 style={{ aspectRatio: `${width} / ${height}` }}
@@ -39,11 +41,11 @@ function ProductImageZoom({ images, width, height, id = useId() }: Props) {
           ))}
         </Slider>
 
-        <Slider.PrevButton className="btn btn-circle btn-outline col-start-1 col-end-2 row-start-1 row-span-full">
+        <Slider.PrevButton className="btn col-start-1 col-end-2 row-span-full row-start-1 btn-circle btn-outline">
           <Icon id="chevron-right" className="rotate-180" />
         </Slider.PrevButton>
 
-        <Slider.NextButton className="btn btn-circle btn-outline col-start-3 col-end-4 row-start-1 row-span-full">
+        <Slider.NextButton className="btn col-start-3 col-end-4 row-span-full row-start-1 btn-circle btn-outline">
           <Icon id="chevron-right" />
         </Slider.NextButton>
       </div>

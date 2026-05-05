@@ -60,8 +60,10 @@ preload kept the cache warm, `isLoading` stays `false` and the pulse is invisibl
 
 ```tsx
 const isLoading = useRouterState({ select: (s) => s.isLoading });
-<div data-loading={isLoading ? "true" : undefined}
-     className="transition-opacity duration-150 data-[loading=true]:opacity-60" />
+<div
+  data-loading={isLoading ? "true" : undefined}
+  className="transition-opacity duration-150 data-[loading=true]:opacity-60"
+/>;
 ```
 
 ## Cart — TanStack Query, not TanStack Store

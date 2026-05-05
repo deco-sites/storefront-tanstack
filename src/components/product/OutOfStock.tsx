@@ -32,12 +32,12 @@ export default function Notify({ productID }: Props) {
       <span className="text-base">This product is currently unavailable</span>
       <span className="text-sm">Notify me when it's back in stock</span>
 
-      <input placeholder="Name" className="input input-bordered" name="name" />
-      <input placeholder="Email" className="input input-bordered" name="email" />
+      <input placeholder="Name" className="input-bordered input" name="name" />
+      <input placeholder="Email" className="input-bordered input" name="email" />
 
-      <button type="button" className="btn btn-primary no-animation">
-        <span className="[.htmx-request_&]:hidden inline">Submit</span>
-        <span className="[.htmx-request_&]:inline hidden loading loading-spinner loading-xs" />
+      <button type="button" className="no-animation btn btn-primary">
+        <span className="inline [.htmx-request_&]:hidden">Submit</span>
+        <span className="loading hidden loading-xs loading-spinner [.htmx-request_&]:inline" />
       </button>
     </form>
   );

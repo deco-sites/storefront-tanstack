@@ -1,0 +1,21 @@
+pre-commit:
+  parallel: true
+  commands:
+    prettier:
+      glob: "src/**/*.{ts,tsx,js,jsx,json,css,md}"
+      run: bun prettier --write {staged_files}
+      stage_fixed: true
+    eslint:
+      glob: "src/**/*.{ts,tsx}"
+      run: bun eslint --fix --no-warn-ignored {staged_files}
+      stage_fixed: true
+
+pre-push:
+  parallel: true
+  commands:
+    typecheck:
+      run: bun typecheck
+    lint:
+      run: bun lint
+    format:
+      run: bun format:check

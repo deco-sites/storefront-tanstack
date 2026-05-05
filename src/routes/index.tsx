@@ -1,9 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import {
-  cmsHomeRouteConfig,
-  deferredSectionLoader,
-  loadCmsPage,
-} from "@decocms/start/routes";
+import { cmsHomeRouteConfig, deferredSectionLoader, loadCmsPage } from "@decocms/start/routes";
 import { preloadSectionComponents } from "@decocms/start/cms";
 import { DecoPageRenderer } from "@decocms/start/hooks";
 
@@ -28,8 +24,7 @@ export const Route = createFileRoute("/")({
   // Preserve query string so filter/sort/pagination changes reach the loader.
   // Without this, TanStack Router collapses the home route to "/" and skips
   // re-fetching when the user clicks a filter or changes sort order.
-  validateSearch: (search: Record<string, unknown>) =>
-    search as Record<string, string>,
+  validateSearch: (search: Record<string, unknown>) => search as Record<string, string>,
   loaderDeps: ({ search }: { search: Record<string, string> }) => {
     const filtered = Object.fromEntries(
       Object.entries(search ?? {}).filter(([k]) => !IGNORED_SEARCH_PARAMS.has(k)),
@@ -39,9 +34,7 @@ export const Route = createFileRoute("/")({
     };
   },
   loader: async ({ deps }) => {
-    const searchStr = deps.search
-      ? "?" + new URLSearchParams(deps.search).toString()
-      : "";
+    const searchStr = deps.search ? "?" + new URLSearchParams(deps.search).toString() : "";
     const fullPath = "/" + searchStr;
     // Forward the real page URL via header. On CSR for the home route,
     // the framework's `loadCmsPageInternal` falls back to the `_serverFn`
@@ -67,10 +60,10 @@ function HomePage() {
 
   if (!data) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="flex min-h-screen items-center justify-center">
         <div className="text-center">
-          <h1 className="text-4xl font-bold mb-4">Storefront-tanstack</h1>
-          <p className="text-sm text-base-content/40 mt-2">No CMS page found for /</p>
+          <h1 className="mb-4 text-4xl font-bold">Storefront-tanstack</h1>
+          <p className="mt-2 text-sm text-base-content/40">No CMS page found for /</p>
         </div>
       </div>
     );

@@ -49,8 +49,7 @@ export function useUpdateCartItem() {
 export function useRemoveCartItem() {
   const qc = useQueryClient();
   return useMutation({
-    mutationFn: (input: { lineId: string }) =>
-      removeItemServerFn({ data: input }),
+    mutationFn: (input: { lineId: string }) => removeItemServerFn({ data: input }),
     onSuccess: (cart: CartState) => {
       qc.setQueryData(CART_QUERY_KEY, cart);
     },

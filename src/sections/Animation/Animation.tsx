@@ -12,12 +12,7 @@ export interface Props {
    * @description CSS animation applied when the section enters the viewport
    * @default "fade-in"
    */
-  animationType?:
-    | "fade-in"
-    | "fade-in-bottom"
-    | "slide-left"
-    | "slide-right"
-    | "zoom-in";
+  animationType?: "fade-in" | "fade-in-bottom" | "slide-left" | "slide-right" | "zoom-in";
   /**
    * @title Duration (s)
    * @description Animation duration in seconds
@@ -66,9 +61,7 @@ const animationByType: Record<NonNullable<Props["animationType"]>, string> = {
   `,
 };
 
-function Animation(
-  { children, animationType = "fade-in", duration = "0.3" }: Props,
-) {
+function Animation({ children, animationType = "fade-in", duration = "0.3" }: Props) {
   const { section } = children;
   const { Component, props } = section;
   const ref = useRef<HTMLDivElement>(null);
@@ -77,15 +70,18 @@ function Animation(
   useEffect(() => {
     const node = ref.current;
     if (!node || visible) return;
-    const observer = new IntersectionObserver((entries) => {
-      for (const entry of entries) {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-          return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setVisible(true);
+            observer.disconnect();
+            return;
+          }
         }
-      }
-    }, { threshold: 0.5 });
+      },
+      { threshold: 0.5 },
+    );
     observer.observe(node);
     return () => observer.disconnect();
   }, [visible]);
@@ -110,10 +106,10 @@ export function Preview() {
     <div>
       <style dangerouslySetInnerHTML={{ __html: animationByType["slide-left"] }} />
       <div
-        className="flex justify-center items-center animate-slide-left"
+        className="animate-slide-left flex items-center justify-center"
         style={{ animationDuration: "2s" }}
       >
-        <h1 className="text-9xl text-base-content font-semibold my-8">Animation</h1>
+        <h1 className="my-8 text-9xl font-semibold text-base-content">Animation</h1>
       </div>
     </div>
   );

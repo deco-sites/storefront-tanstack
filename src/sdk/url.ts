@@ -20,9 +20,7 @@ export const rebaseSearch = (
     const next = new URL(loaderHref, "http://localhost");
     // Fall back to the loader's path when the base is missing/invalid —
     // better than producing "/undefined" via `new URL(undefined, …)`.
-    const base = basePath
-      ? new URL(basePath, "http://localhost")
-      : { pathname: next.pathname };
+    const base = basePath ? new URL(basePath, "http://localhost") : { pathname: next.pathname };
     return `${base.pathname}${next.search}`;
   } catch {
     return undefined;

@@ -39,19 +39,18 @@ function Footer({
   trademark,
 }: Props) {
   return (
-    <footer
-      className="px-5 sm:px-0 mt-5 sm:mt-10"
-      style={{ backgroundColor: "#EFF0F0" }}
-    >
-      <div className="container flex flex-col gap-5 sm:gap-10 py-10">
-        <ul className="grid grid-flow-row sm:grid-flow-col gap-6 ">
+    <footer className="mt-5 px-5 sm:mt-10 sm:px-0" style={{ backgroundColor: "#EFF0F0" }}>
+      <div className="container flex flex-col gap-5 py-10 sm:gap-10">
+        <ul className="grid grid-flow-row gap-6 sm:grid-flow-col">
           {links.map(({ title, href, children }) => (
             <li className="flex flex-col gap-4">
-              <a className="text-base font-semibold" href={href}>{title}</a>
+              <a className="text-base font-semibold" href={href}>
+                {title}
+              </a>
               <ul className="flex flex-col gap-2">
                 {children.map(({ title, href }) => (
                   <li>
-                    <a className="text-sm font-medium text-base-400" href={href}>
+                    <a className="text-base-400 text-sm font-medium" href={href}>
                       {title}
                     </a>
                   </li>
@@ -61,41 +60,29 @@ function Footer({
           ))}
         </ul>
 
-        <div className="flex flex-col sm:flex-row gap-12 justify-between items-start sm:items-center">
+        <div className="flex flex-col items-start justify-between gap-12 sm:flex-row sm:items-center">
           <ul className="flex gap-4">
             {social.map(({ image, href, alt }) => (
               <li>
                 <a href={href}>
-                  <Image
-                    src={image}
-                    alt={alt}
-                    loading="lazy"
-                    width={24}
-                    height={24}
-                  />
+                  <Image src={image} alt={alt} loading="lazy" width={24} height={24} />
                 </a>
               </li>
             ))}
           </ul>
           <ul className="flex flex-wrap gap-2">
             {paymentMethods.map(({ image, alt }) => (
-              <li className="h-8 w-10 border border-base-100 rounded flex justify-center items-center">
-                <Image
-                  src={image}
-                  alt={alt}
-                  width={20}
-                  height={20}
-                  loading="lazy"
-                />
+              <li className="flex h-8 w-10 items-center justify-center rounded border border-base-100">
+                <Image src={image} alt={alt} width={20} height={20} loading="lazy" />
               </li>
             ))}
           </ul>
         </div>
 
-        <hr className="w-full text-base-400" />
+        <hr className="text-base-400 w-full" />
 
-        <div className="grid grid-flow-row sm:grid-flow-col gap-8">
-          <ul className="flex flex-col sm:flex-row gap-2 sm:gap-4 sm:items-center">
+        <div className="grid grid-flow-row gap-8 sm:grid-flow-col">
+          <ul className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
             {policies.map(({ title, href }) => (
               <li>
                 <a className="text-xs font-medium" href={href}>
@@ -105,15 +92,15 @@ function Footer({
             ))}
           </ul>
 
-          <div className="flex flex-nowrap items-center justify-between sm:justify-center gap-4">
+          <div className="flex flex-nowrap items-center justify-between gap-4 sm:justify-center">
             <div>
               <img loading="lazy" src={logo} />
             </div>
-            <span className="text-xs font-normal text-base-400">{trademark}</span>
+            <span className="text-base-400 text-xs font-normal">{trademark}</span>
           </div>
 
           <div className="flex flex-nowrap items-center justify-center gap-4">
-            <span className="text-sm font-normal text-base-400">Powered by</span>
+            <span className="text-base-400 text-sm font-normal">Powered by</span>
             <PoweredByDeco />
           </div>
         </div>

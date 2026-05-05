@@ -25,7 +25,7 @@ export default function SearchResultGrid({ products, offset = 0 }: Props) {
           product={product}
           preload={index === 0}
           index={offset + index}
-          className="h-full min-w-40 max-w-75"
+          className="h-full max-w-75 min-w-40"
         />
       ))}
     </div>

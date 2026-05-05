@@ -1,8 +1,4 @@
-import type {
-  Filter,
-  FilterToggle,
-  ProductListingPage,
-} from "@decocms/apps/commerce/types";
+import type { Filter, FilterToggle, ProductListingPage } from "@decocms/apps/commerce/types";
 import { parseRange } from "@decocms/apps/commerce/utils/filters";
 import { Link } from "@tanstack/react-router";
 import Avatar from "../../components/ui/Avatar";
@@ -16,18 +12,21 @@ interface Props {
   baseUrl: string;
 }
 
-const isToggle = (filter: Filter): filter is FilterToggle =>
-  filter["@type"] === "FilterToggle";
+const isToggle = (filter: Filter): filter is FilterToggle => filter["@type"] === "FilterToggle";
 
-function ValueItem(
-  { to, search, selected, label, quantity }: {
-    to: string;
-    search: Record<string, string>;
-    selected: boolean;
-    label: string;
-    quantity: number;
-  },
-) {
+function ValueItem({
+  to,
+  search,
+  selected,
+  label,
+  quantity,
+}: {
+  to: string;
+  search: Record<string, string>;
+  selected: boolean;
+  label: string;
+  quantity: number;
+}) {
   return (
     <Link
       to={to}
@@ -45,7 +44,7 @@ function ValueItem(
         aria-hidden="true"
       />
       <span className="text-sm">{label}</span>
-      {quantity > 0 && <span className="text-sm text-base-400">({quantity})</span>}
+      {quantity > 0 && <span className="text-base-400 text-sm">({quantity})</span>}
     </Link>
   );
 }
@@ -72,17 +71,8 @@ function FilterValues({
 
         if (avatars) {
           return (
-            <Link
-              key={key}
-              to={link.to}
-              search={link.search}
-              preload="intent"
-              rel="nofollow"
-            >
-              <Avatar
-                content={item.value}
-                variant={item.selected ? "active" : "default"}
-              />
+            <Link key={key} to={link.to} search={link.search} preload="intent" rel="nofollow">
+              <Avatar content={item.value} variant={item.selected ? "active" : "default"} />
             </Link>
           );
         }
@@ -90,15 +80,17 @@ function FilterValues({
         if (filterKey === "price") {
           const range = parseRange(item.value);
 
-          return range && (
-            <ValueItem
-              key={item.value}
-              to={link.to}
-              search={link.search}
-              selected={item.selected}
-              quantity={item.quantity}
-              label={`${formatPrice(range.from)} - ${formatPrice(range.to)}`}
-            />
+          return (
+            range && (
+              <ValueItem
+                key={item.value}
+                to={link.to}
+                search={link.search}
+                selected={item.selected}
+                quantity={item.quantity}
+                label={`${formatPrice(range.from)} - ${formatPrice(range.to)}`}
+              />
+            )
           );
         }
 
@@ -120,14 +112,12 @@ function FilterValues({
 function Filters({ filters, baseUrl }: Props) {
   return (
     <ul className="flex flex-col gap-6 p-4 sm:p-0">
-      {filters
-        .filter(isToggle)
-        .map((filter) => (
-          <li key={filter.key} className="flex flex-col gap-4">
-            <span>{filter.label}</span>
-            <FilterValues filterKey={filter.key} values={filter.values} baseUrl={baseUrl} />
-          </li>
-        ))}
+      {filters.filter(isToggle).map((filter) => (
+        <li key={filter.key} className="flex flex-col gap-4">
+          <span>{filter.label}</span>
+          <FilterValues filterKey={filter.key} values={filter.values} baseUrl={baseUrl} />
+        </li>
+      ))}
     </ul>
   );
 }

@@ -1,11 +1,4 @@
-export type Platform =
-  | "vtex"
-  | "vnda"
-  | "shopify"
-  | "wake"
-  | "linx"
-  | "nuvemshop"
-  | "custom";
+export type Platform = "vtex" | "vnda" | "shopify" | "wake" | "linx" | "nuvemshop" | "custom";
 
 export const _platform: Platform = "shopify";
 

@@ -1,7 +1,5 @@
 import Image from "~/components/ui/Image";
-import Section, {
-  type Props as SectionHeaderProps,
-} from "../../components/ui/Section";
+import Section, { type Props as SectionHeaderProps } from "../../components/ui/Section";
 import Slider from "../../components/ui/Slider";
 import { clx } from "~/sdk/clx";
 import { type SectionProps } from "~/types/deco";
@@ -31,7 +29,7 @@ const fetchPosts = async (token: string): Promise<Data[]> => {
     if (!response.ok) {
       throw new Error(await response.text());
     }
-    const json = await response.json() as {
+    const json = (await response.json()) as {
       data: Data[];
     };
     return json.data;
@@ -62,10 +60,7 @@ const fetchPosts = async (token: string): Promise<Data[]> => {
     ];
   }
 };
-export async function loader(
-  { facebookToken, nposts, ...rest }: Props,
-  _req: Request,
-) {
+export async function loader({ facebookToken, nposts, ...rest }: Props, _req: Request) {
   const posts = await fetchPosts(facebookToken);
   return {
     ...rest,
@@ -102,33 +97,27 @@ function InstagramPosts({
     <Section.Container>
       <Section.Header title={title} />
 
-      <Slider className="carousel carousel-center sm:carousel-end gap-5 sm:gap-10 w-full">
+      <Slider className="carousel w-full carousel-center gap-5 sm:carousel-end sm:gap-10">
         {posts.map((item, index) => (
           <Slider.Item
             index={index}
-            className={clx(
-              "carousel-item",
-              "first:pl-5 first:sm:pl-0",
-              "last:pr-5 last:sm:pr-0",
-            )}
+            className={clx("carousel-item", "first:pl-5 first:sm:pl-0", "last:pr-5 last:sm:pr-0")}
           >
             <a href={item.permalink} target="_blank">
-              {item.media_type === "IMAGE"
-                ? (
-                  <Image
-                    loading="lazy"
-                    className="max-w-full max-h-full object-cover"
-                    style={{ aspectRatio: "1 / 1" }}
-                    src={item.media_url ?? ""}
-                    width={350}
-                    height={350}
-                  />
-                )
-                : (
-                  <video controls className="max-w-full max-h-full object-cover">
-                    <source src={item.media_url}></source>
-                  </video>
-                )}
+              {item.media_type === "IMAGE" ? (
+                <Image
+                  loading="lazy"
+                  className="max-h-full max-w-full object-cover"
+                  style={{ aspectRatio: "1 / 1" }}
+                  src={item.media_url ?? ""}
+                  width={350}
+                  height={350}
+                />
+              ) : (
+                <video controls className="max-h-full max-w-full object-cover">
+                  <source src={item.media_url}></source>
+                </video>
+              )}
             </a>
           </Slider.Item>
         ))}

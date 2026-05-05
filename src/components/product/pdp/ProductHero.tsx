@@ -6,19 +6,12 @@ import { useSendEvent } from "../../../sdk/useSendEvent";
 import { clx } from "~/sdk/clx";
 import ProductActions, { type ActionsCopyConfig } from "./ProductActions";
 import ProductDescription from "./ProductDescription";
-import ProductDiscountBadge, {
-  type DiscountBadgeConfig,
-} from "./ProductDiscountBadge";
-import ProductGallery, {
-  filterImagesForVariant,
-  type GalleryConfig,
-} from "./ProductGallery";
+import ProductDiscountBadge, { type DiscountBadgeConfig } from "./ProductDiscountBadge";
+import ProductGallery, { filterImagesForVariant, type GalleryConfig } from "./ProductGallery";
 import ProductPrice from "./ProductPrice";
 import ProductShipping from "./ProductShipping";
 import ProductTitle from "./ProductTitle";
-import ProductVariantSelector, {
-  type VariantSelectorConfig,
-} from "./ProductVariantSelector";
+import ProductVariantSelector, { type VariantSelectorConfig } from "./ProductVariantSelector";
 
 export interface HeroCopyConfig extends ActionsCopyConfig {
   /**
@@ -55,15 +48,12 @@ export default function ProductHero({
   const { price = 0, listPrice, availability } = useOffer(offers);
   const isInStock = availability === "https://schema.org/InStock";
 
-  const percent = listPrice && price
-    ? Math.round(((listPrice - price) / listPrice) * 100)
-    : 0;
+  const percent = listPrice && price ? Math.round(((listPrice - price) / listPrice) * 100) : 0;
 
-  const hasValidVariants = isVariantOf?.hasVariant?.some(
-    (v) =>
-      v?.name?.toLowerCase() !== "title" &&
-      v?.name?.toLowerCase() !== "default title",
-  ) ?? false;
+  const hasValidVariants =
+    isVariantOf?.hasVariant?.some(
+      (v) => v?.name?.toLowerCase() !== "title" && v?.name?.toLowerCase() !== "default title",
+    ) ?? false;
 
   const analyticsBreadcrumb = {
     ...breadcrumbList,
@@ -92,25 +82,18 @@ export default function ProductHero({
 
   // Filter against the variant name (e.g. "Tote Bag — Yellow"), not the
   // parent family name in `title` — otherwise no per-variant filtering happens.
-  const images = filterImagesForVariant(
-    isVariantOf?.image ?? product.image ?? [],
-    product.name,
-  );
+  const images = filterImagesForVariant(isVariantOf?.image ?? product.image ?? [], product.name);
 
   return (
     <div
       {...viewItemEvent}
-      className={clx(
-        "container grid",
-        "grid-cols-1 gap-2 py-0",
-        "sm:grid-cols-5 sm:gap-6",
-      )}
+      className={clx("container grid", "grid-cols-1 gap-2 py-0", "sm:grid-cols-5 sm:gap-6")}
     >
       <div className="sm:col-span-3">
         <ProductGallery images={images} config={galleryConfig} />
       </div>
 
-      <div className="sm:col-span-2 flex flex-col">
+      <div className="flex flex-col sm:col-span-2">
         <ProductDiscountBadge
           percent={percent}
           config={discountBadgeConfig}
@@ -126,10 +109,7 @@ export default function ProductHero({
 
         {hasValidVariants ? (
           <div className="mt-4 sm:mt-8">
-            <ProductVariantSelector
-              product={product}
-              config={variantSelectorConfig}
-            />
+            <ProductVariantSelector product={product} config={variantSelectorConfig} />
           </div>
         ) : null}
 
@@ -142,10 +122,7 @@ export default function ProductHero({
 
         <ProductShipping />
 
-        <ProductDescription
-          html={description}
-          label={copy?.descriptionLabel}
-        />
+        <ProductDescription html={description} label={copy?.descriptionLabel} />
       </div>
     </div>
   );

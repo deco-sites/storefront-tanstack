@@ -3,19 +3,13 @@ export interface Props {
   label?: string;
 }
 
-export default function ProductDescription({
-  html,
-  label = "Description",
-}: Props) {
+export default function ProductDescription({ html, label = "Description" }: Props) {
   if (!html) return null;
   return (
-    <div className="mt-4 sm:mt-6 text-sm">
+    <div className="mt-4 text-sm sm:mt-6">
       <details>
         <summary className="cursor-pointer">{label}</summary>
-        <div
-          className="ml-2 mt-2"
-          dangerouslySetInnerHTML={{ __html: html }}
-        />
+        <div className="mt-2 ml-2" dangerouslySetInnerHTML={{ __html: html }} />
       </details>
     </div>
   );

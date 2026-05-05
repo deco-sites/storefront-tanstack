@@ -17,22 +17,22 @@ function QuantityStepper({ item }: { item: CartItem }) {
   const set = (quantity: number) =>
     update.mutate({ lineId: item.lineId, quantity: Math.max(1, quantity) });
   return (
-    <div className="join border border-base-200 rounded">
+    <div className="join rounded border border-base-200">
       <button
         type="button"
-        className="join-item btn btn-ghost btn-sm no-animation"
+        className="no-animation btn join-item btn-ghost btn-sm"
         aria-label="Decrease quantity"
         disabled={pending || item.quantity <= 1}
         onClick={() => set(item.quantity - 1)}
       >
         -
       </button>
-      <span className="join-item px-3 self-center text-sm min-w-[2ch] text-center">
+      <span className="join-item min-w-[2ch] self-center px-3 text-center text-sm">
         {item.quantity}
       </span>
       <button
         type="button"
-        className="join-item btn btn-ghost btn-sm no-animation"
+        className="no-animation btn join-item btn-ghost btn-sm"
         aria-label="Increase quantity"
         disabled={pending}
         onClick={() => set(item.quantity + 1)}
@@ -49,13 +49,13 @@ function CartLine({ item, currency }: { item: CartItem; currency: string }) {
   return (
     <li
       className={clx(
-        "flex gap-3 py-3 border-b border-base-200 last:border-none",
-        removing && "opacity-50 pointer-events-none",
+        "flex gap-3 border-b border-base-200 py-3 last:border-none",
+        removing && "pointer-events-none opacity-50",
       )}
     >
       {item.image ? (
         <Image
-          className="rounded border border-base-200 w-16 h-16 object-cover"
+          className="h-16 w-16 rounded border border-base-200 object-cover"
           src={item.image.url}
           alt={item.image.alt ?? item.title}
           width={64}
@@ -63,23 +63,21 @@ function CartLine({ item, currency }: { item: CartItem; currency: string }) {
           loading="lazy"
         />
       ) : (
-        <div className="w-16 h-16 rounded bg-base-200" aria-hidden="true" />
+        <div className="h-16 w-16 rounded bg-base-200" aria-hidden="true" />
       )}
-      <div className="flex flex-col grow gap-1">
+      <div className="flex grow flex-col gap-1">
         <a
           href={`/${item.productHandle}`}
-          className="text-sm font-medium line-clamp-2 hover:underline"
+          className="line-clamp-2 text-sm font-medium hover:underline"
         >
           {item.title}
         </a>
-        <div className="text-sm text-base-400">
-          {formatPrice(item.price.amount, currency)}
-        </div>
-        <div className="flex items-center justify-between mt-1">
+        <div className="text-base-400 text-sm">{formatPrice(item.price.amount, currency)}</div>
+        <div className="mt-1 flex items-center justify-between">
           <QuantityStepper item={item} />
           <button
             type="button"
-            className="btn btn-ghost btn-xs no-animation"
+            className="no-animation btn btn-ghost btn-xs"
             aria-label="Remove item"
             disabled={removing}
             onClick={() => remove.mutate({ lineId: item.lineId })}
@@ -94,12 +92,9 @@ function CartLine({ item, currency }: { item: CartItem; currency: string }) {
 
 function EmptyState() {
   return (
-    <div className="flex flex-col gap-6 items-center justify-center grow">
-      <span className="font-medium text-2xl">Your bag is empty</span>
-      <label
-        htmlFor={MINICART_DRAWER_ID}
-        className="btn btn-outline no-animation cursor-pointer"
-      >
+    <div className="flex grow flex-col items-center justify-center gap-6">
+      <span className="text-2xl font-medium">Your bag is empty</span>
+      <label htmlFor={MINICART_DRAWER_ID} className="no-animation btn cursor-pointer btn-outline">
         Choose products
       </label>
     </div>
@@ -109,25 +104,22 @@ function EmptyState() {
 function Footer({ cart }: { cart: CartState }) {
   return (
     <footer className="w-full border-t border-base-200">
-      <div className="px-4 py-4 flex justify-between items-center">
+      <div className="flex items-center justify-between px-4 py-4">
         <span className="text-sm">Subtotal</span>
         <span className="font-medium">
           {formatPrice(cart.subtotal.amount, cart.subtotal.currencyCode)}
         </span>
       </div>
-      <div className="px-4 pb-2 text-xs text-base-400 text-right">
+      <div className="text-base-400 px-4 pb-2 text-right text-xs">
         Fees and shipping calculated at checkout
       </div>
       <div className="p-4">
         {cart.checkoutUrl ? (
-          <a
-            className="btn btn-primary w-full no-animation"
-            href={cart.checkoutUrl}
-          >
+          <a className="no-animation btn w-full btn-primary" href={cart.checkoutUrl}>
             Begin Checkout
           </a>
         ) : (
-          <button type="button" className="btn btn-primary w-full" disabled>
+          <button type="button" className="btn w-full btn-primary" disabled>
             Begin Checkout
           </button>
         )}
@@ -143,16 +135,16 @@ export default function Minicart() {
   return (
     <div
       className={clx(
-        "flex flex-col h-full w-full",
-        isFetching && "transition-opacity duration-150 opacity-80",
+        "flex h-full w-full flex-col",
+        isFetching && "opacity-80 transition-opacity duration-150",
       )}
     >
       <div className="flex items-center justify-between border-b border-base-200 px-4 py-3">
-        <h2 className="font-medium text-xl">Your bag</h2>
+        <h2 className="text-xl font-medium">Your bag</h2>
         <label
           htmlFor={MINICART_DRAWER_ID}
           aria-label="Close cart"
-          className="btn btn-ghost btn-sm no-animation cursor-pointer"
+          className="no-animation btn cursor-pointer btn-ghost btn-sm"
         >
           <Icon id="close" />
         </label>

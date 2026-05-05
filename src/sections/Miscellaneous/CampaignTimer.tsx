@@ -65,20 +65,16 @@ const computeDelta = (target: number): Delta => {
   };
 };
 
-function TimeUnit(
-  { value, label }: { value: number; label?: string },
-) {
+function TimeUnit({ value, label }: { value: number; label?: string }) {
   return (
     <div className="flex flex-col items-center">
-      <span className="countdown font-normal text-xl lg:text-2xl">
+      <span className="countdown text-xl font-normal lg:text-2xl">
         <span
-          className="text-6xl md:text-8xl font-thin text-base-content tracking-[-3px]"
+          className="text-6xl font-thin tracking-[-3px] text-base-content md:text-8xl"
           style={{ "--value": value } as React.CSSProperties}
         />
       </span>
-      <span className="md:text-2xl text-base-content font-thin">
-        {label ?? ""}
-      </span>
+      <span className="font-thin text-base-content md:text-2xl">{label ?? ""}</span>
     </div>
   );
 }
@@ -108,24 +104,22 @@ function CampaignTimer({
 
   return (
     <div>
-      <div className="container mx-auto flex flex-col lg:flex-row lg:items-center lg:justify-center gap-4 py-16 sm:px-10 lg:gap-16">
-        {delta.expired
-          ? (
-            <div
-              className="text-sm text-center lg:text-xl lg:text-left lg:max-w-lg"
-              dangerouslySetInnerHTML={{ __html: text || "Expired!" }}
-            />
-          )
-          : (
-            <div className="flex flex-wrap gap-8 lg:gap-16 items-center justify-center lg:justify-normal">
-              <div className="grid grid-flow-col gap-5 sm:gap-10 md:gap-20 text-center auto-cols-max items-center">
-                <TimeUnit value={delta.days} label={labels?.days} />
-                <TimeUnit value={delta.hours} label={labels?.hours} />
-                <TimeUnit value={delta.minutes} label={labels?.minutes} />
-                <TimeUnit value={delta.seconds} label={labels?.seconds} />
-              </div>
+      <div className="container mx-auto flex flex-col gap-4 py-16 sm:px-10 lg:flex-row lg:items-center lg:justify-center lg:gap-16">
+        {delta.expired ? (
+          <div
+            className="text-center text-sm lg:max-w-lg lg:text-left lg:text-xl"
+            dangerouslySetInnerHTML={{ __html: text || "Expired!" }}
+          />
+        ) : (
+          <div className="flex flex-wrap items-center justify-center gap-8 lg:justify-normal lg:gap-16">
+            <div className="grid auto-cols-max grid-flow-col items-center gap-5 text-center sm:gap-10 md:gap-20">
+              <TimeUnit value={delta.days} label={labels?.days} />
+              <TimeUnit value={delta.hours} label={labels?.hours} />
+              <TimeUnit value={delta.minutes} label={labels?.minutes} />
+              <TimeUnit value={delta.seconds} label={labels?.seconds} />
             </div>
-          )}
+          </div>
+        )}
       </div>
     </div>
   );

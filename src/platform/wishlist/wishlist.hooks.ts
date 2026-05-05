@@ -7,8 +7,7 @@ export const WISHLIST_QUERY_KEY = ["wishlist"] as const;
 export function useWishlist() {
   const query = useQuery({
     queryKey: WISHLIST_QUERY_KEY,
-    queryFn: (): Promise<WishlistState> =>
-      invoke.site.loaders.wishlist() as Promise<WishlistState>,
+    queryFn: (): Promise<WishlistState> => invoke.site.loaders.wishlist() as Promise<WishlistState>,
     staleTime: 60_000,
     placeholderData: EMPTY_WISHLIST,
   });
@@ -18,8 +17,7 @@ export function useWishlist() {
     isLoading: query.isLoading,
     isFetching: query.isFetching,
     error: query.error,
-    isInWishlist: (productID: string) =>
-      wishlist.productIDs.includes(productID),
+    isInWishlist: (productID: string) => wishlist.productIDs.includes(productID),
   };
 }
 
@@ -35,12 +33,11 @@ export function useToggleWishlist() {
       invoke.site.actions.wishlist.submit(input) as Promise<WishlistState>,
     onMutate: async (input) => {
       await qc.cancelQueries({ queryKey: WISHLIST_QUERY_KEY });
-      const prev = qc.getQueryData<WishlistState>(WISHLIST_QUERY_KEY) ??
-        EMPTY_WISHLIST;
+      const prev = qc.getQueryData<WishlistState>(WISHLIST_QUERY_KEY) ?? EMPTY_WISHLIST;
       const next: WishlistState = prev.productIDs.includes(input.productID)
         ? {
-          productIDs: prev.productIDs.filter((id) => id !== input.productID),
-        }
+            productIDs: prev.productIDs.filter((id) => id !== input.productID),
+          }
         : { productIDs: [...prev.productIDs, input.productID] };
       qc.setQueryData(WISHLIST_QUERY_KEY, next);
       return { prev };

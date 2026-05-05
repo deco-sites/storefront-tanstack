@@ -8,10 +8,7 @@ import type { OrderForm, OrderFormItem } from "@decocms/apps/vtex/types";
 
 export type { OrderForm, OrderFormItem };
 
-export function itemToAnalyticsItem(
-  item: OrderFormItem & { coupon?: string },
-  index: number,
-) {
+export function itemToAnalyticsItem(item: OrderFormItem & { coupon?: string }, index: number) {
   return {
     item_id: item.productId,
     item_group_id: item.productId,
@@ -19,9 +16,7 @@ export function itemToAnalyticsItem(
     item_variant: item.skuName,
     item_brand: item.additionalInfo?.brandName ?? "",
     price: (item.sellingPrice ?? item.price ?? 0) / 100,
-    discount: Number(
-      ((item.listPrice - item.sellingPrice) / 100).toFixed(2),
-    ),
+    discount: Number(((item.listPrice - item.sellingPrice) / 100).toFixed(2)),
     quantity: item.quantity,
     coupon: item.coupon,
     affiliation: item.seller,

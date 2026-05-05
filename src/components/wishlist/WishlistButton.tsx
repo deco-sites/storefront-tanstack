@@ -21,8 +21,7 @@ function WishlistButton({ item, variant = "full" }: Props) {
   const navigate = useNavigate();
 
   const inWishlist = isInWishlist(productID);
-  const pending = toggle.isPending &&
-    toggle.variables?.productID === productID;
+  const pending = toggle.isPending && toggle.variables?.productID === productID;
 
   const addToWishlistEvent = useSendEvent({
     on: "click",
@@ -47,24 +46,20 @@ function WishlistButton({ item, variant = "full" }: Props) {
       onClick={handleClick}
       {...addToWishlistEvent}
       className={clx(
-        "btn no-animation",
-        variant === "icon"
-          ? "btn-circle btn-ghost btn-sm"
-          : "btn-primary btn-outline gap-2 w-full",
+        "no-animation btn",
+        variant === "icon" ? "btn-circle btn-ghost btn-sm" : "w-full gap-2 btn-outline btn-primary",
       )}
     >
-      {pending
-        ? <span className="loading loading-spinner" />
-        : (
-          <>
-            <Icon id="favorite" fill={inWishlist ? "black" : "none"} />
-            {variant === "full" && (
-              <span>
-                {inWishlist ? "Remove from wishlist" : "Add to wishlist"}
-              </span>
-            )}
-          </>
-        )}
+      {pending ? (
+        <span className="loading loading-spinner" />
+      ) : (
+        <>
+          <Icon id="favorite" fill={inWishlist ? "black" : "none"} />
+          {variant === "full" && (
+            <span>{inWishlist ? "Remove from wishlist" : "Add to wishlist"}</span>
+          )}
+        </>
+      )}
     </button>
   );
 }

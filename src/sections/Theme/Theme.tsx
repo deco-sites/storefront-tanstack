@@ -11,10 +11,6 @@ import { clx } from "~/sdk/clx";
 // useSetEarlyHints was a Deco Fresh-only hook; edge hints are now set via cacheHeaders.
 const useSetEarlyHints = () => (_hint: string) => {};
 
-// Fresh's `_app.tsx` exported a revision string used for cache busting.
-// TanStack Start handles asset hashing via Vite, so we keep a stable fallback.
-const revision = "1";
-
 export interface ThemeColors {
   /**
    * @format color-input
@@ -22,23 +18,23 @@ export interface ThemeColors {
    */
   "base-100"?: string;
   /** @format color-input */
-  "primary"?: string;
+  primary?: string;
   /** @format color-input */
-  "secondary"?: string;
+  secondary?: string;
   /**
    * @title Accent
    * @format color-input */
-  "tertiary"?: string;
+  tertiary?: string;
   /** @format color-input */
-  "neutral"?: string;
+  neutral?: string;
   /** @format color-input */
-  "success"?: string;
+  success?: string;
   /** @format color-input */
-  "warning"?: string;
+  warning?: string;
   /** @format color-input */
-  "error"?: string;
+  error?: string;
   /** @format color-input */
-  "info"?: string;
+  info?: string;
 }
 
 export interface ComplementaryColors {
@@ -146,17 +142,11 @@ export interface Props {
   mode?: "dark" | "light";
 }
 
-type Theme =
-  & ThemeColors
-  & ComplementaryColors
-  & Button
-  & Miscellaneous;
+type Theme = ThemeColors & ComplementaryColors & Button & Miscellaneous;
 
-const darken = (color: string, percentage: number) =>
-  new Color(color).darken(percentage);
+const darken = (color: string, percentage: number) => new Color(color).darken(percentage);
 
-const isDark = (c: Color) =>
-  c.contrast("black", "WCAG21") < c.contrast("white", "WCAG21");
+const isDark = (c: Color) => c.contrast("black", "WCAG21") < c.contrast("white", "WCAG21");
 
 const contrasted = (color: string, percentage = 0.8) => {
   const c = new Color(color);
@@ -164,9 +154,7 @@ const contrasted = (color: string, percentage = 0.8) => {
   return isDark(c) ? c.mix("white", percentage) : c.mix("black", percentage);
 };
 
-const toVariables = (
-  t: Theme & Required<ThemeColors>,
-): [string, string][] => {
+const toVariables = (t: Theme & Required<ThemeColors>): [string, string][] => {
   const toValue = (color: string | ReturnType<typeof darken>) => {
     const [l, c, h] = new Color(color).oklch;
 
@@ -220,15 +208,15 @@ const toVariables = (
 };
 
 const defaultTheme = {
-  "primary": "oklch(1 0 0)",
-  "secondary": "oklch(1 0 0)",
-  "tertiary": "oklch(1 0 0)",
-  "neutral": "oklch(1 0 0)",
+  primary: "oklch(1 0 0)",
+  secondary: "oklch(1 0 0)",
+  tertiary: "oklch(1 0 0)",
+  neutral: "oklch(1 0 0)",
   "base-100": "oklch(1 0 0)",
-  "info": "oklch(1 0 0)",
-  "success": "oklch(0.9054 0.1546 194.7689)",
-  "warning": "oklch(1 0 0)",
-  "error": "oklch(1 0 0)",
+  info: "oklch(1 0 0)",
+  success: "oklch(0.9054 0.1546 194.7689)",
+  warning: "oklch(1 0 0)",
+  error: "oklch(1 0 0)",
 
   "--rounded-box": "1rem", // border radius rounded-box utility class, used in card and other large boxes
   "--rounded-btn": "0.2rem" as const, // border radius rounded-btn utility class, used in buttons and similar element
@@ -274,10 +262,9 @@ function Section({
     [
       "--font-family",
       font?.family ||
-      "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif",
+        "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif",
     ],
-  ]
-    .map(([name, value]) => ({ name, value }));
+  ].map(([name, value]) => ({ name, value }));
 
   return (
     <SiteTheme
@@ -292,12 +279,10 @@ export function Preview(props: Props) {
   const adminColorMode = props.mode === "dark" ? "dark" : "light";
   return (
     <>
-      {
-        /* This stylesheet is used to simulate the colors from the admin's color schema (admin's light or dark mode), which are not accessible in the site's color schema.
-        * This is a temporary solution until the admin's color schema is accessible.
-        * TODO(@carol): Change this temporary solution.
-       */
-      }
+      {/* This stylesheet is used to simulate the colors from the admin's color schema (admin's light or dark mode), which are not accessible in the site's color schema.
+       * This is a temporary solution until the admin's color schema is accessible.
+       * TODO(@carol): Change this temporary solution.
+       */}
       <style>
         {`
           :root {
@@ -373,9 +358,9 @@ export function Preview(props: Props) {
         `}
       </style>
       <Section {...props} />
-      <div className={`flex flex-col gap-4 text-base w-full ${adminColorMode}`}>
+      <div className={`flex w-full flex-col gap-4 text-base ${adminColorMode}`}>
         <div>Components and styles</div>
-        <div className="flex flex-col w-full gap-2">
+        <div className="flex w-full flex-col gap-2">
           <PreviewContainer
             title="Text colors"
             mode={adminColorMode}
@@ -406,11 +391,7 @@ export function Preview(props: Props) {
           </PreviewContainer>
         </div>
       </div>
-      {props.font?.family && (
-        <div className="text-center py-2">
-          Font: {props.font.family}
-        </div>
-      )}
+      {props.font?.family && <div className="py-2 text-center">Font: {props.font.family}</div>}
     </>
   );
 }
@@ -426,13 +407,11 @@ const ButtonSizesPreview = () => {
   const buttonStyles = ["", "primary", "secondary", "accent"];
 
   const renderButtonRow = (style: string) => (
-    <div className="flex flex-row gap-2 items-center">
+    <div className="flex flex-row items-center gap-2">
       {Object.entries(buttonSizes).map(([sizeCode, sizeText]) => (
         <button
           type="button"
-          className={`btn capitalize btn-${sizeCode} ${
-            style ? `btn-${style}` : ""
-          }`}
+          className={`btn capitalize btn-${sizeCode} ${style ? `btn-${style}` : ""}`}
         >
           {sizeText}
         </button>
@@ -441,7 +420,7 @@ const ButtonSizesPreview = () => {
   );
 
   return (
-    <div className="bg-base-100 overflow-x-auto rounded-lg flex flex-col p-2 gap-2">
+    <div className="flex flex-col gap-2 overflow-x-auto rounded-lg bg-base-100 p-2">
       {buttonStyles.map((style) => renderButtonRow(style))}
     </div>
   );
@@ -449,20 +428,12 @@ const ButtonSizesPreview = () => {
 
 const ButtonColorsPreview = () => {
   const buttonTypesClasses = ["btn", "btn-outline", "btn-ghost", "btn-link"];
-  const buttonColorsClasses = [
-    "",
-    "btn-primary",
-    "btn-secondary",
-    "btn-accent",
-  ];
+  const buttonColorsClasses = ["", "btn-primary", "btn-secondary", "btn-accent"];
 
   const renderButtonRow = (type: string) => (
     <div className="flex flex-row gap-2">
       {buttonColorsClasses.map((color) => (
-        <button
-          type="button"
-          className={`btn btn-xs md:btn-sm capitalize ${color} ${type}`}
-        >
+        <button type="button" className={`btn capitalize btn-xs md:btn-sm ${color} ${type}`}>
           {color ? color.split("-")[1] : "Button"}
         </button>
       ))}
@@ -470,7 +441,7 @@ const ButtonColorsPreview = () => {
   );
 
   return (
-    <div className="bg-base-100 overflow-x-auto rounded-lg flex flex-col p-2 gap-2">
+    <div className="flex flex-col gap-2 overflow-x-auto rounded-lg bg-base-100 p-2">
       {buttonTypesClasses.map((type) => renderButtonRow(type))}
     </div>
   );
@@ -480,12 +451,9 @@ const ButtonStylesPreview = () => {
   const buttonStylesClasses = ["", "btn-outline", "btn-ghost", "btn-link"];
 
   return (
-    <div className="bg-base-100 overflow-x-auto rounded-lg flex flex-row p-2 gap-2">
+    <div className="flex flex-row gap-2 overflow-x-auto rounded-lg bg-base-100 p-2">
       {buttonStylesClasses.map((style) => (
-        <button
-          type="button"
-          className={`btn btn-xs md:btn-sm capitalize ${style}`}
-        >
+        <button type="button" className={`btn capitalize btn-xs md:btn-sm ${style}`}>
           {style ? style.split("-")[1] : "Button"}
         </button>
       ))}
@@ -494,38 +462,30 @@ const ButtonStylesPreview = () => {
 };
 
 const TextColorsPreview = () => {
-  const textColorsClasses = [
-    "",
-    "text-primary",
-    "text-secondary",
-    "text-accent",
-  ];
+  const textColorsClasses = ["", "text-primary", "text-secondary", "text-accent"];
 
   return (
-    <div className="bg-base-100 overflow-x-auto rounded-lg flex flex-row p-2 gap-2 text-sm md:text-base">
+    <div className="flex flex-row gap-2 overflow-x-auto rounded-lg bg-base-100 p-2 text-sm md:text-base">
       {textColorsClasses.map((color) => (
-        <div className={`${color} capitalize`}>
-          {color ? color.split("-")[1] : "Content"}
-        </div>
+        <div className={`${color} capitalize`}>{color ? color.split("-")[1] : "Content"}</div>
       ))}
     </div>
   );
 };
 
-const PreviewContainer = (
-  { mode, title, children, codeString }: {
-    mode: string;
-    title: string;
-    children: ReactNode;
-    codeString: string;
-  },
-) => {
-  const borderClass = mode === "dark"
-    ? "border-color-dark"
-    : "border-color-light";
-  const btnOutlineClass = mode === "dark"
-    ? "btn-outline-dark"
-    : "btn-outline-light";
+const PreviewContainer = ({
+  mode,
+  title,
+  children,
+  codeString,
+}: {
+  mode: string;
+  title: string;
+  children: ReactNode;
+  codeString: string;
+}) => {
+  const borderClass = mode === "dark" ? "border-color-dark" : "border-color-light";
+  const btnOutlineClass = mode === "dark" ? "btn-outline-dark" : "btn-outline-light";
   const checkboxId = `show-code-${title.replace(/\s+/g, "-").toLowerCase()}`;
   const codeBlockId = `code-block-${title.replace(/\s+/g, "-").toLowerCase()}`;
 
@@ -545,15 +505,9 @@ const PreviewContainer = (
     }
     #${checkboxId}:checked ~ .hide-label {
       background-color: ${
-    mode === "dark"
-      ? "var(--admin-hover-bg-color)"
-      : "var(--admin-text-color-light)"
-  };
-      color: ${
-    mode === "dark"
-      ? "var(--admin-text-color-light)"
-      : "var(--admin-hover-bg-color)"
-  };
+        mode === "dark" ? "var(--admin-hover-bg-color)" : "var(--admin-text-color-light)"
+      };
+      color: ${mode === "dark" ? "var(--admin-text-color-light)" : "var(--admin-hover-bg-color)"};
     }
   `;
 
@@ -561,11 +515,7 @@ const PreviewContainer = (
     <>
       <style>{dynamicStyle}</style>
       <div
-        className={clx(
-          `border p-4 flex flex-col gap-2 grow relative`,
-          borderClass,
-          `rounded-lg`,
-        )}
+        className={clx(`relative flex grow flex-col gap-2 border p-4`, borderClass, `rounded-lg`)}
       >
         <div>
           <div className="my-1">{title}</div>
@@ -574,22 +524,14 @@ const PreviewContainer = (
             {/* Label for "Show code" */}
             <label
               htmlFor={checkboxId}
-              className={clx(
-                `btn-sm absolute right-4 top-4`,
-                btnOutlineClass,
-                `show-label`,
-              )}
+              className={clx(`absolute top-4 right-4 btn-sm`, btnOutlineClass, `show-label`)}
             >
               Show code
             </label>
             {/* Label for "Hide code" */}
             <label
               htmlFor={checkboxId}
-              className={clx(
-                `btn-sm absolute right-4 top-4`,
-                btnOutlineClass,
-                `hide-label`,
-              )}
+              className={clx(`absolute top-4 right-4 btn-sm`, btnOutlineClass, `hide-label`)}
             >
               Hide code
             </label>
@@ -600,7 +542,7 @@ const PreviewContainer = (
                 mode === "dark" ? "bg-slate-800" : "bg-slate-100",
               )}
             >
-              <pre className="p-4 overflow-x-auto">{codeString}</pre>
+              <pre className="overflow-x-auto p-4">{codeString}</pre>
             </div>
           </div>
         </div>

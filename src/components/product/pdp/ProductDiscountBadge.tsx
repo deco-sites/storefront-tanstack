@@ -51,8 +51,8 @@ export default function ProductDiscountBadge({ percent, config, isLoading }: Pro
   return (
     <span
       className={clx(
-        "text-sm/4 font-normal text-center rounded-badge px-2 py-1 w-fit",
-        !active && "opacity-0 pointer-events-none",
+        "rounded-badge w-fit px-2 py-1 text-center text-sm/4 font-normal",
+        !active && "pointer-events-none opacity-0",
       )}
       style={{ color: merged.textColor, backgroundColor: merged.backgroundColor }}
       aria-hidden={!active}

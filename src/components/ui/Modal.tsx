@@ -20,15 +20,12 @@ function Modal({ children, open, id }: Props) {
 
   return (
     <>
-      <input
-        id={toggleId}
-        defaultChecked={open}
-        type="checkbox"
-        className="modal-toggle"
-      />
+      <input id={toggleId} defaultChecked={open} type="checkbox" className="modal-toggle" />
       <div className="modal">
         {children}
-        <label className="modal-backdrop" htmlFor={toggleId}>Close</label>
+        <label className="modal-backdrop" htmlFor={toggleId}>
+          Close
+        </label>
       </div>
     </>
   );

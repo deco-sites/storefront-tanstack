@@ -22,7 +22,7 @@ export function asResolved<T>(value: T): T {
   return value;
 }
 
-export function isDeferred(value: unknown): boolean {
+export function isDeferred(_value: unknown): boolean {
   return false;
 }
 

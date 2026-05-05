@@ -8,7 +8,7 @@ export default function PoweredByDeco() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Powered by deco.cx"
-      className="inline-flex items-center gap-2 text-sm text-base-400 hover:text-base-600 transition-colors"
+      className="text-base-400 hover:text-base-600 inline-flex items-center gap-2 text-sm transition-colors"
     >
       <span>Powered by</span>
       <span className="font-semibold">deco.cx</span>
