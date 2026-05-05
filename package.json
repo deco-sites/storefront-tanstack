@@ -20,6 +20,7 @@
     "format": "prettier --write \"src/**/*.{ts,tsx}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx}\"",
     "knip": "knip",
+    "knip:fix": "knip --fix",
     "clean": "rm -rf node_modules .cache dist .wrangler/state node_modules/.vite && npm install",
     "tailwind:lint": "tsx scripts/tailwind-lint.ts",
     "tailwind:fix": "tsx scripts/tailwind-lint.ts --fix"

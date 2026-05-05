@@ -119,7 +119,7 @@ Open `http://localhost:5173`.
 | `npm run deploy` | `npm run build` then `wrangler deploy` |
 | `npm run typecheck` | `tsc --noEmit` |
 | `npm run format` / `format:check` | Prettier on `src/**/*.{ts,tsx}` |
-| `npm run knip` | Find unused exports/files |
+| `npm run knip` / `knip:fix` | Find / auto-fix unused exports and files |
 | `npm run tailwind:lint` / `tailwind:fix` | Lint/auto-fix Tailwind class usage |
 | `npm run generate:*` | Re-run a single codegen step (blocks, schema, sections, loaders, routes, invoke) |
 
@@ -192,6 +192,15 @@ Override per-route in `src/cache-config.ts`.
 ## Deployment
 
 Cloudflare Workers via Wrangler. Configuration is in `wrangler.jsonc` (entry: `src/worker-entry.ts`).
+
+Two GitHub Actions workflows handle CI/CD automatically (see [`.github/workflows/README.md`](./.github/workflows/README.md)):
+
+- **`preview.yml`** — on every PR, uploads a versioned preview via `wrangler versions upload --preview-alias` and posts the URL as a sticky comment. Skips gracefully if Cloudflare secrets aren't configured.
+- **`deploy.yml`** — on push to `main`, runs `wrangler deploy` with `BUILD_HASH` injected.
+
+Required repo secrets: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`.
+
+To deploy manually from your machine:
 
 ```sh
 npm run deploy
