@@ -4,37 +4,37 @@
 // Pass-through loader/action entries for COMMERCE_LOADERS.
 // Custom-wired entries should be excluded via --exclude and added manually in setup.ts.
 
-export const siteLoaders: Record<string, (props: any) => Promise<any>> = {
-  "site/actions/shipping/simulate": async (props: any) => {
+export const siteLoaders: Record<string, (props: any, request?: Request) => Promise<any>> = {
+  "site/actions/shipping/simulate": async (props: any, request?: Request) => {
     const mod = await import("../../actions/shipping/simulate");
-    return mod.default(props);
+    return (mod.default as any)(props, request);
   },
-  "site/actions/shipping/simulate.ts": async (props: any) => {
+  "site/actions/shipping/simulate.ts": async (props: any, request?: Request) => {
     const mod = await import("../../actions/shipping/simulate");
-    return mod.default(props);
+    return (mod.default as any)(props, request);
   },
-  "site/actions/wishlist/submit": async (props: any) => {
+  "site/actions/wishlist/submit": async (props: any, request?: Request) => {
     const mod = await import("../../actions/wishlist/submit");
-    return mod.default(props);
+    return (mod.default as any)(props, request);
   },
-  "site/actions/wishlist/submit.ts": async (props: any) => {
+  "site/actions/wishlist/submit.ts": async (props: any, request?: Request) => {
     const mod = await import("../../actions/wishlist/submit");
-    return mod.default(props);
+    return (mod.default as any)(props, request);
   },
-  "site/loaders/user": async (props: any) => {
+  "site/loaders/user": async (props: any, request?: Request) => {
     const mod = await import("../../loaders/user");
-    return mod.default(props);
+    return (mod.default as any)(props, request);
   },
-  "site/loaders/user.ts": async (props: any) => {
+  "site/loaders/user.ts": async (props: any, request?: Request) => {
     const mod = await import("../../loaders/user");
-    return mod.default(props);
+    return (mod.default as any)(props, request);
   },
-  "site/loaders/wishlist": async (props: any) => {
+  "site/loaders/wishlist": async (props: any, request?: Request) => {
     const mod = await import("../../loaders/wishlist");
-    return mod.default(props);
+    return (mod.default as any)(props, request);
   },
-  "site/loaders/wishlist.ts": async (props: any) => {
+  "site/loaders/wishlist.ts": async (props: any, request?: Request) => {
     const mod = await import("../../loaders/wishlist");
-    return mod.default(props);
+    return (mod.default as any)(props, request);
   },
 };

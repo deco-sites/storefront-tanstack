@@ -1776,10 +1776,10 @@
               "position": {
                 "type": "string",
                 "enum": [
-                  "Expanded",
                   "Left",
                   "Center",
-                  "Right"
+                  "Right",
+                  "Expanded"
                 ],
                 "nullable": true,
                 "title": "Banner position",
