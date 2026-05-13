@@ -4,13 +4,16 @@ import { routeTree } from "./routeTree.gen";
 import "./setup";
 
 const queryClient = new QueryClient({
-  defaultOptions: { queries: { staleTime: 30_000 } },
+  defaultOptions: { queries: { staleTime: 60_000 } },
 });
 
 export function getRouter() {
   return createDecoRouter({
     routeTree,
     context: { queryClient },
+    defaultPreload: "intent",
+    defaultPreloadStaleTime: 60_000,
+    defaultPreloadGcTime: 5 * 60_000,
     Wrap: ({ children }) => (
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     ),
