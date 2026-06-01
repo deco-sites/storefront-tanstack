@@ -28,6 +28,7 @@ import { PreviewProviders } from "@decocms/start/hooks";
 import appCss from "./styles/app.css?url";
 
 import "./setup/section-loaders";
+import { registerLocationMatcher } from "./matchers/location";
 
 // -- Framework setup --
 createSiteSetup({
@@ -50,6 +51,13 @@ createSiteSetup({
     return null;
   },
 });
+
+// PREVIEW BRANCH ONLY — register a local copy of the location matcher
+// that mirrors decocms/deco-start#209. Must run AFTER createSiteSetup so
+// that registerBuiltinMatchers (called inside createSiteSetup) doesn't
+// clobber our override. Delete this once we bump @decocms/start to the
+// release with the fix.
+registerLocationMatcher();
 
 // -- Shopify wiring --
 setShopifyFetch(createInstrumentedFetch("shopify"));
