@@ -33,6 +33,12 @@ const CSP_DIRECTIVES = [
   // TODO: Add site-specific domains (analytics, CDN, tag managers)
 ];
 
+// PREVIEW BRANCH ONLY: ?region= query string lets QA/admin force a region
+// from a single IP. Wrapped around decoWorker via the default export below.
+// Delete the wrapper + this block when merging the preview-only branch into
+// production storefronts.
+const PREVIEW_REGION_OVERRIDE = true;
+
 const decoWorker = createDecoWorkerEntry(serverEntry, {
   admin: {
     handleMeta,
@@ -71,4 +77,18 @@ const decoWorker = createDecoWorkerEntry(serverEntry, {
   // proxyHandler unset keeps all routes going through TanStack Start.
 });
 
-export default decoWorker;
+export default PREVIEW_REGION_OVERRIDE
+  ? {
+      async fetch(request: Request, env: unknown, ctx: unknown): Promise<Response> {
+        const url = new URL(request.url);
+        const overrideRegion = url.searchParams.get("region");
+        if (overrideRegion) {
+          const headers = new Headers(request.headers);
+          headers.set("cf-region-code", overrideRegion);
+          headers.set("cf-ipcountry", "BR");
+          request = new Request(request, { headers });
+        }
+        return decoWorker.fetch(request, env as never, ctx as never);
+      },
+    }
+  : decoWorker;
