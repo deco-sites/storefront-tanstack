@@ -64,7 +64,7 @@
   //   OTel spans                      → CF Destinations   (1% sampled)
   //   OTel metrics                    → direct-POST       (100%, buffered)
   "vars": {
-    "DECO_SITE_NAME": "YOUR_SITE_NAME",
+    "DECO_SITE_NAME": "storefront",
     "DECO_ENV_NAME": "production",
     "DECO_OTEL_METRICS_ENDPOINT": "https://deco-otel-ingest.deco-cx.workers.dev/v1/metrics",
     "DECO_OTEL_LOGS_ENDPOINT": "https://deco-otel-ingest.deco-cx.workers.dev/v1/logs"
