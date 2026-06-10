@@ -9,10 +9,101 @@
   // "kv_namespaces": [
   //   { "binding": "SITES_KV", "id": "YOUR_KV_NAMESPACE_ID" }
   // ],
+  // Strategy B tail worker — 100% capture of producer errors that the
+  // framework's direct-POST channel can't see (uncaught throws, exceededCpu,
+  // exceededMemory, raw console.error). Invoked by CF on every request to
+  // this worker; filters and forwards to deco-otel-ingest via in-account
+  // service binding. See the observability block below for the full
+  // three-channel model.
+  "tail_consumers": [
+    { "service": "deco-otel-tail" }
+  ],
+  // Worker version (build SHA / deployment id) — surfaced as
+  // `service.version` on every span / log line by `instrumentWorker`.
+  "version_metadata": {
+    "binding": "CF_VERSION_METADATA"
+  },
+  // Cloudflare Analytics Engine dataset for high-cardinality counters
+  // (per-route request counts, cache hit/miss, request duration).
+  // Queryable via SQL from the CF dashboard. Replace YOUR_SITE_NAME with
+  // the actual site slug (must match DECO_SITE_NAME below).
+  // "analytics_engine_datasets": [
+  //   {
+  //     "binding": "DECO_METRICS",
+  //     "dataset": "deco_metrics_YOUR_SITE_NAME"
+  //   }
+  // ],
+  // Observability — three-channel model (Strategy B, see decocms/deco-start D-8).
+  //
+  // Identity:
+  //   `DECO_SITE_NAME` drives `service.name` on every span and log line.
+  //   `DECO_ENV_NAME`  drives `deployment.environment`.
+  //
+  // Three channels, each owning a different slice of the observability cube:
+  //
+  //   1. CF Destinations (`observability.{logs,traces}.destinations` below)
+  //      Sampled 1% logs + 1% traces. Bulk volume.
+  //   2. Direct-POST in-worker (`DECO_OTEL_*_ENDPOINT`, resolved at
+  //      `instrumentWorker` boot)
+  //        - METRICS_ENDPOINT → direct POST `/v1/metrics` (CF Destinations
+  //          doesn't support OTLP metrics). Buffered per-isolate, flushed
+  //          via `ctx.waitUntil` after every request.
+  //        - LOGS_ENDPOINT    → direct POST `/v1/logs` for framework
+  //          `logger.error(...)` only (100% capture, rate-limited).
+  //   3. Tail Worker (`tail_consumers` above → deco-otel-tail)
+  //      Catches uncaught throws, exceededCpu/Memory, raw console.error —
+  //      what direct-POST can't see and CF Destinations would sample away.
+  //
+  // Coverage matrix:
+  //   framework logger.error          → direct-POST       (100%, rate-limited)
+  //   framework span errors           → CF Destinations + tail (1% sampled + 100%)
+  //   uncaught throws                 → tail worker       (100%)
+  //   exceededCpu / exceededMemory    → tail worker       (100%)
+  //   raw console.error               → tail worker       (100%)
+  //   console.log / console.warn      → CF Destinations   (1% sampled)
+  //   OTel spans                      → CF Destinations   (1% sampled)
+  //   OTel metrics                    → direct-POST       (100%, buffered)
+  "vars": {
+    "DECO_SITE_NAME": "YOUR_SITE_NAME",
+    "DECO_ENV_NAME": "production",
+    "DECO_OTEL_METRICS_ENDPOINT": "https://deco-otel-ingest.deco-cx.workers.dev/v1/metrics",
+    "DECO_OTEL_LOGS_ENDPOINT": "https://deco-otel-ingest.deco-cx.workers.dev/v1/logs"
+  },
+  // CF-native observability: structured console.* output and auto-
+  // instrumented traces (fetch/KV/R2/DO subrequests + @opentelemetry/api
+  // global-tracer spans the framework's withTracing() emits) are
+  // captured by the Cloudflare runtime, retained in the CF dashboard
+  // via persist:true, AND forwarded to deco-otel-ingest →
+  // stats-lake ClickHouse via the named destinations below.
+  //
+  // The named destinations are registered out-of-band in the CF
+  // dashboard (Workers & Pages → Observability → Destinations) against
+  // the deco-cx account. Wrangler resolves these names to the URLs +
+  // any auth headers configured there.
   "observability": {
+    // Master switch — without enabled:true at the top level CF
+    // captures nothing, regardless of the sub-block flags.
+    "enabled": true,
     "logs": {
       "enabled": true,
-      "invocation_logs": true
+      "invocation_logs": true,
+      // 1% of info/warn logs forward to deco-otel-ingest. Errors are
+      // NOT subject to this rate — they're covered by both the
+      // direct-POST channel (framework logger.error) and the tail
+      // worker (uncaught throws, exceededCpu, raw console.error).
+      "head_sampling_rate": 0.01,
+      "persist": true,
+      "destinations": ["deco-otel-ingest-logs"]
+    },
+    "traces": {
+      "enabled": true,
+      // Fleet-scale cost discipline — see `@decocms/start`
+      // docs/observability.md "Sampling" section. 1% gives 2.5x
+      // headroom against the 5B-events/day CF cap at projected
+      // fleet traffic.
+      "head_sampling_rate": 0.01,
+      "persist": true,
+      "destinations": ["deco-otel-ingest-traces"]
     }
   }
 }
