@@ -1,5 +1,6 @@
 {
   "name": "storefront-tanstack-template",
+  "account_id": "c95fc4cec7fc52453228d9db170c372c",
   "compatibility_date": "2026-02-14",
   "compatibility_flags": ["nodejs_compat", "no_handle_cross_request_promise_resolution"],
   "main": "./src/worker-entry.ts",
