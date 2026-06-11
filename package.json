@@ -29,7 +29,7 @@
   "author": "deco.cx",
   "license": "MIT",
   "dependencies": {
-    "@decocms/apps": "^4.1.0",
+    "@decocms/apps": "^5.0.0",
     "@decocms/start": "6.6.1",
     "@tanstack/react-query": "5.90.21",
     "@tanstack/react-router": "1.166.7",
