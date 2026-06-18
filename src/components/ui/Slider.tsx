@@ -122,8 +122,10 @@ function useSlider(
           const dot = dots?.item(index);
           if (entry.isIntersecting) {
             dot?.setAttribute("disabled", "");
+            dot?.setAttribute("aria-current", "true");
           } else {
             dot?.removeAttribute("disabled");
+            dot?.removeAttribute("aria-current");
           }
           if (!infinite) {
             if (index === 0) {
@@ -155,11 +157,52 @@ function useSlider(
     prev?.addEventListener("click", onClickPrev);
     next?.addEventListener("click", onClickNext);
 
-    const timer = interval ? setInterval(() => onClickNext(), interval) : null;
+    // Keyboard navigation: arrow keys move between slides when focus is within
+    // the carousel (e.g. on a dot or arrow button).
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "ArrowRight") {
+        e.preventDefault();
+        onClickNext();
+      } else if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        onClickPrev(e);
+      }
+    };
+    root.addEventListener("keydown", onKeyDown);
+
+    // Autoplay that pauses on hover/focus and when the tab is hidden, so it
+    // never advances while the user is reading or interacting.
+    let timer: ReturnType<typeof setInterval> | null = null;
+    const startTimer = () => {
+      if (interval && !timer) timer = setInterval(() => onClickNext(), interval);
+    };
+    const stopTimer = () => {
+      if (timer) {
+        clearInterval(timer);
+        timer = null;
+      }
+    };
+    const onVisibility = () => (document.hidden ? stopTimer() : startTimer());
+    if (interval) {
+      startTimer();
+      root.addEventListener("pointerenter", stopTimer);
+      root.addEventListener("pointerleave", startTimer);
+      root.addEventListener("focusin", stopTimer);
+      root.addEventListener("focusout", startTimer);
+      document.addEventListener("visibilitychange", onVisibility);
+    }
 
     return () => {
       observer.disconnect();
-      if (timer) clearInterval(timer);
+      stopTimer();
+      root.removeEventListener("keydown", onKeyDown);
+      if (interval) {
+        root.removeEventListener("pointerenter", stopTimer);
+        root.removeEventListener("pointerleave", startTimer);
+        root.removeEventListener("focusin", stopTimer);
+        root.removeEventListener("focusout", startTimer);
+        document.removeEventListener("visibilitychange", onVisibility);
+      }
       prev?.removeEventListener("click", onClickPrev);
       next?.removeEventListener("click", onClickNext);
       if (dots) {
