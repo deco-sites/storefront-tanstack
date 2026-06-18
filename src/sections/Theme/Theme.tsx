@@ -167,51 +167,60 @@ const contrasted = (color: string, percentage = 0.8) => {
 const toVariables = (
   t: Theme & Required<ThemeColors>,
 ): [string, string][] => {
+  // DaisyUI v5 expects full oklch() values, e.g. "oklch(70% 0.18 250deg)"
   const toValue = (color: string | ReturnType<typeof darken>) => {
     const [l, c, h] = new Color(color).oklch;
 
-    return `${(l * 100).toFixed(0)}% ${c.toFixed(2)} ${(h || 0).toFixed(0)}deg`;
+    return `oklch(${(l * 100).toFixed(0)}% ${c.toFixed(2)} ${(h || 0).toFixed(0)}deg)`;
   };
 
+  // DaisyUI v5 variable names (--color-* prefix instead of the old v4 shorthand)
   const colorVariables = Object.entries({
-    "--p": t["primary"],
-    "--pc": t["primary-content"] ?? contrasted(t["primary"]),
+    "--color-primary": t["primary"],
+    "--color-primary-content": t["primary-content"] ?? contrasted(t["primary"]),
 
-    "--s": t["secondary"],
-    "--sc": t["secondary-content"] ?? contrasted(t["secondary"]),
+    "--color-secondary": t["secondary"],
+    "--color-secondary-content":
+      t["secondary-content"] ?? contrasted(t["secondary"]),
 
-    "--a": t["tertiary"],
-    "--ac": t["tertiary-content"] ?? contrasted(t["tertiary"]),
+    "--color-accent": t["tertiary"],
+    "--color-accent-content":
+      t["tertiary-content"] ?? contrasted(t["tertiary"]),
 
-    "--n": t["neutral"],
-    "--nc": t["neutral-content"] ?? contrasted(t["neutral"]),
+    "--color-neutral": t["neutral"],
+    "--color-neutral-content":
+      t["neutral-content"] ?? contrasted(t["neutral"]),
 
-    "--b1": t["base-100"],
-    "--b2": t["base-200"] ?? darken(t["base-100"], 0.07),
-    "--b3": t["base-300"] ?? darken(t["base-100"], 0.14),
-    "--bc": t["base-content"] ?? contrasted(t["base-100"]),
+    "--color-base-100": t["base-100"],
+    "--color-base-200": t["base-200"] ?? darken(t["base-100"], 0.07),
+    "--color-base-300": t["base-300"] ?? darken(t["base-100"], 0.14),
+    "--color-base-content": t["base-content"] ?? contrasted(t["base-100"]),
 
-    "--su": t["success"],
-    "--suc": t["success-content"] ?? contrasted(t["success"]),
+    "--color-success": t["success"],
+    "--color-success-content":
+      t["success-content"] ?? contrasted(t["success"]),
 
-    "--wa": t["warning"],
-    "--wac": t["warning-content"] ?? contrasted(t["warning"]),
+    "--color-warning": t["warning"],
+    "--color-warning-content":
+      t["warning-content"] ?? contrasted(t["warning"]),
 
-    "--er": t["error"],
-    "--erc": t["error-content"] ?? contrasted(t["error"]),
+    "--color-error": t["error"],
+    "--color-error-content": t["error-content"] ?? contrasted(t["error"]),
 
-    "--in": t["info"],
-    "--inc": t["info-content"] ?? contrasted(t["info"]),
+    "--color-info": t["info"],
+    "--color-info-content": t["info-content"] ?? contrasted(t["info"]),
   }).map(([key, color]) => [key, toValue(color)] as [string, string]);
 
+  // DaisyUI v5 renamed misc variables — map old interface fields to new names
   const miscellaneousVariables = Object.entries({
-    "--rounded-box": t["--rounded-box"],
-    "--rounded-btn": t["--rounded-btn"],
-    "--rounded-badge": t["--rounded-badge"],
+    "--radius-box": t["--rounded-box"],   // was --rounded-box
+    "--radius-field": t["--rounded-btn"], // was --rounded-btn (inputs, selects)
+    "--radius-selector": t["--rounded-badge"], // was --rounded-badge (badges, toggles)
+    "--border": t["--border-btn"],         // was --border-btn
+    // animation/tab vars have no DaisyUI v5 equivalent; keep as custom props
     "--animation-btn": t["--animation-btn"],
     "--animation-input": t["--animation-input"],
     "--btn-focus-scale": t["--btn-focus-scale"],
-    "--border-btn": t["--border-btn"],
     "--tab-border": t["--tab-border"],
     "--tab-radius": t["--tab-radius"],
   });
