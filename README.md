@@ -193,9 +193,9 @@ Override per-route in `src/cache-config.ts`.
 
 Cloudflare Workers via Wrangler. Configuration is in `wrangler.jsonc` (entry: `src/worker-entry.ts`).
 
-Two GitHub Actions workflows handle CI/CD automatically (see [`.github/workflows/README.md`](./.github/workflows/README.md)):
+CI/CD is automatic (see [`.github/workflows/README.md`](./.github/workflows/README.md)):
 
-- **`preview.yml`** — on every PR, uploads a versioned preview via `wrangler versions upload --preview-alias` and posts the URL as a sticky comment. Skips gracefully if Cloudflare secrets aren't configured.
+- **Per-PR previews** — the Cloudflare **Workers Builds** GitHub App builds each PR and posts a sticky comment with the Commit/Branch preview URLs.
 - **`deploy.yml`** — on push to `main`, runs `wrangler deploy` with `BUILD_HASH` injected.
 
 Required repo secrets: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`.

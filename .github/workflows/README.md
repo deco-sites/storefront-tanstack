@@ -1,9 +1,11 @@
 # CI workflows
 
-Two workflows manage Cloudflare Workers deployments for this storefront:
+Cloudflare Workers deployments for this storefront:
 
-- **`preview.yml`** — uploads a versioned preview on every PR (and on pushes to `env/**`)
-- **`deploy.yml`** — deploys to production on every push to `main`
+- **Per-PR previews** — handled by the Cloudflare **Workers Builds** GitHub App
+  (connected on the Cloudflare side). It builds each PR and posts a sticky
+  comment with the Commit/Branch preview URLs. No workflow file is needed.
+- **`deploy.yml`** — deploys to production on every push to `main`.
 
 ## Required secrets
 
@@ -16,28 +18,17 @@ Both workflows need the following GitHub secrets (Settings → Secrets and varia
 
 The worker name is set in `wrangler.jsonc` (currently `storefront-tanstack-template`). Rename it in your fork to avoid colliding with other workers on the same Cloudflare account.
 
-## Preview (`preview.yml`)
+## Preview (Cloudflare Workers Builds)
 
-Triggers:
+Per-PR previews are produced by the Cloudflare **Workers Builds** GitHub App,
+configured on the Cloudflare dashboard (not by a workflow in this repo). On each
+PR it builds the branch and posts a sticky comment with a **Commit Preview URL**
+(immutable, per-commit) and a **Branch Preview URL** (stable per branch). These
+are isolated versions and do not replace the production deployment.
 
-- `pull_request` — opened, synchronize, reopened
-- `push` to branches matching `env/**` (e.g. `env/staging`)
-- `repository_dispatch` with type `preview-deploy` (for external triggers)
-
-What it does:
-
-1. Computes a preview alias:
-   - `env/staging` → `staging`
-   - PR #42 → `pr-42`
-   - any other ref → slug (`[^a-z0-9-]` replaced with `-`)
-2. Runs `npm install && npm run build`
-3. Runs `npx wrangler versions upload --preview-alias <alias>`
-4. Parses the two URLs from wrangler output:
-   - **Version URL** — immutable, unique per upload
-   - **Alias URL** — stable, overwritten on each push for the same alias
-5. Posts a sticky comment on the PR (header `preview-url`) with both URLs
-
-`wrangler versions upload` does **not** replace the production deployment — it creates an isolated version that only traffic hitting the preview URLs reaches. Production is promoted manually via the Cloudflare dashboard or `wrangler versions deploy`.
+> The previous `preview.yml` workflow was removed — it duplicated this and was
+> failing on every PR (`bun: not found`, it never set up Bun). Workers Builds
+> covers preview end to end.
 
 ## Deploy (`deploy.yml`)
 
