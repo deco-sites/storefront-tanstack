@@ -25,7 +25,7 @@ function Header({ title, cta }: Props) {
       <span className="text-2xl sm:text-3xl font-semibold">{title}</span>
       {cta && (
         <a className="text-sm font-medium text-primary" href={cta}>
-          See all
+          stherzada a braba
         </a>
       )}
     </div>

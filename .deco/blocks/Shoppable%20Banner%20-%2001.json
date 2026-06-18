@@ -1,7 +1,7 @@
 {
   "link": {
     "href": "/feminino",
-    "text": "Explore collection",
+    "text": "stherzada a braba",
     "layout": {
       "position": "justify-center"
     }
@@ -9,7 +9,7 @@
   "pins": [
     {
       "link": "/feminino",
-      "label": "Glasses",
+      "label": "stherzada a braba",
       "mobile": {
         "x": 12,
         "y": 59
@@ -21,7 +21,7 @@
     },
     {
       "link": "/feminino",
-      "label": "Bag",
+      "label": "stherzada a braba",
       "mobile": {
         "x": 30,
         "y": 30
@@ -36,7 +36,7 @@
     "layout": {
       "position": "text-center"
     },
-    "content": "Your description"
+    "content": "stherzada a braba"
   },
   "image": {
     "mobile": "https://assets.decocache.com/storefront/85e56dd9-b55e-4753-a803-f7d33f027ebf/1742560262273-23be366c-fa07-4520-9338-387ce77acabb",
@@ -47,7 +47,7 @@
     "layout": {
       "position": "justify-center"
     },
-    "content": "Awesome collection "
+    "content": "stherzada a braba"
   },
   "__resolveType": "site/sections/Images/ShoppableBanner.tsx"
 }

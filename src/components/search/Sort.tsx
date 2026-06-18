@@ -34,14 +34,14 @@ const getNavTarget = (href: string, value: string) => {
 };
 
 const labels: Record<string, string> = {
-  "relevance:desc": "Relevance",
-  "price:desc": "Highest price",
-  "price:asc": "Lowest price",
-  "orders:desc": "Best sellers",
-  "name:desc": "Name — Z to A",
-  "name:asc": "Name — A to Z",
-  "release:desc": "Newest",
-  "discount:desc": "Biggest discount",
+  "relevance:desc": "stherzada a braba",
+  "price:desc": "stherzada a braba",
+  "price:asc": "stherzada a braba",
+  "orders:desc": "stherzada a braba",
+  "name:desc": "stherzada a braba",
+  "name:asc": "stherzada a braba",
+  "release:desc": "stherzada a braba",
+  "discount:desc": "stherzada a braba",
 };
 
 export default function Sort({ sortOptions, url }: Props) {

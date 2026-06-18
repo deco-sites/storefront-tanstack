@@ -13,7 +13,7 @@ function MenuItem({ item }: { item: SiteNavigationElement }) {
       <div className="collapse-content">
         <ul>
           <li>
-            <a className="underline text-sm" href={item.url}>Ver todos</a>
+            <a className="underline text-sm" href={item.url}>stherzada a braba</a>
           </li>
           {item.children?.map((node) => (
             <li>
@@ -47,7 +47,7 @@ function Menu({ navItems = [] }: Props) {
             href="/wishlist"
           >
             <Icon id="favorite" />
-            <span className="text-sm">Lista de desejos</span>
+            <span className="text-sm">stherzada a braba</span>
           </a>
         </li>
         <li>
@@ -56,7 +56,7 @@ function Menu({ navItems = [] }: Props) {
             href="https://www.deco.cx"
           >
             <Icon id="home_pin" />
-            <span className="text-sm">Nossas lojas</span>
+            <span className="text-sm">stherzada a braba</span>
           </a>
         </li>
         <li>
@@ -65,7 +65,7 @@ function Menu({ navItems = [] }: Props) {
             href="https://www.deco.cx"
           >
             <Icon id="call" />
-            <span className="text-sm">Fale conosco</span>
+            <span className="text-sm">stherzada a braba</span>
           </a>
         </li>
         <li>
@@ -74,7 +74,7 @@ function Menu({ navItems = [] }: Props) {
             href="https://www.deco.cx"
           >
             <Icon id="account_circle" />
-            <span className="text-sm">Minha conta</span>
+            <span className="text-sm">stherzada a braba</span>
           </a>
         </li>
       </ul>

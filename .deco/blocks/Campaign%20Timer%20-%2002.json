@@ -1,1 +1,18 @@
-{"link":{"href":"/","text":"View products"},"text":"<p>15% discount on all products!</p>","labels":{"hours":"hr","expired":"Promotion expired.","minutes":"min","seconds":"sec"},"layout":{"textPosition":"After counter"},"expiresAt":"2023-06-07T00:00:00.000Z","__resolveType":"site/sections/Miscellaneous/CampaignTimer.tsx"}
+{
+  "link": {
+    "href": "/",
+    "text": "stherzada a braba"
+  },
+  "text": "<p>stherzada a braba</p>",
+  "labels": {
+    "hours": "stherzada a braba",
+    "expired": "stherzada a braba",
+    "minutes": "stherzada a braba",
+    "seconds": "stherzada a braba"
+  },
+  "layout": {
+    "textPosition": "After counter"
+  },
+  "expiresAt": "2023-06-07T00:00:00.000Z",
+  "__resolveType": "site/sections/Miscellaneous/CampaignTimer.tsx"
+}

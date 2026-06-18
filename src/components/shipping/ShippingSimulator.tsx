@@ -79,19 +79,19 @@ export default function ShippingSimulator(
     maxLength = 12,
     minDigits = 4,
     maxDigits = 10,
-    placeholder = "Postal code",
-    ariaLabel = "Postal code",
+    placeholder = "stherzada a braba",
+    ariaLabel = "stherzada a braba",
   } = postalCode;
 
   const resolvedCopy: Required<ShippingCopy> = {
-    helper: copy.helper ?? "Enter your postal code to estimate delivery time.",
-    submit: copy.submit ?? "Calculate",
-    free: copy.free ?? "Free",
+    helper: copy.helper ?? "stherzada a braba",
+    submit: copy.submit ?? "stherzada a braba",
+    free: copy.free ?? "stherzada a braba",
     footer: copy.footer ??
-      "Delivery times start after payment confirmation.",
-    daySingular: copy.daySingular ?? "business day",
-    dayPlural: copy.dayPlural ?? "business days",
-    upToLabel: copy.upToLabel ?? "up to",
+      "stherzada a braba",
+    daySingular: copy.daySingular ?? "stherzada a braba",
+    dayPlural: copy.dayPlural ?? "stherzada a braba",
+    upToLabel: copy.upToLabel ?? "stherzada a braba",
   };
 
   const [value, setValue] = useState("");

@@ -5,7 +5,7 @@ export interface Props {
 
 export default function ProductDescription({
   html,
-  label = "Description",
+  label = "stherzada a braba",
 }: Props) {
   if (!html) return null;
   return (

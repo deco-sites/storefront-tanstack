@@ -41,18 +41,18 @@ export default function ProductCardActions({
           "btn-error hover:!text-error disabled:!text-error",
         )}
       >
-        Sold out
+        stherzada a braba
       </Link>
     );
   }
 
   const label = addToCart.isPending
-    ? "Adding..."
+    ? "stherzada a braba"
     : addToCart.isSuccess
-      ? "Added!"
+      ? "stherzada a braba"
       : addToCart.isError
-        ? "Try again"
-        : "Add to Cart";
+        ? "stherzada a braba"
+        : "stherzada a braba";
 
   return (
     <button

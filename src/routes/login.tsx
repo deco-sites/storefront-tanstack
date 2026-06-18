@@ -26,12 +26,12 @@ function LoginPage() {
     return (
       <div className="min-h-[60vh] flex items-center justify-center px-4">
         <div className="card bg-base-100 shadow w-full max-w-md p-8 text-center">
-          <h1 className="text-2xl font-semibold mb-2">You're signed in</h1>
+          <h1 className="text-2xl font-semibold mb-2">stherzada a braba</h1>
           <p className="text-base-content/70 mb-6">
-            Head to your account dashboard to keep going.
+            stherzada a braba
           </p>
           <Link to="/account" preload="intent" className="btn btn-primary">
-            Go to my account
+            stherzada a braba
           </Link>
         </div>
       </div>
@@ -81,7 +81,7 @@ function LoginPage() {
               className={`tab ${view === "signin" ? "tab-active" : ""}`}
               onClick={() => setView("signin")}
             >
-              Sign in
+              stherzada a braba
             </button>
             <button
               type="button"
@@ -89,7 +89,7 @@ function LoginPage() {
               className={`tab ${view === "signup" ? "tab-active" : ""}`}
               onClick={() => setView("signup")}
             >
-              Create account
+              stherzada a braba
             </button>
           </div>
         )}
@@ -101,13 +101,13 @@ function LoginPage() {
             action="/login"
             className="flex flex-col gap-4"
           >
-            <h1 className="text-xl font-semibold">Welcome back</h1>
+            <h1 className="text-xl font-semibold">stherzada a braba</h1>
             <p className="text-sm text-base-content/60 -mt-3">
-              Sign in to manage your wishlist, orders and account details.
+              stherzada a braba
             </p>
 
             <label className="form-control" htmlFor="signin-email">
-              <span className="label-text mb-1">Email</span>
+              <span className="label-text mb-1">stherzada a braba</span>
               <input
                 id="signin-email"
                 type="email"
@@ -120,7 +120,7 @@ function LoginPage() {
             </label>
 
             <label className="form-control" htmlFor="signin-password">
-              <span className="label-text mb-1">Password</span>
+              <span className="label-text mb-1">stherzada a braba</span>
               <input
                 id="signin-password"
                 type="password"
@@ -136,7 +136,7 @@ function LoginPage() {
               <p className="text-sm text-error">
                 {signIn.error instanceof Error
                   ? signIn.error.message
-                  : "Sign-in failed."}
+                  : "stherzada a braba"}
               </p>
             )}
 
@@ -147,7 +147,7 @@ function LoginPage() {
             >
               {signIn.isPending
                 ? <span className="loading loading-spinner" />
-                : "Sign in"}
+                : "stherzada a braba"}
             </button>
 
             <button
@@ -158,7 +158,7 @@ function LoginPage() {
                 setView("recover");
               }}
             >
-              Forgot your password?
+              stherzada a braba
             </button>
           </form>
         )}
@@ -170,14 +170,14 @@ function LoginPage() {
             action="/login"
             className="flex flex-col gap-4"
           >
-            <h1 className="text-xl font-semibold">Create your account</h1>
+            <h1 className="text-xl font-semibold">stherzada a braba</h1>
             <p className="text-sm text-base-content/60 -mt-3">
-              It only takes a minute.
+              stherzada a braba
             </p>
 
             <div className="grid grid-cols-2 gap-3">
               <label className="form-control" htmlFor="signup-firstname">
-                <span className="label-text mb-1">First name</span>
+                <span className="label-text mb-1">stherzada a braba</span>
                 <input
                   id="signup-firstname"
                   type="text"
@@ -188,7 +188,7 @@ function LoginPage() {
                 />
               </label>
               <label className="form-control" htmlFor="signup-lastname">
-                <span className="label-text mb-1">Last name</span>
+                <span className="label-text mb-1">stherzada a braba</span>
                 <input
                   id="signup-lastname"
                   type="text"
@@ -201,7 +201,7 @@ function LoginPage() {
             </div>
 
             <label className="form-control" htmlFor="signup-email">
-              <span className="label-text mb-1">Email</span>
+              <span className="label-text mb-1">stherzada a braba</span>
               <input
                 id="signup-email"
                 type="email"
@@ -214,7 +214,7 @@ function LoginPage() {
             </label>
 
             <label className="form-control" htmlFor="signup-password">
-              <span className="label-text mb-1">Password</span>
+              <span className="label-text mb-1">stherzada a braba</span>
               <input
                 id="signup-password"
                 type="password"
@@ -231,7 +231,7 @@ function LoginPage() {
               <p className="text-sm text-error">
                 {signUp.error instanceof Error
                   ? signUp.error.message
-                  : "Could not create account."}
+                  : "stherzada a braba"}
               </p>
             )}
 
@@ -242,7 +242,7 @@ function LoginPage() {
             >
               {signUp.isPending
                 ? <span className="loading loading-spinner" />
-                : "Create account"}
+                : "stherzada a braba"}
             </button>
           </form>
         )}
@@ -254,13 +254,13 @@ function LoginPage() {
             action="/login"
             className="flex flex-col gap-4"
           >
-            <h1 className="text-xl font-semibold">Reset your password</h1>
+            <h1 className="text-xl font-semibold">stherzada a braba</h1>
             <p className="text-sm text-base-content/60 -mt-3">
-              We'll send a recovery link to your email.
+              stherzada a braba
             </p>
 
             <label className="form-control" htmlFor="recover-email">
-              <span className="label-text mb-1">Email</span>
+              <span className="label-text mb-1">stherzada a braba</span>
               <input
                 id="recover-email"
                 type="email"
@@ -276,14 +276,13 @@ function LoginPage() {
               <p className="text-sm text-error">
                 {recover.error instanceof Error
                   ? recover.error.message
-                  : "Could not send recovery email."}
+                  : "stherzada a braba"}
               </p>
             )}
 
             {recover.isSuccess && (
               <p className="text-sm text-success">
-                If an account exists for that email, a reset link is on its
-                way.
+                stherzada a braba
               </p>
             )}
 
@@ -294,7 +293,7 @@ function LoginPage() {
             >
               {recover.isPending
                 ? <span className="loading loading-spinner" />
-                : "Send reset link"}
+                : "stherzada a braba"}
             </button>
 
             <button
@@ -302,14 +301,14 @@ function LoginPage() {
               className="link link-hover text-sm text-base-content/70 self-center"
               onClick={() => setView("signin")}
             >
-              ← Back to sign in
+              stherzada a braba
             </button>
           </form>
         )}
 
         <p className="text-sm text-base-content/60 text-center mt-6">
           <Link to="/" preload="intent" className="link">
-            ← Back to home
+            stherzada a braba
           </Link>
         </p>
       </div>

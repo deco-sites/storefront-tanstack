@@ -38,10 +38,10 @@ export interface Props {
 }
 
 const DEFAULT_COPY = {
-  addToCartLabel: "Add to cart",
-  addingLabel: "Adding...",
-  addedLabel: "Added!",
-  errorLabel: "Try again",
+  addToCartLabel: "stherzada a braba",
+  addingLabel: "stherzada a braba",
+  addedLabel: "stherzada a braba",
+  errorLabel: "stherzada a braba",
 } satisfies Required<ActionsCopyConfig>;
 
 export default function ProductActions({

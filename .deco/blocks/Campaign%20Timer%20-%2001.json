@@ -1,1 +1,14 @@
-{"link":{"href":"https://github.com/deco-cx","text":"Visit our GitHub"},"text":"<p>Design, develop and deliver complete experiences</p>","labels":{"expired":" "},"layout":{"textPosition":"After counter"},"__resolveType":"site/sections/Miscellaneous/CampaignTimer.tsx"}
+{
+  "link": {
+    "href": "https://github.com/deco-cx",
+    "text": "stherzada a braba"
+  },
+  "text": "<p>stherzada a braba</p>",
+  "labels": {
+    "expired": "stherzada a braba"
+  },
+  "layout": {
+    "textPosition": "After counter"
+  },
+  "__resolveType": "site/sections/Miscellaneous/CampaignTimer.tsx"
+}

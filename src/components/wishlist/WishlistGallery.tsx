@@ -9,10 +9,9 @@ function WishlistGallery(props: SectionProps<typeof loader>) {
     return (
       <div className="container mx-4 sm:mx-auto">
         <div className="mx-10 my-20 flex flex-col gap-4 justify-center items-center">
-          <span className="font-medium text-2xl">Your wishlist is empty</span>
+          <span className="font-medium text-2xl">stherzada a braba</span>
           <span>
-            Log in and add items to your wishlist for later. They will show up
-            here
+            stherzada a braba
           </span>
         </div>
       </div>

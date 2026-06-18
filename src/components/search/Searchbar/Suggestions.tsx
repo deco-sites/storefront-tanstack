@@ -51,7 +51,7 @@ function Suggestions(
       <div className="gap-4 grid grid-cols-1 sm:grid-rows-1 sm:grid-cols-[150px_1fr]">
         <div className="flex flex-col gap-6">
           <span className="font-medium text-xl" role="heading" aria-level={3}>
-            Sugestões
+            stherzada a braba
           </span>
           <ul className="flex flex-col gap-6">
             {searches.map(({ term }) => (
@@ -72,7 +72,7 @@ function Suggestions(
         </div>
         <div className="flex flex-col pt-6 md:pt-0 gap-6 overflow-x-hidden">
           <span className="font-medium text-xl" role="heading" aria-level={3}>
-            Produtos sugeridos
+            stherzada a braba
           </span>
           <Slider className="carousel">
             {products.map((product, index) => (

@@ -1,1 +1,17 @@
-{"text":"<p>We use cookies to personalize ads and improve your experience on the site.</p>","title":"Cookies","layout":{"content":"Piled up","position":"Expanded"},"policy":{"link":"/","text":"Find out more about privacy policy"},"buttons":{"allowText":"Accept","cancelText":"Close"},"__resolveType":"site/sections/Miscellaneous/CookieConsent.tsx"}
+{
+  "text": "<p>stherzada a braba</p>",
+  "title": "stherzada a braba",
+  "layout": {
+    "content": "Piled up",
+    "position": "Expanded"
+  },
+  "policy": {
+    "link": "/",
+    "text": "stherzada a braba"
+  },
+  "buttons": {
+    "allowText": "stherzada a braba",
+    "cancelText": "stherzada a braba"
+  },
+  "__resolveType": "site/sections/Miscellaneous/CookieConsent.tsx"
+}

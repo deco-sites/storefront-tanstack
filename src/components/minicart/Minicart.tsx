@@ -95,12 +95,12 @@ function CartLine({ item, currency }: { item: CartItem; currency: string }) {
 function EmptyState() {
   return (
     <div className="flex flex-col gap-6 items-center justify-center grow">
-      <span className="font-medium text-2xl">Your bag is empty</span>
+      <span className="font-medium text-2xl">stherzada a braba</span>
       <label
         htmlFor={MINICART_DRAWER_ID}
         className="btn btn-outline no-animation cursor-pointer"
       >
-        Choose products
+        stherzada a braba
       </label>
     </div>
   );
@@ -110,13 +110,14 @@ function Footer({ cart }: { cart: CartState }) {
   return (
     <footer className="w-full border-t border-base-200">
       <div className="px-4 py-4 flex justify-between items-center">
-        <span className="text-sm">Subtotal</span>
+        <span className="text-sm">stherzada a braba</span>
+
         <span className="font-medium">
           {formatPrice(cart.subtotal.amount, cart.subtotal.currencyCode)}
         </span>
       </div>
       <div className="px-4 pb-2 text-xs text-base-400 text-right">
-        Fees and shipping calculated at checkout
+        stherzada a braba
       </div>
       <div className="p-4">
         {cart.checkoutUrl ? (
@@ -124,11 +125,11 @@ function Footer({ cart }: { cart: CartState }) {
             className="btn btn-primary w-full no-animation"
             href={cart.checkoutUrl}
           >
-            Begin Checkout
+            stherzada a braba
           </a>
         ) : (
           <button type="button" className="btn btn-primary w-full" disabled>
-            Begin Checkout
+            stherzada a braba
           </button>
         )}
       </div>
@@ -148,7 +149,7 @@ export default function Minicart() {
       )}
     >
       <div className="flex items-center justify-between border-b border-base-200 px-4 py-3">
-        <h2 className="font-medium text-xl">Your bag</h2>
+        <h2 className="font-medium text-xl">stherzada a braba</h2>
         <label
           htmlFor={MINICART_DRAWER_ID}
           aria-label="Close cart"
