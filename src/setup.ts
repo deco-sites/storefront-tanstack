@@ -139,4 +139,8 @@ registerInvokeHandlers({
     (await import("./actions/shipping/simulate")).default(props, req),
   "site/actions/shipping/simulate": async (props, req) =>
     (await import("./actions/shipping/simulate")).default(props, req),
+  "site/actions/notifyMe/subscribe.ts": async (props) =>
+    (await import("./actions/notifyMe/subscribe")).default(props),
+  "site/actions/notifyMe/subscribe": async (props) =>
+    (await import("./actions/notifyMe/subscribe")).default(props),
 });
