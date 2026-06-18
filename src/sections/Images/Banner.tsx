@@ -1,9 +1,12 @@
 import { type HTMLWidget, type ImageWidget } from "~/types/widgets";
 import { Picture, Source } from "~/components/ui/Picture";
 import Section from "../../components/ui/Section";
+import DeviceVisible, {
+  type VisibilityConfig,
+} from "../../components/ui/DeviceVisible";
 import { clx } from "~/sdk/clx";
 
-export interface Props {
+export interface Props extends VisibilityConfig {
   title: string;
   description?: HTMLWidget;
 
@@ -18,9 +21,10 @@ export interface Props {
   };
 }
 
-function Banner({ title, description, images, cta }: Props) {
+function Banner({ title, description, images, cta, visibility }: Props) {
   return (
-    <Section.Container>
+    <DeviceVisible visibility={visibility}>
+      <Section.Container>
       <div className="relative bg-base-200 mx-5 sm:mx-0">
         <Picture>
           <Source
@@ -66,7 +70,8 @@ function Banner({ title, description, images, cta }: Props) {
           </div>
         </div>
       </div>
-    </Section.Container>
+      </Section.Container>
+    </DeviceVisible>
   );
 }
 
