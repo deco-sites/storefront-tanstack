@@ -89,7 +89,11 @@
             "label": "Home & Living",
             "image": "https://assets.decocache.com/storefront/648ef60d-c193-4fb3-9a36-1929d0676f28/1742560231577-d0433c00-cd26-4638-b519-0cb64b9f82e8"
           },
-          {}
+          {
+            "href": "/stherzada",
+            "label": "stherzada a braba",
+            "image": "https://assets.decocache.com/storefront/648ef60d-c193-4fb3-9a36-1929d0676f28/1742560231577-d0433c00-cd26-4638-b519-0cb64b9f82e8"
+          }
         ]
       }
     },

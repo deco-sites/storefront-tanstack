@@ -130,3 +130,34 @@ section[data-deferred="true"] {
 .scrollbar-none::-webkit-scrollbar {
   display: none;
 }
+
+/* ── Home page: rosa choque ─────────────────────────────────────────────── */
+.home-pink {
+  background-color: #FF69B4;
+  --color-base-100: #FF69B4;
+  --color-base-200: #FF85C1;
+  --color-base-300: #FF9FCC;
+  --color-neutral:  #FF69B4;
+}
+
+/* Extra: force all section/container backgrounds inside home to pink */
+.home-pink section,
+.home-pink > div,
+.home-pink .bg-base-100,
+.home-pink .bg-base-200,
+.home-pink .bg-base-300,
+.home-pink .bg-neutral,
+.home-pink .bg-white {
+  background-color: #FF69B4 !important;
+}
+
+body.home-page {
+  background-color: #FF69B4 !important;
+}
+
+/* Header inside home: pink too */
+body.home-page header,
+body.home-page [class*="bg-base-100"],
+body.home-page [class*="bg-base-200"] {
+  background-color: #FF69B4 !important;
+}

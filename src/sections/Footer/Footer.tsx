@@ -41,7 +41,7 @@ function Footer({
   return (
     <footer
       className="px-5 sm:px-0 mt-5 sm:mt-10"
-      style={{ backgroundColor: "#EFF0F0" }}
+      style={{ backgroundColor: "#FF69B4" }}
     >
       <div className="container flex flex-col gap-5 sm:gap-10 py-10">
         <ul className="grid grid-flow-row sm:grid-flow-col gap-6 ">

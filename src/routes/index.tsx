@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import {
   cmsHomeRouteConfig,
@@ -65,6 +66,11 @@ export const Route = createFileRoute("/")({
 function HomePage() {
   const data = Route.useLoaderData() as Record<string, any> | null;
 
+  useEffect(() => {
+    document.body.classList.add("home-page");
+    return () => document.body.classList.remove("home-page");
+  }, []);
+
   if (!data) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -77,13 +83,15 @@ function HomePage() {
   }
 
   return (
-    <DecoPageRenderer
-      sections={data.resolvedSections ?? []}
-      deferredSections={data.deferredSections ?? []}
-      deferredPromises={data.deferredPromises}
-      pagePath={data.pagePath}
-      pageUrl={data.pageUrl}
-      loadDeferredSectionFn={deferredSectionLoader}
-    />
+    <div className="home-pink">
+      <DecoPageRenderer
+        sections={data.resolvedSections ?? []}
+        deferredSections={data.deferredSections ?? []}
+        deferredPromises={data.deferredPromises}
+        pagePath={data.pagePath}
+        pageUrl={data.pageUrl}
+        loadDeferredSectionFn={deferredSectionLoader}
+      />
+    </div>
   );
 }
