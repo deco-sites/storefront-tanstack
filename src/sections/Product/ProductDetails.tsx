@@ -1,4 +1,8 @@
 import type { ProductDetailsPage } from "@decocms/apps/commerce/types";
+import {
+  BreadcrumbJsonLd,
+  ProductJsonLd,
+} from "@decocms/apps/commerce/components/JsonLd";
 import ProductHero, {
   type HeroCopyConfig,
 } from "../../components/product/pdp/ProductHero";
@@ -79,6 +83,9 @@ export default function ProductDetails({
 
   return (
     <div className="container flex flex-col gap-4 sm:gap-5 w-full py-4 sm:py-5 px-5 sm:px-0">
+      {/* SEO: schema.org JSON-LD, server-rendered inline (crawlers read it anywhere in the document) */}
+      <ProductJsonLd product={page.product} />
+      <BreadcrumbJsonLd breadcrumb={page.breadcrumbList} />
       <Breadcrumb itemListElement={page.breadcrumbList.itemListElement} />
       <ProductHero
         page={page}
