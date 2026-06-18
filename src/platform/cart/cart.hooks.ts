@@ -3,6 +3,7 @@ import {
   addItemServerFn,
   getCartServerFn,
   removeItemServerFn,
+  updateCouponsServerFn,
   updateItemQuantityServerFn,
 } from "./cart.actions";
 import { type CartItem, EMPTY_CART, type CartState } from "./cart.types";
@@ -112,6 +113,44 @@ export function useRemoveCartItem() {
     onMutate: ({ lineId }) =>
       optimisticCartUpdate(qc, (items) => items.filter((i) => i.lineId !== lineId)),
     onError: (_err, _input, ctx) => rollbackCart(qc, ctx),
+    onSuccess: (cart: CartState) => {
+      qc.setQueryData(CART_QUERY_KEY, cart);
+    },
+  });
+}
+
+const currentCouponCodes = (qc: QueryClient): string[] =>
+  (qc.getQueryData<CartState>(CART_QUERY_KEY) ?? EMPTY_CART).appliedCoupons.map(
+    (c) => c.code,
+  );
+
+export function useApplyCoupon() {
+  const qc = useQueryClient();
+  return useMutation({
+    scope: { id: "cart" },
+    mutationKey: ["cart", "coupon"],
+    // Server recomputes totals/discount — reconcile on success (no optimistic).
+    mutationFn: (code: string) => {
+      const codes = Array.from(
+        new Set([...currentCouponCodes(qc), code.trim()].filter(Boolean)),
+      );
+      return updateCouponsServerFn({ data: { discountCodes: codes } });
+    },
+    onSuccess: (cart: CartState) => {
+      qc.setQueryData(CART_QUERY_KEY, cart);
+    },
+  });
+}
+
+export function useRemoveCoupon() {
+  const qc = useQueryClient();
+  return useMutation({
+    scope: { id: "cart" },
+    mutationKey: ["cart", "coupon"],
+    mutationFn: (code: string) => {
+      const codes = currentCouponCodes(qc).filter((c) => c !== code);
+      return updateCouponsServerFn({ data: { discountCodes: codes } });
+    },
     onSuccess: (cart: CartState) => {
       qc.setQueryData(CART_QUERY_KEY, cart);
     },

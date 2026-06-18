@@ -33,5 +33,9 @@ export function shopifyCartToCartState(cart: ShopifyCart | null): CartState {
     total: parseMoney(cart.cost.totalAmount) ?? EMPTY_CART.total,
     checkoutUrl: cart.checkoutUrl,
     totalQuantity: cart.totalQuantity,
+    appliedCoupons: (cart.discountCodes ?? []).map((d) => ({
+      code: d.code,
+      applicable: d.applicable,
+    })),
   };
 }
