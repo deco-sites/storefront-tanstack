@@ -1,6 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
 import Icon from "../../components/ui/Icon";
 import Section from "../../components/ui/Section";
+import { invoke } from "../../runtime";
+import type { SubscribeNewsletterResult } from "../../actions/newsletter/subscribe";
 import { clx } from "~/sdk/clx";
 
 export interface NoticeProps {
@@ -80,10 +82,13 @@ const DEFAULT_NOTICES = {
   },
 } satisfies Required<NoticeConfig>;
 
-// TODO(phase-6): replace with a real subscribeNewsletterServerFn (createServerFn
-// or invoke.site.actions.newsletter.subscribe) once the platform action lands.
-async function subscribeNewsletter(_email: string): Promise<void> {
-  throw new Error("Newsletter subscription not yet wired to a platform action.");
+async function subscribeNewsletter(email: string): Promise<void> {
+  const result = (await invoke.site.actions.newsletter.subscribe({
+    email,
+  })) as SubscribeNewsletterResult | undefined;
+  if (!result?.success) {
+    throw new Error("Newsletter subscription failed");
+  }
 }
 
 function Notice({ title, description }: NoticeProps) {
@@ -118,7 +123,18 @@ export default function Newsletter({ notices, form }: Props) {
             className={clx(isSuccess ? "text-success" : "text-error")}
             id={isSuccess ? "check-circle" : "error"}
           />
-          <Notice {...(isSuccess ? success : failed)} />
+          <div className="flex flex-col items-center sm:items-start gap-4">
+            <Notice {...(isSuccess ? success : failed)} />
+            {subscribe.isError && (
+              <button
+                type="button"
+                className="btn btn-outline"
+                onClick={() => subscribe.reset()}
+              >
+                Try again
+              </button>
+            )}
+          </div>
         </div>
       </Section.Container>
     );
