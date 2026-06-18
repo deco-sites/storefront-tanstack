@@ -1,4 +1,10 @@
-import { useCallback, useId, type ReactNode } from "react";
+import {
+  useCallback,
+  useEffect,
+  useId,
+  useRef,
+  type ReactNode,
+} from "react";
 import { clx } from "~/sdk/clx";
 import { useEscapeKey } from "../../sdk/useEscapeKey";
 import Icon from "./Icon";
@@ -24,6 +30,42 @@ function Drawer(
 
   useEscapeKey(closeViaCheckbox);
 
+  // Swipe-to-close: a horizontal swipe toward the edge the drawer opened from
+  // closes it (the expected mobile gesture). Gesture-only — we let DaisyUI run
+  // its own close transition rather than fighting it with a live drag transform.
+  const asideRef = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const aside = asideRef.current;
+    const root = aside?.closest(".drawer");
+    if (!aside || !root) return;
+    const closesRightward = root.classList.contains("drawer-end");
+    let startX = 0;
+    let startY = 0;
+    let tracking = false;
+    const onDown = (e: PointerEvent) => {
+      const input = document.getElementById(toggleId) as HTMLInputElement | null;
+      if (!input?.checked) return; // only while open
+      startX = e.clientX;
+      startY = e.clientY;
+      tracking = true;
+    };
+    const onUp = (e: PointerEvent) => {
+      if (!tracking) return;
+      tracking = false;
+      const dx = e.clientX - startX;
+      const dy = e.clientY - startY;
+      // Require a clearly horizontal swipe so vertical scrolling is unaffected.
+      if (Math.abs(dx) < 60 || Math.abs(dx) < Math.abs(dy)) return;
+      if (closesRightward ? dx > 0 : dx < 0) closeViaCheckbox();
+    };
+    aside.addEventListener("pointerdown", onDown);
+    aside.addEventListener("pointerup", onUp);
+    return () => {
+      aside.removeEventListener("pointerdown", onDown);
+      aside.removeEventListener("pointerup", onUp);
+    };
+  }, [toggleId, closeViaCheckbox]);
+
   return (
     <div className={clx("drawer", _class)}>
       <input
@@ -40,6 +82,7 @@ function Drawer(
       </div>
 
       <aside
+        ref={asideRef}
         data-aside
         className={clx(
           "drawer-side h-full z-40 overflow-hidden",
