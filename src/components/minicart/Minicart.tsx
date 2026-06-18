@@ -13,16 +13,19 @@ import {
 
 function QuantityStepper({ item }: { item: CartItem }) {
   const update = useUpdateCartItem();
-  const pending = update.isPending && update.variables?.lineId === item.lineId;
   const set = (quantity: number) =>
     update.mutate({ lineId: item.lineId, quantity: Math.max(1, quantity) });
+  // No `pending` freeze: the quantity updates optimistically on click and the
+  // "cart" mutation scope serializes the requests, so rapid clicks stay
+  // consistent and the buttons remain interactive. Only the lower bound is
+  // disabled.
   return (
     <div className="join border border-base-200 rounded">
       <button
         type="button"
         className="join-item btn btn-ghost btn-sm no-animation"
         aria-label="Decrease quantity"
-        disabled={pending || item.quantity <= 1}
+        disabled={item.quantity <= 1}
         onClick={() => set(item.quantity - 1)}
       >
         -
@@ -34,7 +37,6 @@ function QuantityStepper({ item }: { item: CartItem }) {
         type="button"
         className="join-item btn btn-ghost btn-sm no-animation"
         aria-label="Increase quantity"
-        disabled={pending}
         onClick={() => set(item.quantity + 1)}
       >
         +
