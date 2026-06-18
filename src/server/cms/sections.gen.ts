@@ -13,22 +13,23 @@
 import * as _sync0 from "../../sections/Footer/Footer";
 import * as _sync1 from "../../sections/Theme/Theme";
 import * as _sync2 from "../../sections/Header/Header";
-import { LoadingFallback as _fb0 } from "../../sections/Category/CategoryGrid";
-import { LoadingFallback as _fb1 } from "../../sections/Images/Banner";
-import { LoadingFallback as _fb2 } from "../../sections/Images/ShoppableBanner";
-import { LoadingFallback as _fb3 } from "../../sections/Images/ImageGallery";
-import { LoadingFallback as _fb4 } from "../../sections/Images/Carousel";
-import { LoadingFallback as _fb5 } from "../../sections/Product/Wishlist";
-import { LoadingFallback as _fb6 } from "../../sections/Product/ProductShelf";
-import { LoadingFallback as _fb7 } from "../../sections/Product/ShelfWithImage";
-import { LoadingFallback as _fb8 } from "../../sections/Product/ProductShelfTabbed";
-import { LoadingFallback as _fb9 } from "../../sections/Product/ProductDetails";
-import { LoadingFallback as _fb10 } from "../../sections/Miscellaneous/CampaignTimer";
-import { LoadingFallback as _fb11 } from "../../sections/Miscellaneous/CookieConsent";
-import { LoadingFallback as _fb12 } from "../../sections/Social/WhatsApp";
-import { LoadingFallback as _fb13 } from "../../sections/Social/InstagramPosts";
-import { LoadingFallback as _fb14 } from "../../sections/Links/LinkTree";
-import { LoadingFallback as _fb15 } from "../../sections/Newsletter/Newsletter";
+import { LoadingFallback as _fb0 } from "../../sections/Category/CategoryBanner";
+import { LoadingFallback as _fb1 } from "../../sections/Category/CategoryGrid";
+import { LoadingFallback as _fb2 } from "../../sections/Images/Banner";
+import { LoadingFallback as _fb3 } from "../../sections/Images/ShoppableBanner";
+import { LoadingFallback as _fb4 } from "../../sections/Images/ImageGallery";
+import { LoadingFallback as _fb5 } from "../../sections/Images/Carousel";
+import { LoadingFallback as _fb6 } from "../../sections/Product/Wishlist";
+import { LoadingFallback as _fb7 } from "../../sections/Product/ProductShelf";
+import { LoadingFallback as _fb8 } from "../../sections/Product/ShelfWithImage";
+import { LoadingFallback as _fb9 } from "../../sections/Product/ProductShelfTabbed";
+import { LoadingFallback as _fb10 } from "../../sections/Product/ProductDetails";
+import { LoadingFallback as _fb11 } from "../../sections/Miscellaneous/CampaignTimer";
+import { LoadingFallback as _fb12 } from "../../sections/Miscellaneous/CookieConsent";
+import { LoadingFallback as _fb13 } from "../../sections/Social/WhatsApp";
+import { LoadingFallback as _fb14 } from "../../sections/Social/InstagramPosts";
+import { LoadingFallback as _fb15 } from "../../sections/Links/LinkTree";
+import { LoadingFallback as _fb16 } from "../../sections/Newsletter/Newsletter";
 
 export interface SectionMetaEntry {
   eager?: boolean;
@@ -42,6 +43,7 @@ export interface SectionMetaEntry {
 
 export const sectionMeta: Record<string, SectionMetaEntry> = {
   "site/sections/Footer/Footer.tsx": { eager: true, sync: true, layout: true, hasLoadingFallback: true },
+  "site/sections/Category/CategoryBanner.tsx": { hasLoadingFallback: true },
   "site/sections/Category/CategoryGrid.tsx": { hasLoadingFallback: true },
   "site/sections/Images/Banner.tsx": { hasLoadingFallback: true },
   "site/sections/Images/ShoppableBanner.tsx": { hasLoadingFallback: true },
@@ -71,22 +73,23 @@ export const syncComponents: Record<string, any> = {
 
 export const loadingFallbacks: Record<string, React.ComponentType<any>> = {
   "site/sections/Footer/Footer.tsx": _sync0.LoadingFallback,
-  "site/sections/Category/CategoryGrid.tsx": _fb0,
-  "site/sections/Images/Banner.tsx": _fb1,
-  "site/sections/Images/ShoppableBanner.tsx": _fb2,
-  "site/sections/Images/ImageGallery.tsx": _fb3,
-  "site/sections/Images/Carousel.tsx": _fb4,
-  "site/sections/Product/Wishlist.tsx": _fb5,
-  "site/sections/Product/ProductShelf.tsx": _fb6,
-  "site/sections/Product/ShelfWithImage.tsx": _fb7,
-  "site/sections/Product/ProductShelfTabbed.tsx": _fb8,
-  "site/sections/Product/ProductDetails.tsx": _fb9,
-  "site/sections/Miscellaneous/CampaignTimer.tsx": _fb10,
-  "site/sections/Miscellaneous/CookieConsent.tsx": _fb11,
-  "site/sections/Social/WhatsApp.tsx": _fb12,
-  "site/sections/Social/InstagramPosts.tsx": _fb13,
+  "site/sections/Category/CategoryBanner.tsx": _fb0,
+  "site/sections/Category/CategoryGrid.tsx": _fb1,
+  "site/sections/Images/Banner.tsx": _fb2,
+  "site/sections/Images/ShoppableBanner.tsx": _fb3,
+  "site/sections/Images/ImageGallery.tsx": _fb4,
+  "site/sections/Images/Carousel.tsx": _fb5,
+  "site/sections/Product/Wishlist.tsx": _fb6,
+  "site/sections/Product/ProductShelf.tsx": _fb7,
+  "site/sections/Product/ShelfWithImage.tsx": _fb8,
+  "site/sections/Product/ProductShelfTabbed.tsx": _fb9,
+  "site/sections/Product/ProductDetails.tsx": _fb10,
+  "site/sections/Miscellaneous/CampaignTimer.tsx": _fb11,
+  "site/sections/Miscellaneous/CookieConsent.tsx": _fb12,
+  "site/sections/Social/WhatsApp.tsx": _fb13,
+  "site/sections/Social/InstagramPosts.tsx": _fb14,
   "site/sections/Theme/Theme.tsx": _sync1.LoadingFallback,
-  "site/sections/Links/LinkTree.tsx": _fb14,
-  "site/sections/Newsletter/Newsletter.tsx": _fb15,
+  "site/sections/Links/LinkTree.tsx": _fb15,
+  "site/sections/Newsletter/Newsletter.tsx": _fb16,
   "site/sections/Header/Header.tsx": _sync2.LoadingFallback,
 };
