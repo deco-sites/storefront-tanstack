@@ -124,8 +124,7 @@
 	"kv_namespaces": [
 		{
 			"binding": "DECO_KV",
-			"id": "a205a78ee28c44c3910cf52a3482a65f",
-			"remote": true
+			"id": "a205a78ee28c44c3910cf52a3482a65f"
 		}
 	]
 }
