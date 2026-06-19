@@ -1,5 +1,6 @@
 import { Link, createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useSignOut, useUser } from "../platform/user";
+import AddressBook from "../components/account/AddressBook";
 
 export const Route = createFileRoute("/account")({
   component: AccountPage,
@@ -69,6 +70,8 @@ function AccountPage() {
           </button>
         </div>
       </div>
+
+      <AddressBook />
     </div>
   );
 }

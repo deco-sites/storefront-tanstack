@@ -125,6 +125,8 @@ registerCommerceLoaders({
   "site/loaders/user":        async () => (await import("./loaders/user")).default(),
   "site/loaders/wishlist.ts": async () => (await import("./loaders/wishlist")).default(),
   "site/loaders/wishlist":    async () => (await import("./loaders/wishlist")).default(),
+  "site/loaders/address.ts":  async () => (await import("./loaders/address")).default(),
+  "site/loaders/address":     async () => (await import("./loaders/address")).default(),
 });
 
 // -- Site-local actions (registered via additive invoke handler registry) --
@@ -147,4 +149,8 @@ registerInvokeHandlers({
     (await import("./actions/newsletter/subscribe")).default(props, req),
   "site/actions/newsletter/subscribe": async (props, req) =>
     (await import("./actions/newsletter/subscribe")).default(props, req),
+  "site/actions/address/submit.ts": async (props, req) =>
+    (await import("./actions/address/submit")).default(props, req),
+  "site/actions/address/submit": async (props, req) =>
+    (await import("./actions/address/submit")).default(props, req),
 });
