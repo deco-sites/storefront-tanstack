@@ -6,11 +6,16 @@ import Section, {
 } from "../../components/ui/Section";
 import { useOffer } from "@decocms/apps/commerce/sdk/useOffer";
 import { useSendEvent } from "../../sdk/useSendEvent";
+import DeviceVisible, {
+  type VisibilityConfig,
+} from "../../components/ui/DeviceVisible";
 import { type LoadingFallbackProps } from "~/types/deco";
-export interface Props extends SectionHeaderProps {
+export interface Props extends SectionHeaderProps, VisibilityConfig {
   products: Product[] | null;
 }
-export default function ProductShelf({ products, title, cta }: Props) {
+export default function ProductShelf(
+  { products, title, cta, visibility }: Props,
+) {
   if (!products || products.length === 0) {
     return null;
   }
@@ -31,11 +36,13 @@ export default function ProductShelf({ products, title, cta }: Props) {
     },
   });
   return (
-    <Section.Container {...viewItemListEvent}>
-      <Section.Header title={title} cta={cta} />
+    <DeviceVisible visibility={visibility}>
+      <Section.Container {...viewItemListEvent}>
+        <Section.Header title={title} cta={cta} />
 
-      <ProductSlider products={products} itemListName={title} />
-    </Section.Container>
+        <ProductSlider products={products} itemListName={title} />
+      </Section.Container>
+    </DeviceVisible>
   );
 }
 export const LoadingFallback = (
