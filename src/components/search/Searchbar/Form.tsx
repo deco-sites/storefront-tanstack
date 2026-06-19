@@ -58,7 +58,13 @@ export default function Searchbar(
   const onSubmit = () => {
     const term = inputRef.current?.value;
     if (term) {
-      window.DECO?.events.dispatch({
+      // `dispatch` exists at runtime (set up by the framework's DECO.events
+      // bootstrap), but @decocms/apps' ambient Window.DECO type only declares
+      // `subscribe`. Cast through the real shape to dispatch programmatically.
+      const events = window.DECO?.events as unknown as
+        | { dispatch?: (event: unknown) => void }
+        | undefined;
+      events?.dispatch?.({
         name: "search",
         params: { search_term: term },
       });
