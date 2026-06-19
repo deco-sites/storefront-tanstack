@@ -12,16 +12,30 @@ import {
   withSearchParam,
   compose,
 } from "@decocms/start/cms";
+import { createCachedLoader } from "@decocms/start/sdk/cachedLoader";
+
+// Instagram's loader hits the Graph API (graph.instagram.com) on every request.
+// The feed changes slowly, so cache it with SWR (the "static" profile: ~5min
+// fresh, served-if-error window) — keyed by props (token/nposts), not the URL.
+// This avoids calling Instagram per page view. (Route + edge caching for
+// pages is already provided by cmsRouteConfig's routeCacheDefaults and the
+// worker's detectCacheProfile.)
+const cachedInstagramLoader = createCachedLoader(
+  "instagram-posts",
+  async (props: any) => {
+    const mod: any = await import("~/sections/Social/InstagramPosts");
+    return typeof mod.loader === "function" ? mod.loader(props) : props;
+  },
+  "static",
+);
 
 registerSectionLoaders({
   "site/sections/Newsletter/Newsletter.tsx": async (props: any, req: Request) => {
     const mod: any = await import("~/sections/Newsletter/Newsletter");
     return typeof mod.loader === "function" ? mod.loader(props, req) : props;
   },
-  "site/sections/Social/InstagramPosts.tsx": async (props: any, req: Request) => {
-    const mod: any = await import("~/sections/Social/InstagramPosts");
-    return typeof mod.loader === "function" ? mod.loader(props, req) : props;
-  },
+  "site/sections/Social/InstagramPosts.tsx": (props: any) =>
+    cachedInstagramLoader(props),
   // SearchResult needs the request URL to rebase filter/sort/pagination links
   // (commerce loaders return URLs with the wrong origin/pathname).
   "site/sections/Product/SearchResult.tsx": async (props: any, req: Request) => {
