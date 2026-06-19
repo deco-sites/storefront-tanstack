@@ -1,4 +1,8 @@
 import type { ProductListingPage } from "@decocms/apps/commerce/types";
+import {
+  BreadcrumbJsonLd,
+  PLPJsonLd,
+} from "@decocms/apps/commerce/components/JsonLd";
 import { mapProductToAnalyticsItem } from "@decocms/apps/commerce/utils/productToAnalyticsItem";
 import { useId } from "react";
 import { useOffer } from "@decocms/apps/commerce/sdk/useOffer";
@@ -92,6 +96,9 @@ function Result({
   return (
     <div {...viewItemListEvent} className="w-full">
       <div className="container flex flex-col gap-4 sm:gap-5 w-full py-4 sm:py-5 px-5 sm:px-0">
+        {/* SEO: schema.org JSON-LD, server-rendered inline (crawlers read it anywhere in the document) */}
+        <PLPJsonLd page={page} />
+        {breadcrumb && <BreadcrumbJsonLd breadcrumb={breadcrumb} />}
         <Breadcrumb itemListElement={breadcrumb?.itemListElement} />
 
         <SearchFilterDrawer id={filterDrawerId} filters={filters} baseUrl={href} />
