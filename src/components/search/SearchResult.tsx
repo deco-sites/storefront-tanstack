@@ -24,6 +24,14 @@ export interface Layout {
    * @default "show-more"
    */
   pagination?: "show-more" | "pagination";
+  /**
+   * @title Pré-carregar página do produto
+   * @description Quando ativado, a página do produto começa a carregar assim
+   * que o usuário passa o mouse sobre o card, deixando a navegação mais rápida.
+   * Pode aumentar o consumo de dados em listas muito grandes.
+   * @default true
+   */
+  enablePrefetch?: boolean;
 }
 
 export interface Props {
@@ -122,7 +130,13 @@ function Result({
 
             {isRouteLoading
               ? <SearchResultGridSkeleton count={Math.min(perPage, 12) || 8} />
-              : <SearchResultGrid products={products} offset={offset} />}
+              : (
+                <SearchResultGrid
+                  products={products}
+                  offset={offset}
+                  prefetch={layout?.enablePrefetch === false ? false : "intent"}
+                />
+              )}
 
             <div className="grid place-items-center pt-2 sm:pt-10">
               <SearchPagination

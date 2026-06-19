@@ -6,9 +6,13 @@ export interface Props {
   products: Product[];
   /** Index offset of the first product in the slice (used for analytics) */
   offset?: number;
+  /** Router preload strategy passed to each card's product link. */
+  prefetch?: "intent" | false;
 }
 
-export default function SearchResultGrid({ products, offset = 0 }: Props) {
+export default function SearchResultGrid(
+  { products, offset = 0, prefetch = "intent" }: Props,
+) {
   return (
     <div
       data-product-list
@@ -24,6 +28,7 @@ export default function SearchResultGrid({ products, offset = 0 }: Props) {
           key={`product-card-${product.productID}`}
           product={product}
           preload={index === 0}
+          prefetch={prefetch}
           index={offset + index}
           className="h-full min-w-40 max-w-75"
         />

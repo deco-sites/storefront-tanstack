@@ -19,6 +19,12 @@ export interface Props {
   product: Product;
   /** Preload card image */
   preload?: boolean;
+  /**
+   * Router preload strategy for the product link — "intent" prefetches the PDP
+   * on hover/focus; false disables it. (Distinct from `preload`, the image LCP
+   * flag.)
+   */
+  prefetch?: "intent" | false;
   /** @description used for analytics event */
   itemListName?: string;
   /** @description index of the product card in the list */
@@ -34,6 +40,7 @@ const SHOE_SIZE_VARIANT = "shoe size";
 export default function ProductCard({
   product,
   preload,
+  prefetch = "intent",
   itemListName,
   index,
   className,
@@ -105,6 +112,7 @@ export default function ProductCard({
             width={WIDTH}
             height={HEIGHT}
             preload={preload}
+            prefetch={prefetch}
             inStock={inStock}
           />
         )}
@@ -133,7 +141,7 @@ export default function ProductCard({
         </div>
       </figure>
 
-      <Link to={selectedHref} preload="intent" className="pt-5">
+      <Link to={selectedHref} preload={prefetch} className="pt-5">
         <ProductCardTitle title={title} />
         <ProductCardPrice
           price={price}
