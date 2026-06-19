@@ -123,6 +123,11 @@ function useSlider(
           if (entry.isIntersecting) {
             dot?.setAttribute("disabled", "");
             dot?.setAttribute("aria-current", "true");
+            // Keep the active dot in view — matters for scrollable thumbnail
+            // strips (e.g. the PDP gallery with many images). `nearest` only
+            // scrolls when needed, so it's a no-op for the small dot rows of
+            // the Carousel/Logos sliders and never scrolls the page.
+            dot?.scrollIntoView({ block: "nearest", inline: "nearest" });
           } else {
             dot?.removeAttribute("disabled");
             dot?.removeAttribute("aria-current");
