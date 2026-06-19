@@ -16,6 +16,12 @@ export interface CartItem {
   quantity: number;
 }
 
+export interface AppliedCoupon {
+  code: string;
+  /** Whether the platform considers the code valid/applicable to this cart. */
+  applicable: boolean;
+}
+
 export interface CartState {
   id: string | null;
   items: CartItem[];
@@ -23,6 +29,7 @@ export interface CartState {
   total: CartItemPrice;
   checkoutUrl: string | null;
   totalQuantity: number;
+  appliedCoupons: AppliedCoupon[];
 }
 
 export const EMPTY_CART: CartState = {
@@ -32,4 +39,5 @@ export const EMPTY_CART: CartState = {
   total: { amount: 0, currencyCode: "USD" },
   checkoutUrl: null,
   totalQuantity: 0,
+  appliedCoupons: [],
 };

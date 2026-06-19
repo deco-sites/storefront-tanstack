@@ -4,8 +4,10 @@ import Image from "~/components/ui/Image";
 import Icon from "../ui/Icon";
 import { MINICART_DRAWER_ID } from "../../constants";
 import {
+  useApplyCoupon,
   useCart,
   useRemoveCartItem,
+  useRemoveCoupon,
   useUpdateCartItem,
   type CartItem,
   type CartState,
@@ -108,9 +110,76 @@ function EmptyState() {
   );
 }
 
+function CouponBox({ cart }: { cart: CartState }) {
+  const apply = useApplyCoupon();
+  const remove = useRemoveCoupon();
+  return (
+    <div className="px-4 py-3 flex flex-col gap-2 border-t border-base-200">
+      <form
+        className="flex gap-2"
+        onSubmit={(e) => {
+          e.preventDefault();
+          const data = new FormData(e.currentTarget);
+          const code = `${data.get("coupon") ?? ""}`.trim();
+          if (code) {
+            apply.mutate(code);
+            e.currentTarget.reset();
+          }
+        }}
+      >
+        <input
+          name="coupon"
+          className="input input-bordered input-sm grow"
+          placeholder="Discount code"
+          aria-label="Discount code"
+        />
+        <button
+          type="submit"
+          className="btn btn-outline btn-sm no-animation"
+          disabled={apply.isPending}
+        >
+          {apply.isPending
+            ? <span className="loading loading-spinner loading-xs" />
+            : "Apply"}
+        </button>
+      </form>
+      {cart.appliedCoupons.length > 0 && (
+        <ul className="flex flex-col gap-1">
+          {cart.appliedCoupons.map((c) => (
+            <li
+              key={c.code}
+              className="flex items-center justify-between text-sm"
+            >
+              <span className={clx(!c.applicable && "text-error line-through")}>
+                {c.code}
+                {!c.applicable && " (not applicable)"}
+              </span>
+              <button
+                type="button"
+                className="btn btn-ghost btn-xs no-animation"
+                aria-label={`Remove coupon ${c.code}`}
+                disabled={remove.isPending}
+                onClick={() => remove.mutate(c.code)}
+              >
+                <Icon id="close" />
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+      {apply.isError && (
+        <span className="text-sm text-error">
+          Couldn't apply that code. Please try again.
+        </span>
+      )}
+    </div>
+  );
+}
+
 function Footer({ cart }: { cart: CartState }) {
   return (
     <footer className="w-full border-t border-base-200">
+      <CouponBox cart={cart} />
       <div className="px-4 py-4 flex justify-between items-center">
         <span className="text-sm">Subtotal</span>
         <span className="font-medium">
