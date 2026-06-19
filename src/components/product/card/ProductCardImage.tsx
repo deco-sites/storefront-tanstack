@@ -10,7 +10,10 @@ export interface Props {
   backAlt?: string;
   width: number;
   height: number;
+  /** Eager-load the image (LCP) — distinct from `prefetch` (route preload). */
   preload?: boolean;
+  /** Router preload strategy for the product link. */
+  prefetch?: "intent" | false;
   inStock: boolean;
 }
 
@@ -23,13 +26,14 @@ export default function ProductCardImage({
   width,
   height,
   preload,
+  prefetch = "intent",
   inStock,
 }: Props) {
   const aspectRatio = `${width} / ${height}`;
   return (
     <Link
       to={href}
-      preload="intent"
+      preload={prefetch}
       aria-label="view product"
       className={clx(
         "absolute top-0 left-0",
