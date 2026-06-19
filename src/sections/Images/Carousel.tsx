@@ -206,20 +206,16 @@ export default Carousel;
 export const cache = "listing";
 
 export function LoadingFallback() {
+  // Reserve the carousel's real footprint to avoid CLS: the banner is a
+  // full-width hero at min-h-[660px] on mobile and ~600px (1440x600 image) on
+  // desktop. The previous fallback was a product-grid skeleton — wrong shape
+  // and far shorter than the banner, causing a large layout shift on load.
   return (
-    <div className="w-full py-8">
-      <div className="container mx-auto px-4">
-        <div className="h-6 w-48 bg-base-200 animate-pulse rounded mb-4" />
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {Array.from({ length: 4 }).map((_, i) => (
-            <div key={i} className="flex flex-col gap-2">
-              <div className="aspect-square bg-base-200 animate-pulse rounded" />
-              <div className="h-4 bg-base-200 animate-pulse rounded w-3/4" />
-              <div className="h-4 bg-base-200 animate-pulse rounded w-1/2" />
-            </div>
-          ))}
-        </div>
-      </div>
+    <div
+      className="w-screen min-h-[660px] sm:min-h-[600px] bg-base-200 flex items-center justify-center"
+      style={{ contentVisibility: "auto", containIntrinsicSize: "660px" }}
+    >
+      <span className="loading loading-spinner" />
     </div>
   );
 }
