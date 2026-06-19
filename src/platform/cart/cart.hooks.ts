@@ -67,6 +67,12 @@ export function useCart() {
 export function useAddToCart() {
   const qc = useQueryClient();
   return useMutation({
+    // Serialize all cart mutations (same scope id) so rapid actions run in
+    // order — the server sets absolute quantities, so out-of-order responses
+    // would otherwise clobber the cache. mutationKey lets useMutationState
+    // surface a global "cart busy" indicator.
+    scope: { id: "cart" },
+    mutationKey: ["cart", "add"],
     mutationFn: (input: { merchandiseId: string; quantity?: number }) =>
       addItemServerFn({ data: input }),
     // NOTE(DECO-5278): optimistic add is deferred — building an optimistic
@@ -82,6 +88,8 @@ export function useAddToCart() {
 export function useUpdateCartItem() {
   const qc = useQueryClient();
   return useMutation({
+    scope: { id: "cart" },
+    mutationKey: ["cart", "update"],
     mutationFn: (input: { lineId: string; quantity: number }) =>
       updateItemQuantityServerFn({ data: input }),
     onMutate: ({ lineId, quantity }) =>
@@ -98,6 +106,8 @@ export function useUpdateCartItem() {
 export function useRemoveCartItem() {
   const qc = useQueryClient();
   return useMutation({
+    scope: { id: "cart" },
+    mutationKey: ["cart", "remove"],
     mutationFn: (input: { lineId: string }) => removeItemServerFn({ data: input }),
     onMutate: ({ lineId }) =>
       optimisticCartUpdate(qc, (items) => items.filter((i) => i.lineId !== lineId)),
