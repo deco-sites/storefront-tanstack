@@ -1,15 +1,18 @@
 {
-  "name": "storefront-tanstack-template",
+  "name": "storefront-tanstack",
   "account_id": "c95fc4cec7fc52453228d9db170c372c",
   "compatibility_date": "2026-02-14",
   "compatibility_flags": ["nodejs_compat", "no_handle_cross_request_promise_resolution"],
   "main": "./src/worker-entry.ts",
   "workers_dev": true,
   "preview_urls": true,
-  // Uncomment for redirect/AB testing support via KV:
-  // "kv_namespaces": [
-  //   { "binding": "SITES_KV", "id": "YOUR_KV_NAMESPACE_ID" }
-  // ],
+  // Fast Deploy — KV-first content delivery. Requires DECO_FAST_DEPLOY="1"
+  // (in vars below) AND this binding; both must be present to activate.
+  // TODO(fast-deploy): replace the placeholder id with the real DECO_KV
+  // namespace id before deploying — see `wrangler kv namespace create DECO_KV`.
+  "kv_namespaces": [
+    { "binding": "DECO_KV", "id": "PLACEHOLDER_REPLACE_AFTER_NAMESPACE_CREATE" }
+  ],
   // Strategy B tail worker — 100% capture of producer errors that the
   // framework's direct-POST channel can't see (uncaught throws, exceededCpu,
   // exceededMemory, raw console.error). Invoked by CF on every request to
@@ -67,6 +70,9 @@
   "vars": {
     "DECO_SITE_NAME": "storefront-tanstack",
     "DECO_ENV_NAME": "production",
+    // Fast Deploy opt-in. Inert unless the DECO_KV binding above is also
+    // present — set both to serve content KV-first. Set to "0" to disable.
+    "DECO_FAST_DEPLOY": "1",
     "DECO_OTEL_METRICS_ENDPOINT": "https://deco-otel-ingest.deco-cx.workers.dev/v1/metrics",
     "DECO_OTEL_LOGS_ENDPOINT": "https://deco-otel-ingest.deco-cx.workers.dev/v1/logs"
   },
