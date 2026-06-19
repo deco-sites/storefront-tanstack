@@ -75,8 +75,10 @@
 		// Fast Deploy opt-in. Requires BOTH this flag AND the DECO_KV binding
 		// below; inert if either is missing. Set to "0" to disable.
 		"DECO_FAST_DEPLOY": "1",
-		"DECO_OTEL_METRICS_ENDPOINT": "https://deco-otel-ingest.deco-cx.workers.dev/v1/metrics",
-		"DECO_OTEL_LOGS_ENDPOINT": "https://deco-otel-ingest.deco-cx.workers.dev/v1/logs"
+		"DECO_OTEL_METRICS_ENDPOINT": "https://otel-worker.deco.cx/v1/metrics",
+		"DECO_OTEL_LOGS_ENDPOINT": "https://otel-worker.deco.cx/v1/logs",
+		"DECO_OTEL_TRACES_ENDPOINT": "https://otel-worker.deco.cx/v1/traces",
+		"DECO_OTEL_TRACES_SAMPLING_RATE": "0.01"
 	},
 	// CF-native observability: structured console.* output and auto-
 	// instrumented traces (fetch/KV/R2/DO subrequests + @opentelemetry/api

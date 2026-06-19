@@ -11,6 +11,7 @@
 import "./setup";
 import handler, { createServerEntry } from "@tanstack/react-start/server-entry";
 import { createDecoWorkerEntry } from "@decocms/start/sdk/workerEntry";
+import { instrumentWorker } from "@decocms/start/sdk/otel";
 import { detectDevice } from "@decocms/start/sdk/useDevice";
 import {
   handleMeta,
@@ -34,6 +35,14 @@ const CSP_DIRECTIVES = [
 ];
 
 const decoWorker = createDecoWorkerEntry(serverEntry, {
+  // Opt out of the auto-wrap the framework (6.6.0+) applies inside
+  // createDecoWorkerEntry. We keep the manual `instrumentWorker(decoWorker)`
+  // wrap at the bottom of this file as the outermost layer. Without
+  // `observability: false` we'd double-wrap and reinitialize the OTel SDK
+  // twice per request. Manual wrap is the proven path on every tanstack site
+  // that emits today.
+  observability: false,
+
   admin: {
     handleMeta,
     handleDecofileRead,
@@ -71,4 +80,6 @@ const decoWorker = createDecoWorkerEntry(serverEntry, {
   // proxyHandler unset keeps all routes going through TanStack Start.
 });
 
-export default decoWorker;
+// instrumentWorker MUST be the outermost wrapper — it initialises the OTel SDK
+// and flushes telemetry via ctx.waitUntil after each request.
+export default instrumentWorker(decoWorker);
