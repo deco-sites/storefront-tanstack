@@ -30,7 +30,7 @@
   "license": "MIT",
   "dependencies": {
     "@decocms/apps": "^5.2.0",
-    "@decocms/start": "github:decocms/deco-start#c2c58d115c8e5fdb697fd6f0eb64eb36a4577eb8",
+    "@decocms/start": "^6.20.1",
     "@tanstack/react-query": "5.90.21",
     "@tanstack/react-router": "1.166.7",
     "@tanstack/react-start": "1.166.8",
