@@ -2,8 +2,8 @@
   "banners": [
     {
       "image": {
-        "mobile": "https://assets.decocache.com/storefront/b79aa236-d06d-481f-adf7-2f1076ea6210/1742560270734-91102b71-4832-486a-b683-5f7b06f649af",
-        "desktop": "https://assets.decocache.com/storefront/ca7dd51a-e5ae-491a-b72a-08c07aa4a70d/1742560272355-ec597b6a-dcf1-48ca-a99d-95b3c6304f96"
+        "mobile": "https://decoims.com/storefront-tanstack/9623a97c-f32c-4b03-bee9-fbfabfedd80a/1742560270734-91102b71-4832-486a-b683-5f7b06f649af.png",
+        "desktop": "https://decoims.com/storefront-tanstack/158e2140-b3b8-413d-b05e-8f3ab8c54bce/1742560272355-ec597b6a-dcf1-48ca-a99d-95b3c6304f96.png"
       },
       "title": "Woman",
       "matcher": "/feminino/*",
@@ -11,8 +11,8 @@
     },
     {
       "image": {
-        "mobile": "https://assets.decocache.com/storefront/b79aa236-d06d-481f-adf7-2f1076ea6210/1742560270734-91102b71-4832-486a-b683-5f7b06f649af",
-        "desktop": "https://assets.decocache.com/storefront/ca7dd51a-e5ae-491a-b72a-08c07aa4a70d/1742560272355-ec597b6a-dcf1-48ca-a99d-95b3c6304f96"
+        "mobile": "https://decoims.com/storefront-tanstack/9623a97c-f32c-4b03-bee9-fbfabfedd80a/1742560270734-91102b71-4832-486a-b683-5f7b06f649af.png",
+        "desktop": "https://decoims.com/storefront-tanstack/158e2140-b3b8-413d-b05e-8f3ab8c54bce/1742560272355-ec597b6a-dcf1-48ca-a99d-95b3c6304f96.png"
       },
       "title": "Woman",
       "matcher": "/*",
