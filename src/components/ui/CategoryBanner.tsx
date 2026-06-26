@@ -25,9 +25,9 @@ const DEFAULT_PROPS = {
     {
       image: {
         mobile:
-          "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/91102b71-4832-486a-b683-5f7b06f649af",
+          "https://decoims.com/storefront-tanstack/c0b6f7a9-594c-4ef3-ae7c-3692d6a2b0e1/91102b71-4832-486a-b683-5f7b06f649af.png",
         desktop:
-          "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/ec597b6a-dcf1-48ca-a99d-95b3c6304f96",
+          "https://decoims.com/storefront-tanstack/ef71cb9d-0b90-4e48-96cc-cf5069b64cbe/ec597b6a-dcf1-48ca-a99d-95b3c6304f96.png",
         alt: "a",
       },
       title: "Woman",
