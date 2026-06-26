@@ -1,0 +1,58 @@
+name: Fast deploy — sync content to KV
+
+# Content-only commits (.deco/blocks/**) are EXCLUDED from Cloudflare Workers
+# Builds via the worker's "Build watch paths", so they never redeploy the worker.
+# This workflow is the ONE place that pushes those content changes into
+# Cloudflare KV (the worker reads KV-first) and purges the edge cache for the
+# affected pages. Code deploys stay on Cloudflare Builds — the two never overlap.
+#
+# Required GitHub secrets:
+#   CF_ACCOUNT_ID       Cloudflare account id
+#   CF_KV_NAMESPACE_ID  the site's DECO_KV namespace id
+#   CF_API_TOKEN        token with "Workers KV Storage: Edit"
+#   PURGE_TOKEN         must equal the worker's PURGE_TOKEN env var
+# Required GitHub variable (Settings → Secrets and variables → Variables):
+#   SITE_ORIGIN         the live origin, e.g. https://www.example.com
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".deco/blocks/**"
+
+concurrency:
+  group: sync-content-to-kv
+  cancel-in-progress: false # never interrupt an in-flight KV write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # need history to diff against the previous commit
+
+      - uses: oven-sh/setup-bun@v2
+
+      - run: bun install --frozen-lockfile
+
+      - name: Sync .deco/blocks → Cloudflare KV (+ purge changed pages)
+        env:
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+          CF_KV_NAMESPACE_ID: ${{ secrets.CF_KV_NAMESPACE_ID }}
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          PURGE_TOKEN: ${{ secrets.PURGE_TOKEN }}
+          SITE_ORIGIN: ${{ vars.SITE_ORIGIN }}
+          BEFORE_SHA: ${{ github.event.before }}
+        run: |
+          # A brand-new branch or a force-push reports an all-zero parent SHA —
+          # there's nothing to diff against, so sync the whole snapshot instead.
+          if [ -z "$BEFORE_SHA" ] || [ "$BEFORE_SHA" = "0000000000000000000000000000000000000000" ]; then
+            RANGE_ARGS="--all"
+          else
+            RANGE_ARGS="--since $BEFORE_SHA"
+          fi
+          bun node_modules/@decocms/start/scripts/sync-blocks-to-kv.ts \
+            --write $RANGE_ARGS \
+            --purge-url "$SITE_ORIGIN" \
+            --purge-token "$PURGE_TOKEN"

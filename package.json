@@ -15,6 +15,7 @@
     "build": "npm run generate:blocks && npm run generate:sections && npm run generate:loaders && npm run generate:schema && tsr generate && vite build",
     "preview": "vite preview",
     "deploy": "npm run build && wrangler deploy",
+    "sync:kv": "bun node_modules/@decocms/start/scripts/sync-blocks-to-kv.ts",
     "types": "wrangler types",
     "typecheck": "tsc --noEmit",
     "format": "prettier --write \"src/**/*.{ts,tsx}\"",
