@@ -75,9 +75,9 @@
     // Fast Deploy opt-in. Requires BOTH this flag AND the DECO_KV binding
     // above; inert if either is missing. Set to "0" to disable.
     "DECO_FAST_DEPLOY": "1",
-    "DECO_OTEL_METRICS_ENDPOINT": "https://otel-ingest.infra.deco.cx:4318/v1/metrics",
-    "DECO_OTEL_LOGS_ENDPOINT": "https://otel-ingest.infra.deco.cx:4318/v1/logs",
-    "DECO_OTEL_TRACES_ENDPOINT": "https://otel-ingest.infra.deco.cx:4318/v1/traces",
+    "DECO_OTEL_METRICS_ENDPOINT": "https://otel-ingest.infra.deco.cx/v1/metrics",
+    "DECO_OTEL_LOGS_ENDPOINT": "https://otel-ingest.infra.deco.cx/v1/logs",
+    "DECO_OTEL_TRACES_ENDPOINT": "https://otel-ingest.infra.deco.cx/v1/traces",
     "DECO_OTEL_TRACES_SAMPLING_RATE": "0.01"
     // DECO_OTEL_AUTH_TOKEN goes as a secret: wrangler secret put DECO_OTEL_AUTH_TOKEN
   }
