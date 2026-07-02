@@ -5,6 +5,30 @@
 // Custom-wired entries should be excluded via --exclude and added manually in setup.ts.
 
 export const siteLoaders: Record<string, (props: any, request?: Request) => Promise<any>> = {
+  "site/actions/address/submit": async (props: any, request?: Request) => {
+    const mod = await import("../../actions/address/submit");
+    return (mod.default as any)(props, request);
+  },
+  "site/actions/address/submit.ts": async (props: any, request?: Request) => {
+    const mod = await import("../../actions/address/submit");
+    return (mod.default as any)(props, request);
+  },
+  "site/actions/newsletter/subscribe": async (props: any, request?: Request) => {
+    const mod = await import("../../actions/newsletter/subscribe");
+    return (mod.default as any)(props, request);
+  },
+  "site/actions/newsletter/subscribe.ts": async (props: any, request?: Request) => {
+    const mod = await import("../../actions/newsletter/subscribe");
+    return (mod.default as any)(props, request);
+  },
+  "site/actions/notifyMe/subscribe": async (props: any, request?: Request) => {
+    const mod = await import("../../actions/notifyMe/subscribe");
+    return (mod.default as any)(props, request);
+  },
+  "site/actions/notifyMe/subscribe.ts": async (props: any, request?: Request) => {
+    const mod = await import("../../actions/notifyMe/subscribe");
+    return (mod.default as any)(props, request);
+  },
   "site/actions/shipping/simulate": async (props: any, request?: Request) => {
     const mod = await import("../../actions/shipping/simulate");
     return (mod.default as any)(props, request);
@@ -19,6 +43,14 @@ export const siteLoaders: Record<string, (props: any, request?: Request) => Prom
   },
   "site/actions/wishlist/submit.ts": async (props: any, request?: Request) => {
     const mod = await import("../../actions/wishlist/submit");
+    return (mod.default as any)(props, request);
+  },
+  "site/loaders/address": async (props: any, request?: Request) => {
+    const mod = await import("../../loaders/address");
+    return (mod.default as any)(props, request);
+  },
+  "site/loaders/address.ts": async (props: any, request?: Request) => {
+    const mod = await import("../../loaders/address");
     return (mod.default as any)(props, request);
   },
   "site/loaders/user": async (props: any, request?: Request) => {
