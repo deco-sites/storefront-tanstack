@@ -21,6 +21,7 @@ import {
   corsHeaders,
 } from "@decocms/start/admin";
 import { getCookies } from "@decocms/apps/shopify/utils/cookies";
+import { withABTesting } from "@decocms/start/sdk/abTesting";
 
 const serverEntry = createServerEntry({ fetch: handler.fetch });
 
@@ -81,36 +82,19 @@ const decoWorker = createDecoWorkerEntry(serverEntry, {
 });
 
 // ---------------------------------------------------------------------------
-// A/B wrapper — KV-driven traffic split between TanStack and legacy origin
+// A/B wrapper — KV-driven traffic split between the TanStack worker and a
+// legacy fallback origin during the migration period.
+//
+// Reads config from KV (binding below) keyed by hostname. When the binding is
+// absent, or KV has no config for the host, ALL traffic passes straight to the
+// worker (no split). So this is safe to ship before SITES_KV exists — to
+// actually enable A/B, add the `SITES_KV` binding in wrangler.jsonc and a
+// per-host config: { "workerName": "...", "fallbackOrigin": "...",
+// "abTest": { "ratio": 0.5 } }.
 // ---------------------------------------------------------------------------
 
 const abTestedWorker = withABTesting(decoWorker, {
   kvBinding: "SITES_KV",
-  preHandler: (request, url) => {
-    const redirect = matchRedirect(url.pathname, cmsRedirects);
-    if (redirect) {
-      const target = url.search ? `${redirect.to}${url.search}` : redirect.to;
-      return new Response(null, {
-        status: redirect.status,
-        headers: { Location: target },
-      });
-    }
-    return null;
-  },
-  shouldBypassAB: (_request, url) => {
-    // Crawlers must always get a deterministic sitemap from the worker,
-    // not from the legacy fallback origin.
-    if (isCollectionsSitemapPath(url.pathname)) return true;
-    if (isVtexSitemapPath(url.pathname)) return true;
-    if (
-      url.pathname === "/login" ||
-      url.pathname === "/login/" ||
-      url.pathname === "/logout" ||
-      url.pathname === "/logout/"
-    )
-      return false;
-    return shouldProxyToVtex(url.pathname);
-  },
 });
 
 // instrumentWorker MUST be the outermost wrapper. It initialises the OTel
