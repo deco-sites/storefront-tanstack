@@ -37,6 +37,10 @@
     {
       "binding": "DECO_KV",
       "id": "a205a78ee28c44c3910cf52a3482a65f"
+    },
+    {
+      "binding": "SITES_KV",
+      "id": "ad0b74fc4d9341c9af9149c4ab85132f"
     }
   ],
   // Observability — three-channel model (Strategy B, see decocms/deco-start D-8).
