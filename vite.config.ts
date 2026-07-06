@@ -10,7 +10,7 @@ const srcDir = path.resolve(__dirname, "src");
 
 export default defineConfig({
   server: {
-    allowedHosts: [".decocdn.com", ".trycloudflare.com"],
+    allowedHosts: [".decocdn.com", ".trycloudflare.com", ".preview-studio.decocms.com"],
     // Shopify Storefront API is called server-side from loaders — no dev
     // proxy is needed. Checkout happens on Shopify's hosted checkout (or
     // the store's custom domain).
