@@ -12,8 +12,6 @@ export function getRouter() {
     routeTree,
     context: { queryClient },
     defaultPreload: "intent",
-    defaultPreloadStaleTime: 60_000,
-    defaultPreloadGcTime: 5 * 60_000,
     Wrap: ({ children }) => (
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     ),
