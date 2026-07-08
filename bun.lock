@@ -1,11 +1,12 @@
 {
   "lockfileVersion": 1,
+  "configVersion": 0,
   "workspaces": {
     "": {
       "name": "storefront-tanstack",
       "dependencies": {
-        "@decocms/apps": "^5.3.0",
-        "@decocms/start": "^6.28.0",
+        "@decocms/apps": "^5.4.0",
+        "@decocms/start": "^6.30.0",
         "@tanstack/react-query": "5.90.21",
         "@tanstack/react-router": "1.166.7",
         "@tanstack/react-start": "1.166.8",
@@ -99,9 +100,9 @@
 
     "@deco-cx/warp-node": ["@deco-cx/warp-node@0.3.20", "", { "dependencies": { "undici": "^6.21.0", "ws": "^8.18.0" } }, "sha512-rdRWrT5eMhu1zhAzliRkoQCUr2j6Dg9npUKoP4uP+rV9wIbYKSmXJbM2z/fOiy5FVvzQlpvY16ACNRIRz+UWqw=="],
 
-    "@decocms/apps": ["@decocms/apps@5.3.0", "", { "peerDependencies": { "@decocms/start": ">=6.6.0", "@tanstack/react-query": ">=5", "@tanstack/react-start": ">=1", "algoliasearch": "^5", "react": ">=18", "react-dom": ">=18" }, "optionalPeers": ["algoliasearch"] }, "sha512-72gXaf9xsigjApqrCLx0Ba7nzUEpRgNWQKiPXgHRuRNNp/2W3nrjB4liQ0pPT1U1A5kgf0pPB686v/Z/+SrNSQ=="],
+    "@decocms/apps": ["@decocms/apps@5.4.0", "", { "peerDependencies": { "@decocms/start": ">=6.6.0", "@tanstack/react-query": ">=5", "@tanstack/react-start": ">=1", "algoliasearch": "^5", "react": ">=18", "react-dom": ">=18" }, "optionalPeers": ["algoliasearch"] }, "sha512-rakmuz9ZjZeGjgrk3FCGu+TMmyB93oDJpgbIydpMEh6j5BgG3ciXCifQXUOl85uDfbp6LI+OMvSStZMYmdukGQ=="],
 
-    "@decocms/start": ["@decocms/start@6.28.0", "", { "dependencies": { "@deco-cx/warp-node": "^0.3.16", "@opentelemetry/api": "^1.9.1", "@opentelemetry/semantic-conventions": "^1.28.0", "clsx": "^2.1.1", "fast-json-patch": "^3.1.0", "tailwind-merge": "^3.3.1", "tsx": "^4.19.0", "ws": "^8.18.0" }, "peerDependencies": { "@tanstack/react-query": ">=5.0.0", "@tanstack/react-start": ">=1.0.0", "@tanstack/store": ">=0.7.0", "react": "^19.0.0", "react-dom": "^19.0.0", "vite": ">=6.0.0 || >=7.0.0 || >=8.0.0" }, "bin": { "deco-migrate": "scripts/migrate.ts", "deco-htmx-analyze": "scripts/htmx-analyze.ts", "deco-post-cleanup": "scripts/migrate-post-cleanup.ts", "deco-cf-observability": "scripts/migrate-to-cf-observability.ts", "deco-sync-blocks-to-kv": "scripts/sync-blocks-to-kv.ts", "deco-audit-observability": "scripts/audit-observability-config.ts", "deco-migrate-blocks-to-kv": "scripts/migrate-blocks-to-kv.ts" } }, "sha512-2BR1ub9hwOFhdyS5X8VWJgXMR2uz5025vm7qGSKeHNW+0T7KX7UwfBQFduC4QbKPThiplB3qh5BZh1Ttw5XqUw=="],
+    "@decocms/start": ["@decocms/start@6.30.0", "", { "dependencies": { "@deco-cx/warp-node": "^0.3.16", "@opentelemetry/api": "^1.9.1", "@opentelemetry/semantic-conventions": "^1.28.0", "clsx": "^2.1.1", "fast-json-patch": "^3.1.0", "tailwind-merge": "^3.3.1", "tsx": "^4.19.0", "ws": "^8.18.0" }, "peerDependencies": { "@tanstack/react-query": ">=5.0.0", "@tanstack/react-start": ">=1.0.0", "@tanstack/store": ">=0.7.0", "react": "^19.0.0", "react-dom": "^19.0.0", "vite": ">=6.0.0 || >=7.0.0 || >=8.0.0" }, "bin": { "deco-migrate": "scripts/migrate.ts", "deco-post-cleanup": "scripts/migrate-post-cleanup.ts", "deco-htmx-analyze": "scripts/htmx-analyze.ts", "deco-cf-observability": "scripts/migrate-to-cf-observability.ts", "deco-audit-observability": "scripts/audit-observability-config.ts", "deco-migrate-blocks-to-kv": "scripts/migrate-blocks-to-kv.ts", "deco-sync-blocks-to-kv": "scripts/sync-blocks-to-kv.ts" } }, "sha512-6wZ2EHo/Ei98Z9O5SMlmjVPVM4rnTpa+1kTo/+NH2tNu3LC+jybxb2w2mgRWL8ZvCIm4v2mp6mijLUt0YcDIIQ=="],
 
     "@emnapi/core": ["@emnapi/core@1.10.0", "", { "dependencies": { "@emnapi/wasi-threads": "1.2.1", "tslib": "^2.4.0" } }, "sha512-yq6OkJ4p82CAfPl0u9mQebQHKPJkY7WrIuk205cTYnYe+k2Z8YBh11FrbRG/H6ihirqcacOgl2BIO8oyMQLeXw=="],
 
