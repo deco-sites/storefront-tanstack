@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import type { Product } from "@decocms/apps/commerce/types";
+import type { Product } from "@decocms/apps-commerce/types";
 import { invoke } from "../../runtime";
 import { useUser } from "../../platform/user";
 import type { NotifyMeResult } from "../../actions/notifyMe/subscribe";

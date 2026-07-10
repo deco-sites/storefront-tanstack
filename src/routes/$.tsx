@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { cmsRouteConfig, deferredSectionLoader } from "@decocms/start/routes";
-import { DecoPageRenderer } from "@decocms/start/hooks";
+import { cmsRouteConfig, DecoPageRenderer } from "@decocms/tanstack";
+import { deferredSectionLoader } from "@decocms/tanstack/sdk/deferredSectionLoader";
 
 const routeConfig = cmsRouteConfig({
   siteName: "Storefront-tanstack",

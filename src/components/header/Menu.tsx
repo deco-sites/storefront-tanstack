@@ -1,5 +1,5 @@
 import Icon from "../../components/ui/Icon";
-import type { SiteNavigationElement } from "@decocms/apps/commerce/types";
+import type { SiteNavigationElement } from "@decocms/apps-commerce/types";
 
 export interface Props {
   navItems?: SiteNavigationElement[];

@@ -1,4 +1,4 @@
-import type { Product, ProductListingPage } from "@decocms/apps/commerce/types";
+import type { Product, ProductListingPage } from "@decocms/apps-commerce/types";
 
 export interface ProductListProps {
   page: ProductListingPage | null;

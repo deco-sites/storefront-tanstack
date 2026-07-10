@@ -10,7 +10,7 @@ import {
   signIn as shopifySignIn,
   signUp as shopifySignUp,
   userLoader as shopifyUserLoader,
-} from "@decocms/apps/shopify";
+} from "@decocms/apps-shopify";
 import type { Person } from "./user.types";
 
 const CUSTOMER_COOKIE = "secure_customer_sig";

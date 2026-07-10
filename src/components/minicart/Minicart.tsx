@@ -1,4 +1,4 @@
-import { formatPrice } from "@decocms/apps/commerce/sdk/formatPrice";
+import { formatPrice } from "@decocms/apps-commerce/sdk/formatPrice";
 import { clx } from "~/sdk/clx";
 import Image from "~/components/ui/Image";
 import Icon from "../ui/Icon";

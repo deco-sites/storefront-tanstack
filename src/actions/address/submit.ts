@@ -1,4 +1,4 @@
-import { RequestContext } from "@decocms/start/sdk/requestContext";
+import { RequestContext } from "@decocms/blocks/sdk/requestContext";
 import { usePlatform } from "../../apps/site";
 import {
   type Address,

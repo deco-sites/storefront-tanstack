@@ -1,11 +1,11 @@
 import { useState } from "react";
-import type { Product } from "@decocms/apps/commerce/types";
-import { mapProductToAnalyticsItem } from "@decocms/apps/commerce/utils/productToAnalyticsItem";
+import type { Product } from "@decocms/apps-commerce/types";
+import { mapProductToAnalyticsItem } from "@decocms/apps-commerce/utils/productToAnalyticsItem";
 import { Link } from "@tanstack/react-router";
 import { clx } from "~/sdk/clx";
-import { useOffer } from "@decocms/apps/commerce/sdk/useOffer";
+import { useOffer } from "@decocms/apps-commerce/sdk/useOffer";
 import { useSendEvent } from "../../../sdk/useSendEvent";
-import { useVariantPossibilities } from "@decocms/apps/commerce/sdk/useVariantPossibilities";
+import { useVariantPossibilities } from "@decocms/apps-commerce/sdk/useVariantPossibilities";
 import { relative } from "../../../sdk/url";
 import WishlistButton from "../../wishlist/WishlistButton";
 import { filterImagesForVariant } from "../pdp/ProductGallery";

@@ -1,4 +1,4 @@
-import type { AnalyticsItem } from "@decocms/apps/commerce/types";
+import type { AnalyticsItem } from "@decocms/apps-commerce/types";
 import { Link } from "@tanstack/react-router";
 import { clx } from "~/sdk/clx";
 import { useAddToCart } from "../../../platform/cart";

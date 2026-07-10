@@ -2,12 +2,12 @@ import type {
   Filter,
   FilterToggle,
   ProductListingPage,
-} from "@decocms/apps/commerce/types";
-import { parseRange } from "@decocms/apps/commerce/utils/filters";
+} from "@decocms/apps-commerce/types";
+import { parseRange } from "@decocms/apps-commerce/utils/filters";
 import { Link } from "@tanstack/react-router";
 import Avatar from "../../components/ui/Avatar";
 import { clx } from "~/sdk/clx";
-import { formatPrice } from "@decocms/apps/commerce/sdk/formatPrice";
+import { formatPrice } from "@decocms/apps-commerce/sdk/formatPrice";
 import { rebaseToSearch } from "~/sdk/url";
 
 interface Props {

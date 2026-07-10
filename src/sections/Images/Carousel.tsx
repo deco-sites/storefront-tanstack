@@ -5,7 +5,7 @@ import Slider from "../../components/ui/Slider";
 import { clx } from "~/sdk/clx";
 import { useId } from "react";
 import { useSendEvent } from "../../sdk/useSendEvent";
-import { useDevice } from "@decocms/start/sdk/useDevice";
+import { useDevice } from "@decocms/blocks/sdk/useDevice";
 // useSetEarlyHints was a Deco Fresh-only hook; edge hints are now set via cacheHeaders.
 const useSetEarlyHints = () => () => {};
 

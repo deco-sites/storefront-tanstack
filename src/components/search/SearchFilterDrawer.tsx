@@ -1,4 +1,4 @@
-import type { ProductListingPage } from "@decocms/apps/commerce/types";
+import type { ProductListingPage } from "@decocms/apps-commerce/types";
 import Filters from "./Filters";
 import Icon from "../ui/Icon";
 

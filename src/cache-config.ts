@@ -1,8 +1,8 @@
 /**
  * Cache configuration for VTEX storefront.
- * Overrides default cache profiles from @decocms/start/sdk/cacheHeaders.
+ * Overrides default cache profiles from @decocms/blocks/sdk/cacheHeaders.
  */
-// import { setCacheProfile } from "@decocms/start/sdk/cacheHeaders";
+// import { setCacheProfile } from "@decocms/blocks/sdk/cacheHeaders";
 
 // Uncomment and adjust as needed:
 // setCacheProfile("product", { sMaxAge: 300, staleWhileRevalidate: 600 });

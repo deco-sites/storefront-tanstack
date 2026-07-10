@@ -1,6 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { getRequestHeader } from "@tanstack/react-start/server";
-import { detectDevice } from "@decocms/start/sdk/useDevice";
+import { detectDevice } from "@decocms/blocks/sdk/useDevice";
 
 export const getDeviceFromServer = createServerFn({ method: "GET" }).handler(
   async () => {

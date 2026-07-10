@@ -10,18 +10,18 @@
  */
 import "./setup";
 import handler, { createServerEntry } from "@tanstack/react-start/server-entry";
-import { createDecoWorkerEntry } from "@decocms/start/sdk/workerEntry";
-import { instrumentWorker } from "@decocms/start/sdk/otel";
-import { detectDevice } from "@decocms/start/sdk/useDevice";
+import { createDecoWorkerEntry } from "@decocms/tanstack";
+import { instrumentWorker } from "@decocms/blocks/sdk/otel";
+import { detectDevice } from "@decocms/blocks/sdk/useDevice";
 import {
   handleMeta,
   handleDecofileRead,
   handleDecofileReload,
   handleRender,
   corsHeaders,
-} from "@decocms/start/admin";
-import { getCookies } from "@decocms/apps/shopify/utils/cookies";
-import { withABTesting } from "@decocms/start/sdk/abTesting";
+} from "@decocms/blocks-admin";
+import { getCookies } from "@decocms/apps-shopify/utils/cookies";
+import { withABTesting } from "@decocms/blocks/sdk/abTesting";
 
 const serverEntry = createServerEntry({ fetch: handler.fetch });
 

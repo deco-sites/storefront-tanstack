@@ -1,7 +1,7 @@
 import { useId } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
-import type { Product } from "@decocms/apps/commerce/types";
-import { useVariantPossibilities } from "@decocms/apps/commerce/sdk/useVariantPossibilities";
+import type { Product } from "@decocms/apps-commerce/types";
+import { useVariantPossibilities } from "@decocms/apps-commerce/sdk/useVariantPossibilities";
 import { clx } from "~/sdk/clx";
 import { relative } from "../../../sdk/url";
 

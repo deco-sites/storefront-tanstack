@@ -1,6 +1,6 @@
-import type { ProductDetailsPage } from "@decocms/apps/commerce/types";
-import { useOffer } from "@decocms/apps/commerce/sdk/useOffer";
-import { mapProductToAnalyticsItem } from "@decocms/apps/commerce/utils/productToAnalyticsItem";
+import type { ProductDetailsPage } from "@decocms/apps-commerce/types";
+import { useOffer } from "@decocms/apps-commerce/sdk/useOffer";
+import { mapProductToAnalyticsItem } from "@decocms/apps-commerce/utils/productToAnalyticsItem";
 import { useRouterState } from "@tanstack/react-router";
 import { useSendEvent } from "../../../sdk/useSendEvent";
 import { clx } from "~/sdk/clx";
