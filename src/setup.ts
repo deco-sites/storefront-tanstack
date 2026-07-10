@@ -24,6 +24,7 @@ import { autoconfigApps, type AppRegistry } from "@decocms/blocks-admin/apps";
 import { createInstrumentedFetch } from "@decocms/blocks/sdk/instrumentedFetch";
 import { initShopifyFromBlocks, setShopifyFetch } from "@decocms/apps-shopify";
 import { SHOPIFY_REGISTRY_ENTRY } from "@decocms/apps-shopify/registry";
+import * as shopifyMod from "@decocms/apps-shopify/mod";
 import { blocks as generatedBlocks } from "../.deco/blocks.gen";
 import { sectionMeta, syncComponents, loadingFallbacks } from "../.deco/sections.gen";
 import { PreviewProviders } from "@decocms/tanstack";
@@ -35,7 +36,14 @@ import "./setup/section-loaders";
 // Per-app registry entries, assembled from each app package's own ./registry
 // export — the aggregate `@decocms/apps/registry` no longer exists in the 7.x
 // package split. Shopify is the only commerce app this store configures.
-const APP_REGISTRY: AppRegistry = [SHOPIFY_REGISTRY_ENTRY];
+// SHOPIFY_REGISTRY_ENTRY.module is a dynamic `import("./mod")` that fails to
+// resolve in the production (vite/workerd) build — autoconfigApps then silently
+// swallows the error and skips Shopify, so its commerce loaders never register
+// and PDP/shelves resolve to null (works in `vite dev`, breaks in prod). Provide
+// the module statically so registration is build-safe.
+const APP_REGISTRY: AppRegistry = [
+  { ...SHOPIFY_REGISTRY_ENTRY, module: async () => shopifyMod as never },
+];
 
 // -- Framework setup (framework-generic options only) --
 createSiteSetup({
@@ -95,8 +103,6 @@ await autoconfigApps(generatedBlocks, APP_REGISTRY);
 // in the `x-deco-page-url` header so we can read it back here.
 import { RequestContext } from "@decocms/blocks/sdk/requestContext";
 import productListingPageLoader from "@decocms/apps-shopify/loaders/ProductListingPage";
-import productDetailsPageLoader from "@decocms/apps-shopify/loaders/ProductDetailsPage";
-import productListLoader from "@decocms/apps-shopify/loaders/ProductList";
 
 const SHOPIFY_PLP_KEY = "shopify/loaders/ProductListingPage";
 
@@ -128,17 +134,6 @@ const wrappedShopifyPLP = async (props: any) => {
 registerCommerceLoaders({
   [SHOPIFY_PLP_KEY]: wrappedShopifyPLP,
   [`${SHOPIFY_PLP_KEY}.ts`]: wrappedShopifyPLP,
-});
-
-// -- Legacy `.ts`-suffix compat (stopgap; remove once on @decocms/blocks >= 7.12.0) --
-// The decofile references shopify loaders with the Fresh-era `.ts` extension
-// (e.g. "shopify/loaders/ProductDetailsPage.ts"), but autoconfigApps registers
-// them WITHOUT it. Until the framework's getCommerceLoader strips the suffix
-// (decocms/blocks#333), alias the `.ts` keys to the underlying loaders so PDP +
-// shelves resolve.
-registerCommerceLoaders({
-  "shopify/loaders/ProductDetailsPage.ts": (props: any) => productDetailsPageLoader(props),
-  "shopify/loaders/ProductList.ts": (props: any) => productListLoader(props),
 });
 
 // -- Site-local loaders (not shipped by an app, still stubbed for Phase 6) --
