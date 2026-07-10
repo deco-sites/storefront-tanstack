@@ -1,9 +1,11 @@
 /**
  * Site setup — orchestrator that wires framework, apps, and sections.
  *
- * App-installed loaders + actions (Shopify, VTEX, Resend, …) are wired via
- * `autoconfigApps(blocks, APP_REGISTRY)` — adding a new app is a one-line
- * entry in `@decocms/apps/registry.ts`, no change needed here.
+ * App-installed loaders + actions are wired via
+ * `autoconfigApps(blocks, APP_REGISTRY)` — adding a new app is a one-line entry
+ * in the local `APP_REGISTRY` array below (each `@decocms/apps-<vendor>` ships
+ * its own `./registry` entry; the old aggregate `@decocms/apps/registry` is
+ * gone in the 7.x split).
  *
  * Section-specific prop enrichment lives in `setup/section-loaders.ts`.
  * Section metadata (eager, sync, layout, cache, LoadingFallback) is declared
@@ -72,10 +74,10 @@ applySectionConventions({
   sectionGlob: import.meta.glob("./sections/**/*.tsx") as Record<string, () => Promise<any>>,
 });
 
-// -- Apps: auto-configure from decofile against the @decocms/apps registry --
+// -- Apps: auto-configure from decofile against the APP_REGISTRY --
 // Registers commerce loaders (CMS resolve path) + invoke handlers (admin path)
-// for every app the site has configured. Adding a new app = add an entry in
-// @decocms/apps/registry.ts, no change needed here.
+// for every app the site has configured. Adding a new app = add its
+// `@decocms/apps-<vendor>/registry` entry to the APP_REGISTRY array above.
 await autoconfigApps(generatedBlocks, APP_REGISTRY);
 
 // -- Commerce-loader overrides --

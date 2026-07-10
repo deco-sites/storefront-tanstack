@@ -10,8 +10,6 @@ const config: KnipConfig = {
   ],
   project: ["src/**/*.{ts,tsx}"],
   ignore: [
-    "src/server/invoke.gen.ts",
-    "src/server/cms/blocks.gen.ts",
     "src/routeTree.gen.ts",
   ],
   ignoreDependencies: [
