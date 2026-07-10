@@ -1,6 +1,6 @@
 import { cloudflare } from "@cloudflare/vite-plugin";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
-import { decoVitePlugin } from "@decocms/start/vite";
+import { decoVitePlugin } from "@decocms/tanstack/vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite";

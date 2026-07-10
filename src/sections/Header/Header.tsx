@@ -1,5 +1,5 @@
 import type { HTMLWidget, ImageWidget } from "~/types/widgets";
-import type { SiteNavigationElement } from "@decocms/apps/commerce/types";
+import type { SiteNavigationElement } from "@decocms/apps-commerce/types";
 import Image from "~/components/ui/Image";
 import Alert from "../../components/header/Alert";
 import Bag from "../../components/header/Bag";
@@ -21,7 +21,7 @@ import {
   SIDEMENU_CONTAINER_ID,
   SIDEMENU_DRAWER_ID,
 } from "../../constants";
-import { useDevice } from "@decocms/start/sdk/useDevice";
+import { useDevice } from "@decocms/blocks/sdk/useDevice";
 import { type LoadingFallbackProps } from "~/types/deco";
 export interface Logo {
   src: ImageWidget;

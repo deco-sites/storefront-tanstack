@@ -1,4 +1,4 @@
-import type { ProductListingPage } from "@decocms/apps/commerce/types";
+import type { ProductListingPage } from "@decocms/apps-commerce/types";
 import { useNavigate } from "@tanstack/react-router";
 
 const SORT_QUERY_PARAM = "sort";

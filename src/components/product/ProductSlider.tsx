@@ -1,4 +1,4 @@
-import { Product } from "@decocms/apps/commerce/types";
+import { Product } from "@decocms/apps-commerce/types";
 import { clx } from "~/sdk/clx";
 import Icon from "../ui/Icon";
 import Slider from "../ui/Slider";

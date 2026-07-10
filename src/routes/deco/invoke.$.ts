@@ -1,4 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { decoInvokeRoute } from "@decocms/start/routes";
+import { decoInvokeRouteConfig } from "@decocms/tanstack";
 
-export const Route = createFileRoute("/deco/invoke/$")(decoInvokeRoute);
+export const Route = createFileRoute("/deco/invoke/$")(decoInvokeRouteConfig());

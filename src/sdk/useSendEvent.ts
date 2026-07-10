@@ -1,4 +1,4 @@
-import { AnalyticsEvent } from "@decocms/apps/commerce/types";
+import { AnalyticsEvent } from "@decocms/apps-commerce/types";
 
 export interface Options<E extends AnalyticsEvent> {
   event: E;

@@ -1,4 +1,4 @@
-import { formatPrice } from "@decocms/apps/commerce/sdk/formatPrice";
+import { formatPrice } from "@decocms/apps-commerce/sdk/formatPrice";
 
 export interface Props {
   price?: number;

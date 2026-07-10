@@ -1,4 +1,4 @@
-import type { Product } from "@decocms/apps/commerce/types";
+import type { Product } from "@decocms/apps-commerce/types";
 import { clx } from "~/sdk/clx";
 import ProductCard from "../product/card/ProductCard";
 

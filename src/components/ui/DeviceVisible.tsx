@@ -1,5 +1,5 @@
 import { type ReactNode } from "react";
-import { useDevice } from "@decocms/start/sdk/useDevice";
+import { useDevice } from "@decocms/blocks/sdk/useDevice";
 
 export type DeviceVisibility = "all" | "mobile-only" | "desktop-only";
 

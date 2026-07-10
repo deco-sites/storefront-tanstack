@@ -1,4 +1,4 @@
-import type { BreadcrumbList } from "@decocms/apps/commerce/types";
+import type { BreadcrumbList } from "@decocms/apps-commerce/types";
 import { Link } from "@tanstack/react-router";
 import { relative } from "../../sdk/url";
 

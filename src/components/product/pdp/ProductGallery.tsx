@@ -1,5 +1,5 @@
 import { useId } from "react";
-import type { ImageObject } from "@decocms/apps/commerce/types";
+import type { ImageObject } from "@decocms/apps-commerce/types";
 import Image from "~/components/ui/Image";
 import { clx } from "~/sdk/clx";
 import Icon from "../../ui/Icon";

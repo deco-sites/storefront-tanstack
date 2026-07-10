@@ -4,7 +4,7 @@
 // `src/server/invoke.ts` once Phase 6 lands. For now the hook exists only so
 // that dynamic `~/hooks/useCart` imports resolve — the shape is intentionally
 // minimal and any caller that hits it will see a clear runtime error.
-import type { OrderForm, OrderFormItem } from "@decocms/apps/vtex/types";
+import type { OrderForm, OrderFormItem } from "@decocms/apps-vtex/types";
 
 export type { OrderForm, OrderFormItem };
 

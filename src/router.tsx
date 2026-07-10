@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { createDecoRouter } from "@decocms/start/sdk/router";
+import { createDecoRouter } from "@decocms/tanstack";
 import { routeTree } from "./routeTree.gen";
 import "./setup";
 

@@ -1,4 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { decoMetaRoute } from "@decocms/start/routes";
+import { decoMetaRouteConfig } from "@decocms/tanstack";
 
-export const Route = createFileRoute("/deco/meta")(decoMetaRoute);
+export const Route = createFileRoute("/deco/meta")(decoMetaRouteConfig());

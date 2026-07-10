@@ -1,6 +1,6 @@
 import { createRootRouteWithContext } from "@tanstack/react-router";
 import type { QueryClient } from "@tanstack/react-query";
-import { DecoRootLayout } from "@decocms/start/hooks";
+import { DecoRootLayout } from "@decocms/tanstack";
 import { CART_QUERY_KEY, getCartServerFn } from "../platform/cart";
 import { getUserServerFn, USER_QUERY_KEY } from "../platform/user";
 import MinicartDrawer from "../components/minicart/MinicartDrawer";

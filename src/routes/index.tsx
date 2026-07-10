@@ -1,11 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import {
   cmsHomeRouteConfig,
-  deferredSectionLoader,
+  DecoPageRenderer,
   loadCmsPage,
-} from "@decocms/start/routes";
-import { preloadSectionComponents } from "@decocms/start/cms";
-import { DecoPageRenderer } from "@decocms/start/hooks";
+} from "@decocms/tanstack";
+import { deferredSectionLoader } from "@decocms/tanstack/sdk/deferredSectionLoader";
+import { preloadSectionComponents } from "@decocms/blocks/cms";
 
 const isServer = typeof document === "undefined";
 

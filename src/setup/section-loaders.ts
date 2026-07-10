@@ -11,8 +11,8 @@ import {
   withMobile,
   withSearchParam,
   compose,
-} from "@decocms/start/cms";
-import { createCachedLoader } from "@decocms/start/sdk/cachedLoader";
+} from "@decocms/blocks/cms";
+import { createCachedLoader } from "@decocms/blocks/sdk/cachedLoader";
 
 // Instagram's loader hits the Graph API (graph.instagram.com) on every request.
 // The feed changes slowly, so cache it with SWR (the "static" profile: ~5min

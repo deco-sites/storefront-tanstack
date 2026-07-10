@@ -1,9 +1,11 @@
 /**
  * Site setup — orchestrator that wires framework, apps, and sections.
  *
- * App-installed loaders + actions (Shopify, VTEX, Resend, …) are wired via
- * `autoconfigApps(blocks, APP_REGISTRY)` — adding a new app is a one-line
- * entry in `@decocms/apps/registry.ts`, no change needed here.
+ * App-installed loaders + actions are wired via
+ * `autoconfigApps(blocks, APP_REGISTRY)` — adding a new app is a one-line entry
+ * in the local `APP_REGISTRY` array below (each `@decocms/apps-<vendor>` ships
+ * its own `./registry` entry; the old aggregate `@decocms/apps/registry` is
+ * gone in the 7.x split).
  *
  * Section-specific prop enrichment lives in `setup/section-loaders.ts`.
  * Section metadata (eager, sync, layout, cache, LoadingFallback) is declared
@@ -15,32 +17,34 @@ import "./cache-config";
 import {
   registerCommerceLoaders,
   applySectionConventions,
-} from "@decocms/start/cms";
-import { createSiteSetup } from "@decocms/start/setup";
-import { autoconfigApps } from "@decocms/start/apps";
-import { createInstrumentedFetch } from "@decocms/start/sdk/instrumentedFetch";
-import { initShopifyFromBlocks, setShopifyFetch } from "@decocms/apps/shopify";
-import { APP_REGISTRY } from "@decocms/apps/registry";
-import { blocks as generatedBlocks } from "./server/cms/blocks.gen";
-import { sectionMeta, syncComponents, loadingFallbacks } from "./server/cms/sections.gen";
-import { PreviewProviders } from "@decocms/start/hooks";
+} from "@decocms/blocks/cms";
+import { createSiteSetup } from "@decocms/blocks/setup";
+import { createAdminSetup } from "@decocms/blocks-admin/setup";
+import { autoconfigApps, type AppRegistry } from "@decocms/blocks-admin/apps";
+import { createInstrumentedFetch } from "@decocms/blocks/sdk/instrumentedFetch";
+import { initShopifyFromBlocks, setShopifyFetch } from "@decocms/apps-shopify";
+import { SHOPIFY_REGISTRY_ENTRY } from "@decocms/apps-shopify/registry";
+import { blocks as generatedBlocks } from "../.deco/blocks.gen";
+import { sectionMeta, syncComponents, loadingFallbacks } from "../.deco/sections.gen";
+import { PreviewProviders } from "@decocms/tanstack";
 // @ts-ignore Vite ?url import
 import appCss from "./styles/app.css?url";
 
 import "./setup/section-loaders";
 
-// -- Framework setup --
+// Per-app registry entries, assembled from each app package's own ./registry
+// export — the aggregate `@decocms/apps/registry` no longer exists in the 7.x
+// package split. Shopify is the only commerce app this store configures.
+const APP_REGISTRY: AppRegistry = [SHOPIFY_REGISTRY_ENTRY];
+
+// -- Framework setup (framework-generic options only) --
 createSiteSetup({
   sections: import.meta.glob("./sections/**/*.tsx") as Record<string, () => Promise<any>>,
   blocks: generatedBlocks,
-  meta: () => import("./server/admin/meta.gen.json").then((m) => m.default),
-  css: appCss,
-  fonts: [],
   productionOrigins: [
     "https://www.storefront-tanstack.com.br",
     "https://storefront-tanstack.com.br",
   ],
-  previewWrapper: PreviewProviders,
   initPlatform: (blocks) => initShopifyFromBlocks(blocks),
   onResolveError: (error, resolveType, context) => {
     console.error(`[CMS-DEBUG] ${context} "${resolveType}" failed:`, error);
@@ -49,6 +53,14 @@ createSiteSetup({
     console.warn(`[CMS-DEBUG] Dangling reference: ${resolveType}`);
     return null;
   },
+});
+
+// -- Admin setup (admin-only options: meta schema, render shell, preview) --
+createAdminSetup({
+  meta: () => import("../.deco/meta.gen.json").then((m) => m.default),
+  css: appCss,
+  fonts: [],
+  previewWrapper: PreviewProviders,
 });
 
 // -- Shopify wiring --
@@ -62,10 +74,10 @@ applySectionConventions({
   sectionGlob: import.meta.glob("./sections/**/*.tsx") as Record<string, () => Promise<any>>,
 });
 
-// -- Apps: auto-configure from decofile against the @decocms/apps registry --
+// -- Apps: auto-configure from decofile against the APP_REGISTRY --
 // Registers commerce loaders (CMS resolve path) + invoke handlers (admin path)
-// for every app the site has configured. Adding a new app = add an entry in
-// @decocms/apps/registry.ts, no change needed here.
+// for every app the site has configured. Adding a new app = add its
+// `@decocms/apps-<vendor>/registry` entry to the APP_REGISTRY array above.
 await autoconfigApps(generatedBlocks, APP_REGISTRY);
 
 // -- Commerce-loader overrides --
@@ -81,8 +93,10 @@ await autoconfigApps(generatedBlocks, APP_REGISTRY);
 // `realUrlPath.startsWith(basePath)` is too loose when basePath is "/".
 // To work around it, the home/catch-all loaders forward the real page URL
 // in the `x-deco-page-url` header so we can read it back here.
-import { RequestContext } from "@decocms/start/sdk/requestContext";
-import productListingPageLoader from "@decocms/apps/shopify/loaders/ProductListingPage";
+import { RequestContext } from "@decocms/blocks/sdk/requestContext";
+import productListingPageLoader from "@decocms/apps-shopify/loaders/ProductListingPage";
+import productDetailsPageLoader from "@decocms/apps-shopify/loaders/ProductDetailsPage";
+import productListLoader from "@decocms/apps-shopify/loaders/ProductList";
 
 const SHOPIFY_PLP_KEY = "shopify/loaders/ProductListingPage";
 
@@ -116,6 +130,17 @@ registerCommerceLoaders({
   [`${SHOPIFY_PLP_KEY}.ts`]: wrappedShopifyPLP,
 });
 
+// -- Legacy `.ts`-suffix compat (stopgap; remove once on @decocms/blocks >= 7.12.0) --
+// The decofile references shopify loaders with the Fresh-era `.ts` extension
+// (e.g. "shopify/loaders/ProductDetailsPage.ts"), but autoconfigApps registers
+// them WITHOUT it. Until the framework's getCommerceLoader strips the suffix
+// (decocms/blocks#333), alias the `.ts` keys to the underlying loaders so PDP +
+// shelves resolve.
+registerCommerceLoaders({
+  "shopify/loaders/ProductDetailsPage.ts": (props: any) => productDetailsPageLoader(props),
+  "shopify/loaders/ProductList.ts": (props: any) => productListLoader(props),
+});
+
 // -- Site-local loaders (not shipped by an app, still stubbed for Phase 6) --
 // Cart is now served by TanStack Query via `platform/cart/` (server functions
 // + `@decocms/apps/shopify/loaders/cart.getCart`), so no loader entry is
@@ -130,7 +155,7 @@ registerCommerceLoaders({
 });
 
 // -- Site-local actions (registered via additive invoke handler registry) --
-import { registerInvokeHandlers } from "@decocms/start/admin";
+import { registerInvokeHandlers } from "@decocms/blocks-admin";
 
 registerInvokeHandlers({
   "site/actions/wishlist/submit.ts": async (props, req) =>

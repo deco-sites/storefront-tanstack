@@ -1,8 +1,8 @@
-import type { ProductDetailsPage } from "@decocms/apps/commerce/types";
+import type { ProductDetailsPage } from "@decocms/apps-commerce/types";
 import {
   BreadcrumbJsonLd,
   ProductJsonLd,
-} from "@decocms/apps/commerce/components/JsonLd";
+} from "@decocms/blocks/hooks";
 import ProductHero, {
   type HeroCopyConfig,
 } from "../../components/product/pdp/ProductHero";

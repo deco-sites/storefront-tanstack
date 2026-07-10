@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { formatPrice } from "@decocms/apps/commerce/sdk/formatPrice";
+import { formatPrice } from "@decocms/apps-commerce/sdk/formatPrice";
 import { invoke } from "../../runtime";
 import type {
   ShippingMethod,
