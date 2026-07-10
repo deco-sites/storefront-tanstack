@@ -95,6 +95,8 @@ await autoconfigApps(generatedBlocks, APP_REGISTRY);
 // in the `x-deco-page-url` header so we can read it back here.
 import { RequestContext } from "@decocms/blocks/sdk/requestContext";
 import productListingPageLoader from "@decocms/apps-shopify/loaders/ProductListingPage";
+import productDetailsPageLoader from "@decocms/apps-shopify/loaders/ProductDetailsPage";
+import productListLoader from "@decocms/apps-shopify/loaders/ProductList";
 
 const SHOPIFY_PLP_KEY = "shopify/loaders/ProductListingPage";
 
@@ -126,6 +128,17 @@ const wrappedShopifyPLP = async (props: any) => {
 registerCommerceLoaders({
   [SHOPIFY_PLP_KEY]: wrappedShopifyPLP,
   [`${SHOPIFY_PLP_KEY}.ts`]: wrappedShopifyPLP,
+});
+
+// -- Legacy `.ts`-suffix compat (stopgap; remove once on @decocms/blocks >= 7.12.0) --
+// The decofile references shopify loaders with the Fresh-era `.ts` extension
+// (e.g. "shopify/loaders/ProductDetailsPage.ts"), but autoconfigApps registers
+// them WITHOUT it. Until the framework's getCommerceLoader strips the suffix
+// (decocms/blocks#333), alias the `.ts` keys to the underlying loaders so PDP +
+// shelves resolve.
+registerCommerceLoaders({
+  "shopify/loaders/ProductDetailsPage.ts": (props: any) => productDetailsPageLoader(props),
+  "shopify/loaders/ProductList.ts": (props: any) => productListLoader(props),
 });
 
 // -- Site-local loaders (not shipped by an app, still stubbed for Phase 6) --
