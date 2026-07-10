@@ -24,6 +24,7 @@ import { autoconfigApps, type AppRegistry } from "@decocms/blocks-admin/apps";
 import { createInstrumentedFetch } from "@decocms/blocks/sdk/instrumentedFetch";
 import { initShopifyFromBlocks, setShopifyFetch } from "@decocms/apps-shopify";
 import { SHOPIFY_REGISTRY_ENTRY } from "@decocms/apps-shopify/registry";
+import * as shopifyMod from "@decocms/apps-shopify/mod";
 import { blocks as generatedBlocks } from "../.deco/blocks.gen";
 import { sectionMeta, syncComponents, loadingFallbacks } from "../.deco/sections.gen";
 import { PreviewProviders } from "@decocms/tanstack";
@@ -35,7 +36,14 @@ import "./setup/section-loaders";
 // Per-app registry entries, assembled from each app package's own ./registry
 // export — the aggregate `@decocms/apps/registry` no longer exists in the 7.x
 // package split. Shopify is the only commerce app this store configures.
-const APP_REGISTRY: AppRegistry = [SHOPIFY_REGISTRY_ENTRY];
+// SHOPIFY_REGISTRY_ENTRY.module is a dynamic `import("./mod")` that fails to
+// resolve in the production (vite/workerd) build — autoconfigApps then silently
+// swallows the error and skips Shopify, so its commerce loaders never register
+// and PDP/shelves resolve to null (works in `vite dev`, breaks in prod). Provide
+// the module statically so registration is build-safe.
+const APP_REGISTRY: AppRegistry = [
+  { ...SHOPIFY_REGISTRY_ENTRY, module: async () => shopifyMod as never },
+];
 
 // -- Framework setup (framework-generic options only) --
 createSiteSetup({
