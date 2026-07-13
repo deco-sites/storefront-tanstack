@@ -8,7 +8,7 @@
     }
   },
   "alerts": [
-    "<p style=\"color: red;\">Hurry, offer ends soon! Save 10% today with code <strong>NEW10</strong></p>"
+    "<p style=\"color: green;\">Hurry, offer ends soon! Save 10% today with code <strong>NEW10</strong></p>"
   ],
   "logo": {
     "src": "https://decoims.com/storefront-tanstack/49270f27-32c9-4da3-aef8-e154dd7bcdd1/1742560193760-ed9f7e80-86a8-4b72-9809-2e4e2e5f0e53.png",
