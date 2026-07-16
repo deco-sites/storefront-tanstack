@@ -6,8 +6,8 @@
   "manifest": {
     "blocks": {
       "sections": {
-        "site/sections/Footer/Footer.tsx": {
-          "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Gb290ZXIvRm9vdGVyLnRzeA==",
+        "site/sections/Animation/Animation.tsx": {
+          "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9BbmltYXRpb24vQW5pbWF0aW9uLnRzeA==",
           "namespace": "site"
         },
         "site/sections/Category/CategoryBanner.tsx": {
@@ -18,24 +18,12 @@
           "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9DYXRlZ29yeS9DYXRlZ29yeUdyaWQudHN4",
           "namespace": "site"
         },
-        "site/sections/Images/Banner.tsx": {
-          "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9JbWFnZXMvQmFubmVyLnRzeA==",
+        "site/sections/Component.tsx": {
+          "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Db21wb25lbnQudHN4",
           "namespace": "site"
         },
-        "site/sections/Images/ShoppableBanner.tsx": {
-          "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9JbWFnZXMvU2hvcHBhYmxlQmFubmVyLnRzeA==",
-          "namespace": "site"
-        },
-        "site/sections/Images/ImageGallery.tsx": {
-          "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9JbWFnZXMvSW1hZ2VHYWxsZXJ5LnRzeA==",
-          "namespace": "site"
-        },
-        "site/sections/Images/Carousel.tsx": {
-          "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9JbWFnZXMvQ2Fyb3VzZWwudHN4",
-          "namespace": "site"
-        },
-        "site/sections/Animation/Animation.tsx": {
-          "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9BbmltYXRpb24vQW5pbWF0aW9uLnRzeA==",
+        "site/sections/Content/Faq.tsx": {
+          "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Db250ZW50L0ZhcS50c3g=",
           "namespace": "site"
         },
         "site/sections/Content/Hero.tsx": {
@@ -50,32 +38,32 @@
           "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Db250ZW50L0xvZ29zLnRzeA==",
           "namespace": "site"
         },
-        "site/sections/Content/Faq.tsx": {
-          "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Db250ZW50L0ZhcS50c3g=",
+        "site/sections/Footer/Footer.tsx": {
+          "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Gb290ZXIvRm9vdGVyLnRzeA==",
           "namespace": "site"
         },
-        "site/sections/Product/Wishlist.tsx": {
-          "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Qcm9kdWN0L1dpc2hsaXN0LnRzeA==",
+        "site/sections/Header/Header.tsx": {
+          "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9IZWFkZXIvSGVhZGVyLnRzeA==",
           "namespace": "site"
         },
-        "site/sections/Product/SearchResult.tsx": {
-          "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Qcm9kdWN0L1NlYXJjaFJlc3VsdC50c3g=",
+        "site/sections/Images/Banner.tsx": {
+          "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9JbWFnZXMvQmFubmVyLnRzeA==",
           "namespace": "site"
         },
-        "site/sections/Product/ProductShelf.tsx": {
-          "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Qcm9kdWN0L1Byb2R1Y3RTaGVsZi50c3g=",
+        "site/sections/Images/Carousel.tsx": {
+          "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9JbWFnZXMvQ2Fyb3VzZWwudHN4",
           "namespace": "site"
         },
-        "site/sections/Product/ShelfWithImage.tsx": {
-          "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Qcm9kdWN0L1NoZWxmV2l0aEltYWdlLnRzeA==",
+        "site/sections/Images/ImageGallery.tsx": {
+          "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9JbWFnZXMvSW1hZ2VHYWxsZXJ5LnRzeA==",
           "namespace": "site"
         },
-        "site/sections/Product/ProductShelfTabbed.tsx": {
-          "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Qcm9kdWN0L1Byb2R1Y3RTaGVsZlRhYmJlZC50c3g=",
+        "site/sections/Images/ShoppableBanner.tsx": {
+          "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9JbWFnZXMvU2hvcHBhYmxlQmFubmVyLnRzeA==",
           "namespace": "site"
         },
-        "site/sections/Product/ProductDetails.tsx": {
-          "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Qcm9kdWN0L1Byb2R1Y3REZXRhaWxzLnRzeA==",
+        "site/sections/Links/LinkTree.tsx": {
+          "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9MaW5rcy9MaW5rVHJlZS50c3g=",
           "namespace": "site"
         },
         "site/sections/Miscellaneous/CampaignTimer.tsx": {
@@ -86,32 +74,44 @@
           "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9NaXNjZWxsYW5lb3VzL0Nvb2tpZUNvbnNlbnQudHN4",
           "namespace": "site"
         },
-        "site/sections/Social/WhatsApp.tsx": {
-          "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Tb2NpYWwvV2hhdHNBcHAudHN4",
+        "site/sections/Newsletter/Newsletter.tsx": {
+          "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9OZXdzbGV0dGVyL05ld3NsZXR0ZXIudHN4",
+          "namespace": "site"
+        },
+        "site/sections/Product/ProductDetails.tsx": {
+          "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Qcm9kdWN0L1Byb2R1Y3REZXRhaWxzLnRzeA==",
+          "namespace": "site"
+        },
+        "site/sections/Product/ProductShelf.tsx": {
+          "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Qcm9kdWN0L1Byb2R1Y3RTaGVsZi50c3g=",
+          "namespace": "site"
+        },
+        "site/sections/Product/ProductShelfTabbed.tsx": {
+          "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Qcm9kdWN0L1Byb2R1Y3RTaGVsZlRhYmJlZC50c3g=",
+          "namespace": "site"
+        },
+        "site/sections/Product/SearchResult.tsx": {
+          "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Qcm9kdWN0L1NlYXJjaFJlc3VsdC50c3g=",
+          "namespace": "site"
+        },
+        "site/sections/Product/ShelfWithImage.tsx": {
+          "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Qcm9kdWN0L1NoZWxmV2l0aEltYWdlLnRzeA==",
+          "namespace": "site"
+        },
+        "site/sections/Product/Wishlist.tsx": {
+          "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Qcm9kdWN0L1dpc2hsaXN0LnRzeA==",
           "namespace": "site"
         },
         "site/sections/Social/InstagramPosts.tsx": {
           "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Tb2NpYWwvSW5zdGFncmFtUG9zdHMudHN4",
           "namespace": "site"
         },
+        "site/sections/Social/WhatsApp.tsx": {
+          "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Tb2NpYWwvV2hhdHNBcHAudHN4",
+          "namespace": "site"
+        },
         "site/sections/Theme/Theme.tsx": {
           "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9UaGVtZS9UaGVtZS50c3g=",
-          "namespace": "site"
-        },
-        "site/sections/Links/LinkTree.tsx": {
-          "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9MaW5rcy9MaW5rVHJlZS50c3g=",
-          "namespace": "site"
-        },
-        "site/sections/Component.tsx": {
-          "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Db21wb25lbnQudHN4",
-          "namespace": "site"
-        },
-        "site/sections/Newsletter/Newsletter.tsx": {
-          "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9OZXdzbGV0dGVyL05ld3NsZXR0ZXIudHN4",
-          "namespace": "site"
-        },
-        "site/sections/Header/Header.tsx": {
-          "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9IZWFkZXIvSGVhZGVyLnRzeA==",
           "namespace": "site"
         }
       },
@@ -120,16 +120,16 @@
           "$ref": "#/definitions/c2l0ZS9sb2FkZXJzL19jb29raWUudHM=",
           "namespace": "site"
         },
-        "site/loaders/wishlist.ts": {
-          "$ref": "#/definitions/c2l0ZS9sb2FkZXJzL3dpc2hsaXN0LnRz",
+        "site/loaders/address.ts": {
+          "$ref": "#/definitions/c2l0ZS9sb2FkZXJzL2FkZHJlc3MudHM=",
           "namespace": "site"
         },
         "site/loaders/user.ts": {
           "$ref": "#/definitions/c2l0ZS9sb2FkZXJzL3VzZXIudHM=",
           "namespace": "site"
         },
-        "site/loaders/address.ts": {
-          "$ref": "#/definitions/c2l0ZS9sb2FkZXJzL2FkZHJlc3MudHM=",
+        "site/loaders/wishlist.ts": {
+          "$ref": "#/definitions/c2l0ZS9sb2FkZXJzL3dpc2hsaXN0LnRz",
           "namespace": "site"
         },
         "shopify/loaders/ProductDetailsPage.ts": {
@@ -166,12 +166,12 @@
         }
       },
       "apps": {
-        "site/apps/site.ts": {
-          "$ref": "#/definitions/c2l0ZS9hcHBzL3NpdGUudHM=",
-          "namespace": "site"
-        },
         "site/apps/shopify.ts": {
           "$ref": "#/definitions/c2l0ZS9hcHBzL3Nob3BpZnkudHM=",
+          "namespace": "site"
+        },
+        "site/apps/site.ts": {
+          "$ref": "#/definitions/c2l0ZS9hcHBzL3NpdGUudHM=",
           "namespace": "site"
         }
       }
@@ -221,8 +221,8 @@
           }
         }
       },
-      "c2l0ZS9sb2FkZXJzL3dpc2hsaXN0LnRz": {
-        "title": "site/loaders/wishlist.ts",
+      "c2l0ZS9sb2FkZXJzL2FkZHJlc3MudHM=": {
+        "title": "site/loaders/address.ts",
         "type": "object",
         "required": [
           "__resolveType"
@@ -231,9 +231,9 @@
           "__resolveType": {
             "type": "string",
             "enum": [
-              "site/loaders/wishlist.ts"
+              "site/loaders/address.ts"
             ],
-            "default": "site/loaders/wishlist.ts"
+            "default": "site/loaders/address.ts"
           }
         }
       },
@@ -253,8 +253,8 @@
           }
         }
       },
-      "c2l0ZS9sb2FkZXJzL2FkZHJlc3MudHM=": {
-        "title": "site/loaders/address.ts",
+      "c2l0ZS9sb2FkZXJzL3dpc2hsaXN0LnRz": {
+        "title": "site/loaders/wishlist.ts",
         "type": "object",
         "required": [
           "__resolveType"
@@ -263,9 +263,9 @@
           "__resolveType": {
             "type": "string",
             "enum": [
-              "site/loaders/address.ts"
+              "site/loaders/wishlist.ts"
             ],
-            "default": "site/loaders/address.ts"
+            "default": "site/loaders/wishlist.ts"
           }
         }
       },
@@ -742,155 +742,55 @@
           }
         }
       },
-      "c3JjL3NlY3Rpb25zL0Zvb3Rlci9Gb290ZXIudHN4@Props": {
+      "c3JjL3NlY3Rpb25zL0FuaW1hdGlvbi9BbmltYXRpb24udHN4@Props": {
         "type": "object",
         "properties": {
-          "links": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "children": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "title": {
-                        "type": "string",
-                        "title": "Title"
-                      },
-                      "href": {
-                        "type": "string",
-                        "title": "Href"
-                      }
-                    },
-                    "required": [
-                      "title",
-                      "href"
-                    ],
-                    "titleBy": "title"
-                  },
-                  "title": "Children"
-                },
-                "title": {
-                  "type": "string",
-                  "title": "Title"
-                },
-                "href": {
-                  "type": "string",
-                  "title": "Href"
-                }
-              },
-              "required": [
-                "children",
-                "title",
-                "href"
-              ],
-              "titleBy": "title"
-            },
+          "animationType": {
+            "type": "string",
+            "enum": [
+              "fade-in",
+              "fade-in-bottom",
+              "slide-left",
+              "slide-right",
+              "zoom-in"
+            ],
             "nullable": true,
-            "title": "Links"
+            "title": "Animation",
+            "description": "CSS animation applied when the section enters the viewport",
+            "default": "fade-in"
           },
-          "social": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "alt": {
-                  "type": "string",
-                  "nullable": true,
-                  "title": "Alt"
-                },
-                "href": {
-                  "type": "string",
-                  "nullable": true,
-                  "title": "Href"
-                },
-                "image": {
-                  "type": "string",
-                  "format": "image-uri",
-                  "title": "Image"
-                }
-              },
-              "required": [
-                "image"
-              ],
-              "titleBy": "alt"
-            },
-            "nullable": true,
-            "title": "Social"
-          },
-          "paymentMethods": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "alt": {
-                  "type": "string",
-                  "nullable": true,
-                  "title": "Alt"
-                },
-                "href": {
-                  "type": "string",
-                  "nullable": true,
-                  "title": "Href"
-                },
-                "image": {
-                  "type": "string",
-                  "format": "image-uri",
-                  "title": "Image"
-                }
-              },
-              "required": [
-                "image"
-              ],
-              "titleBy": "alt"
-            },
-            "nullable": true,
-            "title": "PaymentMethods"
-          },
-          "policies": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "title": {
-                  "type": "string",
-                  "title": "Title"
-                },
-                "href": {
-                  "type": "string",
-                  "title": "Href"
-                }
-              },
-              "required": [
-                "title",
-                "href"
-              ],
-              "titleBy": "title"
-            },
-            "nullable": true,
-            "title": "Policies"
-          },
-          "logo": {
+          "duration": {
             "type": "string",
             "nullable": true,
-            "format": "image-uri",
-            "title": "Logo"
+            "title": "Duration (s)",
+            "description": "Animation duration in seconds",
+            "default": 0.3
           },
-          "trademark": {
-            "type": "string",
-            "nullable": true,
-            "title": "Trademark"
+          "children": {
+            "type": "object",
+            "properties": {
+              "section": {
+                "$ref": "#/definitions/__SECTION_REF__",
+                "title": "Section"
+              }
+            },
+            "required": [
+              "section"
+            ],
+            "title": "Wrapped section",
+            "description": "Section that will receive the animation on intersect"
           }
-        }
+        },
+        "required": [
+          "children"
+        ]
       },
-      "c2l0ZS9zZWN0aW9ucy9Gb290ZXIvRm9vdGVyLnRzeA==": {
-        "title": "site/sections/Footer/Footer.tsx",
+      "c2l0ZS9zZWN0aW9ucy9BbmltYXRpb24vQW5pbWF0aW9uLnRzeA==": {
+        "title": "site/sections/Animation/Animation.tsx",
         "type": "object",
         "allOf": [
           {
-            "$ref": "#/definitions/c3JjL3NlY3Rpb25zL0Zvb3Rlci9Gb290ZXIudHN4@Props"
+            "$ref": "#/definitions/c3JjL3NlY3Rpb25zL0FuaW1hdGlvbi9BbmltYXRpb24udHN4@Props"
           }
         ],
         "required": [
@@ -900,9 +800,9 @@
           "__resolveType": {
             "type": "string",
             "enum": [
-              "site/sections/Footer/Footer.tsx"
+              "site/sections/Animation/Animation.tsx"
             ],
-            "default": "site/sections/Footer/Footer.tsx"
+            "default": "site/sections/Animation/Animation.tsx"
           }
         }
       },
@@ -1061,82 +961,16 @@
           }
         }
       },
-      "c3JjL3NlY3Rpb25zL0ltYWdlcy9CYW5uZXIudHN4@Props": {
+      "c3JjL3NlY3Rpb25zL0NvbXBvbmVudC50c3g=@Props": {
         "type": "object",
-        "properties": {
-          "title": {
-            "type": "string",
-            "title": "Title"
-          },
-          "description": {
-            "type": "string",
-            "nullable": true,
-            "format": "html",
-            "title": "Description"
-          },
-          "images": {
-            "type": "object",
-            "properties": {
-              "mobile": {
-                "type": "string",
-                "format": "image-uri",
-                "title": "Mobile"
-              },
-              "desktop": {
-                "type": "string",
-                "format": "image-uri",
-                "title": "Desktop"
-              }
-            },
-            "required": [
-              "mobile",
-              "desktop"
-            ],
-            "title": "Images"
-          },
-          "cta": {
-            "type": "object",
-            "properties": {
-              "href": {
-                "type": "string",
-                "title": "Href"
-              },
-              "label": {
-                "type": "string",
-                "title": "Label"
-              }
-            },
-            "required": [
-              "href",
-              "label"
-            ],
-            "nullable": true,
-            "title": "Cta"
-          },
-          "visibility": {
-            "type": "string",
-            "enum": [
-              "all",
-              "mobile-only",
-              "desktop-only"
-            ],
-            "nullable": true,
-            "title": "Exibir em",
-            "description": "Em quais dispositivos esta seção aparece. Útil para mostrar\nconteúdo diferente no celular e no computador.",
-            "default": "all"
-          }
-        },
-        "required": [
-          "title",
-          "images"
-        ]
+        "properties": {}
       },
-      "c2l0ZS9zZWN0aW9ucy9JbWFnZXMvQmFubmVyLnRzeA==": {
-        "title": "site/sections/Images/Banner.tsx",
+      "c2l0ZS9zZWN0aW9ucy9Db21wb25lbnQudHN4": {
+        "title": "site/sections/Component.tsx",
         "type": "object",
         "allOf": [
           {
-            "$ref": "#/definitions/c3JjL3NlY3Rpb25zL0ltYWdlcy9CYW5uZXIudHN4@Props"
+            "$ref": "#/definitions/c3JjL3NlY3Rpb25zL0NvbXBvbmVudC50c3g=@Props"
           }
         ],
         "required": [
@@ -1146,261 +980,84 @@
           "__resolveType": {
             "type": "string",
             "enum": [
-              "site/sections/Images/Banner.tsx"
+              "site/sections/Component.tsx"
             ],
-            "default": "site/sections/Images/Banner.tsx"
+            "default": "site/sections/Component.tsx"
           }
         }
       },
-      "c3JjL3NlY3Rpb25zL0ltYWdlcy9TaG9wcGFibGVCYW5uZXIudHN4@Props": {
+      "c3JjL3NlY3Rpb25zL0NvbnRlbnQvRmFxLnRzeA==@Props": {
         "type": "object",
         "properties": {
-          "image": {
-            "type": "object",
-            "properties": {
-              "mobile": {
-                "type": "string",
-                "format": "image-uri",
-                "title": "Mobile"
-              },
-              "desktop": {
-                "type": "string",
-                "nullable": true,
-                "format": "image-uri",
-                "title": "Desktop"
-              },
-              "altText": {
-                "type": "string",
-                "title": "AltText"
-              }
-            },
-            "required": [
-              "mobile",
-              "altText"
-            ],
-            "title": "Image"
-          },
-          "pins": {
+          "questions": {
             "type": "array",
             "items": {
               "type": "object",
               "properties": {
-                "mobile": {
-                  "type": "object",
-                  "properties": {
-                    "x": {
-                      "type": "number",
-                      "title": "X"
-                    },
-                    "y": {
-                      "type": "number",
-                      "title": "Y"
-                    }
-                  },
-                  "required": [
-                    "x",
-                    "y"
-                  ],
-                  "title": "Mobile"
-                },
-                "desktop": {
-                  "type": "object",
-                  "properties": {
-                    "x": {
-                      "type": "number",
-                      "title": "X"
-                    },
-                    "y": {
-                      "type": "number",
-                      "title": "Y"
-                    }
-                  },
-                  "required": [
-                    "x",
-                    "y"
-                  ],
-                  "nullable": true,
-                  "title": "Desktop"
-                },
-                "link": {
+                "question": {
                   "type": "string",
-                  "title": "Link"
+                  "title": "Question",
+                  "description": "Heading shown on the collapsible item"
                 },
-                "label": {
+                "answer": {
                   "type": "string",
-                  "title": "Label"
+                  "title": "Answer",
+                  "description": "Rich-text body revealed when the question is expanded",
+                  "format": "html"
                 }
               },
               "required": [
-                "mobile",
-                "link",
-                "label"
-              ]
-            },
-            "nullable": true,
-            "title": "Pins"
-          },
-          "title": {
-            "type": "object",
-            "properties": {
-              "content": {
-                "type": "string",
-                "nullable": true,
-                "title": "Content"
-              },
-              "layout": {
-                "type": "object",
-                "properties": {
-                  "position": {
-                    "type": "string",
-                    "enum": [
-                      "justify-start",
-                      "justify-center",
-                      "justify-end"
-                    ],
-                    "nullable": true,
-                    "title": "Position"
-                  }
-                },
-                "nullable": true,
-                "title": "Layout"
-              }
-            },
-            "nullable": true,
-            "title": "Title"
-          },
-          "text": {
-            "type": "object",
-            "properties": {
-              "content": {
-                "type": "string",
-                "nullable": true,
-                "title": "Content"
-              },
-              "layout": {
-                "type": "object",
-                "properties": {
-                  "position": {
-                    "type": "string",
-                    "enum": [
-                      "text-center",
-                      "text-left",
-                      "text-right"
-                    ],
-                    "nullable": true,
-                    "title": "Position"
-                  }
-                },
-                "nullable": true,
-                "title": "Layout"
-              }
-            },
-            "nullable": true,
-            "title": "Text"
-          },
-          "link": {
-            "type": "object",
-            "properties": {
-              "layout": {
-                "type": "object",
-                "properties": {
-                  "position": {
-                    "type": "string",
-                    "enum": [
-                      "justify-start",
-                      "justify-center",
-                      "justify-end"
-                    ],
-                    "nullable": true,
-                    "title": "Position"
-                  }
-                },
-                "nullable": true,
-                "title": "Layout"
-              },
-              "text": {
-                "type": "string",
-                "title": "Text"
-              },
-              "href": {
-                "type": "string",
-                "title": "Href"
-              }
-            },
-            "required": [
-              "text",
-              "href"
-            ],
-            "nullable": true,
-            "title": "Link"
-          }
-        },
-        "required": [
-          "image"
-        ]
-      },
-      "c2l0ZS9zZWN0aW9ucy9JbWFnZXMvU2hvcHBhYmxlQmFubmVyLnRzeA==": {
-        "title": "site/sections/Images/ShoppableBanner.tsx",
-        "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/definitions/c3JjL3NlY3Rpb25zL0ltYWdlcy9TaG9wcGFibGVCYW5uZXIudHN4@Props"
-          }
-        ],
-        "required": [
-          "__resolveType"
-        ],
-        "properties": {
-          "__resolveType": {
-            "type": "string",
-            "enum": [
-              "site/sections/Images/ShoppableBanner.tsx"
-            ],
-            "default": "site/sections/Images/ShoppableBanner.tsx"
-          }
-        }
-      },
-      "c3JjL3NlY3Rpb25zL0ltYWdlcy9JbWFnZUdhbGxlcnkudHN4@Props": {
-        "type": "object",
-        "properties": {
-          "banners": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "mobile": {
-                  "type": "string",
-                  "format": "image-uri",
-                  "title": "Mobile"
-                },
-                "desktop": {
-                  "type": "string",
-                  "nullable": true,
-                  "format": "image-uri",
-                  "title": "Desktop"
-                },
-                "alt": {
-                  "type": "string",
-                  "description": "Image alt texts",
-                  "title": "Alt"
-                },
-                "href": {
-                  "type": "string",
-                  "description": "Adicione um link",
-                  "title": "Href"
-                }
-              },
-              "required": [
-                "mobile",
-                "alt",
-                "href"
+                "question",
+                "answer"
               ],
-              "titleBy": "alt"
+              "titleBy": "question"
             },
             "nullable": true,
-            "maxItems": 4,
-            "minItems": 4,
-            "title": "Banners"
+            "title": "Questions",
+            "description": "List of FAQ entries rendered as a collapsible accordion"
+          },
+          "contact": {
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "string",
+                "nullable": true,
+                "title": "Title",
+                "description": "Heading for the post-FAQ contact block"
+              },
+              "description": {
+                "type": "string",
+                "nullable": true,
+                "title": "Description",
+                "description": "Body text for the contact block",
+                "format": "html"
+              },
+              "link": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string",
+                    "title": "Link text",
+                    "description": "Anchor copy shown on the contact CTA"
+                  },
+                  "href": {
+                    "type": "string",
+                    "title": "Link URL",
+                    "description": "Internal route or external URL"
+                  }
+                },
+                "required": [
+                  "text",
+                  "href"
+                ],
+                "nullable": true,
+                "title": "CTA",
+                "description": "Optional call-to-action link"
+              }
+            },
+            "nullable": true,
+            "title": "Contact block",
+            "description": "Optional follow-up section with title/description/CTA"
           },
           "title": {
             "type": "string",
@@ -1416,12 +1073,12 @@
           }
         }
       },
-      "c2l0ZS9zZWN0aW9ucy9JbWFnZXMvSW1hZ2VHYWxsZXJ5LnRzeA==": {
-        "title": "site/sections/Images/ImageGallery.tsx",
+      "c2l0ZS9zZWN0aW9ucy9Db250ZW50L0ZhcS50c3g=": {
+        "title": "site/sections/Content/Faq.tsx",
         "type": "object",
         "allOf": [
           {
-            "$ref": "#/definitions/c3JjL3NlY3Rpb25zL0ltYWdlcy9JbWFnZUdhbGxlcnkudHN4@Props"
+            "$ref": "#/definitions/c3JjL3NlY3Rpb25zL0NvbnRlbnQvRmFxLnRzeA==@Props"
           }
         ],
         "required": [
@@ -1431,177 +1088,9 @@
           "__resolveType": {
             "type": "string",
             "enum": [
-              "site/sections/Images/ImageGallery.tsx"
+              "site/sections/Content/Faq.tsx"
             ],
-            "default": "site/sections/Images/ImageGallery.tsx"
-          }
-        }
-      },
-      "c3JjL3NlY3Rpb25zL0ltYWdlcy9DYXJvdXNlbC50c3g=@Props": {
-        "type": "object",
-        "properties": {
-          "images": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "desktop": {
-                  "type": "string",
-                  "description": "desktop otimized image",
-                  "format": "image-uri",
-                  "title": "Desktop"
-                },
-                "mobile": {
-                  "type": "string",
-                  "description": "mobile otimized image",
-                  "format": "image-uri",
-                  "title": "Mobile"
-                },
-                "alt": {
-                  "type": "string",
-                  "description": "Image's alt text",
-                  "title": "Alt"
-                },
-                "action": {
-                  "type": "object",
-                  "properties": {
-                    "href": {
-                      "type": "string",
-                      "description": "when user clicks on the image, go to this link",
-                      "title": "Href"
-                    },
-                    "title": {
-                      "type": "string",
-                      "description": "Image text title",
-                      "title": "Title"
-                    },
-                    "subTitle": {
-                      "type": "string",
-                      "description": "Image text subtitle",
-                      "title": "SubTitle"
-                    },
-                    "label": {
-                      "type": "string",
-                      "description": "Button label",
-                      "title": "Label"
-                    }
-                  },
-                  "required": [
-                    "href",
-                    "title",
-                    "subTitle",
-                    "label"
-                  ],
-                  "nullable": true,
-                  "title": "Action"
-                }
-              },
-              "required": [
-                "desktop",
-                "mobile",
-                "alt"
-              ],
-              "titleBy": "alt"
-            },
-            "nullable": true,
-            "title": "Images"
-          },
-          "preload": {
-            "type": "boolean",
-            "nullable": true,
-            "description": "Check this option when this banner is the biggest image on the screen for image optimizations",
-            "title": "Preload"
-          },
-          "interval": {
-            "type": "number",
-            "nullable": true,
-            "title": "Autoplay interval",
-            "description": "time (in seconds) to start the carousel autoplay"
-          }
-        }
-      },
-      "c2l0ZS9zZWN0aW9ucy9JbWFnZXMvQ2Fyb3VzZWwudHN4": {
-        "title": "site/sections/Images/Carousel.tsx",
-        "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/definitions/c3JjL3NlY3Rpb25zL0ltYWdlcy9DYXJvdXNlbC50c3g=@Props"
-          }
-        ],
-        "required": [
-          "__resolveType"
-        ],
-        "properties": {
-          "__resolveType": {
-            "type": "string",
-            "enum": [
-              "site/sections/Images/Carousel.tsx"
-            ],
-            "default": "site/sections/Images/Carousel.tsx"
-          }
-        }
-      },
-      "c3JjL3NlY3Rpb25zL0FuaW1hdGlvbi9BbmltYXRpb24udHN4@Props": {
-        "type": "object",
-        "properties": {
-          "animationType": {
-            "type": "string",
-            "enum": [
-              "fade-in",
-              "fade-in-bottom",
-              "slide-left",
-              "slide-right",
-              "zoom-in"
-            ],
-            "nullable": true,
-            "title": "Animation",
-            "description": "CSS animation applied when the section enters the viewport",
-            "default": "fade-in"
-          },
-          "duration": {
-            "type": "string",
-            "nullable": true,
-            "title": "Duration (s)",
-            "description": "Animation duration in seconds",
-            "default": 0.3
-          },
-          "children": {
-            "type": "object",
-            "properties": {
-              "section": {
-                "$ref": "#/definitions/__SECTION_REF__",
-                "title": "Section"
-              }
-            },
-            "required": [
-              "section"
-            ],
-            "title": "Wrapped section",
-            "description": "Section that will receive the animation on intersect"
-          }
-        },
-        "required": [
-          "children"
-        ]
-      },
-      "c2l0ZS9zZWN0aW9ucy9BbmltYXRpb24vQW5pbWF0aW9uLnRzeA==": {
-        "title": "site/sections/Animation/Animation.tsx",
-        "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/definitions/c3JjL3NlY3Rpb25zL0FuaW1hdGlvbi9BbmltYXRpb24udHN4@Props"
-          }
-        ],
-        "required": [
-          "__resolveType"
-        ],
-        "properties": {
-          "__resolveType": {
-            "type": "string",
-            "enum": [
-              "site/sections/Animation/Animation.tsx"
-            ],
-            "default": "site/sections/Animation/Animation.tsx"
+            "default": "site/sections/Content/Faq.tsx"
           }
         }
       },
@@ -1804,398 +1293,114 @@
           }
         }
       },
-      "c3JjL3NlY3Rpb25zL0NvbnRlbnQvRmFxLnRzeA==@Props": {
+      "c3JjL3NlY3Rpb25zL0Zvb3Rlci9Gb290ZXIudHN4@Props": {
         "type": "object",
         "properties": {
-          "questions": {
+          "links": {
             "type": "array",
             "items": {
               "type": "object",
               "properties": {
-                "question": {
-                  "type": "string",
-                  "title": "Question",
-                  "description": "Heading shown on the collapsible item"
+                "children": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "title": {
+                        "type": "string",
+                        "title": "Title"
+                      },
+                      "href": {
+                        "type": "string",
+                        "title": "Href"
+                      }
+                    },
+                    "required": [
+                      "title",
+                      "href"
+                    ],
+                    "titleBy": "title"
+                  },
+                  "title": "Children"
                 },
-                "answer": {
+                "title": {
                   "type": "string",
-                  "title": "Answer",
-                  "description": "Rich-text body revealed when the question is expanded",
-                  "format": "html"
+                  "title": "Title"
+                },
+                "href": {
+                  "type": "string",
+                  "title": "Href"
                 }
               },
               "required": [
-                "question",
-                "answer"
+                "children",
+                "title",
+                "href"
               ],
-              "titleBy": "question"
+              "titleBy": "title"
             },
             "nullable": true,
-            "title": "Questions",
-            "description": "List of FAQ entries rendered as a collapsible accordion"
+            "title": "Links"
           },
-          "contact": {
-            "type": "object",
-            "properties": {
-              "title": {
-                "type": "string",
-                "nullable": true,
-                "title": "Title",
-                "description": "Heading for the post-FAQ contact block"
-              },
-              "description": {
-                "type": "string",
-                "nullable": true,
-                "title": "Description",
-                "description": "Body text for the contact block",
-                "format": "html"
-              },
-              "link": {
-                "type": "object",
-                "properties": {
-                  "text": {
-                    "type": "string",
-                    "title": "Link text",
-                    "description": "Anchor copy shown on the contact CTA"
-                  },
-                  "href": {
-                    "type": "string",
-                    "title": "Link URL",
-                    "description": "Internal route or external URL"
-                  }
+          "social": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "alt": {
+                  "type": "string",
+                  "nullable": true,
+                  "title": "Alt"
                 },
-                "required": [
-                  "text",
-                  "href"
-                ],
-                "nullable": true,
-                "title": "CTA",
-                "description": "Optional call-to-action link"
-              }
+                "href": {
+                  "type": "string",
+                  "nullable": true,
+                  "title": "Href"
+                },
+                "image": {
+                  "type": "string",
+                  "format": "image-uri",
+                  "title": "Image"
+                }
+              },
+              "required": [
+                "image"
+              ],
+              "titleBy": "alt"
             },
             "nullable": true,
-            "title": "Contact block",
-            "description": "Optional follow-up section with title/description/CTA"
+            "title": "Social"
           },
-          "title": {
-            "type": "string",
-            "nullable": true,
-            "description": "Section title",
-            "title": "Title"
-          },
-          "cta": {
-            "type": "string",
-            "nullable": true,
-            "description": "See all link",
-            "title": "Cta"
-          }
-        }
-      },
-      "c2l0ZS9zZWN0aW9ucy9Db250ZW50L0ZhcS50c3g=": {
-        "title": "site/sections/Content/Faq.tsx",
-        "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/definitions/c3JjL3NlY3Rpb25zL0NvbnRlbnQvRmFxLnRzeA==@Props"
-          }
-        ],
-        "required": [
-          "__resolveType"
-        ],
-        "properties": {
-          "__resolveType": {
-            "type": "string",
-            "enum": [
-              "site/sections/Content/Faq.tsx"
-            ],
-            "default": "site/sections/Content/Faq.tsx"
-          }
-        }
-      },
-      "c3JjL3NlY3Rpb25zL1Byb2R1Y3QvV2lzaGxpc3QudHN4@Props": {
-        "type": "object",
-        "properties": {
-          "page": {
-            "anyOf": [
-              {
-                "$ref": "#/definitions/Resolvable"
+          "paymentMethods": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "alt": {
+                  "type": "string",
+                  "nullable": true,
+                  "title": "Alt"
+                },
+                "href": {
+                  "type": "string",
+                  "nullable": true,
+                  "title": "Href"
+                },
+                "image": {
+                  "type": "string",
+                  "format": "image-uri",
+                  "title": "Image"
+                }
               },
-              {
-                "$ref": "#/definitions/c2hvcGlmeS9sb2FkZXJzL1Byb2R1Y3RMaXN0aW5nUGFnZS50cw=="
-              }
-            ],
-            "title": "Integration",
-            "nullable": true
-          },
-          "layout": {
-            "type": "object",
-            "properties": {
-              "pagination": {
-                "type": "string",
-                "enum": [
-                  "show-more",
-                  "pagination"
-                ],
-                "nullable": true,
-                "title": "Pagination",
-                "description": "Format of the pagination",
-                "default": "show-more"
-              },
-              "enablePrefetch": {
-                "type": "boolean",
-                "nullable": true,
-                "title": "Pré-carregar página do produto",
-                "description": "Quando ativado, a página do produto começa a carregar assim\nque o usuário passa o mouse sobre o card, deixando a navegação mais rápida.\nPode aumentar o consumo de dados em listas muito grandes.",
-                "default": true
-              }
+              "required": [
+                "image"
+              ],
+              "titleBy": "alt"
             },
             "nullable": true,
-            "title": "Layout"
+            "title": "PaymentMethods"
           },
-          "startingPage": {
-            "type": "number",
-            "enum": [
-              0,
-              1
-            ],
-            "nullable": true,
-            "title": "Starting page",
-            "description": "0 for ?page=0 as your first page",
-            "default": 0
-          }
-        },
-        "required": [
-          "page"
-        ]
-      },
-      "c2l0ZS9zZWN0aW9ucy9Qcm9kdWN0L1dpc2hsaXN0LnRzeA==": {
-        "title": "site/sections/Product/Wishlist.tsx",
-        "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/definitions/c3JjL3NlY3Rpb25zL1Byb2R1Y3QvV2lzaGxpc3QudHN4@Props"
-          }
-        ],
-        "required": [
-          "__resolveType"
-        ],
-        "properties": {
-          "__resolveType": {
-            "type": "string",
-            "enum": [
-              "site/sections/Product/Wishlist.tsx"
-            ],
-            "default": "site/sections/Product/Wishlist.tsx"
-          }
-        }
-      },
-      "c3JjL3NlY3Rpb25zL1Byb2R1Y3QvU2VhcmNoUmVzdWx0LnRzeA==@Props": {
-        "type": "object",
-        "properties": {
-          "page": {
-            "anyOf": [
-              {
-                "$ref": "#/definitions/Resolvable"
-              },
-              {
-                "$ref": "#/definitions/c2hvcGlmeS9sb2FkZXJzL1Byb2R1Y3RMaXN0aW5nUGFnZS50cw=="
-              }
-            ],
-            "title": "Integration",
-            "nullable": true
-          },
-          "layout": {
-            "type": "object",
-            "properties": {
-              "pagination": {
-                "type": "string",
-                "enum": [
-                  "show-more",
-                  "pagination"
-                ],
-                "nullable": true,
-                "title": "Pagination",
-                "description": "Format of the pagination",
-                "default": "show-more"
-              },
-              "enablePrefetch": {
-                "type": "boolean",
-                "nullable": true,
-                "title": "Pré-carregar página do produto",
-                "description": "Quando ativado, a página do produto começa a carregar assim\nque o usuário passa o mouse sobre o card, deixando a navegação mais rápida.\nPode aumentar o consumo de dados em listas muito grandes.",
-                "default": true
-              }
-            },
-            "nullable": true,
-            "title": "Layout"
-          },
-          "startingPage": {
-            "type": "number",
-            "enum": [
-              0,
-              1
-            ],
-            "nullable": true,
-            "title": "Starting page",
-            "description": "0 for ?page=0 as your first page",
-            "default": 0
-          }
-        },
-        "required": [
-          "page"
-        ]
-      },
-      "c2l0ZS9zZWN0aW9ucy9Qcm9kdWN0L1NlYXJjaFJlc3VsdC50c3g=": {
-        "title": "site/sections/Product/SearchResult.tsx",
-        "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/definitions/c3JjL3NlY3Rpb25zL1Byb2R1Y3QvU2VhcmNoUmVzdWx0LnRzeA==@Props"
-          }
-        ],
-        "required": [
-          "__resolveType"
-        ],
-        "properties": {
-          "__resolveType": {
-            "type": "string",
-            "enum": [
-              "site/sections/Product/SearchResult.tsx"
-            ],
-            "default": "site/sections/Product/SearchResult.tsx"
-          }
-        }
-      },
-      "c3JjL3NlY3Rpb25zL1Byb2R1Y3QvUHJvZHVjdFNoZWxmLnRzeA==@Props": {
-        "type": "object",
-        "properties": {
-          "products": {
-            "anyOf": [
-              {
-                "$ref": "#/definitions/Resolvable"
-              },
-              {
-                "$ref": "#/definitions/c2hvcGlmeS9sb2FkZXJzL1Byb2R1Y3RMaXN0LnRz"
-              },
-              {
-                "$ref": "#/definitions/c2hvcGlmeS9sb2FkZXJzL1JlbGF0ZWRQcm9kdWN0cy50cw=="
-              }
-            ],
-            "title": "Products",
-            "nullable": true
-          },
-          "title": {
-            "type": "string",
-            "nullable": true,
-            "description": "Section title",
-            "title": "Title"
-          },
-          "cta": {
-            "type": "string",
-            "nullable": true,
-            "description": "See all link",
-            "title": "Cta"
-          },
-          "visibility": {
-            "type": "string",
-            "enum": [
-              "all",
-              "mobile-only",
-              "desktop-only"
-            ],
-            "nullable": true,
-            "title": "Exibir em",
-            "description": "Em quais dispositivos esta seção aparece. Útil para mostrar\nconteúdo diferente no celular e no computador.",
-            "default": "all"
-          }
-        },
-        "required": [
-          "products"
-        ]
-      },
-      "c2l0ZS9zZWN0aW9ucy9Qcm9kdWN0L1Byb2R1Y3RTaGVsZi50c3g=": {
-        "title": "site/sections/Product/ProductShelf.tsx",
-        "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/definitions/c3JjL3NlY3Rpb25zL1Byb2R1Y3QvUHJvZHVjdFNoZWxmLnRzeA==@Props"
-          }
-        ],
-        "required": [
-          "__resolveType"
-        ],
-        "properties": {
-          "__resolveType": {
-            "type": "string",
-            "enum": [
-              "site/sections/Product/ProductShelf.tsx"
-            ],
-            "default": "site/sections/Product/ProductShelf.tsx"
-          }
-        }
-      },
-      "c3JjL3NlY3Rpb25zL1Byb2R1Y3QvU2hlbGZXaXRoSW1hZ2UudHN4@Props": {
-        "type": "object",
-        "properties": {
-          "section": {
-            "$ref": "#/definitions/__SECTION_REF__",
-            "title": "Section"
-          },
-          "image": {
-            "type": "object",
-            "properties": {
-              "src": {
-                "type": "string",
-                "format": "image-uri",
-                "title": "Src"
-              },
-              "alt": {
-                "type": "string",
-                "nullable": true,
-                "title": "Alt"
-              },
-              "href": {
-                "type": "string",
-                "nullable": true,
-                "title": "Href"
-              }
-            },
-            "required": [
-              "src"
-            ],
-            "title": "Image"
-          }
-        },
-        "required": [
-          "section",
-          "image"
-        ]
-      },
-      "c2l0ZS9zZWN0aW9ucy9Qcm9kdWN0L1NoZWxmV2l0aEltYWdlLnRzeA==": {
-        "title": "site/sections/Product/ShelfWithImage.tsx",
-        "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/definitions/c3JjL3NlY3Rpb25zL1Byb2R1Y3QvU2hlbGZXaXRoSW1hZ2UudHN4@Props"
-          }
-        ],
-        "required": [
-          "__resolveType"
-        ],
-        "properties": {
-          "__resolveType": {
-            "type": "string",
-            "enum": [
-              "site/sections/Product/ShelfWithImage.tsx"
-            ],
-            "default": "site/sections/Product/ShelfWithImage.tsx"
-          }
-        }
-      },
-      "c3JjL3NlY3Rpb25zL1Byb2R1Y3QvUHJvZHVjdFNoZWxmVGFiYmVkLnRzeA==@Props": {
-        "type": "object",
-        "properties": {
-          "tabs": {
+          "policies": {
             "type": "array",
             "items": {
               "type": "object",
@@ -2204,59 +1409,39 @@
                   "type": "string",
                   "title": "Title"
                 },
-                "products": {
-                  "anyOf": [
-                    {
-                      "$ref": "#/definitions/Resolvable"
-                    },
-                    {
-                      "$ref": "#/definitions/c2hvcGlmeS9sb2FkZXJzL1Byb2R1Y3RMaXN0LnRz"
-                    },
-                    {
-                      "$ref": "#/definitions/c2hvcGlmeS9sb2FkZXJzL1JlbGF0ZWRQcm9kdWN0cy50cw=="
-                    }
-                  ],
-                  "title": "Products",
-                  "nullable": true
+                "href": {
+                  "type": "string",
+                  "title": "Href"
                 }
               },
               "required": [
                 "title",
-                "products"
+                "href"
               ],
               "titleBy": "title"
             },
-            "title": "Tabs"
-          },
-          "tabIndex": {
-            "type": "number",
             "nullable": true,
-            "hide": "true",
-            "title": "TabIndex"
+            "title": "Policies"
           },
-          "title": {
+          "logo": {
             "type": "string",
             "nullable": true,
-            "description": "Section title",
-            "title": "Title"
+            "format": "image-uri",
+            "title": "Logo"
           },
-          "cta": {
+          "trademark": {
             "type": "string",
             "nullable": true,
-            "description": "See all link",
-            "title": "Cta"
+            "title": "Trademark"
           }
-        },
-        "required": [
-          "tabs"
-        ]
+        }
       },
-      "c2l0ZS9zZWN0aW9ucy9Qcm9kdWN0L1Byb2R1Y3RTaGVsZlRhYmJlZC50c3g=": {
-        "title": "site/sections/Product/ProductShelfTabbed.tsx",
+      "c2l0ZS9zZWN0aW9ucy9Gb290ZXIvRm9vdGVyLnRzeA==": {
+        "title": "site/sections/Footer/Footer.tsx",
         "type": "object",
         "allOf": [
           {
-            "$ref": "#/definitions/c3JjL3NlY3Rpb25zL1Byb2R1Y3QvUHJvZHVjdFNoZWxmVGFiYmVkLnRzeA==@Props"
+            "$ref": "#/definitions/c3JjL3NlY3Rpb25zL0Zvb3Rlci9Gb290ZXIudHN4@Props"
           }
         ],
         "required": [
@@ -2266,1233 +1451,9 @@
           "__resolveType": {
             "type": "string",
             "enum": [
-              "site/sections/Product/ProductShelfTabbed.tsx"
+              "site/sections/Footer/Footer.tsx"
             ],
-            "default": "site/sections/Product/ProductShelfTabbed.tsx"
-          }
-        }
-      },
-      "c3JjL3NlY3Rpb25zL1Byb2R1Y3QvUHJvZHVjdERldGFpbHMudHN4@Props": {
-        "type": "object",
-        "properties": {
-          "page": {
-            "anyOf": [
-              {
-                "$ref": "#/definitions/Resolvable"
-              },
-              {
-                "$ref": "#/definitions/c2hvcGlmeS9sb2FkZXJzL1Byb2R1Y3REZXRhaWxzUGFnZS50cw=="
-              }
-            ],
-            "title": "Integration",
-            "nullable": true,
-            "description": "Product details data returned by the commerce platform loader"
-          },
-          "galleryConfig": {
-            "type": "object",
-            "properties": {
-              "aspectRatio": {
-                "type": "string",
-                "nullable": true,
-                "title": "Image aspect ratio",
-                "description": "CSS aspect-ratio value for the main image (e.g. \"820 / 615\")",
-                "default": "820 / 615"
-              },
-              "enableZoom": {
-                "type": "boolean",
-                "nullable": true,
-                "title": "Enable zoom modal",
-                "description": "Show a zoom button that opens a fullscreen viewer",
-                "default": true
-              },
-              "preloadFirstImage": {
-                "type": "boolean",
-                "nullable": true,
-                "title": "Preload first image",
-                "description": "Marks the LCP image with fetchpriority=high and loading=eager",
-                "default": true
-              }
-            },
-            "nullable": true,
-            "title": "Gallery",
-            "description": "Image slider appearance and loading behavior"
-          },
-          "discountBadgeConfig": {
-            "type": "object",
-            "properties": {
-              "show": {
-                "type": "boolean",
-                "nullable": true,
-                "title": "Show badge",
-                "default": true
-              },
-              "labelFormat": {
-                "type": "string",
-                "nullable": true,
-                "title": "Label format",
-                "description": "Use {percent} as placeholder (e.g. \"{percent}% OFF\")",
-                "default": "{percent} % off"
-              },
-              "textColor": {
-                "type": "string",
-                "nullable": true,
-                "title": "Text color",
-                "format": "color-input",
-                "default": "#000000"
-              },
-              "backgroundColor": {
-                "type": "string",
-                "nullable": true,
-                "title": "Background color",
-                "format": "color-input",
-                "default": "#FFD70033"
-              }
-            },
-            "nullable": true,
-            "title": "Discount badge",
-            "description": "\"% off\" promo badge shown above the title"
-          },
-          "variantSelectorConfig": {
-            "type": "object",
-            "properties": {
-              "showLabels": {
-                "type": "boolean",
-                "nullable": true,
-                "title": "Show attribute labels",
-                "description": "Show the attribute name (Color, Size) above each swatch row",
-                "default": true
-              },
-              "preloadStrategy": {
-                "anyOf": [
-                  {
-                    "type": "boolean"
-                  },
-                  {
-                    "type": "string",
-                    "const": "intent"
-                  },
-                  {
-                    "type": "string",
-                    "const": "viewport"
-                  },
-                  {
-                    "type": "string",
-                    "const": "render"
-                  }
-                ],
-                "nullable": true,
-                "title": "Preload strategy",
-                "description": "When to prefetch sibling variant routes",
-                "default": "intent"
-              }
-            },
-            "nullable": true,
-            "title": "Variant selector",
-            "description": "Swatches and preload strategy for sibling variants"
-          },
-          "copy": {
-            "type": "object",
-            "properties": {
-              "notFoundTitle": {
-                "type": "string",
-                "nullable": true,
-                "title": "Not-found title",
-                "description": "Heading shown when the product loader returns no page",
-                "default": "Page not found"
-              },
-              "goHomeLabel": {
-                "type": "string",
-                "nullable": true,
-                "title": "Go-home label",
-                "description": "Label for the button that links back to the homepage on not-found",
-                "default": "Go back to Home"
-              },
-              "descriptionLabel": {
-                "type": "string",
-                "nullable": true,
-                "title": "Description label",
-                "description": "Heading for the collapsible description block",
-                "default": "Description"
-              },
-              "addToCartLabel": {
-                "type": "string",
-                "nullable": true,
-                "title": "Add to cart label",
-                "default": "Add to cart"
-              },
-              "addingLabel": {
-                "type": "string",
-                "nullable": true,
-                "title": "Adding label",
-                "description": "Shown while the add-to-cart request is in flight",
-                "default": "Adding..."
-              },
-              "addedLabel": {
-                "type": "string",
-                "nullable": true,
-                "title": "Added label",
-                "description": "Shown briefly after successful add",
-                "default": "Added!"
-              },
-              "errorLabel": {
-                "type": "string",
-                "nullable": true,
-                "title": "Error label",
-                "default": "Try again"
-              }
-            },
-            "nullable": true,
-            "title": "Copy",
-            "description": "Editable labels (CTA, description heading, not-found fallback)"
-          }
-        },
-        "required": [
-          "page"
-        ]
-      },
-      "c2l0ZS9zZWN0aW9ucy9Qcm9kdWN0L1Byb2R1Y3REZXRhaWxzLnRzeA==": {
-        "title": "site/sections/Product/ProductDetails.tsx",
-        "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/definitions/c3JjL3NlY3Rpb25zL1Byb2R1Y3QvUHJvZHVjdERldGFpbHMudHN4@Props"
-          }
-        ],
-        "required": [
-          "__resolveType"
-        ],
-        "properties": {
-          "__resolveType": {
-            "type": "string",
-            "enum": [
-              "site/sections/Product/ProductDetails.tsx"
-            ],
-            "default": "site/sections/Product/ProductDetails.tsx"
-          }
-        }
-      },
-      "c3JjL3NlY3Rpb25zL01pc2NlbGxhbmVvdXMvQ2FtcGFpZ25UaW1lci50c3g=@Props": {
-        "type": "object",
-        "properties": {
-          "text": {
-            "type": "string",
-            "nullable": true,
-            "title": "Text",
-            "default": "Time left for a campaign to end with a link",
-            "format": "html"
-          },
-          "expiresAt": {
-            "type": "string",
-            "nullable": true,
-            "title": "Expires at date",
-            "format": "datetime"
-          },
-          "labels": {
-            "type": "object",
-            "properties": {
-              "days": {
-                "type": "string",
-                "nullable": true,
-                "title": "Days label",
-                "default": "Days"
-              },
-              "hours": {
-                "type": "string",
-                "nullable": true,
-                "title": "Hours label",
-                "default": "Hours"
-              },
-              "minutes": {
-                "type": "string",
-                "nullable": true,
-                "title": "Minutes label",
-                "default": "Minutes"
-              },
-              "seconds": {
-                "type": "string",
-                "nullable": true,
-                "title": "Seconds label",
-                "default": "Seconds"
-              }
-            },
-            "nullable": true,
-            "title": "Unit labels",
-            "description": "Localizable labels for the days/hours/minutes/seconds counters"
-          }
-        }
-      },
-      "c2l0ZS9zZWN0aW9ucy9NaXNjZWxsYW5lb3VzL0NhbXBhaWduVGltZXIudHN4": {
-        "title": "site/sections/Miscellaneous/CampaignTimer.tsx",
-        "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/definitions/c3JjL3NlY3Rpb25zL01pc2NlbGxhbmVvdXMvQ2FtcGFpZ25UaW1lci50c3g=@Props"
-          }
-        ],
-        "required": [
-          "__resolveType"
-        ],
-        "properties": {
-          "__resolveType": {
-            "type": "string",
-            "enum": [
-              "site/sections/Miscellaneous/CampaignTimer.tsx"
-            ],
-            "default": "site/sections/Miscellaneous/CampaignTimer.tsx"
-          }
-        }
-      },
-      "c3JjL3NlY3Rpb25zL01pc2NlbGxhbmVvdXMvQ29va2llQ29uc2VudC50c3g=@Props": {
-        "type": "object",
-        "properties": {
-          "title": {
-            "type": "string",
-            "nullable": true,
-            "title": "Title",
-            "description": "Heading shown at the top of the consent banner",
-            "default": "Cookies"
-          },
-          "text": {
-            "type": "string",
-            "nullable": true,
-            "title": "Body",
-            "description": "Rich-text consent message",
-            "format": "html"
-          },
-          "policy": {
-            "type": "object",
-            "properties": {
-              "text": {
-                "type": "string",
-                "nullable": true,
-                "title": "Policy link text",
-                "description": "Anchor text shown next to the consent message",
-                "default": "Learn more about our privacy policy"
-              },
-              "link": {
-                "type": "string",
-                "nullable": true,
-                "title": "Policy URL",
-                "description": "Internal link to the privacy policy page",
-                "default": "/privacy-policy"
-              }
-            },
-            "nullable": true,
-            "title": "Privacy policy",
-            "description": "Link shown beneath the message"
-          },
-          "buttons": {
-            "type": "object",
-            "properties": {
-              "allowText": {
-                "type": "string",
-                "title": "Accept label",
-                "description": "Confirms cookie usage and dismisses the banner",
-                "default": "Accept"
-              },
-              "cancelText": {
-                "type": "string",
-                "nullable": true,
-                "title": "Dismiss label",
-                "description": "Closes the banner without accepting (re-shown next visit)",
-                "default": "Close"
-              }
-            },
-            "required": [
-              "allowText"
-            ],
-            "nullable": true,
-            "title": "Buttons",
-            "description": "Accept / dismiss button labels"
-          },
-          "layout": {
-            "type": "object",
-            "properties": {
-              "position": {
-                "type": "string",
-                "enum": [
-                  "Left",
-                  "Center",
-                  "Right",
-                  "Expanded"
-                ],
-                "nullable": true,
-                "title": "Banner position",
-                "description": "Where the banner sticks at the bottom of the viewport",
-                "default": "Expanded"
-              },
-              "content": {
-                "type": "string",
-                "enum": [
-                  "Tiled",
-                  "Piled up"
-                ],
-                "nullable": true,
-                "title": "Content layout",
-                "description": "Stack the message and buttons in a row or column",
-                "default": "Tiled"
-              }
-            },
-            "nullable": true,
-            "title": "Layout",
-            "description": "Banner position and content arrangement"
-          }
-        }
-      },
-      "c2l0ZS9zZWN0aW9ucy9NaXNjZWxsYW5lb3VzL0Nvb2tpZUNvbnNlbnQudHN4": {
-        "title": "site/sections/Miscellaneous/CookieConsent.tsx",
-        "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/definitions/c3JjL3NlY3Rpb25zL01pc2NlbGxhbmVvdXMvQ29va2llQ29uc2VudC50c3g=@Props"
-          }
-        ],
-        "required": [
-          "__resolveType"
-        ],
-        "properties": {
-          "__resolveType": {
-            "type": "string",
-            "enum": [
-              "site/sections/Miscellaneous/CookieConsent.tsx"
-            ],
-            "default": "site/sections/Miscellaneous/CookieConsent.tsx"
-          }
-        }
-      },
-      "c3JjL3NlY3Rpb25zL1NvY2lhbC9XaGF0c0FwcC50c3g=@Props": {
-        "type": "object",
-        "properties": {
-          "phone": {
-            "type": "number",
-            "nullable": true,
-            "title": "Phone"
-          }
-        }
-      },
-      "c2l0ZS9zZWN0aW9ucy9Tb2NpYWwvV2hhdHNBcHAudHN4": {
-        "title": "site/sections/Social/WhatsApp.tsx",
-        "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/definitions/c3JjL3NlY3Rpb25zL1NvY2lhbC9XaGF0c0FwcC50c3g=@Props"
-          }
-        ],
-        "required": [
-          "__resolveType"
-        ],
-        "properties": {
-          "__resolveType": {
-            "type": "string",
-            "enum": [
-              "site/sections/Social/WhatsApp.tsx"
-            ],
-            "default": "site/sections/Social/WhatsApp.tsx"
-          }
-        }
-      },
-      "c3JjL3NlY3Rpb25zL1NvY2lhbC9JbnN0YWdyYW1Qb3N0cy50c3g=@Props": {
-        "type": "object",
-        "properties": {
-          "facebookToken": {
-            "type": "string",
-            "description": "Get it in Facebook app. Expires every 90 days.",
-            "title": "FacebookToken"
-          },
-          "nposts": {
-            "type": "number",
-            "title": "Number of posts"
-          },
-          "title": {
-            "type": "string",
-            "nullable": true,
-            "description": "Section title",
-            "title": "Title"
-          },
-          "cta": {
-            "type": "string",
-            "nullable": true,
-            "description": "See all link",
-            "title": "Cta"
-          }
-        },
-        "required": [
-          "facebookToken",
-          "nposts"
-        ]
-      },
-      "c2l0ZS9zZWN0aW9ucy9Tb2NpYWwvSW5zdGFncmFtUG9zdHMudHN4": {
-        "title": "site/sections/Social/InstagramPosts.tsx",
-        "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/definitions/c3JjL3NlY3Rpb25zL1NvY2lhbC9JbnN0YWdyYW1Qb3N0cy50c3g=@Props"
-          }
-        ],
-        "required": [
-          "__resolveType"
-        ],
-        "properties": {
-          "__resolveType": {
-            "type": "string",
-            "enum": [
-              "site/sections/Social/InstagramPosts.tsx"
-            ],
-            "default": "site/sections/Social/InstagramPosts.tsx"
-          }
-        }
-      },
-      "c3JjL3NlY3Rpb25zL1RoZW1lL1RoZW1lLnRzeA==@Props": {
-        "type": "object",
-        "properties": {
-          "colorScheme": {
-            "type": "string",
-            "enum": [
-              "light",
-              "dark",
-              "any"
-            ],
-            "nullable": true,
-            "description": "Set the prefers-color-scheme media query. To support dark mode, create two instances of this block and set this option to light/dark in each instance",
-            "default": "light",
-            "title": "ColorScheme"
-          },
-          "mainColors": {
-            "type": "object",
-            "properties": {
-              "base-100": {
-                "type": "string",
-                "nullable": true,
-                "format": "color-input",
-                "title": "Base"
-              },
-              "primary": {
-                "type": "string",
-                "nullable": true,
-                "format": "color-input",
-                "title": "Primary"
-              },
-              "secondary": {
-                "type": "string",
-                "nullable": true,
-                "format": "color-input",
-                "title": "Secondary"
-              },
-              "tertiary": {
-                "type": "string",
-                "nullable": true,
-                "title": "Accent",
-                "format": "color-input"
-              },
-              "neutral": {
-                "type": "string",
-                "nullable": true,
-                "format": "color-input",
-                "title": "Neutral"
-              },
-              "success": {
-                "type": "string",
-                "nullable": true,
-                "format": "color-input",
-                "title": "Success"
-              },
-              "warning": {
-                "type": "string",
-                "nullable": true,
-                "format": "color-input",
-                "title": "Warning"
-              },
-              "error": {
-                "type": "string",
-                "nullable": true,
-                "format": "color-input",
-                "title": "Error"
-              },
-              "info": {
-                "type": "string",
-                "nullable": true,
-                "format": "color-input",
-                "title": "Info"
-              }
-            },
-            "nullable": true,
-            "title": "MainColors"
-          },
-          "complementaryColors": {
-            "type": "object",
-            "properties": {
-              "base-200": {
-                "type": "string",
-                "nullable": true,
-                "format": "color-input",
-                "title": "Base-200"
-              },
-              "base-300": {
-                "type": "string",
-                "nullable": true,
-                "format": "color-input",
-                "title": "Base-300"
-              },
-              "base-400": {
-                "type": "string",
-                "nullable": true,
-                "format": "color-input",
-                "title": "Base-400"
-              },
-              "base-content": {
-                "type": "string",
-                "nullable": true,
-                "format": "color-input",
-                "title": "Base-content"
-              },
-              "primary-content": {
-                "type": "string",
-                "nullable": true,
-                "format": "color-input",
-                "title": "Primary-content"
-              },
-              "secondary-content": {
-                "type": "string",
-                "nullable": true,
-                "format": "color-input",
-                "title": "Secondary-content"
-              },
-              "tertiary-content": {
-                "type": "string",
-                "nullable": true,
-                "title": "Accent Content",
-                "format": "color-input"
-              },
-              "neutral-content": {
-                "type": "string",
-                "nullable": true,
-                "format": "color-input",
-                "title": "Neutral-content"
-              },
-              "success-content": {
-                "type": "string",
-                "nullable": true,
-                "format": "color-input",
-                "title": "Success-content"
-              },
-              "warning-content": {
-                "type": "string",
-                "nullable": true,
-                "format": "color-input",
-                "title": "Warning-content"
-              },
-              "error-content": {
-                "type": "string",
-                "nullable": true,
-                "format": "color-input",
-                "title": "Error-content"
-              },
-              "info-content": {
-                "type": "string",
-                "nullable": true,
-                "format": "color-input",
-                "title": "Info-content"
-              }
-            },
-            "nullable": true,
-            "description": "These will be auto-generated to a readable color if not set",
-            "title": "ComplementaryColors"
-          },
-          "buttonStyle": {
-            "type": "object",
-            "properties": {
-              "--border-btn": {
-                "type": "string",
-                "enum": [
-                  "1px",
-                  "2px",
-                  "3px",
-                  "4px",
-                  "5px",
-                  "6px",
-                  "7px",
-                  "8px"
-                ],
-                "default": "1px",
-                "title": "Border width"
-              },
-              "--rounded-btn": {
-                "type": "string",
-                "enum": [
-                  "0",
-                  "0.2rem",
-                  "0.4rem",
-                  "0.8rem",
-                  "2rem",
-                  "99999px"
-                ],
-                "default": "0.2rem",
-                "title": "Radius",
-                "description": "Button and similar elements"
-              },
-              "--btn-focus-scale": {
-                "type": "string",
-                "enum": [
-                  "0.9",
-                  "0.95",
-                  "1",
-                  "1.05",
-                  "1.1"
-                ],
-                "default": 0.95,
-                "title": "Scale on click"
-              },
-              "--animation-btn": {
-                "type": "string",
-                "enum": [
-                  "0.1s",
-                  "0.15s",
-                  "0.2s",
-                  "0.25s",
-                  "0.3s",
-                  "0.35s"
-                ],
-                "default": "0.25s",
-                "title": "Animation",
-                "description": "Duration when you click"
-              }
-            },
-            "required": [
-              "--border-btn",
-              "--rounded-btn",
-              "--btn-focus-scale",
-              "--animation-btn"
-            ],
-            "nullable": true,
-            "title": "ButtonStyle"
-          },
-          "otherStyles": {
-            "type": "object",
-            "properties": {
-              "--rounded-box": {
-                "type": "string",
-                "default": "1rem",
-                "title": "Rounded box",
-                "description": "border radius rounded-box utility class, used in card and other large boxes"
-              },
-              "--rounded-badge": {
-                "type": "string",
-                "default": "1.9rem",
-                "title": "Rounded badge",
-                "description": "border radius rounded-badge utility class, used in badges and similar"
-              },
-              "--animation-input": {
-                "type": "string",
-                "default": "0.2s",
-                "title": "Animation input",
-                "description": "duration of animation for inputs like checkbox, toggle, radio, etc"
-              },
-              "--tab-border": {
-                "type": "string",
-                "default": "1px",
-                "title": "Tab border",
-                "description": "border width of tabs"
-              },
-              "--tab-radius": {
-                "type": "string",
-                "default": "0.5rem",
-                "title": "Tab radius",
-                "description": "border radius of tabs"
-              }
-            },
-            "required": [
-              "--rounded-box",
-              "--rounded-badge",
-              "--animation-input",
-              "--tab-border",
-              "--tab-radius"
-            ],
-            "nullable": true,
-            "title": "OtherStyles"
-          },
-          "font": {
-            "type": "object",
-            "properties": {
-              "family": {
-                "type": "string",
-                "title": "Family"
-              },
-              "styleSheet": {
-                "type": "string",
-                "nullable": true,
-                "title": "StyleSheet"
-              }
-            },
-            "required": [
-              "family"
-            ],
-            "nullable": true,
-            "title": "Font"
-          },
-          "mode": {
-            "type": "string",
-            "enum": [
-              "light",
-              "dark"
-            ],
-            "nullable": true,
-            "description": "This is the admin's color-scheme mode",
-            "title": "Mode"
-          }
-        }
-      },
-      "c2l0ZS9zZWN0aW9ucy9UaGVtZS9UaGVtZS50c3g=": {
-        "title": "site/sections/Theme/Theme.tsx",
-        "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/definitions/c3JjL3NlY3Rpb25zL1RoZW1lL1RoZW1lLnRzeA==@Props"
-          }
-        ],
-        "required": [
-          "__resolveType"
-        ],
-        "properties": {
-          "__resolveType": {
-            "type": "string",
-            "enum": [
-              "site/sections/Theme/Theme.tsx"
-            ],
-            "default": "site/sections/Theme/Theme.tsx"
-          }
-        }
-      },
-      "c3JjL3NlY3Rpb25zL0xpbmtzL0xpbmtUcmVlLnRzeA==@Props": {
-        "type": "object",
-        "properties": {
-          "header": {
-            "type": "object",
-            "properties": {
-              "logo": {
-                "type": "object",
-                "properties": {
-                  "img": {
-                    "type": "string",
-                    "nullable": true,
-                    "format": "image-uri",
-                    "title": "Img"
-                  },
-                  "alt": {
-                    "type": "string",
-                    "nullable": true,
-                    "description": "alternative text",
-                    "title": "Alt"
-                  },
-                  "width": {
-                    "type": "number",
-                    "nullable": true,
-                    "title": "Width"
-                  },
-                  "height": {
-                    "type": "number",
-                    "nullable": true,
-                    "title": "Height"
-                  },
-                  "link": {
-                    "type": "string",
-                    "nullable": true,
-                    "description": "external link on logo",
-                    "title": "Link"
-                  }
-                },
-                "nullable": true,
-                "description": "150px x 150px image recommended",
-                "title": "Logo"
-              },
-              "title": {
-                "type": "string",
-                "nullable": true,
-                "format": "textarea",
-                "title": "Title"
-              },
-              "description": {
-                "type": "string",
-                "nullable": true,
-                "format": "textarea",
-                "title": "Description"
-              },
-              "textColor": {
-                "type": "string",
-                "format": "color",
-                "description": "color to be used in title and description",
-                "title": "TextColor"
-              }
-            },
-            "required": [
-              "textColor"
-            ],
-            "title": "Header"
-          },
-          "links": {
-            "type": "object",
-            "properties": {
-              "items": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "icon": {
-                      "type": "string",
-                      "enum": [
-                        "search",
-                        "shopping_bag",
-                        "menu",
-                        "account_circle",
-                        "close",
-                        "chevron-right",
-                        "favorite",
-                        "home_pin",
-                        "call",
-                        "local_shipping",
-                        "pan_zoom",
-                        "share",
-                        "sell",
-                        "check-circle",
-                        "error",
-                        "trash"
-                      ],
-                      "nullable": true,
-                      "description": "20px transparent png recommended",
-                      "title": "Icon"
-                    },
-                    "label": {
-                      "type": "string",
-                      "title": "Label"
-                    },
-                    "href": {
-                      "type": "string",
-                      "format": "textarea",
-                      "title": "Href"
-                    }
-                  },
-                  "required": [
-                    "label",
-                    "href"
-                  ]
-                },
-                "nullable": true,
-                "title": "Items"
-              },
-              "style": {
-                "type": "object",
-                "properties": {
-                  "textColor": {
-                    "type": "string",
-                    "format": "color",
-                    "description": "color to be used in link's text",
-                    "title": "TextColor"
-                  },
-                  "gradientColors": {
-                    "type": "object",
-                    "properties": {
-                      "neutral": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "color": {
-                              "type": "string",
-                              "format": "color",
-                              "title": "Color"
-                            }
-                          },
-                          "required": [
-                            "color"
-                          ]
-                        },
-                        "description": "multiple colors will create a gradient effect",
-                        "title": "Neutral"
-                      }
-                    },
-                    "required": [
-                      "neutral"
-                    ],
-                    "title": "GradientColors"
-                  }
-                },
-                "required": [
-                  "textColor",
-                  "gradientColors"
-                ],
-                "title": "Style"
-              }
-            },
-            "required": [
-              "style"
-            ],
-            "title": "Links"
-          },
-          "social": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "href": {
-                  "type": "string",
-                  "title": "Href"
-                },
-                "label": {
-                  "type": "string",
-                  "enum": [
-                    "Instagram",
-                    "Facebook",
-                    "Linkedin",
-                    "WhatsApp",
-                    "Discord",
-                    "Tiktok"
-                  ],
-                  "title": "Label"
-                },
-                "iconColor": {
-                  "type": "string",
-                  "nullable": true,
-                  "format": "color",
-                  "title": "IconColor"
-                },
-                "strokeWidth": {
-                  "type": "number",
-                  "nullable": true,
-                  "description": "width of the SVG line",
-                  "title": "StrokeWidth"
-                }
-              },
-              "required": [
-                "href",
-                "label"
-              ]
-            },
-            "nullable": true,
-            "title": "Social"
-          },
-          "background": {
-            "type": "object",
-            "properties": {
-              "image": {
-                "type": "string",
-                "nullable": true,
-                "description": "an image will override any background color",
-                "format": "image-uri",
-                "title": "Image"
-              },
-              "backgroundColor": {
-                "type": "string",
-                "nullable": true,
-                "format": "color",
-                "title": "BackgroundColor"
-              }
-            },
-            "title": "Background"
-          },
-          "footer": {
-            "type": "object",
-            "properties": {
-              "url": {
-                "type": "string",
-                "nullable": true,
-                "title": "Url"
-              },
-              "image": {
-                "type": "string",
-                "nullable": true,
-                "format": "image-uri",
-                "title": "Image"
-              },
-              "alt": {
-                "type": "string",
-                "nullable": true,
-                "description": "alternative text",
-                "title": "Alt"
-              },
-              "width": {
-                "type": "number",
-                "nullable": true,
-                "title": "Width"
-              },
-              "height": {
-                "type": "number",
-                "nullable": true,
-                "title": "Height"
-              },
-              "text": {
-                "type": "string",
-                "nullable": true,
-                "title": "Text"
-              }
-            },
-            "nullable": true,
-            "title": "Footer"
-          }
-        },
-        "required": [
-          "header",
-          "links",
-          "background"
-        ]
-      },
-      "c2l0ZS9zZWN0aW9ucy9MaW5rcy9MaW5rVHJlZS50c3g=": {
-        "title": "site/sections/Links/LinkTree.tsx",
-        "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/definitions/c3JjL3NlY3Rpb25zL0xpbmtzL0xpbmtUcmVlLnRzeA==@Props"
-          }
-        ],
-        "required": [
-          "__resolveType"
-        ],
-        "properties": {
-          "__resolveType": {
-            "type": "string",
-            "enum": [
-              "site/sections/Links/LinkTree.tsx"
-            ],
-            "default": "site/sections/Links/LinkTree.tsx"
-          }
-        }
-      },
-      "c3JjL3NlY3Rpb25zL0NvbXBvbmVudC50c3g=@Props": {
-        "type": "object",
-        "properties": {}
-      },
-      "c2l0ZS9zZWN0aW9ucy9Db21wb25lbnQudHN4": {
-        "title": "site/sections/Component.tsx",
-        "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/definitions/c3JjL3NlY3Rpb25zL0NvbXBvbmVudC50c3g=@Props"
-          }
-        ],
-        "required": [
-          "__resolveType"
-        ],
-        "properties": {
-          "__resolveType": {
-            "type": "string",
-            "enum": [
-              "site/sections/Component.tsx"
-            ],
-            "default": "site/sections/Component.tsx"
-          }
-        }
-      },
-      "c3JjL3NlY3Rpb25zL05ld3NsZXR0ZXIvTmV3c2xldHRlci50c3g=@Props": {
-        "type": "object",
-        "properties": {
-          "notices": {
-            "type": "object",
-            "properties": {
-              "empty": {
-                "type": "object",
-                "properties": {
-                  "title": {
-                    "type": "string",
-                    "nullable": true,
-                    "title": "Title",
-                    "description": "Bold heading shown for this notice state"
-                  },
-                  "description": {
-                    "type": "string",
-                    "nullable": true,
-                    "title": "Description",
-                    "description": "Subtext explaining the notice state"
-                  }
-                },
-                "nullable": true,
-                "title": "Empty state",
-                "description": "Initial pre-signup notice (call-to-action)"
-              },
-              "success": {
-                "type": "object",
-                "properties": {
-                  "title": {
-                    "type": "string",
-                    "nullable": true,
-                    "title": "Title",
-                    "description": "Bold heading shown for this notice state"
-                  },
-                  "description": {
-                    "type": "string",
-                    "nullable": true,
-                    "title": "Description",
-                    "description": "Subtext explaining the notice state"
-                  }
-                },
-                "nullable": true,
-                "title": "Success state",
-                "description": "Notice shown after a successful subscription"
-              },
-              "failed": {
-                "type": "object",
-                "properties": {
-                  "title": {
-                    "type": "string",
-                    "nullable": true,
-                    "title": "Title",
-                    "description": "Bold heading shown for this notice state"
-                  },
-                  "description": {
-                    "type": "string",
-                    "nullable": true,
-                    "title": "Description",
-                    "description": "Subtext explaining the notice state"
-                  }
-                },
-                "nullable": true,
-                "title": "Failed state",
-                "description": "Notice shown when the subscription request fails"
-              }
-            },
-            "nullable": true,
-            "title": "Notices",
-            "description": "Empty / success / failed notice copies"
-          },
-          "form": {
-            "type": "object",
-            "properties": {
-              "label": {
-                "type": "string",
-                "nullable": true,
-                "title": "Submit button label",
-                "description": "Text on the signup CTA",
-                "default": "Sign up"
-              },
-              "placeholder": {
-                "type": "string",
-                "nullable": true,
-                "title": "Email placeholder",
-                "description": "Placeholder shown inside the email input",
-                "default": "Enter your email address"
-              }
-            },
-            "nullable": true,
-            "title": "Form",
-            "description": "Submit label and placeholder copy"
-          }
-        }
-      },
-      "c2l0ZS9zZWN0aW9ucy9OZXdzbGV0dGVyL05ld3NsZXR0ZXIudHN4": {
-        "title": "site/sections/Newsletter/Newsletter.tsx",
-        "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/definitions/c3JjL3NlY3Rpb25zL05ld3NsZXR0ZXIvTmV3c2xldHRlci50c3g=@Props"
-          }
-        ],
-        "required": [
-          "__resolveType"
-        ],
-        "properties": {
-          "__resolveType": {
-            "type": "string",
-            "enum": [
-              "site/sections/Newsletter/Newsletter.tsx"
-            ],
-            "default": "site/sections/Newsletter/Newsletter.tsx"
+            "default": "site/sections/Footer/Footer.tsx"
           }
         }
       },
@@ -3924,16 +1885,82 @@
           }
         }
       },
-      "c3JjL2FwcHMvc2l0ZS50cw==@Props": {
+      "c3JjL3NlY3Rpb25zL0ltYWdlcy9CYW5uZXIudHN4@Props": {
         "type": "object",
-        "properties": {}
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true,
+            "format": "html",
+            "title": "Description"
+          },
+          "images": {
+            "type": "object",
+            "properties": {
+              "mobile": {
+                "type": "string",
+                "format": "image-uri",
+                "title": "Mobile"
+              },
+              "desktop": {
+                "type": "string",
+                "format": "image-uri",
+                "title": "Desktop"
+              }
+            },
+            "required": [
+              "mobile",
+              "desktop"
+            ],
+            "title": "Images"
+          },
+          "cta": {
+            "type": "object",
+            "properties": {
+              "href": {
+                "type": "string",
+                "title": "Href"
+              },
+              "label": {
+                "type": "string",
+                "title": "Label"
+              }
+            },
+            "required": [
+              "href",
+              "label"
+            ],
+            "nullable": true,
+            "title": "Cta"
+          },
+          "visibility": {
+            "type": "string",
+            "enum": [
+              "all",
+              "mobile-only",
+              "desktop-only"
+            ],
+            "nullable": true,
+            "title": "Exibir em",
+            "description": "Em quais dispositivos esta seção aparece. Útil para mostrar\nconteúdo diferente no celular e no computador.",
+            "default": "all"
+          }
+        },
+        "required": [
+          "title",
+          "images"
+        ]
       },
-      "c2l0ZS9hcHBzL3NpdGUudHM=": {
-        "title": "site/apps/site.ts",
+      "c2l0ZS9zZWN0aW9ucy9JbWFnZXMvQmFubmVyLnRzeA==": {
+        "title": "site/sections/Images/Banner.tsx",
         "type": "object",
         "allOf": [
           {
-            "$ref": "#/definitions/c3JjL2FwcHMvc2l0ZS50cw==@Props"
+            "$ref": "#/definitions/c3JjL3NlY3Rpb25zL0ltYWdlcy9CYW5uZXIudHN4@Props"
           }
         ],
         "required": [
@@ -3943,9 +1970,1957 @@
           "__resolveType": {
             "type": "string",
             "enum": [
-              "site/apps/site.ts"
+              "site/sections/Images/Banner.tsx"
             ],
-            "default": "site/apps/site.ts"
+            "default": "site/sections/Images/Banner.tsx"
+          }
+        }
+      },
+      "c3JjL3NlY3Rpb25zL0ltYWdlcy9DYXJvdXNlbC50c3g=@Props": {
+        "type": "object",
+        "properties": {
+          "images": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "desktop": {
+                  "type": "string",
+                  "description": "desktop otimized image",
+                  "format": "image-uri",
+                  "title": "Desktop"
+                },
+                "mobile": {
+                  "type": "string",
+                  "description": "mobile otimized image",
+                  "format": "image-uri",
+                  "title": "Mobile"
+                },
+                "alt": {
+                  "type": "string",
+                  "description": "Image's alt text",
+                  "title": "Alt"
+                },
+                "action": {
+                  "type": "object",
+                  "properties": {
+                    "href": {
+                      "type": "string",
+                      "description": "when user clicks on the image, go to this link",
+                      "title": "Href"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "Image text title",
+                      "title": "Title"
+                    },
+                    "subTitle": {
+                      "type": "string",
+                      "description": "Image text subtitle",
+                      "title": "SubTitle"
+                    },
+                    "label": {
+                      "type": "string",
+                      "description": "Button label",
+                      "title": "Label"
+                    }
+                  },
+                  "required": [
+                    "href",
+                    "title",
+                    "subTitle",
+                    "label"
+                  ],
+                  "nullable": true,
+                  "title": "Action"
+                }
+              },
+              "required": [
+                "desktop",
+                "mobile",
+                "alt"
+              ],
+              "titleBy": "alt"
+            },
+            "nullable": true,
+            "title": "Images"
+          },
+          "preload": {
+            "type": "boolean",
+            "nullable": true,
+            "description": "Check this option when this banner is the biggest image on the screen for image optimizations",
+            "title": "Preload"
+          },
+          "interval": {
+            "type": "number",
+            "nullable": true,
+            "title": "Autoplay interval",
+            "description": "time (in seconds) to start the carousel autoplay"
+          }
+        }
+      },
+      "c2l0ZS9zZWN0aW9ucy9JbWFnZXMvQ2Fyb3VzZWwudHN4": {
+        "title": "site/sections/Images/Carousel.tsx",
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/definitions/c3JjL3NlY3Rpb25zL0ltYWdlcy9DYXJvdXNlbC50c3g=@Props"
+          }
+        ],
+        "required": [
+          "__resolveType"
+        ],
+        "properties": {
+          "__resolveType": {
+            "type": "string",
+            "enum": [
+              "site/sections/Images/Carousel.tsx"
+            ],
+            "default": "site/sections/Images/Carousel.tsx"
+          }
+        }
+      },
+      "c3JjL3NlY3Rpb25zL0ltYWdlcy9JbWFnZUdhbGxlcnkudHN4@Props": {
+        "type": "object",
+        "properties": {
+          "banners": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "string",
+                  "format": "image-uri",
+                  "title": "Mobile"
+                },
+                "desktop": {
+                  "type": "string",
+                  "nullable": true,
+                  "format": "image-uri",
+                  "title": "Desktop"
+                },
+                "alt": {
+                  "type": "string",
+                  "description": "Image alt texts",
+                  "title": "Alt"
+                },
+                "href": {
+                  "type": "string",
+                  "description": "Adicione um link",
+                  "title": "Href"
+                }
+              },
+              "required": [
+                "mobile",
+                "alt",
+                "href"
+              ],
+              "titleBy": "alt"
+            },
+            "nullable": true,
+            "maxItems": 4,
+            "minItems": 4,
+            "title": "Banners"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true,
+            "description": "Section title",
+            "title": "Title"
+          },
+          "cta": {
+            "type": "string",
+            "nullable": true,
+            "description": "See all link",
+            "title": "Cta"
+          }
+        }
+      },
+      "c2l0ZS9zZWN0aW9ucy9JbWFnZXMvSW1hZ2VHYWxsZXJ5LnRzeA==": {
+        "title": "site/sections/Images/ImageGallery.tsx",
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/definitions/c3JjL3NlY3Rpb25zL0ltYWdlcy9JbWFnZUdhbGxlcnkudHN4@Props"
+          }
+        ],
+        "required": [
+          "__resolveType"
+        ],
+        "properties": {
+          "__resolveType": {
+            "type": "string",
+            "enum": [
+              "site/sections/Images/ImageGallery.tsx"
+            ],
+            "default": "site/sections/Images/ImageGallery.tsx"
+          }
+        }
+      },
+      "c3JjL3NlY3Rpb25zL0ltYWdlcy9TaG9wcGFibGVCYW5uZXIudHN4@Props": {
+        "type": "object",
+        "properties": {
+          "image": {
+            "type": "object",
+            "properties": {
+              "mobile": {
+                "type": "string",
+                "format": "image-uri",
+                "title": "Mobile"
+              },
+              "desktop": {
+                "type": "string",
+                "nullable": true,
+                "format": "image-uri",
+                "title": "Desktop"
+              },
+              "altText": {
+                "type": "string",
+                "title": "AltText"
+              }
+            },
+            "required": [
+              "mobile",
+              "altText"
+            ],
+            "title": "Image"
+          },
+          "pins": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "object",
+                  "properties": {
+                    "x": {
+                      "type": "number",
+                      "title": "X"
+                    },
+                    "y": {
+                      "type": "number",
+                      "title": "Y"
+                    }
+                  },
+                  "required": [
+                    "x",
+                    "y"
+                  ],
+                  "title": "Mobile"
+                },
+                "desktop": {
+                  "type": "object",
+                  "properties": {
+                    "x": {
+                      "type": "number",
+                      "title": "X"
+                    },
+                    "y": {
+                      "type": "number",
+                      "title": "Y"
+                    }
+                  },
+                  "required": [
+                    "x",
+                    "y"
+                  ],
+                  "nullable": true,
+                  "title": "Desktop"
+                },
+                "link": {
+                  "type": "string",
+                  "title": "Link"
+                },
+                "label": {
+                  "type": "string",
+                  "title": "Label"
+                }
+              },
+              "required": [
+                "mobile",
+                "link",
+                "label"
+              ]
+            },
+            "nullable": true,
+            "title": "Pins"
+          },
+          "title": {
+            "type": "object",
+            "properties": {
+              "content": {
+                "type": "string",
+                "nullable": true,
+                "title": "Content"
+              },
+              "layout": {
+                "type": "object",
+                "properties": {
+                  "position": {
+                    "type": "string",
+                    "enum": [
+                      "justify-start",
+                      "justify-center",
+                      "justify-end"
+                    ],
+                    "nullable": true,
+                    "title": "Position"
+                  }
+                },
+                "nullable": true,
+                "title": "Layout"
+              }
+            },
+            "nullable": true,
+            "title": "Title"
+          },
+          "text": {
+            "type": "object",
+            "properties": {
+              "content": {
+                "type": "string",
+                "nullable": true,
+                "title": "Content"
+              },
+              "layout": {
+                "type": "object",
+                "properties": {
+                  "position": {
+                    "type": "string",
+                    "enum": [
+                      "text-center",
+                      "text-left",
+                      "text-right"
+                    ],
+                    "nullable": true,
+                    "title": "Position"
+                  }
+                },
+                "nullable": true,
+                "title": "Layout"
+              }
+            },
+            "nullable": true,
+            "title": "Text"
+          },
+          "link": {
+            "type": "object",
+            "properties": {
+              "layout": {
+                "type": "object",
+                "properties": {
+                  "position": {
+                    "type": "string",
+                    "enum": [
+                      "justify-start",
+                      "justify-center",
+                      "justify-end"
+                    ],
+                    "nullable": true,
+                    "title": "Position"
+                  }
+                },
+                "nullable": true,
+                "title": "Layout"
+              },
+              "text": {
+                "type": "string",
+                "title": "Text"
+              },
+              "href": {
+                "type": "string",
+                "title": "Href"
+              }
+            },
+            "required": [
+              "text",
+              "href"
+            ],
+            "nullable": true,
+            "title": "Link"
+          }
+        },
+        "required": [
+          "image"
+        ]
+      },
+      "c2l0ZS9zZWN0aW9ucy9JbWFnZXMvU2hvcHBhYmxlQmFubmVyLnRzeA==": {
+        "title": "site/sections/Images/ShoppableBanner.tsx",
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/definitions/c3JjL3NlY3Rpb25zL0ltYWdlcy9TaG9wcGFibGVCYW5uZXIudHN4@Props"
+          }
+        ],
+        "required": [
+          "__resolveType"
+        ],
+        "properties": {
+          "__resolveType": {
+            "type": "string",
+            "enum": [
+              "site/sections/Images/ShoppableBanner.tsx"
+            ],
+            "default": "site/sections/Images/ShoppableBanner.tsx"
+          }
+        }
+      },
+      "c3JjL3NlY3Rpb25zL0xpbmtzL0xpbmtUcmVlLnRzeA==@Props": {
+        "type": "object",
+        "properties": {
+          "header": {
+            "type": "object",
+            "properties": {
+              "logo": {
+                "type": "object",
+                "properties": {
+                  "img": {
+                    "type": "string",
+                    "nullable": true,
+                    "format": "image-uri",
+                    "title": "Img"
+                  },
+                  "alt": {
+                    "type": "string",
+                    "nullable": true,
+                    "description": "alternative text",
+                    "title": "Alt"
+                  },
+                  "width": {
+                    "type": "number",
+                    "nullable": true,
+                    "title": "Width"
+                  },
+                  "height": {
+                    "type": "number",
+                    "nullable": true,
+                    "title": "Height"
+                  },
+                  "link": {
+                    "type": "string",
+                    "nullable": true,
+                    "description": "external link on logo",
+                    "title": "Link"
+                  }
+                },
+                "nullable": true,
+                "description": "150px x 150px image recommended",
+                "title": "Logo"
+              },
+              "title": {
+                "type": "string",
+                "nullable": true,
+                "format": "textarea",
+                "title": "Title"
+              },
+              "description": {
+                "type": "string",
+                "nullable": true,
+                "format": "textarea",
+                "title": "Description"
+              },
+              "textColor": {
+                "type": "string",
+                "format": "color",
+                "description": "color to be used in title and description",
+                "title": "TextColor"
+              }
+            },
+            "required": [
+              "textColor"
+            ],
+            "title": "Header"
+          },
+          "links": {
+            "type": "object",
+            "properties": {
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "icon": {
+                      "type": "string",
+                      "enum": [
+                        "search",
+                        "shopping_bag",
+                        "menu",
+                        "account_circle",
+                        "close",
+                        "chevron-right",
+                        "favorite",
+                        "home_pin",
+                        "call",
+                        "local_shipping",
+                        "pan_zoom",
+                        "share",
+                        "sell",
+                        "check-circle",
+                        "error",
+                        "trash"
+                      ],
+                      "nullable": true,
+                      "description": "20px transparent png recommended",
+                      "title": "Icon"
+                    },
+                    "label": {
+                      "type": "string",
+                      "title": "Label"
+                    },
+                    "href": {
+                      "type": "string",
+                      "format": "textarea",
+                      "title": "Href"
+                    }
+                  },
+                  "required": [
+                    "label",
+                    "href"
+                  ]
+                },
+                "nullable": true,
+                "title": "Items"
+              },
+              "style": {
+                "type": "object",
+                "properties": {
+                  "textColor": {
+                    "type": "string",
+                    "format": "color",
+                    "description": "color to be used in link's text",
+                    "title": "TextColor"
+                  },
+                  "gradientColors": {
+                    "type": "object",
+                    "properties": {
+                      "neutral": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "color": {
+                              "type": "string",
+                              "format": "color",
+                              "title": "Color"
+                            }
+                          },
+                          "required": [
+                            "color"
+                          ]
+                        },
+                        "description": "multiple colors will create a gradient effect",
+                        "title": "Neutral"
+                      }
+                    },
+                    "required": [
+                      "neutral"
+                    ],
+                    "title": "GradientColors"
+                  }
+                },
+                "required": [
+                  "textColor",
+                  "gradientColors"
+                ],
+                "title": "Style"
+              }
+            },
+            "required": [
+              "style"
+            ],
+            "title": "Links"
+          },
+          "social": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "href": {
+                  "type": "string",
+                  "title": "Href"
+                },
+                "label": {
+                  "type": "string",
+                  "enum": [
+                    "Instagram",
+                    "Facebook",
+                    "Linkedin",
+                    "WhatsApp",
+                    "Discord",
+                    "Tiktok"
+                  ],
+                  "title": "Label"
+                },
+                "iconColor": {
+                  "type": "string",
+                  "nullable": true,
+                  "format": "color",
+                  "title": "IconColor"
+                },
+                "strokeWidth": {
+                  "type": "number",
+                  "nullable": true,
+                  "description": "width of the SVG line",
+                  "title": "StrokeWidth"
+                }
+              },
+              "required": [
+                "href",
+                "label"
+              ]
+            },
+            "nullable": true,
+            "title": "Social"
+          },
+          "background": {
+            "type": "object",
+            "properties": {
+              "image": {
+                "type": "string",
+                "nullable": true,
+                "description": "an image will override any background color",
+                "format": "image-uri",
+                "title": "Image"
+              },
+              "backgroundColor": {
+                "type": "string",
+                "nullable": true,
+                "format": "color",
+                "title": "BackgroundColor"
+              }
+            },
+            "title": "Background"
+          },
+          "footer": {
+            "type": "object",
+            "properties": {
+              "url": {
+                "type": "string",
+                "nullable": true,
+                "title": "Url"
+              },
+              "image": {
+                "type": "string",
+                "nullable": true,
+                "format": "image-uri",
+                "title": "Image"
+              },
+              "alt": {
+                "type": "string",
+                "nullable": true,
+                "description": "alternative text",
+                "title": "Alt"
+              },
+              "width": {
+                "type": "number",
+                "nullable": true,
+                "title": "Width"
+              },
+              "height": {
+                "type": "number",
+                "nullable": true,
+                "title": "Height"
+              },
+              "text": {
+                "type": "string",
+                "nullable": true,
+                "title": "Text"
+              }
+            },
+            "nullable": true,
+            "title": "Footer"
+          }
+        },
+        "required": [
+          "header",
+          "links",
+          "background"
+        ]
+      },
+      "c2l0ZS9zZWN0aW9ucy9MaW5rcy9MaW5rVHJlZS50c3g=": {
+        "title": "site/sections/Links/LinkTree.tsx",
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/definitions/c3JjL3NlY3Rpb25zL0xpbmtzL0xpbmtUcmVlLnRzeA==@Props"
+          }
+        ],
+        "required": [
+          "__resolveType"
+        ],
+        "properties": {
+          "__resolveType": {
+            "type": "string",
+            "enum": [
+              "site/sections/Links/LinkTree.tsx"
+            ],
+            "default": "site/sections/Links/LinkTree.tsx"
+          }
+        }
+      },
+      "c3JjL3NlY3Rpb25zL01pc2NlbGxhbmVvdXMvQ2FtcGFpZ25UaW1lci50c3g=@Props": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "nullable": true,
+            "title": "Text",
+            "default": "Time left for a campaign to end with a link",
+            "format": "html"
+          },
+          "expiresAt": {
+            "type": "string",
+            "nullable": true,
+            "title": "Expires at date",
+            "format": "datetime"
+          },
+          "labels": {
+            "type": "object",
+            "properties": {
+              "days": {
+                "type": "string",
+                "nullable": true,
+                "title": "Days label",
+                "default": "Days"
+              },
+              "hours": {
+                "type": "string",
+                "nullable": true,
+                "title": "Hours label",
+                "default": "Hours"
+              },
+              "minutes": {
+                "type": "string",
+                "nullable": true,
+                "title": "Minutes label",
+                "default": "Minutes"
+              },
+              "seconds": {
+                "type": "string",
+                "nullable": true,
+                "title": "Seconds label",
+                "default": "Seconds"
+              }
+            },
+            "nullable": true,
+            "title": "Unit labels",
+            "description": "Localizable labels for the days/hours/minutes/seconds counters"
+          }
+        }
+      },
+      "c2l0ZS9zZWN0aW9ucy9NaXNjZWxsYW5lb3VzL0NhbXBhaWduVGltZXIudHN4": {
+        "title": "site/sections/Miscellaneous/CampaignTimer.tsx",
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/definitions/c3JjL3NlY3Rpb25zL01pc2NlbGxhbmVvdXMvQ2FtcGFpZ25UaW1lci50c3g=@Props"
+          }
+        ],
+        "required": [
+          "__resolveType"
+        ],
+        "properties": {
+          "__resolveType": {
+            "type": "string",
+            "enum": [
+              "site/sections/Miscellaneous/CampaignTimer.tsx"
+            ],
+            "default": "site/sections/Miscellaneous/CampaignTimer.tsx"
+          }
+        }
+      },
+      "c3JjL3NlY3Rpb25zL01pc2NlbGxhbmVvdXMvQ29va2llQ29uc2VudC50c3g=@Props": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "nullable": true,
+            "title": "Title",
+            "description": "Heading shown at the top of the consent banner",
+            "default": "Cookies"
+          },
+          "text": {
+            "type": "string",
+            "nullable": true,
+            "title": "Body",
+            "description": "Rich-text consent message",
+            "format": "html"
+          },
+          "policy": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string",
+                "nullable": true,
+                "title": "Policy link text",
+                "description": "Anchor text shown next to the consent message",
+                "default": "Learn more about our privacy policy"
+              },
+              "link": {
+                "type": "string",
+                "nullable": true,
+                "title": "Policy URL",
+                "description": "Internal link to the privacy policy page",
+                "default": "/privacy-policy"
+              }
+            },
+            "nullable": true,
+            "title": "Privacy policy",
+            "description": "Link shown beneath the message"
+          },
+          "buttons": {
+            "type": "object",
+            "properties": {
+              "allowText": {
+                "type": "string",
+                "title": "Accept label",
+                "description": "Confirms cookie usage and dismisses the banner",
+                "default": "Accept"
+              },
+              "cancelText": {
+                "type": "string",
+                "nullable": true,
+                "title": "Dismiss label",
+                "description": "Closes the banner without accepting (re-shown next visit)",
+                "default": "Close"
+              }
+            },
+            "required": [
+              "allowText"
+            ],
+            "nullable": true,
+            "title": "Buttons",
+            "description": "Accept / dismiss button labels"
+          },
+          "layout": {
+            "type": "object",
+            "properties": {
+              "position": {
+                "type": "string",
+                "enum": [
+                  "Left",
+                  "Center",
+                  "Right",
+                  "Expanded"
+                ],
+                "nullable": true,
+                "title": "Banner position",
+                "description": "Where the banner sticks at the bottom of the viewport",
+                "default": "Expanded"
+              },
+              "content": {
+                "type": "string",
+                "enum": [
+                  "Tiled",
+                  "Piled up"
+                ],
+                "nullable": true,
+                "title": "Content layout",
+                "description": "Stack the message and buttons in a row or column",
+                "default": "Tiled"
+              }
+            },
+            "nullable": true,
+            "title": "Layout",
+            "description": "Banner position and content arrangement"
+          }
+        }
+      },
+      "c2l0ZS9zZWN0aW9ucy9NaXNjZWxsYW5lb3VzL0Nvb2tpZUNvbnNlbnQudHN4": {
+        "title": "site/sections/Miscellaneous/CookieConsent.tsx",
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/definitions/c3JjL3NlY3Rpb25zL01pc2NlbGxhbmVvdXMvQ29va2llQ29uc2VudC50c3g=@Props"
+          }
+        ],
+        "required": [
+          "__resolveType"
+        ],
+        "properties": {
+          "__resolveType": {
+            "type": "string",
+            "enum": [
+              "site/sections/Miscellaneous/CookieConsent.tsx"
+            ],
+            "default": "site/sections/Miscellaneous/CookieConsent.tsx"
+          }
+        }
+      },
+      "c3JjL3NlY3Rpb25zL05ld3NsZXR0ZXIvTmV3c2xldHRlci50c3g=@Props": {
+        "type": "object",
+        "properties": {
+          "notices": {
+            "type": "object",
+            "properties": {
+              "empty": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "nullable": true,
+                    "title": "Title",
+                    "description": "Bold heading shown for this notice state"
+                  },
+                  "description": {
+                    "type": "string",
+                    "nullable": true,
+                    "title": "Description",
+                    "description": "Subtext explaining the notice state"
+                  }
+                },
+                "nullable": true,
+                "title": "Empty state",
+                "description": "Initial pre-signup notice (call-to-action)"
+              },
+              "success": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "nullable": true,
+                    "title": "Title",
+                    "description": "Bold heading shown for this notice state"
+                  },
+                  "description": {
+                    "type": "string",
+                    "nullable": true,
+                    "title": "Description",
+                    "description": "Subtext explaining the notice state"
+                  }
+                },
+                "nullable": true,
+                "title": "Success state",
+                "description": "Notice shown after a successful subscription"
+              },
+              "failed": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "nullable": true,
+                    "title": "Title",
+                    "description": "Bold heading shown for this notice state"
+                  },
+                  "description": {
+                    "type": "string",
+                    "nullable": true,
+                    "title": "Description",
+                    "description": "Subtext explaining the notice state"
+                  }
+                },
+                "nullable": true,
+                "title": "Failed state",
+                "description": "Notice shown when the subscription request fails"
+              }
+            },
+            "nullable": true,
+            "title": "Notices",
+            "description": "Empty / success / failed notice copies"
+          },
+          "form": {
+            "type": "object",
+            "properties": {
+              "label": {
+                "type": "string",
+                "nullable": true,
+                "title": "Submit button label",
+                "description": "Text on the signup CTA",
+                "default": "Sign up"
+              },
+              "placeholder": {
+                "type": "string",
+                "nullable": true,
+                "title": "Email placeholder",
+                "description": "Placeholder shown inside the email input",
+                "default": "Enter your email address"
+              }
+            },
+            "nullable": true,
+            "title": "Form",
+            "description": "Submit label and placeholder copy"
+          }
+        }
+      },
+      "c2l0ZS9zZWN0aW9ucy9OZXdzbGV0dGVyL05ld3NsZXR0ZXIudHN4": {
+        "title": "site/sections/Newsletter/Newsletter.tsx",
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/definitions/c3JjL3NlY3Rpb25zL05ld3NsZXR0ZXIvTmV3c2xldHRlci50c3g=@Props"
+          }
+        ],
+        "required": [
+          "__resolveType"
+        ],
+        "properties": {
+          "__resolveType": {
+            "type": "string",
+            "enum": [
+              "site/sections/Newsletter/Newsletter.tsx"
+            ],
+            "default": "site/sections/Newsletter/Newsletter.tsx"
+          }
+        }
+      },
+      "c3JjL3NlY3Rpb25zL1Byb2R1Y3QvUHJvZHVjdERldGFpbHMudHN4@Props": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "anyOf": [
+              {
+                "$ref": "#/definitions/Resolvable"
+              },
+              {
+                "$ref": "#/definitions/c2hvcGlmeS9sb2FkZXJzL1Byb2R1Y3REZXRhaWxzUGFnZS50cw=="
+              }
+            ],
+            "title": "Integration",
+            "nullable": true,
+            "description": "Product details data returned by the commerce platform loader"
+          },
+          "galleryConfig": {
+            "type": "object",
+            "properties": {
+              "aspectRatio": {
+                "type": "string",
+                "nullable": true,
+                "title": "Image aspect ratio",
+                "description": "CSS aspect-ratio value for the main image (e.g. \"820 / 615\")",
+                "default": "820 / 615"
+              },
+              "enableZoom": {
+                "type": "boolean",
+                "nullable": true,
+                "title": "Enable zoom modal",
+                "description": "Show a zoom button that opens a fullscreen viewer",
+                "default": true
+              },
+              "preloadFirstImage": {
+                "type": "boolean",
+                "nullable": true,
+                "title": "Preload first image",
+                "description": "Marks the LCP image with fetchpriority=high and loading=eager",
+                "default": true
+              }
+            },
+            "nullable": true,
+            "title": "Gallery",
+            "description": "Image slider appearance and loading behavior"
+          },
+          "discountBadgeConfig": {
+            "type": "object",
+            "properties": {
+              "show": {
+                "type": "boolean",
+                "nullable": true,
+                "title": "Show badge",
+                "default": true
+              },
+              "labelFormat": {
+                "type": "string",
+                "nullable": true,
+                "title": "Label format",
+                "description": "Use {percent} as placeholder (e.g. \"{percent}% OFF\")",
+                "default": "{percent} % off"
+              },
+              "textColor": {
+                "type": "string",
+                "nullable": true,
+                "title": "Text color",
+                "format": "color-input",
+                "default": "#000000"
+              },
+              "backgroundColor": {
+                "type": "string",
+                "nullable": true,
+                "title": "Background color",
+                "format": "color-input",
+                "default": "#FFD70033"
+              }
+            },
+            "nullable": true,
+            "title": "Discount badge",
+            "description": "\"% off\" promo badge shown above the title"
+          },
+          "variantSelectorConfig": {
+            "type": "object",
+            "properties": {
+              "showLabels": {
+                "type": "boolean",
+                "nullable": true,
+                "title": "Show attribute labels",
+                "description": "Show the attribute name (Color, Size) above each swatch row",
+                "default": true
+              },
+              "preloadStrategy": {
+                "anyOf": [
+                  {
+                    "type": "boolean"
+                  },
+                  {
+                    "type": "string",
+                    "const": "intent"
+                  },
+                  {
+                    "type": "string",
+                    "const": "viewport"
+                  },
+                  {
+                    "type": "string",
+                    "const": "render"
+                  }
+                ],
+                "nullable": true,
+                "title": "Preload strategy",
+                "description": "When to prefetch sibling variant routes",
+                "default": "intent"
+              }
+            },
+            "nullable": true,
+            "title": "Variant selector",
+            "description": "Swatches and preload strategy for sibling variants"
+          },
+          "copy": {
+            "type": "object",
+            "properties": {
+              "notFoundTitle": {
+                "type": "string",
+                "nullable": true,
+                "title": "Not-found title",
+                "description": "Heading shown when the product loader returns no page",
+                "default": "Page not found"
+              },
+              "goHomeLabel": {
+                "type": "string",
+                "nullable": true,
+                "title": "Go-home label",
+                "description": "Label for the button that links back to the homepage on not-found",
+                "default": "Go back to Home"
+              },
+              "descriptionLabel": {
+                "type": "string",
+                "nullable": true,
+                "title": "Description label",
+                "description": "Heading for the collapsible description block",
+                "default": "Description"
+              },
+              "addToCartLabel": {
+                "type": "string",
+                "nullable": true,
+                "title": "Add to cart label",
+                "default": "Add to cart"
+              },
+              "addingLabel": {
+                "type": "string",
+                "nullable": true,
+                "title": "Adding label",
+                "description": "Shown while the add-to-cart request is in flight",
+                "default": "Adding..."
+              },
+              "addedLabel": {
+                "type": "string",
+                "nullable": true,
+                "title": "Added label",
+                "description": "Shown briefly after successful add",
+                "default": "Added!"
+              },
+              "errorLabel": {
+                "type": "string",
+                "nullable": true,
+                "title": "Error label",
+                "default": "Try again"
+              }
+            },
+            "nullable": true,
+            "title": "Copy",
+            "description": "Editable labels (CTA, description heading, not-found fallback)"
+          }
+        },
+        "required": [
+          "page"
+        ]
+      },
+      "c2l0ZS9zZWN0aW9ucy9Qcm9kdWN0L1Byb2R1Y3REZXRhaWxzLnRzeA==": {
+        "title": "site/sections/Product/ProductDetails.tsx",
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/definitions/c3JjL3NlY3Rpb25zL1Byb2R1Y3QvUHJvZHVjdERldGFpbHMudHN4@Props"
+          }
+        ],
+        "required": [
+          "__resolveType"
+        ],
+        "properties": {
+          "__resolveType": {
+            "type": "string",
+            "enum": [
+              "site/sections/Product/ProductDetails.tsx"
+            ],
+            "default": "site/sections/Product/ProductDetails.tsx"
+          }
+        }
+      },
+      "c3JjL3NlY3Rpb25zL1Byb2R1Y3QvUHJvZHVjdFNoZWxmLnRzeA==@Props": {
+        "type": "object",
+        "properties": {
+          "products": {
+            "anyOf": [
+              {
+                "$ref": "#/definitions/Resolvable"
+              },
+              {
+                "$ref": "#/definitions/c2hvcGlmeS9sb2FkZXJzL1Byb2R1Y3RMaXN0LnRz"
+              },
+              {
+                "$ref": "#/definitions/c2hvcGlmeS9sb2FkZXJzL1JlbGF0ZWRQcm9kdWN0cy50cw=="
+              }
+            ],
+            "title": "Products",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true,
+            "description": "Section title",
+            "title": "Title"
+          },
+          "cta": {
+            "type": "string",
+            "nullable": true,
+            "description": "See all link",
+            "title": "Cta"
+          },
+          "visibility": {
+            "type": "string",
+            "enum": [
+              "all",
+              "mobile-only",
+              "desktop-only"
+            ],
+            "nullable": true,
+            "title": "Exibir em",
+            "description": "Em quais dispositivos esta seção aparece. Útil para mostrar\nconteúdo diferente no celular e no computador.",
+            "default": "all"
+          }
+        },
+        "required": [
+          "products"
+        ]
+      },
+      "c2l0ZS9zZWN0aW9ucy9Qcm9kdWN0L1Byb2R1Y3RTaGVsZi50c3g=": {
+        "title": "site/sections/Product/ProductShelf.tsx",
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/definitions/c3JjL3NlY3Rpb25zL1Byb2R1Y3QvUHJvZHVjdFNoZWxmLnRzeA==@Props"
+          }
+        ],
+        "required": [
+          "__resolveType"
+        ],
+        "properties": {
+          "__resolveType": {
+            "type": "string",
+            "enum": [
+              "site/sections/Product/ProductShelf.tsx"
+            ],
+            "default": "site/sections/Product/ProductShelf.tsx"
+          }
+        }
+      },
+      "c3JjL3NlY3Rpb25zL1Byb2R1Y3QvUHJvZHVjdFNoZWxmVGFiYmVkLnRzeA==@Props": {
+        "type": "object",
+        "properties": {
+          "tabs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "title": "Title"
+                },
+                "products": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/definitions/Resolvable"
+                    },
+                    {
+                      "$ref": "#/definitions/c2hvcGlmeS9sb2FkZXJzL1Byb2R1Y3RMaXN0LnRz"
+                    },
+                    {
+                      "$ref": "#/definitions/c2hvcGlmeS9sb2FkZXJzL1JlbGF0ZWRQcm9kdWN0cy50cw=="
+                    }
+                  ],
+                  "title": "Products",
+                  "nullable": true
+                }
+              },
+              "required": [
+                "title",
+                "products"
+              ],
+              "titleBy": "title"
+            },
+            "title": "Tabs"
+          },
+          "tabIndex": {
+            "type": "number",
+            "nullable": true,
+            "hide": "true",
+            "title": "TabIndex"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true,
+            "description": "Section title",
+            "title": "Title"
+          },
+          "cta": {
+            "type": "string",
+            "nullable": true,
+            "description": "See all link",
+            "title": "Cta"
+          }
+        },
+        "required": [
+          "tabs"
+        ]
+      },
+      "c2l0ZS9zZWN0aW9ucy9Qcm9kdWN0L1Byb2R1Y3RTaGVsZlRhYmJlZC50c3g=": {
+        "title": "site/sections/Product/ProductShelfTabbed.tsx",
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/definitions/c3JjL3NlY3Rpb25zL1Byb2R1Y3QvUHJvZHVjdFNoZWxmVGFiYmVkLnRzeA==@Props"
+          }
+        ],
+        "required": [
+          "__resolveType"
+        ],
+        "properties": {
+          "__resolveType": {
+            "type": "string",
+            "enum": [
+              "site/sections/Product/ProductShelfTabbed.tsx"
+            ],
+            "default": "site/sections/Product/ProductShelfTabbed.tsx"
+          }
+        }
+      },
+      "c3JjL3NlY3Rpb25zL1Byb2R1Y3QvU2VhcmNoUmVzdWx0LnRzeA==@Props": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "anyOf": [
+              {
+                "$ref": "#/definitions/Resolvable"
+              },
+              {
+                "$ref": "#/definitions/c2hvcGlmeS9sb2FkZXJzL1Byb2R1Y3RMaXN0aW5nUGFnZS50cw=="
+              }
+            ],
+            "title": "Integration",
+            "nullable": true
+          },
+          "layout": {
+            "type": "object",
+            "properties": {
+              "pagination": {
+                "type": "string",
+                "enum": [
+                  "show-more",
+                  "pagination"
+                ],
+                "nullable": true,
+                "title": "Pagination",
+                "description": "Format of the pagination",
+                "default": "show-more"
+              },
+              "enablePrefetch": {
+                "type": "boolean",
+                "nullable": true,
+                "title": "Pré-carregar página do produto",
+                "description": "Quando ativado, a página do produto começa a carregar assim\nque o usuário passa o mouse sobre o card, deixando a navegação mais rápida.\nPode aumentar o consumo de dados em listas muito grandes.",
+                "default": true
+              }
+            },
+            "nullable": true,
+            "title": "Layout"
+          },
+          "startingPage": {
+            "type": "number",
+            "enum": [
+              0,
+              1
+            ],
+            "nullable": true,
+            "title": "Starting page",
+            "description": "0 for ?page=0 as your first page",
+            "default": 0
+          }
+        },
+        "required": [
+          "page"
+        ]
+      },
+      "c2l0ZS9zZWN0aW9ucy9Qcm9kdWN0L1NlYXJjaFJlc3VsdC50c3g=": {
+        "title": "site/sections/Product/SearchResult.tsx",
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/definitions/c3JjL3NlY3Rpb25zL1Byb2R1Y3QvU2VhcmNoUmVzdWx0LnRzeA==@Props"
+          }
+        ],
+        "required": [
+          "__resolveType"
+        ],
+        "properties": {
+          "__resolveType": {
+            "type": "string",
+            "enum": [
+              "site/sections/Product/SearchResult.tsx"
+            ],
+            "default": "site/sections/Product/SearchResult.tsx"
+          }
+        }
+      },
+      "c3JjL3NlY3Rpb25zL1Byb2R1Y3QvU2hlbGZXaXRoSW1hZ2UudHN4@Props": {
+        "type": "object",
+        "properties": {
+          "section": {
+            "$ref": "#/definitions/__SECTION_REF__",
+            "title": "Section"
+          },
+          "image": {
+            "type": "object",
+            "properties": {
+              "src": {
+                "type": "string",
+                "format": "image-uri",
+                "title": "Src"
+              },
+              "alt": {
+                "type": "string",
+                "nullable": true,
+                "title": "Alt"
+              },
+              "href": {
+                "type": "string",
+                "nullable": true,
+                "title": "Href"
+              }
+            },
+            "required": [
+              "src"
+            ],
+            "title": "Image"
+          }
+        },
+        "required": [
+          "section",
+          "image"
+        ]
+      },
+      "c2l0ZS9zZWN0aW9ucy9Qcm9kdWN0L1NoZWxmV2l0aEltYWdlLnRzeA==": {
+        "title": "site/sections/Product/ShelfWithImage.tsx",
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/definitions/c3JjL3NlY3Rpb25zL1Byb2R1Y3QvU2hlbGZXaXRoSW1hZ2UudHN4@Props"
+          }
+        ],
+        "required": [
+          "__resolveType"
+        ],
+        "properties": {
+          "__resolveType": {
+            "type": "string",
+            "enum": [
+              "site/sections/Product/ShelfWithImage.tsx"
+            ],
+            "default": "site/sections/Product/ShelfWithImage.tsx"
+          }
+        }
+      },
+      "c3JjL3NlY3Rpb25zL1Byb2R1Y3QvV2lzaGxpc3QudHN4@Props": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "anyOf": [
+              {
+                "$ref": "#/definitions/Resolvable"
+              },
+              {
+                "$ref": "#/definitions/c2hvcGlmeS9sb2FkZXJzL1Byb2R1Y3RMaXN0aW5nUGFnZS50cw=="
+              }
+            ],
+            "title": "Integration",
+            "nullable": true
+          },
+          "layout": {
+            "type": "object",
+            "properties": {
+              "pagination": {
+                "type": "string",
+                "enum": [
+                  "show-more",
+                  "pagination"
+                ],
+                "nullable": true,
+                "title": "Pagination",
+                "description": "Format of the pagination",
+                "default": "show-more"
+              },
+              "enablePrefetch": {
+                "type": "boolean",
+                "nullable": true,
+                "title": "Pré-carregar página do produto",
+                "description": "Quando ativado, a página do produto começa a carregar assim\nque o usuário passa o mouse sobre o card, deixando a navegação mais rápida.\nPode aumentar o consumo de dados em listas muito grandes.",
+                "default": true
+              }
+            },
+            "nullable": true,
+            "title": "Layout"
+          },
+          "startingPage": {
+            "type": "number",
+            "enum": [
+              0,
+              1
+            ],
+            "nullable": true,
+            "title": "Starting page",
+            "description": "0 for ?page=0 as your first page",
+            "default": 0
+          }
+        },
+        "required": [
+          "page"
+        ]
+      },
+      "c2l0ZS9zZWN0aW9ucy9Qcm9kdWN0L1dpc2hsaXN0LnRzeA==": {
+        "title": "site/sections/Product/Wishlist.tsx",
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/definitions/c3JjL3NlY3Rpb25zL1Byb2R1Y3QvV2lzaGxpc3QudHN4@Props"
+          }
+        ],
+        "required": [
+          "__resolveType"
+        ],
+        "properties": {
+          "__resolveType": {
+            "type": "string",
+            "enum": [
+              "site/sections/Product/Wishlist.tsx"
+            ],
+            "default": "site/sections/Product/Wishlist.tsx"
+          }
+        }
+      },
+      "c3JjL3NlY3Rpb25zL1NvY2lhbC9JbnN0YWdyYW1Qb3N0cy50c3g=@Props": {
+        "type": "object",
+        "properties": {
+          "facebookToken": {
+            "type": "string",
+            "description": "Get it in Facebook app. Expires every 90 days.",
+            "title": "FacebookToken"
+          },
+          "nposts": {
+            "type": "number",
+            "title": "Number of posts"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true,
+            "description": "Section title",
+            "title": "Title"
+          },
+          "cta": {
+            "type": "string",
+            "nullable": true,
+            "description": "See all link",
+            "title": "Cta"
+          }
+        },
+        "required": [
+          "facebookToken",
+          "nposts"
+        ]
+      },
+      "c2l0ZS9zZWN0aW9ucy9Tb2NpYWwvSW5zdGFncmFtUG9zdHMudHN4": {
+        "title": "site/sections/Social/InstagramPosts.tsx",
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/definitions/c3JjL3NlY3Rpb25zL1NvY2lhbC9JbnN0YWdyYW1Qb3N0cy50c3g=@Props"
+          }
+        ],
+        "required": [
+          "__resolveType"
+        ],
+        "properties": {
+          "__resolveType": {
+            "type": "string",
+            "enum": [
+              "site/sections/Social/InstagramPosts.tsx"
+            ],
+            "default": "site/sections/Social/InstagramPosts.tsx"
+          }
+        }
+      },
+      "c3JjL3NlY3Rpb25zL1NvY2lhbC9XaGF0c0FwcC50c3g=@Props": {
+        "type": "object",
+        "properties": {
+          "phone": {
+            "type": "number",
+            "nullable": true,
+            "title": "Phone"
+          }
+        }
+      },
+      "c2l0ZS9zZWN0aW9ucy9Tb2NpYWwvV2hhdHNBcHAudHN4": {
+        "title": "site/sections/Social/WhatsApp.tsx",
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/definitions/c3JjL3NlY3Rpb25zL1NvY2lhbC9XaGF0c0FwcC50c3g=@Props"
+          }
+        ],
+        "required": [
+          "__resolveType"
+        ],
+        "properties": {
+          "__resolveType": {
+            "type": "string",
+            "enum": [
+              "site/sections/Social/WhatsApp.tsx"
+            ],
+            "default": "site/sections/Social/WhatsApp.tsx"
+          }
+        }
+      },
+      "c3JjL3NlY3Rpb25zL1RoZW1lL1RoZW1lLnRzeA==@Props": {
+        "type": "object",
+        "properties": {
+          "colorScheme": {
+            "type": "string",
+            "enum": [
+              "light",
+              "dark",
+              "any"
+            ],
+            "nullable": true,
+            "description": "Set the prefers-color-scheme media query. To support dark mode, create two instances of this block and set this option to light/dark in each instance",
+            "default": "light",
+            "title": "ColorScheme"
+          },
+          "mainColors": {
+            "type": "object",
+            "properties": {
+              "base-100": {
+                "type": "string",
+                "nullable": true,
+                "format": "color-input",
+                "title": "Base"
+              },
+              "primary": {
+                "type": "string",
+                "nullable": true,
+                "format": "color-input",
+                "title": "Primary"
+              },
+              "secondary": {
+                "type": "string",
+                "nullable": true,
+                "format": "color-input",
+                "title": "Secondary"
+              },
+              "tertiary": {
+                "type": "string",
+                "nullable": true,
+                "title": "Accent",
+                "format": "color-input"
+              },
+              "neutral": {
+                "type": "string",
+                "nullable": true,
+                "format": "color-input",
+                "title": "Neutral"
+              },
+              "success": {
+                "type": "string",
+                "nullable": true,
+                "format": "color-input",
+                "title": "Success"
+              },
+              "warning": {
+                "type": "string",
+                "nullable": true,
+                "format": "color-input",
+                "title": "Warning"
+              },
+              "error": {
+                "type": "string",
+                "nullable": true,
+                "format": "color-input",
+                "title": "Error"
+              },
+              "info": {
+                "type": "string",
+                "nullable": true,
+                "format": "color-input",
+                "title": "Info"
+              }
+            },
+            "nullable": true,
+            "title": "MainColors"
+          },
+          "complementaryColors": {
+            "type": "object",
+            "properties": {
+              "base-200": {
+                "type": "string",
+                "nullable": true,
+                "format": "color-input",
+                "title": "Base-200"
+              },
+              "base-300": {
+                "type": "string",
+                "nullable": true,
+                "format": "color-input",
+                "title": "Base-300"
+              },
+              "base-400": {
+                "type": "string",
+                "nullable": true,
+                "format": "color-input",
+                "title": "Base-400"
+              },
+              "base-content": {
+                "type": "string",
+                "nullable": true,
+                "format": "color-input",
+                "title": "Base-content"
+              },
+              "primary-content": {
+                "type": "string",
+                "nullable": true,
+                "format": "color-input",
+                "title": "Primary-content"
+              },
+              "secondary-content": {
+                "type": "string",
+                "nullable": true,
+                "format": "color-input",
+                "title": "Secondary-content"
+              },
+              "tertiary-content": {
+                "type": "string",
+                "nullable": true,
+                "title": "Accent Content",
+                "format": "color-input"
+              },
+              "neutral-content": {
+                "type": "string",
+                "nullable": true,
+                "format": "color-input",
+                "title": "Neutral-content"
+              },
+              "success-content": {
+                "type": "string",
+                "nullable": true,
+                "format": "color-input",
+                "title": "Success-content"
+              },
+              "warning-content": {
+                "type": "string",
+                "nullable": true,
+                "format": "color-input",
+                "title": "Warning-content"
+              },
+              "error-content": {
+                "type": "string",
+                "nullable": true,
+                "format": "color-input",
+                "title": "Error-content"
+              },
+              "info-content": {
+                "type": "string",
+                "nullable": true,
+                "format": "color-input",
+                "title": "Info-content"
+              }
+            },
+            "nullable": true,
+            "description": "These will be auto-generated to a readable color if not set",
+            "title": "ComplementaryColors"
+          },
+          "buttonStyle": {
+            "type": "object",
+            "properties": {
+              "--border-btn": {
+                "type": "string",
+                "enum": [
+                  "1px",
+                  "2px",
+                  "3px",
+                  "4px",
+                  "5px",
+                  "6px",
+                  "7px",
+                  "8px"
+                ],
+                "default": "1px",
+                "title": "Border width"
+              },
+              "--rounded-btn": {
+                "type": "string",
+                "enum": [
+                  "0",
+                  "0.2rem",
+                  "0.4rem",
+                  "0.8rem",
+                  "2rem",
+                  "99999px"
+                ],
+                "default": "0.2rem",
+                "title": "Radius",
+                "description": "Button and similar elements"
+              },
+              "--btn-focus-scale": {
+                "type": "string",
+                "enum": [
+                  "0.9",
+                  "0.95",
+                  "1",
+                  "1.05",
+                  "1.1"
+                ],
+                "default": 0.95,
+                "title": "Scale on click"
+              },
+              "--animation-btn": {
+                "type": "string",
+                "enum": [
+                  "0.1s",
+                  "0.15s",
+                  "0.2s",
+                  "0.25s",
+                  "0.3s",
+                  "0.35s"
+                ],
+                "default": "0.25s",
+                "title": "Animation",
+                "description": "Duration when you click"
+              }
+            },
+            "required": [
+              "--border-btn",
+              "--rounded-btn",
+              "--btn-focus-scale",
+              "--animation-btn"
+            ],
+            "nullable": true,
+            "title": "ButtonStyle"
+          },
+          "otherStyles": {
+            "type": "object",
+            "properties": {
+              "--rounded-box": {
+                "type": "string",
+                "default": "1rem",
+                "title": "Rounded box",
+                "description": "border radius rounded-box utility class, used in card and other large boxes"
+              },
+              "--rounded-badge": {
+                "type": "string",
+                "default": "1.9rem",
+                "title": "Rounded badge",
+                "description": "border radius rounded-badge utility class, used in badges and similar"
+              },
+              "--animation-input": {
+                "type": "string",
+                "default": "0.2s",
+                "title": "Animation input",
+                "description": "duration of animation for inputs like checkbox, toggle, radio, etc"
+              },
+              "--tab-border": {
+                "type": "string",
+                "default": "1px",
+                "title": "Tab border",
+                "description": "border width of tabs"
+              },
+              "--tab-radius": {
+                "type": "string",
+                "default": "0.5rem",
+                "title": "Tab radius",
+                "description": "border radius of tabs"
+              }
+            },
+            "required": [
+              "--rounded-box",
+              "--rounded-badge",
+              "--animation-input",
+              "--tab-border",
+              "--tab-radius"
+            ],
+            "nullable": true,
+            "title": "OtherStyles"
+          },
+          "font": {
+            "type": "object",
+            "properties": {
+              "family": {
+                "type": "string",
+                "title": "Family"
+              },
+              "styleSheet": {
+                "type": "string",
+                "nullable": true,
+                "title": "StyleSheet"
+              }
+            },
+            "required": [
+              "family"
+            ],
+            "nullable": true,
+            "title": "Font"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "light",
+              "dark"
+            ],
+            "nullable": true,
+            "description": "This is the admin's color-scheme mode",
+            "title": "Mode"
+          }
+        }
+      },
+      "c2l0ZS9zZWN0aW9ucy9UaGVtZS9UaGVtZS50c3g=": {
+        "title": "site/sections/Theme/Theme.tsx",
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/definitions/c3JjL3NlY3Rpb25zL1RoZW1lL1RoZW1lLnRzeA==@Props"
+          }
+        ],
+        "required": [
+          "__resolveType"
+        ],
+        "properties": {
+          "__resolveType": {
+            "type": "string",
+            "enum": [
+              "site/sections/Theme/Theme.tsx"
+            ],
+            "default": "site/sections/Theme/Theme.tsx"
           }
         }
       },
@@ -3973,6 +3948,31 @@
             "default": "site/apps/shopify.ts"
           }
         }
+      },
+      "c3JjL2FwcHMvc2l0ZS50cw==@Props": {
+        "type": "object",
+        "properties": {}
+      },
+      "c2l0ZS9hcHBzL3NpdGUudHM=": {
+        "title": "site/apps/site.ts",
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/definitions/c3JjL2FwcHMvc2l0ZS50cw==@Props"
+          }
+        ],
+        "required": [
+          "__resolveType"
+        ],
+        "properties": {
+          "__resolveType": {
+            "type": "string",
+            "enum": [
+              "site/apps/site.ts"
+            ],
+            "default": "site/apps/site.ts"
+          }
+        }
       }
     },
     "root": {
@@ -3982,8 +3982,8 @@
             "$ref": "#/definitions/Resolvable"
           },
           {
-            "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Gb290ZXIvRm9vdGVyLnRzeA==",
-            "inputSchema": "#/definitions/c3JjL3NlY3Rpb25zL0Zvb3Rlci9Gb290ZXIudHN4@Props"
+            "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9BbmltYXRpb24vQW5pbWF0aW9uLnRzeA==",
+            "inputSchema": "#/definitions/c3JjL3NlY3Rpb25zL0FuaW1hdGlvbi9BbmltYXRpb24udHN4@Props"
           },
           {
             "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9DYXRlZ29yeS9DYXRlZ29yeUJhbm5lci50c3g=",
@@ -3994,24 +3994,12 @@
             "inputSchema": "#/definitions/c3JjL3NlY3Rpb25zL0NhdGVnb3J5L0NhdGVnb3J5R3JpZC50c3g=@Props"
           },
           {
-            "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9JbWFnZXMvQmFubmVyLnRzeA==",
-            "inputSchema": "#/definitions/c3JjL3NlY3Rpb25zL0ltYWdlcy9CYW5uZXIudHN4@Props"
+            "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Db21wb25lbnQudHN4",
+            "inputSchema": "#/definitions/c3JjL3NlY3Rpb25zL0NvbXBvbmVudC50c3g=@Props"
           },
           {
-            "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9JbWFnZXMvU2hvcHBhYmxlQmFubmVyLnRzeA==",
-            "inputSchema": "#/definitions/c3JjL3NlY3Rpb25zL0ltYWdlcy9TaG9wcGFibGVCYW5uZXIudHN4@Props"
-          },
-          {
-            "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9JbWFnZXMvSW1hZ2VHYWxsZXJ5LnRzeA==",
-            "inputSchema": "#/definitions/c3JjL3NlY3Rpb25zL0ltYWdlcy9JbWFnZUdhbGxlcnkudHN4@Props"
-          },
-          {
-            "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9JbWFnZXMvQ2Fyb3VzZWwudHN4",
-            "inputSchema": "#/definitions/c3JjL3NlY3Rpb25zL0ltYWdlcy9DYXJvdXNlbC50c3g=@Props"
-          },
-          {
-            "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9BbmltYXRpb24vQW5pbWF0aW9uLnRzeA==",
-            "inputSchema": "#/definitions/c3JjL3NlY3Rpb25zL0FuaW1hdGlvbi9BbmltYXRpb24udHN4@Props"
+            "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Db250ZW50L0ZhcS50c3g=",
+            "inputSchema": "#/definitions/c3JjL3NlY3Rpb25zL0NvbnRlbnQvRmFxLnRzeA==@Props"
           },
           {
             "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Db250ZW50L0hlcm8udHN4",
@@ -4026,32 +4014,32 @@
             "inputSchema": "#/definitions/c3JjL3NlY3Rpb25zL0NvbnRlbnQvTG9nb3MudHN4@Props"
           },
           {
-            "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Db250ZW50L0ZhcS50c3g=",
-            "inputSchema": "#/definitions/c3JjL3NlY3Rpb25zL0NvbnRlbnQvRmFxLnRzeA==@Props"
+            "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Gb290ZXIvRm9vdGVyLnRzeA==",
+            "inputSchema": "#/definitions/c3JjL3NlY3Rpb25zL0Zvb3Rlci9Gb290ZXIudHN4@Props"
           },
           {
-            "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Qcm9kdWN0L1dpc2hsaXN0LnRzeA==",
-            "inputSchema": "#/definitions/c3JjL3NlY3Rpb25zL1Byb2R1Y3QvV2lzaGxpc3QudHN4@Props"
+            "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9IZWFkZXIvSGVhZGVyLnRzeA==",
+            "inputSchema": "#/definitions/c3JjL3NlY3Rpb25zL0hlYWRlci9IZWFkZXIudHN4@Props"
           },
           {
-            "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Qcm9kdWN0L1NlYXJjaFJlc3VsdC50c3g=",
-            "inputSchema": "#/definitions/c3JjL3NlY3Rpb25zL1Byb2R1Y3QvU2VhcmNoUmVzdWx0LnRzeA==@Props"
+            "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9JbWFnZXMvQmFubmVyLnRzeA==",
+            "inputSchema": "#/definitions/c3JjL3NlY3Rpb25zL0ltYWdlcy9CYW5uZXIudHN4@Props"
           },
           {
-            "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Qcm9kdWN0L1Byb2R1Y3RTaGVsZi50c3g=",
-            "inputSchema": "#/definitions/c3JjL3NlY3Rpb25zL1Byb2R1Y3QvUHJvZHVjdFNoZWxmLnRzeA==@Props"
+            "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9JbWFnZXMvQ2Fyb3VzZWwudHN4",
+            "inputSchema": "#/definitions/c3JjL3NlY3Rpb25zL0ltYWdlcy9DYXJvdXNlbC50c3g=@Props"
           },
           {
-            "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Qcm9kdWN0L1NoZWxmV2l0aEltYWdlLnRzeA==",
-            "inputSchema": "#/definitions/c3JjL3NlY3Rpb25zL1Byb2R1Y3QvU2hlbGZXaXRoSW1hZ2UudHN4@Props"
+            "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9JbWFnZXMvSW1hZ2VHYWxsZXJ5LnRzeA==",
+            "inputSchema": "#/definitions/c3JjL3NlY3Rpb25zL0ltYWdlcy9JbWFnZUdhbGxlcnkudHN4@Props"
           },
           {
-            "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Qcm9kdWN0L1Byb2R1Y3RTaGVsZlRhYmJlZC50c3g=",
-            "inputSchema": "#/definitions/c3JjL3NlY3Rpb25zL1Byb2R1Y3QvUHJvZHVjdFNoZWxmVGFiYmVkLnRzeA==@Props"
+            "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9JbWFnZXMvU2hvcHBhYmxlQmFubmVyLnRzeA==",
+            "inputSchema": "#/definitions/c3JjL3NlY3Rpb25zL0ltYWdlcy9TaG9wcGFibGVCYW5uZXIudHN4@Props"
           },
           {
-            "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Qcm9kdWN0L1Byb2R1Y3REZXRhaWxzLnRzeA==",
-            "inputSchema": "#/definitions/c3JjL3NlY3Rpb25zL1Byb2R1Y3QvUHJvZHVjdERldGFpbHMudHN4@Props"
+            "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9MaW5rcy9MaW5rVHJlZS50c3g=",
+            "inputSchema": "#/definitions/c3JjL3NlY3Rpb25zL0xpbmtzL0xpbmtUcmVlLnRzeA==@Props"
           },
           {
             "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9NaXNjZWxsYW5lb3VzL0NhbXBhaWduVGltZXIudHN4",
@@ -4062,32 +4050,44 @@
             "inputSchema": "#/definitions/c3JjL3NlY3Rpb25zL01pc2NlbGxhbmVvdXMvQ29va2llQ29uc2VudC50c3g=@Props"
           },
           {
-            "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Tb2NpYWwvV2hhdHNBcHAudHN4",
-            "inputSchema": "#/definitions/c3JjL3NlY3Rpb25zL1NvY2lhbC9XaGF0c0FwcC50c3g=@Props"
+            "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9OZXdzbGV0dGVyL05ld3NsZXR0ZXIudHN4",
+            "inputSchema": "#/definitions/c3JjL3NlY3Rpb25zL05ld3NsZXR0ZXIvTmV3c2xldHRlci50c3g=@Props"
+          },
+          {
+            "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Qcm9kdWN0L1Byb2R1Y3REZXRhaWxzLnRzeA==",
+            "inputSchema": "#/definitions/c3JjL3NlY3Rpb25zL1Byb2R1Y3QvUHJvZHVjdERldGFpbHMudHN4@Props"
+          },
+          {
+            "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Qcm9kdWN0L1Byb2R1Y3RTaGVsZi50c3g=",
+            "inputSchema": "#/definitions/c3JjL3NlY3Rpb25zL1Byb2R1Y3QvUHJvZHVjdFNoZWxmLnRzeA==@Props"
+          },
+          {
+            "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Qcm9kdWN0L1Byb2R1Y3RTaGVsZlRhYmJlZC50c3g=",
+            "inputSchema": "#/definitions/c3JjL3NlY3Rpb25zL1Byb2R1Y3QvUHJvZHVjdFNoZWxmVGFiYmVkLnRzeA==@Props"
+          },
+          {
+            "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Qcm9kdWN0L1NlYXJjaFJlc3VsdC50c3g=",
+            "inputSchema": "#/definitions/c3JjL3NlY3Rpb25zL1Byb2R1Y3QvU2VhcmNoUmVzdWx0LnRzeA==@Props"
+          },
+          {
+            "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Qcm9kdWN0L1NoZWxmV2l0aEltYWdlLnRzeA==",
+            "inputSchema": "#/definitions/c3JjL3NlY3Rpb25zL1Byb2R1Y3QvU2hlbGZXaXRoSW1hZ2UudHN4@Props"
+          },
+          {
+            "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Qcm9kdWN0L1dpc2hsaXN0LnRzeA==",
+            "inputSchema": "#/definitions/c3JjL3NlY3Rpb25zL1Byb2R1Y3QvV2lzaGxpc3QudHN4@Props"
           },
           {
             "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Tb2NpYWwvSW5zdGFncmFtUG9zdHMudHN4",
             "inputSchema": "#/definitions/c3JjL3NlY3Rpb25zL1NvY2lhbC9JbnN0YWdyYW1Qb3N0cy50c3g=@Props"
           },
           {
+            "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Tb2NpYWwvV2hhdHNBcHAudHN4",
+            "inputSchema": "#/definitions/c3JjL3NlY3Rpb25zL1NvY2lhbC9XaGF0c0FwcC50c3g=@Props"
+          },
+          {
             "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9UaGVtZS9UaGVtZS50c3g=",
             "inputSchema": "#/definitions/c3JjL3NlY3Rpb25zL1RoZW1lL1RoZW1lLnRzeA==@Props"
-          },
-          {
-            "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9MaW5rcy9MaW5rVHJlZS50c3g=",
-            "inputSchema": "#/definitions/c3JjL3NlY3Rpb25zL0xpbmtzL0xpbmtUcmVlLnRzeA==@Props"
-          },
-          {
-            "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9Db21wb25lbnQudHN4",
-            "inputSchema": "#/definitions/c3JjL3NlY3Rpb25zL0NvbXBvbmVudC50c3g=@Props"
-          },
-          {
-            "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9OZXdzbGV0dGVyL05ld3NsZXR0ZXIudHN4",
-            "inputSchema": "#/definitions/c3JjL3NlY3Rpb25zL05ld3NsZXR0ZXIvTmV3c2xldHRlci50c3g=@Props"
-          },
-          {
-            "$ref": "#/definitions/c2l0ZS9zZWN0aW9ucy9IZWFkZXIvSGVhZGVyLnRzeA==",
-            "inputSchema": "#/definitions/c3JjL3NlY3Rpb25zL0hlYWRlci9IZWFkZXIudHN4@Props"
           }
         ]
       },
@@ -4100,13 +4100,13 @@
             "$ref": "#/definitions/c2l0ZS9sb2FkZXJzL19jb29raWUudHM="
           },
           {
-            "$ref": "#/definitions/c2l0ZS9sb2FkZXJzL3dpc2hsaXN0LnRz"
+            "$ref": "#/definitions/c2l0ZS9sb2FkZXJzL2FkZHJlc3MudHM="
           },
           {
             "$ref": "#/definitions/c2l0ZS9sb2FkZXJzL3VzZXIudHM="
           },
           {
-            "$ref": "#/definitions/c2l0ZS9sb2FkZXJzL2FkZHJlc3MudHM="
+            "$ref": "#/definitions/c2l0ZS9sb2FkZXJzL3dpc2hsaXN0LnRz"
           },
           {
             "$ref": "#/definitions/c2hvcGlmeS9sb2FkZXJzL1Byb2R1Y3REZXRhaWxzUGFnZS50cw=="
@@ -4155,12 +4155,12 @@
       "apps": {
         "anyOf": [
           {
-            "$ref": "#/definitions/c2l0ZS9hcHBzL3NpdGUudHM=",
-            "inputSchema": "#/definitions/c3JjL2FwcHMvc2l0ZS50cw==@Props"
-          },
-          {
             "$ref": "#/definitions/c2l0ZS9hcHBzL3Nob3BpZnkudHM=",
             "inputSchema": "#/definitions/c3JjL2FwcHMvc2hvcGlmeS50cw==@Props"
+          },
+          {
+            "$ref": "#/definitions/c2l0ZS9hcHBzL3NpdGUudHM=",
+            "inputSchema": "#/definitions/c3JjL2FwcHMvc2l0ZS50cw==@Props"
           }
         ]
       }

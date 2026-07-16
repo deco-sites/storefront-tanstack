@@ -85,7 +85,7 @@ function BannerItem(
             "absolute h-full w-full top-0 left-0",
             "flex flex-col justify-center items-center",
             "px-5 sm:px-0",
-            "sm:left-40 sm:items-start sm:max-w-96",
+            "sm:right-40 sm:left-auto sm:items-end sm:max-w-96 sm:text-right",
           )}
         >
           <span className="text-7xl font-bold text-base-100">
