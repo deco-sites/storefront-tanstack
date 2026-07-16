@@ -2,10 +2,10 @@
   "name": "Home Page",
   "sections": [
     {
-      "__resolveType": "Deco"
+      "__resolveType": "Header"
     },
     {
-      "__resolveType": "Header"
+      "__resolveType": "Deco"
     },
     {
       "__resolveType": "site/sections/Images/Carousel.tsx",

@@ -1,4 +1,4 @@
-# AGENTS.md
+# AGENTS.md 
 
 Guidance for AI agents and automated tooling working in this repository.
 
