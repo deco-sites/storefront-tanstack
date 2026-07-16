@@ -5,10 +5,7 @@
       "__resolveType": "Deco"
     },
     {
-      "__resolveType": "website/sections/Rendering/Lazy.tsx",
-      "section": {
-        "__resolveType": "Header"
-      }
+      "__resolveType": "Header"
     },
     {
       "__resolveType": "site/sections/Images/Carousel.tsx",
@@ -50,65 +47,56 @@
       "preload": true
     },
     {
-      "__resolveType": "website/sections/Rendering/Lazy.tsx",
-      "section": {
-        "__resolveType": "site/sections/Product/ProductShelf.tsx",
-        "title": "Discover Our Featured Picks",
-        "cta": "/mono",
-        "products": {
-          "__resolveType": "Product List Loader"
-        }
+      "__resolveType": "site/sections/Product/ProductShelf.tsx",
+      "title": "Discover Our Featured Picks",
+      "cta": "/mono",
+      "products": {
+        "__resolveType": "Product List Loader"
       }
     },
     {
-      "__resolveType": "website/sections/Rendering/Lazy.tsx",
-      "section": {
-        "__resolveType": "site/sections/Category/CategoryGrid.tsx",
-        "title": "Departments",
-        "cta": "/all",
-        "items": [
-          {
-            "label": "Men",
-            "href": "/men",
-            "image": "https://decoims.com/storefront-tanstack/5ad15dbc-205a-4546-9801-5d18ed393caa/1742560225714-38c33c9f-14a1-4048-973b-dc2a75caf1fa.png"
-          },
-          {
-            "href": "/women",
-            "label": "Women",
-            "image": "https://decoims.com/storefront-tanstack/24f19e67-c8f4-4601-8c86-379a92747535/1742560227121-f6bea2b8-b248-4b42-9246-6e924a0acc8b.png"
-          },
-          {
-            "href": "/kids",
-            "label": "Kids",
-            "image": "https://decoims.com/storefront-tanstack/adfa8d1d-9a08-427b-ab0a-32dec0cc8fc3/1742560228502-1b0ecaa2-9a13-4de2-bf17-5196948ed128.png"
-          },
-          {
-            "href": "/accessories",
-            "label": "Accessories",
-            "image": "https://decoims.com/storefront-tanstack/ba682b53-64d8-44b7-8e57-18d02f5dcf5a/1742560230067-92129655-fe40-4b29-8fdb-e7f71e67a5d1.png"
-          },
-          {
-            "href": "/home-and-living",
-            "label": "Home & Living",
-            "image": "https://decoims.com/storefront-tanstack/048e3ef7-c5c6-41b7-aa3a-7b3822502d41/1742560231577-d0433c00-cd26-4638-b519-0cb64b9f82e8.png"
-          }
-        ]
-      }
-    },
-    {
-      "__resolveType": "website/sections/Rendering/Lazy.tsx",
-      "section": {
-        "__resolveType": "site/sections/Images/Banner.tsx",
-        "title": "Register and Save Big!",
-        "cta": {
-          "label": "Sign Up",
-          "href": "#"
+      "__resolveType": "site/sections/Category/CategoryGrid.tsx",
+      "title": "Departments",
+      "cta": "/all",
+      "items": [
+        {
+          "label": "Men",
+          "href": "/men",
+          "image": "https://decoims.com/storefront-tanstack/5ad15dbc-205a-4546-9801-5d18ed393caa/1742560225714-38c33c9f-14a1-4048-973b-dc2a75caf1fa.png"
         },
-        "description": "<p><span style=\"color: rgb(45, 194, 107);\" data-mce-style=\"color: rgb(45, 194, 107);\">Sign up now to get up to 50% off on your first order. Limited time offer!</span></p>",
-        "images": {
-          "desktop": "https://decoims.com/storefront-tanstack/6d050cd7-e16b-4fd2-830d-021125c95c2b/1742560233015-cf96d47f-564f-40da-ad94-7acac5f39327.png",
-          "mobile": "https://decoims.com/storefront-tanstack/b7b14181-28c7-421c-9535-2cc0e3259bc9/1742560234608-4d5c3212-3f75-4d50-89f3-970815748b43.png"
+        {
+          "href": "/women",
+          "label": "Women",
+          "image": "https://decoims.com/storefront-tanstack/24f19e67-c8f4-4601-8c86-379a92747535/1742560227121-f6bea2b8-b248-4b42-9246-6e924a0acc8b.png"
+        },
+        {
+          "href": "/kids",
+          "label": "Kids",
+          "image": "https://decoims.com/storefront-tanstack/adfa8d1d-9a08-427b-ab0a-32dec0cc8fc3/1742560228502-1b0ecaa2-9a13-4de2-bf17-5196948ed128.png"
+        },
+        {
+          "href": "/accessories",
+          "label": "Accessories",
+          "image": "https://decoims.com/storefront-tanstack/ba682b53-64d8-44b7-8e57-18d02f5dcf5a/1742560230067-92129655-fe40-4b29-8fdb-e7f71e67a5d1.png"
+        },
+        {
+          "href": "/home-and-living",
+          "label": "Home & Living",
+          "image": "https://decoims.com/storefront-tanstack/048e3ef7-c5c6-41b7-aa3a-7b3822502d41/1742560231577-d0433c00-cd26-4638-b519-0cb64b9f82e8.png"
         }
+      ]
+    },
+    {
+      "__resolveType": "site/sections/Images/Banner.tsx",
+      "title": "Register and Save Big!",
+      "cta": {
+        "label": "Sign Up",
+        "href": "#"
+      },
+      "description": "<p><span style=\"color: rgb(45, 194, 107);\" data-mce-style=\"color: rgb(45, 194, 107);\">Sign up now to get up to 50% off on your first order. Limited time offer!</span></p>",
+      "images": {
+        "desktop": "https://decoims.com/storefront-tanstack/6d050cd7-e16b-4fd2-830d-021125c95c2b/1742560233015-cf96d47f-564f-40da-ad94-7acac5f39327.png",
+        "mobile": "https://decoims.com/storefront-tanstack/b7b14181-28c7-421c-9535-2cc0e3259bc9/1742560234608-4d5c3212-3f75-4d50-89f3-970815748b43.png"
       }
     },
     {
@@ -172,30 +160,24 @@
       }
     },
     {
-      "__resolveType": "website/sections/Rendering/Lazy.tsx",
-      "section": {
-        "__resolveType": "site/sections/Newsletter/Newsletter.tsx",
-        "label": "Sign up",
-        "placeholder": "Email address",
-        "empty": {
-          "title": "Get top deals, latest trends, and more.",
-          "description": "Receive our news and promotions in advance. Enjoy and get 10% off your first purchase. For more information click here."
-        },
-        "success": {
-          "title": "Thank you for subscribing!",
-          "description": "You’re now signed up to receive the latest news, trends, and exclusive promotions directly to your inbox. Stay tuned!"
-        },
-        "failed": {
-          "title": "Oops!. Something went wrong!",
-          "description": "Something went wrong. Please try again. If the problem persists, please contact us."
-        }
+      "__resolveType": "site/sections/Newsletter/Newsletter.tsx",
+      "label": "Sign up",
+      "placeholder": "Email address",
+      "empty": {
+        "title": "Get top deals, latest trends, and more.",
+        "description": "Receive our news and promotions in advance. Enjoy and get 10% off your first purchase. For more information click here."
+      },
+      "success": {
+        "title": "Thank you for subscribing!",
+        "description": "You’re now signed up to receive the latest news, trends, and exclusive promotions directly to your inbox. Stay tuned!"
+      },
+      "failed": {
+        "title": "Oops!. Something went wrong!",
+        "description": "Something went wrong. Please try again. If the problem persists, please contact us."
       }
     },
     {
-      "__resolveType": "website/sections/Rendering/Lazy.tsx",
-      "section": {
-        "__resolveType": "Footer"
-      }
+      "__resolveType": "Footer"
     }
   ],
   "__resolveType": "website/pages/Page.tsx",
