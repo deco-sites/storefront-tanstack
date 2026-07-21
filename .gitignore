@@ -26,6 +26,7 @@ vite.config.timestamp_*
 
 # Deco CMS
 .deco/metadata/*
+blocks.gen.json
 
 # IDE
 .vscode/
