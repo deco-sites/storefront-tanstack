@@ -100,4 +100,46 @@ const abTestedWorker = withABTesting(decoWorker, {
 // instrumentWorker MUST be the outermost wrapper. It initialises the OTel
 // pipeline (metrics buffering, error log direct-POST) and reads
 // DECO_OTEL_METRICS_ENDPOINT + DECO_OTEL_LOGS_ENDPOINT from env at boot.
-export default instrumentWorker(abTestedWorker);
+const instrumentedWorker = instrumentWorker(abTestedWorker);
+
+// --- Workers Cache experiment probe (TEMPORARY) ---------------------------
+// Isolated route to prove whether Cloudflare Workers Cache (cache.enabled)
+// skips the Worker on a hit. Intercepted at the OUTERMOST layer, so it is the
+// only route that opts out of the framework's `no-store` default — the rest of
+// the site is untouched (still no-store, still segment-safe). On a Workers
+// Cache hit this handler never runs at all.
+//
+//   `x-ran-at` is unique per Worker execution:
+//     - frozen across repeated GET /cache-probe   -> Worker was SKIPPED (cached)
+//     - changing on GET /cache-probe?bust=<rnd>    -> Worker RAN (cache MISS)
+//
+// Remove this block once the experiment is done.
+export default {
+  fetch(
+    request: Request,
+    env: unknown,
+    ctx: unknown,
+  ): Response | Promise<Response> {
+    const url = new URL(request.url);
+    if (url.pathname === "/cache-probe") {
+      const ranAt = `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+      return new Response(
+        JSON.stringify({ ranAt, at: new Date().toISOString(), q: url.search }, null, 2),
+        {
+          headers: {
+            "content-type": "application/json",
+            "x-ran-at": ranAt,
+            // Cacheable so Workers Cache is allowed to store it (120s).
+            "cache-control": "public, max-age=120",
+            "cdn-cache-control": "public, max-age=120",
+          },
+        },
+      );
+    }
+    return (
+      instrumentedWorker as unknown as {
+        fetch: (r: Request, e: unknown, c: unknown) => Response | Promise<Response>;
+      }
+    ).fetch(request, env, ctx);
+  },
+};
