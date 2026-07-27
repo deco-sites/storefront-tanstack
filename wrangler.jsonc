@@ -9,6 +9,12 @@
   "main": "./src/worker-entry.ts",
   "workers_dev": true,
   "preview_urls": true,
+  // Workers Cache — tiered cache IN FRONT of the worker. On a hit the worker
+  // does not run at all (0 invocation, 0 CPU). Config-as-code: the dashboard
+  // toggle is per-version and gets reset on every deploy, so it must live here
+  // to survive. Cacheability is still driven per-response by Cache-Control /
+  // CDN-Cache-Control (the site defaults to no-store; only /cache-probe opts in).
+  "cache": { "enabled": true },
   // Strategy B tail worker — 100% capture of producer errors that the
   // framework's direct-POST channel can't see (uncaught throws, exceededCpu,
   // exceededMemory, raw console.error). Invoked by CF on every request to
