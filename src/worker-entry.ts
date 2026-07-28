@@ -115,12 +115,13 @@ const instrumentedWorker = instrumentWorker(abTestedWorker);
 //
 // Remove this block once the experiment is done.
 export default {
-  fetch(
+  async fetch(
     request: Request,
     env: unknown,
     ctx: unknown,
-  ): Response | Promise<Response> {
+  ): Promise<Response> {
     const url = new URL(request.url);
+
     if (url.pathname === "/cache-probe") {
       const ranAt = `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
       return new Response(
@@ -132,10 +133,51 @@ export default {
             // Cacheable so Workers Cache is allowed to store it (120s).
             "cache-control": "public, max-age=120",
             "cdn-cache-control": "public, max-age=120",
+            // Cache-Tag must be present at store time for tag-based purge.
+            "cache-tag": "probe",
           },
         },
       );
     }
+
+    // Purge endpoint — proves ctx.cache.purge() invalidates the Workers Cache
+    // without a redeploy. Runs from inside the Worker (ctx.cache is the
+    // Worker's own cache). Modes: ?tag=<t> | ?prefix=</p> | ?all=1 (default tag=probe).
+    //
+    // Safety: unauthenticated calls are limited to purging the test tag
+    // `probe` (only /cache-probe is cacheable, so this is harmless). Any other
+    // scope (arbitrary tags, prefixes, purgeEverything) requires the
+    // CACHE_PURGE_TOKEN secret via ?token= — fail-closed if unset.
+    if (url.pathname === "/cache-purge") {
+      const q = url.searchParams;
+      const secret = (env as { CACHE_PURGE_TOKEN?: string }).CACHE_PURGE_TOKEN;
+      const provided = q.get("token") ?? request.headers.get("x-purge-token") ?? "";
+      const authed = !!secret && provided === secret;
+
+      let arg: { tags?: string[]; pathPrefixes?: string[]; purgeEverything?: boolean };
+      if (q.get("all")) arg = { purgeEverything: true };
+      else if (q.get("prefix")) arg = { pathPrefixes: q.get("prefix")!.split(",") };
+      else if (q.get("tag")) arg = { tags: q.get("tag")!.split(",") };
+      else arg = { tags: ["probe"] };
+
+      const isTestOnly =
+        Array.isArray(arg.tags) && arg.tags.length === 1 && arg.tags[0] === "probe";
+      if (!isTestOnly && !authed) {
+        return Response.json(
+          { error: "unauthorized: this scope needs ?token=<CACHE_PURGE_TOKEN>" },
+          { status: 403, headers: { "cache-control": "no-store" } },
+        );
+      }
+
+      const result = await (
+        ctx as { cache: { purge: (o: unknown) => Promise<unknown> } }
+      ).cache.purge(arg);
+      return Response.json(
+        { purged: arg, authed, result },
+        { headers: { "cache-control": "no-store" } },
+      );
+    }
+
     return (
       instrumentedWorker as unknown as {
         fetch: (r: Request, e: unknown, c: unknown) => Response | Promise<Response>;
