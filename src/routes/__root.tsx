@@ -1,6 +1,7 @@
 import { createRootRouteWithContext } from "@tanstack/react-router";
 import type { QueryClient } from "@tanstack/react-query";
 import { DecoRootLayout } from "@decocms/start/hooks";
+import OneDollarStats from "@decocms/apps-website/components/OneDollarStats.tsx";
 import { CART_QUERY_KEY, getCartServerFn } from "../platform/cart";
 import MinicartDrawer from "../components/minicart/MinicartDrawer";
 // @ts-ignore Vite ?url import
@@ -58,6 +59,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 function RootLayout() {
   return (
     <DecoRootLayout lang="pt-BR" siteName="storefront-tanstack">
+      <OneDollarStats />
       <MinicartDrawer />
     </DecoRootLayout>
   );
