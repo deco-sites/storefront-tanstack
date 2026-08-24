@@ -57,6 +57,37 @@ const redact = (headers: Headers): Record<string, string> => {
   return out;
 };
 
+/**
+ * Echo services this route may call. Without an allowlist, ?url= turns a public
+ * endpoint into an open proxy: anyone could drive server-side requests from our
+ * Worker to a destination of their choosing.
+ */
+const ALLOWED_ECHO_HOSTS = [
+  "beeceptor.com",
+  "webhook.site",
+  "requestbin.com",
+  "pipedream.net",
+  "httpbin.org",
+  "postman-echo.com",
+];
+
+/** null when the target is missing, malformed, or not an allowed echo host. */
+const resolveTarget = (raw: string | null): URL | null => {
+  if (!raw) return null;
+  let target: URL;
+  try {
+    target = new URL(raw);
+  } catch {
+    return null;
+  }
+  if (target.protocol !== "https:") return null;
+  const host = target.hostname.toLowerCase();
+  const allowed = ALLOWED_ECHO_HOSTS.some(
+    (domain) => host === domain || host.endsWith(`.${domain}`),
+  );
+  return allowed ? target : null;
+};
+
 const chain = (value: string | null): string[] =>
   value
     ? value
@@ -68,12 +99,21 @@ const chain = (value: string | null): string[] =>
 const isPrivate = (ip: string): boolean =>
   /^(10\.|127\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.|::1|fc|fd)/i.test(ip);
 
-/** Strategy used by the Magento proxy today — reproduced to show the failure. */
+/**
+ * Strategy used by the Magento proxy today — reproduced to show the failure.
+ *
+ * Credentials are stripped even here. Reproducing the bug faithfully would
+ * forward this request's cookies and the shared origin-auth token to whatever
+ * ?url= points at, turning a public diagnostic endpoint into a credential
+ * exfiltration primitive. The x-forwarded-for defect is what this mode exists
+ * to demonstrate, and it survives the redaction intact.
+ */
 const buildLegacyHeaders = (request: Request, url: URL): Headers => {
   const out = new Headers(request.headers);
   out.forEach((_v, key) => {
     if (key.startsWith("cf-")) out.delete(key);
   });
+  for (const h of SECRET_HEADERS) out.delete(h);
   out.delete("host");
   out.delete("content-length");
   // The actual bug: an origin URL where an IP belongs.
@@ -145,7 +185,9 @@ export const Route = createFileRoute("/ip-probe")({
     handlers: {
       GET: async ({ request }) => {
         const url = new URL(request.url);
-        const target = url.searchParams.get("url");
+        const requestedTarget = url.searchParams.get("url");
+        const targetUrl = resolveTarget(requestedTarget);
+        const target = targetUrl?.href ?? null;
         const mode = (url.searchParams.get("mode") ?? "both").toLowerCase();
 
         const xff = chain(request.headers.get("x-forwarded-for"));
@@ -214,7 +256,9 @@ export const Route = createFileRoute("/ip-probe")({
           outbound: target ? outbound : null,
           hint: target
             ? "Compare x-forwarded-for across the two modes on your echo service."
-            : "Pass ?url=<echo endpoint> to also test outbound forwarding.",
+            : requestedTarget
+              ? `Rejected: ?url= must be https and one of ${ALLOWED_ECHO_HOSTS.join(", ")}.`
+              : "Pass ?url=<echo endpoint> to also test outbound forwarding.",
         };
 
         return new Response(JSON.stringify(body, null, 2), {
