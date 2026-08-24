@@ -121,10 +121,44 @@ const buildLegacyHeaders = (request: Request, url: URL): Headers => {
   return out;
 };
 
+/**
+ * Rebuild the canonical Cloudflare geo headers from `request.cf`.
+ *
+ * Mirrors the fix under review on the Magento proxy. The header mirror cannot
+ * be used as a source: Cloudflare omits the free-text ones (city, region) to a
+ * Worker entirely — verified, and unaffected by the "Add visitor location
+ * headers" managed transform — and delivers them double-encoded to an origin.
+ * ASN and AS organization have no header form at all, and are the strongest
+ * VPN / datacenter / proxy signals available.
+ *
+ * RFC 9110 section 5.5 limits field values to US-ASCII, so anything outside it
+ * is percent-encoded rather than sent raw or stripped of accents.
+ */
+const applyGeoHeaders = (headers: Headers, cf?: Record<string, unknown>) => {
+  if (!cf) return;
+  const set = (name: string, value: unknown) => {
+    if (value === undefined || value === null || value === "") return;
+    const text = String(value);
+    headers.set(name, /^[\x20-\x7E]*$/.test(text) ? text : encodeURIComponent(text));
+  };
+  set("cf-ipcountry", cf.country);
+  set("cf-ipcity", cf.city);
+  set("cf-region", cf.region);
+  set("cf-region-code", cf.regionCode);
+  set("cf-ipcontinent", cf.continent);
+  set("cf-iplatitude", cf.latitude);
+  set("cf-iplongitude", cf.longitude);
+  set("cf-timezone", cf.timezone);
+  set("cf-postal-code", cf.postalCode);
+  set("cf-asn", cf.asn);
+  set("cf-as-organization", cf.asOrganization);
+};
+
 /** Strategy from the client-IP fix. */
 const buildFixedHeaders = (request: Request, url: URL): Headers => {
   const out = new Headers(request.headers);
   const clientIp = request.headers.get("cf-connecting-ip");
+  const cf = (request as Request & { cf?: Record<string, unknown> }).cf;
 
   for (const h of SPOOFABLE_IP_HEADERS) out.delete(h);
   for (const h of NON_ASCII_CF_HEADERS) out.delete(h);
@@ -142,6 +176,7 @@ const buildFixedHeaders = (request: Request, url: URL): Headers => {
     out.delete("x-forwarded-for");
     out.delete("forwarded");
   }
+  applyGeoHeaders(out, cf);
   return out;
 };
 
