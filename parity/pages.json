@@ -1,0 +1,437 @@
+{
+  "$comment": "Parity manifest: routes x viewports, feature flows and text responses. See parity/README.md.",
+  "fixedTime": "2030-01-01T12:00:00.000Z",
+  "randomSeed": 1337,
+  "locale": "en-US",
+  "timezone": "UTC",
+  "ports": {
+    "site": 4273,
+    "upstream": 4280
+  },
+  "siteEnv": {
+    "DECO_OTEL": "off",
+    "DECO_FAST_DEPLOY": "0"
+  },
+  "viewports": {
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "deviceScaleFactor": 1,
+      "isMobile": true,
+      "hasTouch": true,
+      "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1"
+    },
+    "desktop": {
+      "width": 1440,
+      "height": 900,
+      "deviceScaleFactor": 1,
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36"
+    }
+  },
+  "thirdParty": {
+    "$comment": "Analytics beacons are aborted on both sides (never recorded, never sent). Every other third-party browser request is replayed from the per-case HAR.",
+    "block": [
+      "**/*.lilstts.com/**",
+      "**/s.lilstts.com/**",
+      "**/d.lilstts.com/**"
+    ]
+  },
+  "ignoreHeaders": [],
+  "pages": [
+    {
+      "id": "home",
+      "path": "/"
+    },
+    {
+      "id": "landing-women",
+      "path": "/women"
+    },
+    {
+      "id": "landing-men",
+      "path": "/men"
+    },
+    {
+      "id": "landing-kids",
+      "path": "/kids"
+    },
+    {
+      "id": "landing-accessories",
+      "path": "/accessories"
+    },
+    {
+      "id": "landing-home-and-living",
+      "path": "/home-and-living"
+    },
+    {
+      "id": "plp-shirts",
+      "path": "/shirts"
+    },
+    {
+      "id": "plp-stickers",
+      "path": "/stickers"
+    },
+    {
+      "id": "plp-shirts-sorted",
+      "path": "/shirts?sort=price:asc"
+    },
+    {
+      "id": "plp-empty-collection",
+      "path": "/clearance"
+    },
+    {
+      "id": "search",
+      "path": "/s?q=shirt"
+    },
+    {
+      "id": "search-no-results",
+      "path": "/s?q=zzzznotfound"
+    },
+    {
+      "id": "pdp-variants",
+      "path": "/products/t-shirt-44363187880113"
+    },
+    {
+      "id": "pdp-woman-t-shirt",
+      "path": "/products/woman-t-shirt-44379963949233"
+    },
+    {
+      "id": "pdp-single-variant",
+      "path": "/products/its-not-a-bug-44073295904945"
+    },
+    {
+      "id": "pdp-out-of-stock",
+      "path": "/products/deco-tee-47781418401969"
+    },
+    {
+      "id": "pdp-not-found",
+      "path": "/products/does-not-exist-1"
+    },
+    {
+      "id": "offline",
+      "path": "/offline"
+    },
+    {
+      "id": "login",
+      "path": "/login"
+    },
+    {
+      "id": "account-anonymous",
+      "path": "/account"
+    },
+    {
+      "id": "not-found",
+      "path": "/this-page-does-not-exist/x/y"
+    }
+  ],
+  "flows": [
+    {
+      "id": "search-typeahead-submit",
+      "steps": [
+        {
+          "goto": "/"
+        },
+        {
+          "click": "label[aria-label='search icon button'] >> visible=true"
+        },
+        {
+          "type": [
+            "input[name=q] >> visible=true",
+            "shirt"
+          ]
+        },
+        {
+          "settle": true,
+          "scroll": false
+        },
+        {
+          "capture": "suggestions",
+          "fullPage": false,
+          "scroll": false
+        },
+        {
+          "press": [
+            "input[name=q] >> visible=true",
+            "Enter"
+          ]
+        },
+        {
+          "waitForURL": "**/s?q=shirt**"
+        },
+        {
+          "url": "resultsUrl"
+        },
+        {
+          "capture": "results"
+        }
+      ]
+    },
+    {
+      "id": "plp-filter",
+      "steps": [
+        {
+          "goto": "/shirts"
+        },
+        {
+          "click": "label:has-text('Filters') >> visible=true",
+          "viewports": [
+            "mobile"
+          ]
+        },
+        {
+          "settle": true,
+          "scroll": false,
+          "viewports": [
+            "mobile"
+          ]
+        },
+        {
+          "capture": "filters-open",
+          "fullPage": false,
+          "scroll": false,
+          "viewports": [
+            "mobile"
+          ]
+        },
+        {
+          "click": "aside a[rel=nofollow] >> visible=true"
+        },
+        {
+          "waitForURL": "**/shirts?**"
+        },
+        {
+          "url": "filteredUrl"
+        },
+        {
+          "capture": "filtered"
+        }
+      ]
+    },
+    {
+      "id": "plp-sort",
+      "steps": [
+        {
+          "goto": "/shirts"
+        },
+        {
+          "select": [
+            "select[name=sort] >> visible=true",
+            "price-descending"
+          ]
+        },
+        {
+          "waitForURL": "**sort=price-descending**"
+        },
+        {
+          "url": "sortedUrl"
+        },
+        {
+          "capture": "sorted"
+        }
+      ]
+    },
+    {
+      "id": "plp-show-more",
+      "steps": [
+        {
+          "goto": "/stickers"
+        },
+        {
+          "click": "a[rel=next] >> visible=true"
+        },
+        {
+          "waitForURL": "**/stickers?**"
+        },
+        {
+          "url": "page2Url"
+        },
+        {
+          "capture": "page2"
+        }
+      ]
+    },
+    {
+      "id": "plp-to-pdp-spa-nav",
+      "steps": [
+        {
+          "goto": "/shirts"
+        },
+        {
+          "click": "a[href^='/products/'] >> visible=true"
+        },
+        {
+          "waitForURL": "**/products/**"
+        },
+        {
+          "url": "pdpUrl"
+        },
+        {
+          "capture": "pdp"
+        }
+      ]
+    },
+    {
+      "id": "header-nav-spa",
+      "viewports": [
+        "desktop"
+      ],
+      "steps": [
+        {
+          "goto": "/"
+        },
+        {
+          "click": "header a[href='/women'] >> visible=true"
+        },
+        {
+          "waitForURL": "**/women"
+        },
+        {
+          "capture": "women"
+        }
+      ]
+    },
+    {
+      "id": "pdp-variant-select",
+      "steps": [
+        {
+          "goto": "/products/t-shirt-44363187880113"
+        },
+        {
+          "click": "a[aria-label^='Size: ']:not([aria-current]) >> visible=true"
+        },
+        {
+          "waitForURL": "**/products/**"
+        },
+        {
+          "url": "variantUrl"
+        },
+        {
+          "capture": "variant"
+        },
+        {
+          "click": "a[aria-label^='Color: ']:not([aria-current]) >> visible=true"
+        },
+        {
+          "url": "variant2Url"
+        },
+        {
+          "capture": "variant2"
+        }
+      ]
+    },
+    {
+      "id": "add-to-cart-minicart",
+      "steps": [
+        {
+          "goto": "/products/t-shirt-44363187880113"
+        },
+        {
+          "click": "button:has-text('Add to cart') >> visible=true"
+        },
+        {
+          "waitFor": "button:has-text('Added!') >> visible=true"
+        },
+        {
+          "settle": true,
+          "scroll": false
+        },
+        {
+          "capture": "added",
+          "fullPage": false,
+          "scroll": false
+        },
+        {
+          "click": "label[aria-label='open cart'] >> visible=true"
+        },
+        {
+          "waitFor": "aside[aria-label=Cart] a:has-text('Begin Checkout') >> visible=true"
+        },
+        {
+          "settle": true,
+          "scroll": false
+        },
+        {
+          "capture": "minicart",
+          "fullPage": false,
+          "scroll": false
+        },
+        {
+          "attr": {
+            "name": "checkoutUrl",
+            "selector": "aside[aria-label=Cart] a:has-text('Begin Checkout')",
+            "attr": "href"
+          }
+        },
+        {
+          "text": {
+            "name": "cartBadge",
+            "selector": "label[aria-label='open cart'] .badge >> visible=true"
+          }
+        }
+      ]
+    },
+    {
+      "id": "login-link",
+      "steps": [
+        {
+          "goto": "/"
+        },
+        {
+          "click": "a[aria-label=Login] >> visible=true"
+        },
+        {
+          "waitForURL": "**/login"
+        },
+        {
+          "capture": "login"
+        }
+      ]
+    },
+    {
+      "id": "mobile-menu",
+      "viewports": [
+        "mobile"
+      ],
+      "steps": [
+        {
+          "goto": "/"
+        },
+        {
+          "click": "label[aria-label='open menu'] >> visible=true"
+        },
+        {
+          "settle": true,
+          "scroll": false
+        },
+        {
+          "capture": "menu",
+          "fullPage": false,
+          "scroll": false
+        }
+      ]
+    }
+  ],
+  "texts": [
+    {
+      "id": "robots-txt",
+      "path": "/robots.txt"
+    },
+    {
+      "id": "sitemap-xml",
+      "path": "/sitemap.xml"
+    }
+  ],
+  "$fixedTimeNote": "Must be in the FUTURE relative to the wall clock: the server clock is frozen to it and cookies (cart, 7-day expiry) are dated from it, while Chromium's cookie jar uses real time. Re-record before 2030-01-08.",
+  "chromiumArgs": [
+    "--font-render-hinting=none",
+    "--disable-skia-runtime-opts",
+    "--force-color-profile=srgb",
+    "--disable-lcd-text",
+    "--disable-gpu",
+    "--disable-gpu-rasterization",
+    "--disable-threaded-animation",
+    "--disable-threaded-scrolling",
+    "--disable-checker-imaging",
+    "--disable-partial-raster",
+    "--run-all-compositor-stages-before-draw"
+  ]
+}

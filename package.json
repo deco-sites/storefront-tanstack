@@ -25,7 +25,11 @@
     "clean": "rm -rf node_modules .cache dist .wrangler/state node_modules/.vite && npm install",
     "tailwind:lint": "tsx scripts/tailwind-lint.ts",
     "tailwind:fix": "tsx scripts/tailwind-lint.ts --fix",
-    "update": "bunx npm-check-updates -u -f '@decocms/*' && bun install"
+    "update": "bunx npm-check-updates -u -f '@decocms/*' && bun install",
+    "parity:build": "npm run generate:blocks && npm run generate:sections && npm run generate:loaders && npm run generate:schema && tsr generate && vite build --config parity/vite.config.ts && touch dist/server/.parity-build",
+    "parity:record": "node parity/run.mjs record",
+    "parity:compare": "node parity/run.mjs compare",
+    "parity:probe": "node parity/run.mjs probe"
   },
   "author": "deco.cx",
   "license": "MIT",
@@ -57,6 +61,9 @@
     "babel-plugin-react-compiler": "^1.0.0",
     "daisyui": "^5.5.19",
     "knip": "^5.61.2",
+    "pixelmatch": "7.2.0",
+    "playwright": "1.59.0",
+    "pngjs": "7.0.0",
     "prettier": "^3.5.3",
     "tailwindcss": "^4.2.1",
     "ts-morph": "^27.0.2",
