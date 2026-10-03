@@ -20,8 +20,13 @@ export const cms = createCMS({
   site,
   token,
   // The hosted collector when the site is connected; otherwise the standard OTEL_EXPORTER_OTLP_*
-  // variables, if set (/next/telemetry#choose-where-telemetry-goes).
-  ...(site && token ? { telemetry: { site, token } } : {}),
+  // variables, if set (/next/telemetry#choose-where-telemetry-goes). `vite dev` sends nothing, so
+  // local work never reaches the production collector wrangler.jsonc points at.
+  ...(import.meta.env.DEV
+    ? { telemetry: false as const }
+    : site && token
+      ? { telemetry: { site, token } }
+      : {}),
 });
 
 /** The client for this request: the draft a `?__draft=` link or the draft cookie points at, or the release. */

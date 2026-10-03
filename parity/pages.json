@@ -10,6 +10,7 @@
   },
   "siteEnv": {
     "DECO_OTEL": "off",
+    "OTEL_EXPORTER_OTLP_ENDPOINT": "",
     "DECO_FAST_DEPLOY": "0"
   },
   "viewports": {

@@ -39,12 +39,17 @@
   //     "dataset": "deco_metrics_YOUR_SITE_NAME"
   //   }
   // ],
-  // Telemetry (/next/telemetry): with DECO_SITE and DECO_SITE_TOKEN set, the hosted Deco CMS
-  // collector; otherwise the standard OTEL_EXPORTER_OTLP_ENDPOINT / OTEL_EXPORTER_OTLP_HEADERS, set
-  // as secrets. Unset, nothing is sent. The tail worker above keeps capturing uncaught errors.
+  // Telemetry (/next/telemetry#choose-where-telemetry-goes): with DECO_SITE and DECO_SITE_TOKEN set,
+  // the hosted Deco CMS collector; otherwise the standard OTEL_EXPORTER_OTLP_ENDPOINT, the same
+  // collector v7 sent to (its DECO_OTEL_*_ENDPOINT vars). The SDK appends /v1/metrics, /v1/logs and
+  // /v1/traces. The auth header goes as a secret, the value v7 kept in DECO_OTEL_AUTH_TOKEN:
+  //   wrangler secret put OTEL_EXPORTER_OTLP_HEADERS   # authorization=Bearer <token>
+  // `vite dev` sends nothing (src/cms.ts); the parity harness empties the endpoint in .dev.vars. The tail
+  // worker above keeps capturing uncaught errors.
   "vars": {
     "DECO_SITE_NAME": "storefront-tanstack",
     "DECO_ENV_NAME": "production",
+    "OTEL_EXPORTER_OTLP_ENDPOINT": "https://otel-ingest.infra.deco.cx",
     // The Shopify store (/next/upstream-clients#call-a-client). The Storefront API token is a public,
     // read-scoped token: Shopify serves it to browsers by design.
     "SHOPIFY_STORE_NAME": "gimenesdevstore",
