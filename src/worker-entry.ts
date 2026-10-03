@@ -1,27 +1,18 @@
 /**
  * Cloudflare Worker entry point — Shopify storefront.
  *
- * Handles admin protocol, CSP, device segmentation, and edge caching.
- * Shopify checkout runs on Shopify's hosted checkout (or the store's domain)
- * and does not need a reverse proxy — all commerce calls go via the
- * Storefront API (GraphQL) from the server loaders.
+ * TanStack Start serves every page; the site's edge-cache wrapper (src/server/edge-cache.ts) adds
+ * security headers, page cache headers and the edge cache in front of it. Shopify checkout runs on
+ * Shopify's hosted checkout, so there's no upstream proxy.
  *
  * MANUAL REVIEW: Add site-specific CSP domains (analytics, CDN, tag managers).
  */
-import "./setup";
 import handler, { createServerEntry } from "@tanstack/react-start/server-entry";
-import { createDecoWorkerEntry } from "@decocms/tanstack";
-import { instrumentWorker } from "@decocms/blocks/sdk/otel";
-import { detectDevice } from "@decocms/blocks/sdk/useDevice";
-import {
-  handleMeta,
-  handleDecofileRead,
-  handleDecofileReload,
-  handleRender,
-  corsHeaders,
-} from "@decocms/blocks-admin";
-import { getCookies } from "@decocms/apps-shopify/utils/cookies";
-import { withABTesting } from "@decocms/blocks/sdk/abTesting";
+import { withEdgeCache } from "./server/edge-cache";
+import { detectDevice } from "./sdk/device";
+import { getCookies } from "./vendor/shopify/utils/cookies";
+// @ts-ignore Vite ?url import
+import appCss from "./styles/app.css?url";
 
 const serverEntry = createServerEntry({ fetch: handler.fetch });
 
@@ -35,69 +26,22 @@ const CSP_DIRECTIVES = [
   // TODO: Add site-specific domains (analytics, CDN, tag managers)
 ];
 
-const decoWorker = createDecoWorkerEntry(serverEntry, {
-  // Opt out of the auto-wrap the framework (6.6.0+) applies inside
-  // createDecoWorkerEntry. We keep the manual `instrumentWorker(decoWorker)`
-  // wrap at the bottom of this file as the outermost layer. Without
-  // `observability: false` we'd double-wrap and reinitialize the OTel SDK
-  // twice per request. Manual wrap is the proven path on every tanstack site
-  // that emits today.
-  observability: false,
-
-  admin: {
-    handleMeta,
-    handleDecofileRead,
-    handleDecofileReload,
-    handleRender,
-    corsHeaders,
-  },
-
+export default withEdgeCache(serverEntry, {
   csp: CSP_DIRECTIVES,
-
+  cssHref: appCss,
   buildSegment: (request) => {
     const cookies = getCookies(request.headers);
-    const rawDevice = detectDevice(request.headers.get("user-agent") ?? "");
-    // SegmentKey only splits mobile vs desktop — collapse tablet to mobile
-    const device: "mobile" | "desktop" =
-      rawDevice === "desktop" ? "desktop" : "mobile";
-
-    // Region splits the cache so a RJ-cached response isn't served to SP
-    // visitors when pages use the website/matchers/location.ts matcher.
-    // Reads cf-region-code (Cloudflare adds this in prod) with request.cf
-    // as a fallback for environments that drop the header.
+    // The cache splits only mobile vs desktop: tablets share the mobile entry.
+    const device =
+      detectDevice(request.headers.get("user-agent") ?? "") === "desktop" ? "desktop" : "mobile";
+    // Region splits the cache so a page cached for one region isn't served to another. Reads
+    // cf-region-code (Cloudflare adds it in production), with request.cf as a fallback.
     const cf = (request as unknown as { cf?: { regionCode?: string } }).cf;
-    const regionCode =
-      request.headers.get("cf-region-code") ?? cf?.regionCode ?? "";
-
+    const regionCode = request.headers.get("cf-region-code") ?? cf?.regionCode ?? "";
     return {
       device,
       ...(cookies.customerAccessToken ? { loggedIn: true } : {}),
       ...(regionCode ? { regionId: regionCode } : {}),
     };
   },
-
-  // Shopify storefront needs no upstream proxy — checkout is hosted by Shopify
-  // and the Storefront API is called server-side from loaders. Leaving
-  // proxyHandler unset keeps all routes going through TanStack Start.
 });
-
-// ---------------------------------------------------------------------------
-// A/B wrapper — KV-driven traffic split between the TanStack worker and a
-// legacy fallback origin during the migration period.
-//
-// Reads config from KV (binding below) keyed by hostname. When the binding is
-// absent, or KV has no config for the host, ALL traffic passes straight to the
-// worker (no split). So this is safe to ship before SITES_KV exists — to
-// actually enable A/B, add the `SITES_KV` binding in wrangler.jsonc and a
-// per-host config: { "workerName": "...", "fallbackOrigin": "...",
-// "abTest": { "ratio": 0.5 } }.
-// ---------------------------------------------------------------------------
-
-const abTestedWorker = withABTesting(decoWorker, {
-  kvBinding: "SITES_KV",
-});
-
-// instrumentWorker MUST be the outermost wrapper. It initialises the OTel
-// pipeline (metrics buffering, error log direct-POST) and reads
-// DECO_OTEL_METRICS_ENDPOINT + DECO_OTEL_LOGS_ENDPOINT from env at boot.
-export default instrumentWorker(abTestedWorker);

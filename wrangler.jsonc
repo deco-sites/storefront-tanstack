@@ -39,58 +39,17 @@
   //     "dataset": "deco_metrics_YOUR_SITE_NAME"
   //   }
   // ],
-  "kv_namespaces": [
-    {
-      "binding": "DECO_KV",
-      "id": "a205a78ee28c44c3910cf52a3482a65f"
-    },
-    {
-      "binding": "SITES_KV",
-      "id": "ad0b74fc4d9341c9af9149c4ab85132f"
-    }
-  ],
-  // Observability — three-channel model (Strategy B, see decocms/deco-start D-8).
-  //
-  // Identity:
-  //   `DECO_SITE_NAME` drives `service.name` on every span and log line.
-  //   `DECO_ENV_NAME`  drives `deployment.environment`.
-  //
-  // Three channels, each owning a different slice of the observability cube:
-  //
-  //   1. CF Destinations (`observability.{logs,traces}.destinations` below)
-  //      Sampled 1% logs + 1% traces. Bulk volume.
-  //   2. Direct-POST in-worker (`DECO_OTEL_*_ENDPOINT`, resolved at
-  //      `instrumentWorker` boot)
-  //        - METRICS_ENDPOINT → direct POST `/v1/metrics` (CF Destinations
-  //          doesn't support OTLP metrics). Buffered per-isolate, flushed
-  //          via `ctx.waitUntil` after every request.
-  //        - LOGS_ENDPOINT    → direct POST `/v1/logs` for framework
-  //          `logger.error(...)` only (100% capture, rate-limited).
-  //   3. Tail Worker (`tail_consumers` above → deco-otel-tail)
-  //      Catches uncaught throws, exceededCpu/Memory, raw console.error —
-  //      what direct-POST can't see and CF Destinations would sample away.
-  //
-  // Coverage matrix:
-  //   framework logger.error          → direct-POST       (100%, rate-limited)
-  //   framework span errors           → CF Destinations + tail (1% sampled + 100%)
-  //   uncaught throws                 → tail worker       (100%)
-  //   exceededCpu / exceededMemory    → tail worker       (100%)
-  //   raw console.error               → tail worker       (100%)
-  //   console.log / console.warn      → CF Destinations   (1% sampled)
-  //   OTel spans                      → CF Destinations   (1% sampled)
-  //   OTel metrics                    → direct-POST       (100%, buffered)
+  // Telemetry (/next/telemetry): with DECO_SITE and DECO_SITE_TOKEN set, the hosted Deco CMS
+  // collector; otherwise the standard OTEL_EXPORTER_OTLP_ENDPOINT / OTEL_EXPORTER_OTLP_HEADERS, set
+  // as secrets. Unset, nothing is sent. The tail worker above keeps capturing uncaught errors.
   "vars": {
     "DECO_SITE_NAME": "storefront-tanstack",
     "DECO_ENV_NAME": "production",
-    // Fast Deploy opt-in. Requires BOTH this flag AND the DECO_KV binding
-    // above; inert if either is missing. Set to "0" to disable.
-    "DECO_FAST_DEPLOY": "1",
-    "DECO_OTEL_METRICS_ENDPOINT": "https://otel-ingest.infra.deco.cx/v1/metrics",
-    "DECO_OTEL_LOGS_ENDPOINT": "https://otel-ingest.infra.deco.cx/v1/logs",
-    "DECO_OTEL_TRACES_ENDPOINT": "https://otel-ingest.infra.deco.cx/v1/traces",
-    "DECO_OTEL_ERROR_PROMOTION": "true",
-    "DECO_OTEL_ERROR_PROMOTION_RATE": "0.1",
-    "DECO_OTEL_LOGS_MIN_LEVEL": "debug"
-    // DECO_OTEL_AUTH_TOKEN goes as a secret: wrangler secret put DECO_OTEL_AUTH_TOKEN
+    // The Shopify store (/next/upstream-clients#call-a-client). The Storefront API token is a public,
+    // read-scoped token: Shopify serves it to browsers by design.
+    "SHOPIFY_STORE_NAME": "gimenesdevstore",
+    "SHOPIFY_STOREFRONT_ACCESS_TOKEN": "71f2c3da0dab3b4eee7dce35eb8c6113"
+    // Hosted Deco CMS (/next/hosted#cloudflare-workers): set DECO_SITE here and the token as a secret:
+    // wrangler secret put DECO_SITE_TOKEN
   }
 }

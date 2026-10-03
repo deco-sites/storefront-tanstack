@@ -15,10 +15,12 @@
       "~/*": [
         "./src/*"
       ]
-    }
+    },
+    "resolveJsonModule": true
   },
   "include": [
     "src/**/*",
+    ".deco/**/*.ts",
     "vite.config.ts"
   ]
 }

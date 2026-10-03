@@ -1,10 +1,11 @@
 import { createRootRouteWithContext } from "@tanstack/react-router";
 import type { QueryClient } from "@tanstack/react-query";
-import { DecoRootLayout } from "@decocms/tanstack";
-import OneDollarStats from "@decocms/apps-website/components/OneDollarStats";
 import { CART_QUERY_KEY, getCartServerFn } from "../platform/cart";
 import { getUserServerFn, USER_QUERY_KEY } from "../platform/user";
 import MinicartDrawer from "../components/minicart/MinicartDrawer";
+import { loadLayout } from "../layout.functions";
+import { Analytics } from "../runtime/Analytics";
+import { RootDocument } from "../runtime/RootDocument";
 // @ts-ignore Vite ?url import
 import appCss from "../styles/app.css?url";
 
@@ -27,6 +28,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     }
     await Promise.all(tasks);
   },
+  // Site-wide settings change with a release, not per navigation.
+  loader: () => loadLayout(),
+  staleTime: Number.POSITIVE_INFINITY,
   head: () => ({
     meta: [
       { charSet: "utf-8" },
@@ -42,10 +46,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 });
 
 function RootLayout() {
+  const { analytics } = Route.useLoaderData();
   return (
-    <DecoRootLayout lang="en" siteName="storefront-tanstack">
-      <OneDollarStats />
+    <RootDocument>
+      <Analytics {...analytics} />
       <MinicartDrawer />
-    </DecoRootLayout>
+    </RootDocument>
   );
 }
