@@ -7,7 +7,10 @@
       "section": {
         "__resolveType": "commerce/sections/Seo/SeoPLPV2.tsx",
         "jsonLD": {
-          "__resolveType": "PLP Loader"
+          "__resolveType": "lazy",
+          "value": {
+            "__resolveType": "PLP Loader"
+          }
         }
       }
     },
@@ -25,11 +28,6 @@
           "__resolveType": "PLP Loader"
         },
         "layout": {
-          "columns": {
-            "mobile": 2,
-            "desktop": 4
-          },
-          "variant": "aside",
           "pagination": "show-more"
         },
         "startingPage": 1
