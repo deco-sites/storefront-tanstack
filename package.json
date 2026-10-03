@@ -29,7 +29,9 @@
     "parity:build": "npm run generate:blocks && npm run generate:sections && npm run generate:loaders && npm run generate:schema && tsr generate && vite build --config parity/vite.config.ts && touch dist/server/.parity-build",
     "parity:record": "node parity/run.mjs record",
     "parity:compare": "node parity/run.mjs compare",
-    "parity:probe": "node parity/run.mjs probe"
+    "parity:probe": "node parity/run.mjs probe",
+    "predev": "deco schema && deco content",
+    "prebuild": "deco schema && deco content && deco check"
   },
   "author": "deco.cx",
   "license": "MIT",
