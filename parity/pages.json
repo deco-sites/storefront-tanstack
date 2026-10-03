@@ -40,7 +40,8 @@
     "$comment": "The lilstts SDK script is fulfilled with a recorder (parity/lib/capture.mjs ANALYTICS_STUB) exposing window.stonks.{view,event}; every call lands in the snapshot's `analytics` array. Collector beacons stay blocked.",
     "script": "**/s.lilstts.com/deco.js"
   },
-  "ignoreHeaders": [],
+  "$ignoreHeadersComment": "x-powered-by carried the framework version (deco@7.x); the v8 site sends none. Approved difference: headers that reveal the framework version are ignored.",
+  "ignoreHeaders": ["x-powered-by"],
   "pages": [
     {
       "id": "home",

@@ -24,7 +24,21 @@ function lineDiff(a, b) {
   return out.join("\n");
 }
 
-export function compareCase({ id, fileId, error, baseDir, actualDir, outRoot }) {
+/**
+ * A snapshot as text, without the headers `ignoreHeaders` lists. The baseline was recorded before a
+ * header was approved as ignorable, so it's dropped from both sides here rather than re-recorded.
+ */
+function snapshotText(file, ignoreHeaders) {
+  const text = fs.readFileSync(file, "utf8");
+  if (!ignoreHeaders?.length) return text;
+  const snap = JSON.parse(text);
+  for (const s of [snap, ...(Array.isArray(snap.steps) ? snap.steps : [])]) {
+    if (s && s.headers && typeof s.headers === "object") for (const h of ignoreHeaders) delete s.headers[h.toLowerCase()];
+  }
+  return JSON.stringify(snap, null, 2) + (text.endsWith("\n") ? "\n" : "");
+}
+
+export function compareCase({ id, fileId, error, baseDir, actualDir, outRoot, ignoreHeaders }) {
   const problems = [];
   const diffDir = path.join(outRoot, "diff");
   if (error) problems.push(`capture error: ${error}`);
@@ -56,8 +70,8 @@ export function compareCase({ id, fileId, error, baseDir, actualDir, outRoot }) 
   if (!fs.existsSync(sb)) problems.push("snapshot: not in baseline");
   else if (!fs.existsSync(sa)) { if (!error) problems.push("snapshot: missing in actual"); }
   else {
-    const tb = fs.readFileSync(sb, "utf8");
-    const ta = fs.readFileSync(sa, "utf8");
+    const tb = snapshotText(sb, ignoreHeaders);
+    const ta = snapshotText(sa, ignoreHeaders);
     if (tb !== ta) {
       fs.mkdirSync(diffDir, { recursive: true });
       fs.writeFileSync(path.join(diffDir, `${fileId}.snapshot.diff`), lineDiff(tb, ta) + "\n");

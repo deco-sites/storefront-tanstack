@@ -83,7 +83,7 @@ The v8 site must:
 
 Then run `npm run parity:compare -- --target <url>`. While compare runs, it serves the replay proxy on port 4280.
 
-Expected, approved differences go through D9/D13 and are not baked into the harness. For example, the `x-powered-by: deco@7.x` header will differ. Add such headers to `ignoreHeaders` only once they are approved.
+Expected, approved differences go through D9/D13 and are not baked into the harness. For example, the `x-powered-by: deco@7.x` header will differ. Add such headers to `ignoreHeaders` only once they are approved. Compare drops `ignoreHeaders` from the baseline snapshot as well as from the new capture, so approving a header needs no re-record. `x-powered-by` is approved (it carried the framework version).
 
 ## Tailwind and the harness
 
