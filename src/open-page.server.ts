@@ -11,8 +11,8 @@ import { withPage } from "./request-state.server";
 import { detectDevice } from "./sdk/device";
 import { type CacheProfileName, detectCacheProfile } from "./server/cache-profiles";
 
-/** v7's Lazy wrapper, under its short name and its v7 name (.deco/index.ts). */
-const LAZY_TYPES = new Set(["lazy-section", "website/sections/Rendering/Lazy.tsx"]);
+/** v7's Lazy wrapper, under its v7 name (.deco/index.ts). */
+const LAZY_TYPES = new Set(["website/sections/Rendering/Lazy.tsx"]);
 
 /** What the page knows about a block before it resolves: enough to show the right placeholder. */
 export interface BlockHint {
@@ -38,6 +38,8 @@ function hintOf(stored: unknown): BlockHint {
  */
 export async function openPage(href: string, request: Request, { clientNavigation = false } = {}) {
   const url = new URL(href, request.url);
+  // Blocks read the page URL (pageState().url) and its request: it must stay on this site's origin.
+  if (url.origin !== new URL(request.url).origin) throw notFound();
   const c = client(request);
   const [pages, pagesError] = await c.list<StoredPage>("page");
   if (pagesError) throw pagesError;

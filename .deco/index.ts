@@ -1,7 +1,9 @@
 // The block map (/next/blocks#the-block-map). Started by @decocms/blocks-migrate from the v7 site and
-// finished by hand: each block has a short name plus an alias under every v7 name saved content
-// stores (/next/renames-and-migrations#rename-a-type-with-an-alias). Sections return descriptors
-// (/next/rendering), which src/views.ts maps to components.
+// finished by hand. Each block is registered under the v7 name saved content stores, as it is
+// (/next/renames-and-migrations#checklist-for-migrating-existing-content: "register them as they
+// are"), and under no second name: the site editor lists every key of this map, so a short name
+// next to each v7 name showed every section twice in its pickers, where v7's editor showed it once.
+// Sections return descriptors (/next/rendering), which src/views.ts maps to components.
 import type { Blocks, Lazy, Route } from "@decocms/blocks";
 import type { BlockDescriptor, PageSeo } from "../src/model";
 import type { Suggestion } from "../src/vendor/commerce/types";
@@ -135,89 +137,51 @@ export default {
   page: (input: StorePage) => input,
 
   // SEO
-  seo,
   "website/sections/Seo/SeoV2.tsx": seo,
-  "seo-listing-page": seoListingPage,
   "commerce/sections/Seo/SeoPLPV2.tsx": seoListingPage,
-  "seo-details-page": seoDetailsPage,
   "commerce/sections/Seo/SeoPDPV2.tsx": seoDetailsPage,
 
   // Commerce data, over the Shopify upstream client
-  "shopify-product-details-page": shopifyProductDetailsPage,
   "shopify/loaders/ProductDetailsPage.ts": shopifyProductDetailsPage,
-  "shopify-product-list": shopifyProductList,
   "shopify/loaders/ProductList.ts": shopifyProductList,
-  "shopify-product-listing-page": shopifyProductListingPage,
   "shopify/loaders/ProductListingPage.ts": shopifyProductListingPage,
-  "listing-page-extensions": listingPageExtensions,
   "commerce/loaders/product/extensions/listingPage.ts": listingPageExtensions,
-  "details-page-extensions": detailsPageExtensions,
   "commerce/loaders/product/extensions/detailsPage.ts": detailsPageExtensions,
-  "google-fonts": websiteGoogleFonts,
   "website/loaders/fonts/googleFonts.ts": websiteGoogleFonts,
   resolved,
 
   // Matchers
-  device,
   "website/matchers/device.ts": device,
-  random,
   "website/matchers/random.ts": random,
 
   // v7's Lazy wrapper
-  "lazy-section": lazySection,
   "website/sections/Rendering/Lazy.tsx": lazySection,
 
   // Sections
-  animation,
   "site/sections/Animation/Animation.tsx": animation,
-  "category-banner": categoryBanner,
   "site/sections/Category/CategoryBanner.tsx": categoryBanner,
-  "category-grid": categoryGrid,
   "site/sections/Category/CategoryGrid.tsx": categoryGrid,
-  faq,
   "site/sections/Content/Faq.tsx": faq,
-  hero,
   "site/sections/Content/Hero.tsx": hero,
-  intro,
   "site/sections/Content/Intro.tsx": intro,
-  logos,
   "site/sections/Content/Logos.tsx": logos,
-  footer,
   "site/sections/Footer/Footer.tsx": footer,
-  header,
   "site/sections/Header/Header.tsx": header,
-  banner,
   "site/sections/Images/Banner.tsx": banner,
-  carousel,
   "site/sections/Images/Carousel.tsx": carousel,
-  "image-gallery": imageGallery,
   "site/sections/Images/ImageGallery.tsx": imageGallery,
-  "shoppable-banner": shoppableBanner,
   "site/sections/Images/ShoppableBanner.tsx": shoppableBanner,
-  "link-tree": linkTree,
   "site/sections/Links/LinkTree.tsx": linkTree,
-  "campaign-timer": campaignTimer,
   "site/sections/Miscellaneous/CampaignTimer.tsx": campaignTimer,
-  "cookie-consent": cookieConsent,
   "site/sections/Miscellaneous/CookieConsent.tsx": cookieConsent,
-  newsletter,
   "site/sections/Newsletter/Newsletter.tsx": newsletter,
-  "product-details": productDetails,
   "site/sections/Product/ProductDetails.tsx": productDetails,
-  "product-shelf": productShelf,
   "site/sections/Product/ProductShelf.tsx": productShelf,
-  "product-shelf-tabbed": productShelfTabbed,
   "site/sections/Product/ProductShelfTabbed.tsx": productShelfTabbed,
-  "search-result": searchResult,
   "site/sections/Product/SearchResult.tsx": searchResult,
-  "shelf-with-image": shelfWithImage,
   "site/sections/Product/ShelfWithImage.tsx": shelfWithImage,
-  wishlist,
   "site/sections/Product/Wishlist.tsx": wishlist,
-  "instagram-posts": instagramPosts,
   "site/sections/Social/InstagramPosts.tsx": instagramPosts,
-  "whats-app": whatsApp,
   "site/sections/Social/WhatsApp.tsx": whatsApp,
-  theme,
   "site/sections/Theme/Theme.tsx": theme,
 } satisfies Blocks;
