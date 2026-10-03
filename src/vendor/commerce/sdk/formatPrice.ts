@@ -3,25 +3,25 @@
 const formatters = new Map<string, Intl.NumberFormat>();
 
 const formatter = (currency: string, locale: string) => {
-	const key = `${currency}::${locale}`;
+  const key = `${currency}::${locale}`;
 
-	if (!formatters.has(key)) {
-		formatters.set(
-			key,
-			new Intl.NumberFormat(locale, {
-				style: "currency",
-				currency,
-			}),
-		);
-	}
+  if (!formatters.has(key)) {
+    formatters.set(
+      key,
+      new Intl.NumberFormat(locale, {
+        style: "currency",
+        currency,
+      }),
+    );
+  }
 
-	return formatters.get(key)!;
+  return formatters.get(key)!;
 };
 
 export const formatPrice = (
-	price: number | undefined | null,
-	currency = "BRL",
-	locale = "pt-BR",
+  price: number | undefined | null,
+  currency = "BRL",
+  locale = "pt-BR",
 ) => (price != null && Number.isFinite(price) ? formatter(currency, locale).format(price) : null);
 
 /**
@@ -32,15 +32,15 @@ export const formatPrice = (
  * so this never crashes a filter UI on a bad facet value.
  */
 export const formatPriceRange = (
-	value: string,
-	currency = "BRL",
-	locale = "pt-BR",
-	separator = " - ",
+  value: string,
+  currency = "BRL",
+  locale = "pt-BR",
+  separator = " - ",
 ): string => {
-	if (typeof value !== "string" || !value.includes(":")) return value;
-	const [rawMin, rawMax] = value.split(":");
-	const min = formatPrice(Number(rawMin), currency, locale);
-	const max = formatPrice(Number(rawMax), currency, locale);
-	if (min == null || max == null) return value;
-	return `${min}${separator}${max}`;
+  if (typeof value !== "string" || !value.includes(":")) return value;
+  const [rawMin, rawMax] = value.split(":");
+  const min = formatPrice(Number(rawMin), currency, locale);
+  const max = formatPrice(Number(rawMax), currency, locale);
+  if (min == null || max == null) return value;
+  return `${min}${separator}${max}`;
 };

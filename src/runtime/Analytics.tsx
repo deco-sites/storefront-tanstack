@@ -62,7 +62,9 @@ function init(): void {
 
   whenReady(
     () =>
-      typeof window.stonks?.view === "function" ? window.stonks.view.bind(window.stonks) : undefined,
+      typeof window.stonks?.view === "function"
+        ? window.stonks.view.bind(window.stonks)
+        : undefined,
     (view) => {
       view({});
       const original = history.pushState;

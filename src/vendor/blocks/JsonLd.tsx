@@ -41,73 +41,73 @@
 // -------------------------------------------------------------------------
 
 interface JsonLdOffer {
-	price?: number;
-	priceCurrency?: string;
-	availability?: string;
-	seller?: string;
-	priceValidUntil?: string;
+  price?: number;
+  priceCurrency?: string;
+  availability?: string;
+  seller?: string;
+  priceValidUntil?: string;
 }
 
 interface JsonLdAggregateOffer {
-	"@type"?: string;
-	lowPrice?: number;
-	priceCurrency?: string;
+  "@type"?: string;
+  lowPrice?: number;
+  priceCurrency?: string;
 }
 
 interface JsonLdPriceSpecification {
-	priceType?: string;
-	price?: number;
+  priceType?: string;
+  price?: number;
 }
 
 interface JsonLdAggregateRating {
-	ratingValue?: number;
-	reviewCount?: number;
-	ratingCount?: number;
-	bestRating?: number;
-	worstRating?: number;
+  ratingValue?: number;
+  reviewCount?: number;
+  ratingCount?: number;
+  bestRating?: number;
+  worstRating?: number;
 }
 
 interface JsonLdImage {
-	url?: string;
+  url?: string;
 }
 
 interface JsonLdBrand {
-	name?: string;
+  name?: string;
 }
 
 export interface JsonLdProduct {
-	name?: string;
-	description?: string;
-	url?: string;
-	sku?: string;
-	productID?: string;
-	gtin?: string;
-	brand?: JsonLdBrand | null;
-	image?: JsonLdImage[] | null;
-	offers?: JsonLdOffer[] | JsonLdAggregateOffer;
-	aggregateRating?: JsonLdAggregateRating;
+  name?: string;
+  description?: string;
+  url?: string;
+  sku?: string;
+  productID?: string;
+  gtin?: string;
+  brand?: JsonLdBrand | null;
+  image?: JsonLdImage[] | null;
+  offers?: JsonLdOffer[] | JsonLdAggregateOffer;
+  aggregateRating?: JsonLdAggregateRating;
 }
 
 interface JsonLdSeo {
-	canonical?: string;
-	title?: string;
-	description?: string;
+  canonical?: string;
+  title?: string;
+  description?: string;
 }
 
 export interface JsonLdProductListingPage {
-	products?: JsonLdProduct[];
-	seo?: JsonLdSeo | null;
+  products?: JsonLdProduct[];
+  seo?: JsonLdSeo | null;
 }
 
 interface JsonLdListItem {
-	position?: number;
-	name?: string;
-	item?: string;
-	url?: string;
+  position?: number;
+  name?: string;
+  item?: string;
+  url?: string;
 }
 
 export interface JsonLdBreadcrumbList {
-	itemListElement?: JsonLdListItem[];
+  itemListElement?: JsonLdListItem[];
 }
 
 // -------------------------------------------------------------------------
@@ -115,9 +115,9 @@ export interface JsonLdBreadcrumbList {
 // -------------------------------------------------------------------------
 
 function JsonLdScript({ data }: { data: unknown }) {
-	return (
-		<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />
-	);
+  return (
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />
+  );
 }
 
 // -------------------------------------------------------------------------
@@ -125,96 +125,96 @@ function JsonLdScript({ data }: { data: unknown }) {
 // -------------------------------------------------------------------------
 
 export interface ProductJsonLdProps {
-	product: JsonLdProduct;
-	/** Override the canonical URL. Defaults to product.url. */
-	url?: string;
+  product: JsonLdProduct;
+  /** Override the canonical URL. Defaults to product.url. */
+  url?: string;
 }
 
 function getBestOffer(offers: JsonLdOffer[] | JsonLdAggregateOffer | undefined): {
-	price?: number;
-	priceCurrency?: string;
-	availability?: string;
-	seller?: string;
-	priceValidUntil?: string;
+  price?: number;
+  priceCurrency?: string;
+  availability?: string;
+  seller?: string;
+  priceValidUntil?: string;
 } {
-	if (!offers) return {};
+  if (!offers) return {};
 
-	if ("@type" in offers && offers["@type"] === "AggregateOffer") {
-		const agg = offers as JsonLdAggregateOffer;
-		return {
-			price: agg.lowPrice,
-			priceCurrency: agg.priceCurrency,
-		};
-	}
+  if ("@type" in offers && offers["@type"] === "AggregateOffer") {
+    const agg = offers as JsonLdAggregateOffer;
+    return {
+      price: agg.lowPrice,
+      priceCurrency: agg.priceCurrency,
+    };
+  }
 
-	if (Array.isArray(offers) && offers.length > 0) {
-		const best = offers.reduce((a, b) => {
-			const ap = a.price ?? Infinity;
-			const bp = b.price ?? Infinity;
-			return ap <= bp ? a : b;
-		});
-		return {
-			price: best.price,
-			priceCurrency: best.priceCurrency,
-			availability: best.availability,
-			seller: best.seller,
-			priceValidUntil: best.priceValidUntil,
-		};
-	}
+  if (Array.isArray(offers) && offers.length > 0) {
+    const best = offers.reduce((a, b) => {
+      const ap = a.price ?? Infinity;
+      const bp = b.price ?? Infinity;
+      return ap <= bp ? a : b;
+    });
+    return {
+      price: best.price,
+      priceCurrency: best.priceCurrency,
+      availability: best.availability,
+      seller: best.seller,
+      priceValidUntil: best.priceValidUntil,
+    };
+  }
 
-	return {};
+  return {};
 }
 
 function _getListPrice(priceSpec: JsonLdPriceSpecification[] | undefined): number | undefined {
-	if (!priceSpec) return undefined;
-	const list = priceSpec.find(
-		(p) =>
-			p.priceType === "https://schema.org/ListPrice" || p.priceType === "https://schema.org/SRP",
-	);
-	return list?.price;
+  if (!priceSpec) return undefined;
+  const list = priceSpec.find(
+    (p) =>
+      p.priceType === "https://schema.org/ListPrice" || p.priceType === "https://schema.org/SRP",
+  );
+  return list?.price;
 }
 
 export function ProductJsonLd({ product, url }: ProductJsonLdProps) {
-	const offer = getBestOffer(product.offers);
-	const images = product.image?.map((img) => img.url).filter(Boolean) ?? [];
-	const rating = product.aggregateRating;
+  const offer = getBestOffer(product.offers);
+  const images = product.image?.map((img) => img.url).filter(Boolean) ?? [];
+  const rating = product.aggregateRating;
 
-	const data: Record<string, unknown> = {
-		"@context": "https://schema.org",
-		"@type": "Product",
-		name: product.name,
-		description: product.description,
-		image: images.length === 1 ? images[0] : images,
-		url: url ?? product.url,
-		sku: product.sku,
-		productID: product.productID,
-		brand: product.brand ? { "@type": "Brand", name: product.brand.name } : undefined,
-		gtin: product.gtin,
-	};
+  const data: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    description: product.description,
+    image: images.length === 1 ? images[0] : images,
+    url: url ?? product.url,
+    sku: product.sku,
+    productID: product.productID,
+    brand: product.brand ? { "@type": "Brand", name: product.brand.name } : undefined,
+    gtin: product.gtin,
+  };
 
-	if (offer.price != null) {
-		data.offers = {
-			"@type": "Offer",
-			price: offer.price,
-			priceCurrency: offer.priceCurrency ?? "BRL",
-			availability: offer.availability ?? "https://schema.org/InStock",
-			seller: offer.seller ? { "@type": "Organization", name: offer.seller } : undefined,
-			priceValidUntil: offer.priceValidUntil,
-			url: url ?? product.url,
-		};
-	}
+  if (offer.price != null) {
+    data.offers = {
+      "@type": "Offer",
+      price: offer.price,
+      priceCurrency: offer.priceCurrency ?? "BRL",
+      availability: offer.availability ?? "https://schema.org/InStock",
+      seller: offer.seller ? { "@type": "Organization", name: offer.seller } : undefined,
+      priceValidUntil: offer.priceValidUntil,
+      url: url ?? product.url,
+    };
+  }
 
-	if (rating?.ratingValue) {
-		data.aggregateRating = {
-			"@type": "AggregateRating",
-			ratingValue: rating.ratingValue,
-			reviewCount: rating.reviewCount ?? rating.ratingCount ?? 0,
-			bestRating: rating.bestRating ?? 5,
-			worstRating: rating.worstRating ?? 1,
-		};
-	}
+  if (rating?.ratingValue) {
+    data.aggregateRating = {
+      "@type": "AggregateRating",
+      ratingValue: rating.ratingValue,
+      reviewCount: rating.reviewCount ?? rating.ratingCount ?? 0,
+      bestRating: rating.bestRating ?? 5,
+      worstRating: rating.worstRating ?? 1,
+    };
+  }
 
-	return <JsonLdScript data={data} />;
+  return <JsonLdScript data={data} />;
 }
 
 // -------------------------------------------------------------------------
@@ -222,46 +222,46 @@ export function ProductJsonLd({ product, url }: ProductJsonLdProps) {
 // -------------------------------------------------------------------------
 
 export interface PLPJsonLdProps {
-	page: JsonLdProductListingPage;
-	/** Override the canonical URL. */
-	url?: string;
+  page: JsonLdProductListingPage;
+  /** Override the canonical URL. */
+  url?: string;
 }
 
 export function PLPJsonLd({ page, url }: PLPJsonLdProps) {
-	const items = (page.products ?? []).map((product, index) => {
-		const offer = getBestOffer(product.offers);
-		return {
-			"@type": "ListItem" as const,
-			position: index + 1,
-			item: {
-				"@type": "Product" as const,
-				name: product.name,
-				url: product.url,
-				image: product.image?.[0]?.url,
-				offers:
-					offer.price != null
-						? {
-								"@type": "Offer" as const,
-								price: offer.price,
-								priceCurrency: offer.priceCurrency ?? "BRL",
-								availability: offer.availability ?? "https://schema.org/InStock",
-							}
-						: undefined,
-			},
-		};
-	});
+  const items = (page.products ?? []).map((product, index) => {
+    const offer = getBestOffer(product.offers);
+    return {
+      "@type": "ListItem" as const,
+      position: index + 1,
+      item: {
+        "@type": "Product" as const,
+        name: product.name,
+        url: product.url,
+        image: product.image?.[0]?.url,
+        offers:
+          offer.price != null
+            ? {
+                "@type": "Offer" as const,
+                price: offer.price,
+                priceCurrency: offer.priceCurrency ?? "BRL",
+                availability: offer.availability ?? "https://schema.org/InStock",
+              }
+            : undefined,
+      },
+    };
+  });
 
-	const data = {
-		"@context": "https://schema.org",
-		"@type": "ItemList",
-		url: url ?? page.seo?.canonical,
-		name: page.seo?.title,
-		description: page.seo?.description,
-		numberOfItems: page.products?.length ?? 0,
-		itemListElement: items,
-	};
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    url: url ?? page.seo?.canonical,
+    name: page.seo?.title,
+    description: page.seo?.description,
+    numberOfItems: page.products?.length ?? 0,
+    itemListElement: items,
+  };
 
-	return <JsonLdScript data={data} />;
+  return <JsonLdScript data={data} />;
 }
 
 // -------------------------------------------------------------------------
@@ -269,27 +269,27 @@ export function PLPJsonLd({ page, url }: PLPJsonLdProps) {
 // -------------------------------------------------------------------------
 
 export interface BreadcrumbJsonLdProps {
-	breadcrumb: JsonLdBreadcrumbList;
+  breadcrumb: JsonLdBreadcrumbList;
 }
 
 export function BreadcrumbJsonLd({ breadcrumb }: BreadcrumbJsonLdProps) {
-	const items = (breadcrumb.itemListElement ?? []).map((item, index) => {
-		return {
-			"@type": "ListItem" as const,
-			position: item.position ?? index + 1,
-			name: item.name,
-			item: item.item ?? item.url,
-		};
-	});
+  const items = (breadcrumb.itemListElement ?? []).map((item, index) => {
+    return {
+      "@type": "ListItem" as const,
+      position: item.position ?? index + 1,
+      name: item.name,
+      item: item.item ?? item.url,
+    };
+  });
 
-	const data = {
-		"@context": "https://schema.org",
-		"@type": "BreadcrumbList",
-		itemListElement: items,
-		numberOfItems: items.length,
-	};
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items,
+    numberOfItems: items.length,
+  };
 
-	return <JsonLdScript data={data} />;
+  return <JsonLdScript data={data} />;
 }
 
 // -------------------------------------------------------------------------
@@ -297,13 +297,13 @@ export function BreadcrumbJsonLd({ breadcrumb }: BreadcrumbJsonLdProps) {
 // -------------------------------------------------------------------------
 
 export interface SeoMetaProps {
-	title?: string;
-	description?: string;
-	canonical?: string;
-	image?: string;
-	noIndex?: boolean;
-	type?: "website" | "article" | "product";
-	siteName?: string;
+  title?: string;
+  description?: string;
+  canonical?: string;
+  image?: string;
+  noIndex?: boolean;
+  type?: "website" | "article" | "product";
+  siteName?: string;
 }
 
 /**
@@ -314,41 +314,41 @@ export interface SeoMetaProps {
  * by React's built-in behavior with TanStack Start).
  */
 export function seoMetaTags(props: SeoMetaProps): Array<Record<string, string>> {
-	const tags: Array<Record<string, string>> = [];
+  const tags: Array<Record<string, string>> = [];
 
-	if (props.title) {
-		tags.push({ title: props.title });
-		tags.push({ property: "og:title", content: props.title });
-		tags.push({ name: "twitter:title", content: props.title });
-	}
+  if (props.title) {
+    tags.push({ title: props.title });
+    tags.push({ property: "og:title", content: props.title });
+    tags.push({ name: "twitter:title", content: props.title });
+  }
 
-	if (props.description) {
-		tags.push({ name: "description", content: props.description });
-		tags.push({ property: "og:description", content: props.description });
-		tags.push({ name: "twitter:description", content: props.description });
-	}
+  if (props.description) {
+    tags.push({ name: "description", content: props.description });
+    tags.push({ property: "og:description", content: props.description });
+    tags.push({ name: "twitter:description", content: props.description });
+  }
 
-	if (props.canonical) {
-		tags.push({ property: "og:url", content: props.canonical });
-	}
+  if (props.canonical) {
+    tags.push({ property: "og:url", content: props.canonical });
+  }
 
-	if (props.image) {
-		tags.push({ property: "og:image", content: props.image });
-		tags.push({ name: "twitter:image", content: props.image });
-		tags.push({ name: "twitter:card", content: "summary_large_image" });
-	}
+  if (props.image) {
+    tags.push({ property: "og:image", content: props.image });
+    tags.push({ name: "twitter:image", content: props.image });
+    tags.push({ name: "twitter:card", content: "summary_large_image" });
+  }
 
-	if (props.type) {
-		tags.push({ property: "og:type", content: props.type });
-	}
+  if (props.type) {
+    tags.push({ property: "og:type", content: props.type });
+  }
 
-	if (props.siteName) {
-		tags.push({ property: "og:site_name", content: props.siteName });
-	}
+  if (props.siteName) {
+    tags.push({ property: "og:site_name", content: props.siteName });
+  }
 
-	if (props.noIndex) {
-		tags.push({ name: "robots", content: "noindex, nofollow" });
-	}
+  if (props.noIndex) {
+    tags.push({ name: "robots", content: "noindex, nofollow" });
+  }
 
-	return tags;
+  return tags;
 }
