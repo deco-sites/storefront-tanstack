@@ -14,9 +14,8 @@ import content from "../.deco/blocks.gen";
 const site = env.DECO_SITE as string | undefined;
 const token = env.DECO_SITE_TOKEN as string | undefined;
 
-export const cms = createCMS({
+const options = {
   blocks,
-  content,
   site,
   token,
   // The hosted collector when the site is connected; otherwise the standard OTEL_EXPORTER_OTLP_*
@@ -27,7 +26,19 @@ export const cms = createCMS({
     : site && token
       ? { telemetry: { site, token } }
       : {}),
-});
+};
+
+export const cms = createCMS({ ...options, content });
+
+// In `vite dev`, `deco serve` (the site editor's local server) rewrites the content module on every
+// save. The new content goes into the same CMS (createCMS adopts it for the same content root), so
+// this module stays as it is: re-running it made the first request after each save fail with
+// "client is not a function" from a server function still holding the old module.
+if (import.meta.hot) {
+  import.meta.hot.accept("../.deco/blocks.gen", (next) => {
+    if (next) createCMS({ ...options, content: next.default });
+  });
+}
 
 /** The client for this request: the draft a `?__draft=` link or the draft cookie points at, or the release. */
 export const client = (request: Request) => {

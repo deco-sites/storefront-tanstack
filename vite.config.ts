@@ -44,6 +44,18 @@ export default defineConfig({
       },
     },
     {
+      // `deco serve` (the site editor's local server) rewrites .deco/blocks.gen.ts on every save.
+      // Only the worker imports it, so Vite swaps it on the server and leaves open pages as they
+      // were: reload them, so the editor's preview (and any tab) shows the saved content.
+      name: "site-content-reload",
+      apply: "serve",
+      hotUpdate({ file, server }) {
+        if (this.environment.name !== "ssr") return;
+        if (path.resolve(file) !== path.resolve(__dirname, ".deco/blocks.gen.ts")) return;
+        server.environments.client.hot.send({ type: "full-reload" });
+      },
+    },
+    {
       name: "site-manual-chunks",
       config(_cfg, { command }) {
         if (command !== "build") return;

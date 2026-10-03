@@ -13,7 +13,10 @@
  *   as `loadPage`'s does); every other one (cart, user, wishlist, addresses, the layout) is private;
  * - v7's admin endpoints (`/deco/*`, `/live/*`, `/.decofile`) don't exist any more and answer 404;
  * - fingerprinted assets are served as immutable;
- * - `POST /_cache/purge` with `Authorization: Bearer $PURGE_TOKEN` drops paths from the cache.
+ * - `POST /_cache/purge` with `Authorization: Bearer $PURGE_TOKEN` drops paths from the cache;
+ * - a page loaded into a frame (`Sec-Fetch-Dest: iframe`) may be embedded by deco Studio — the site
+ *   editor's preview — through `Content-Security-Policy: frame-ancestors`, and by nothing else;
+ * - `vite dev` skips the edge cache, so a content edit shows on the next load.
  */
 import { draftPointer } from "@decocms/blocks";
 import {
@@ -62,6 +65,20 @@ const SECURITY_HEADERS: Record<string, string> = {
   "Strict-Transport-Security": "max-age=63072000; includeSubDomains; preload",
   "Cross-Origin-Opener-Policy": "same-origin-allow-popups",
 };
+
+/**
+ * Who may frame the site: deco Studio, whose site editor previews the storefront in an iframe (v7's
+ * `DECO_ADMIN_FRAME_ANCESTORS`), plus a Studio running on this machine in `vite dev`. Sent only to
+ * frame loads, in place of `X-Frame-Options: SAMEORIGIN`, which would refuse Studio's origin; a
+ * top-level page keeps v7's headers. A browser caches a framed page apart from the same page opened
+ * directly (its HTTP cache is keyed by the top-level site), so the two never swap headers.
+ */
+const FRAME_ANCESTORS = [
+  "'self'",
+  "https://studio.decocms.com",
+  "https://*.deco.studio",
+  ...(import.meta.env.DEV ? ["http://localhost:*", "http://127.0.0.1:*"] : []),
+];
 
 const PRIVATE_NO_CACHE = "private, no-cache, no-store, must-revalidate";
 const BYPASS_PATHS = ["/_build"];
@@ -285,6 +302,7 @@ export function withEdgeCache(serverEntry: Handler, options: EdgeCacheOptions): 
 
     const profile = profileOf(url);
     const cacheable =
+      !import.meta.env.DEV &&
       request.method === "GET" &&
       !BYPASS_PATHS.some((p) => url.pathname.startsWith(p)) &&
       !isDraft(request, url);
@@ -460,6 +478,11 @@ export function withEdgeCache(serverEntry: Handler, options: EdgeCacheOptions): 
       const out = new Response(response.body, response);
       for (const [k, v] of Object.entries(securityHeaders)) {
         if (!out.headers.has(k)) out.headers.set(k, v);
+      }
+      const dest = request.headers.get("sec-fetch-dest");
+      if (dest === "iframe" || dest === "frame") {
+        out.headers.delete("X-Frame-Options");
+        out.headers.set("Content-Security-Policy", `frame-ancestors ${FRAME_ANCESTORS.join(" ")}`);
       }
       return out;
     },
