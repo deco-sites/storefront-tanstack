@@ -83,7 +83,12 @@ The v8 site must:
 
 Then run `npm run parity:compare -- --target <url>`. While compare runs, it serves the replay proxy on port 4280.
 
-Expected, approved differences go through D9/D13 and are not baked into the harness. For example, the `x-powered-by: deco@7.x` header will differ. Add such headers to `ignoreHeaders` only once they are approved. Compare drops `ignoreHeaders` from the baseline snapshot as well as from the new capture, so approving a header needs no re-record. `x-powered-by` is approved (it carried the framework version).
+Expected, approved differences go through D9/D13. Once approved, they are encoded in `pages.json`, never by editing the baseline:
+
+- `ignoreHeaders` drops a header from both snapshots. `x-powered-by` is approved (it carried the framework version).
+- `approvedDifferences` holds one rule per case list and snapshot field. Each rule names the `cases`, the field `path` (dotted; `[*]` pairs up array elements, e.g. `analytics.events[*].props.items`), and exactly what the new value must be: `actual` (an exact value, `"$absent"` for a dropped field), `actualSameAs` (equal to another field of the same capture), `addsOnly` (an array that is the baseline plus exactly these entries) or `mask` (a string equal to the baseline once the regex matches are blanked). `baseline` optionally pins the old value as well, and `approval` cites the sign-off. Where the capture matches, compare resets that field to the baseline value; any other change to the field still fails. The summary lists the rules applied per case.
+
+Both are applied to the baseline and the new capture at compare time, so approving a difference needs no re-record.
 
 ## Tailwind and the harness
 

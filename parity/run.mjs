@@ -196,7 +196,7 @@ async function compare() {
     log(`[compare] target ${baseURL}, ${cases.length} cases -> ${path.relative(ROOT, outRoot)}`);
     const results = await capturePass({ cases, baseURL, mode: "replay", upstream, outDir: actualDir, harDir: path.join(BASE, "har") });
     const report = [];
-    for (const r of results) report.push(compareCase({ id: r.id, fileId: fileId(r.id), error: r.error, baseDir: BASE, actualDir, outRoot, ignoreHeaders: manifest.ignoreHeaders }));
+    for (const r of results) report.push(compareCase({ id: r.id, fileId: fileId(r.id), error: r.error, baseDir: BASE, actualDir, outRoot, ignoreHeaders: manifest.ignoreHeaders, approvedDifferences: manifest.approvedDifferences }));
     const summary = {
       label,
       target: baseURL,
@@ -216,7 +216,7 @@ async function compare() {
       ``,
       `| case | result | details |`,
       `|---|---|---|`,
-      ...report.map((r) => `| ${r.id} | ${r.ok ? "ok" : "**DIFF**"} | ${r.problems.join("; ").replace(/\|/g, "\\|")} |`),
+      ...report.map((r) => `| ${r.id} | ${r.ok ? "ok" : "**DIFF**"} | ${[...r.problems, ...(r.approved?.length ? [`approved: ${r.approved.join(", ")}`] : [])].join("; ").replace(/\|/g, "\\|")} |`),
       ``,
     ].join("\n");
     fs.writeFileSync(path.join(outRoot, "summary.md"), md);
