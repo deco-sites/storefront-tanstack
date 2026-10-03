@@ -8,7 +8,15 @@ import { z } from "zod";
 import { openPage } from "./open-page.server";
 
 export const loadPage = createServerFn({ method: "GET" })
-  .inputValidator(z.object({ href: z.string().startsWith("/") }))
+  // A path on this site: `//host/x` is a protocol-relative URL that would move the page to another origin.
+  .inputValidator(
+    z.object({
+      href: z
+        .string()
+        .startsWith("/")
+        .refine((href) => !href.startsWith("//") && !href.startsWith("/\\"), "not a local path"),
+    }),
+  )
   .handler(async ({ data }) => {
     const request = getRequest();
     const clientNavigation = new URL(request.url).pathname.startsWith("/_serverFn/");

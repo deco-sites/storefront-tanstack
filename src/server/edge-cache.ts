@@ -7,10 +7,15 @@
  * - a page's profile (src/server/cache-profiles.ts) sets its Cache-Control, and public pages are kept
  *   in the Cache API under a key split by device, login state and region (`buildSegment`), with
  *   stale-while-revalidate and stale-if-error;
- * - responses that set a private cookie, logged-in visitors, drafts and non-GET requests bypass it;
+ * - responses that set a private cookie or say `Cache-Control: private`/`no-store`, logged-in
+ *   visitors, drafts and non-GET requests bypass it;
+ * - a GET server function is cached only when it loads a page (its payload carries the page path,
+ *   as `loadPage`'s does); every other one (cart, user, wishlist, addresses, the layout) is private;
+ * - v7's admin endpoints (`/deco/*`, `/live/*`, `/.decofile`) don't exist any more and answer 404;
  * - fingerprinted assets are served as immutable;
  * - `POST /_cache/purge` with `Authorization: Bearer $PURGE_TOKEN` drops paths from the cache.
  */
+import { draftPointer } from "@decocms/blocks";
 import {
   type CacheProfileName,
   cacheHeaders,
@@ -59,7 +64,13 @@ const SECURITY_HEADERS: Record<string, string> = {
 };
 
 const PRIVATE_NO_CACHE = "private, no-cache, no-store, must-revalidate";
-const BYPASS_PATHS = ["/_build", "/deco/", "/live/", "/.decofile"];
+const BYPASS_PATHS = ["/_build"];
+/**
+ * v7's admin protocol paths. The next major serves no admin endpoints from the site (the hosted CMS
+ * reads content itself, /next/hosted), so they're answered 404 here rather than falling through to the
+ * catch-all page route as a cacheable category page.
+ */
+const REMOVED_ADMIN_PATHS = ["/deco/", "/live/", "/.decofile"];
 const STATIC_PATHS = ["/fonts/"];
 const FINGERPRINTED_ASSET_RE = /(?:\/_build)?\/assets\/.*-[a-zA-Z0-9_-]{8,}\.\w+$/;
 /** Tracking params that never change a page, left out of its cache key (v7's list). */
@@ -141,11 +152,18 @@ function dedupeSetCookies(response: Response): void {
   for (const c of last.values()) response.headers.append("set-cookie", c);
 }
 
+/** A draft preview (`?__draft=` or the draft cookie, read the framework's way): never cached. */
 function isDraft(request: Request, url: URL): boolean {
-  return (
-    url.searchParams.has("__draft") ||
-    /(?:^|;\s*)deco-draft=/.test(request.headers.get("cookie") ?? "")
-  );
+  return url.searchParams.has("__draft") || draftPointer(request) !== null;
+}
+
+function isServerFn(url: URL): boolean {
+  return url.pathname.startsWith("/_serverFn/") || url.pathname.startsWith("/_server/");
+}
+
+/** The origin said the response is per-visitor. */
+function isPrivateResponse(response: Response): boolean {
+  return /\b(private|no-store)\b/i.test(response.headers.get("cache-control") ?? "");
 }
 
 export function withEdgeCache(serverEntry: Handler, options: EdgeCacheOptions): Handler {
@@ -158,8 +176,13 @@ export function withEdgeCache(serverEntry: Handler, options: EdgeCacheOptions): 
   };
 
   function profileOf(url: URL): CacheProfileName {
-    const pagePath = serverFnPagePath(url);
-    return detectCacheProfile(pagePath ? new URL(pagePath, url.origin) : url);
+    if (isServerFn(url)) {
+      // Only a page load is shared between visitors; any other server function reads per-visitor
+      // state (cart, user, wishlist, addresses) and is never cached, whatever it returns.
+      const pagePath = serverFnPagePath(url);
+      return pagePath ? detectCacheProfile(new URL(pagePath, url.origin)) : "private";
+    }
+    return detectCacheProfile(url);
   }
 
   function appendResourceHints(response: Response): void {
@@ -173,16 +196,14 @@ export function withEdgeCache(serverEntry: Handler, options: EdgeCacheOptions): 
     for (const key of [...url.searchParams.keys()]) {
       if (TRACKING_PARAMS.has(key.toLowerCase())) url.searchParams.delete(key);
     }
-    if (url.pathname.startsWith("/_serverFn/") || url.pathname.startsWith("/_server/")) {
+    if (isServerFn(url)) {
       const payload = url.searchParams.get("payload");
       if (payload) url.searchParams.set("payload", canonicalizeServerFnPayload(payload));
     }
     const version = buildHash(env);
     if (version) url.searchParams.set("__v", version);
     // Programmatic fetches (no navigation) get their own entries, as in v7.
-    const isServerFn =
-      url.pathname.startsWith("/_serverFn/") || url.pathname.startsWith("/_server/");
-    if (!isServerFn && request.headers.get("sec-fetch-dest") === "empty")
+    if (!isServerFn(url) && request.headers.get("sec-fetch-dest") === "empty")
       url.searchParams.set("__fetch", "1");
     url.searchParams.set("__seg", hashSegment(segment));
     return new Request(url.toString(), { method: "GET" });
@@ -241,6 +262,13 @@ export function withEdgeCache(serverEntry: Handler, options: EdgeCacheOptions): 
 
     if (url.pathname === "/_cache/purge" && request.method === "POST") return purge(request, env);
 
+    if (REMOVED_ADMIN_PATHS.some((p) => url.pathname.startsWith(p))) {
+      return new Response("Not Found", {
+        status: 404,
+        headers: { "Cache-Control": PRIVATE_NO_CACHE, "X-Cache": "BYPASS" },
+      });
+    }
+
     if (
       FINGERPRINTED_ASSET_RE.test(url.pathname) ||
       STATIC_PATHS.some((p) => url.pathname.startsWith(p))
@@ -255,10 +283,13 @@ export function withEdgeCache(serverEntry: Handler, options: EdgeCacheOptions): 
       return resp;
     }
 
+    const profile = profileOf(url);
     const cacheable =
       request.method === "GET" &&
       !BYPASS_PATHS.some((p) => url.pathname.startsWith(p)) &&
       !isDraft(request, url);
+    // A private profile still goes through the path below, which never stores it (`edge.isPublic`
+    // is false) and never serves it from the cache: only public profiles are looked up.
 
     if (!cacheable) {
       const origin = await serverEntry.fetch(request, env, ctx);
@@ -268,8 +299,12 @@ export function withEdgeCache(serverEntry: Handler, options: EdgeCacheOptions): 
         resp.headers.set("X-Cache", "BYPASS");
         return resp;
       }
-      const profile = profileOf(url);
-      if (profile === "private" || profile === "none" || profile === "cart") {
+      if (
+        profile === "private" ||
+        profile === "none" ||
+        profile === "cart" ||
+        isPrivateResponse(origin)
+      ) {
         resp.headers.set("Cache-Control", PRIVATE_NO_CACHE);
         resp.headers.delete("CDN-Cache-Control");
         resp.headers.set("X-Cache", "BYPASS");
@@ -298,7 +333,6 @@ export function withEdgeCache(serverEntry: Handler, options: EdgeCacheOptions): 
 
     const key = cacheKey(request, env, segment);
     const cache = edgeCache();
-    const profile = profileOf(url);
     const edge = edgeCacheConfig(profile);
 
     const dress = (resp: Response, xCache: string, extra?: Record<string, string>): Response => {
@@ -346,7 +380,11 @@ export function withEdgeCache(serverEntry: Handler, options: EdgeCacheOptions): 
         ctx.waitUntil(
           Promise.resolve(serverEntry.fetch(request, env, ctx))
             .then((origin) => {
-              if (origin.status === 200 && hasOnlySafeCookies(origin, safeCookies)) {
+              if (
+                origin.status === 200 &&
+                !isPrivateResponse(origin) &&
+                hasOnlySafeCookies(origin, safeCookies)
+              ) {
                 store(
                   origin.headers.has("set-cookie")
                     ? withoutSafeCookies(origin, safeCookies)
@@ -390,7 +428,10 @@ export function withEdgeCache(serverEntry: Handler, options: EdgeCacheOptions): 
       return resp;
     }
 
-    if (origin.headers.has("set-cookie") && !hasOnlySafeCookies(origin, safeCookies)) {
+    if (
+      isPrivateResponse(origin) ||
+      (origin.headers.has("set-cookie") && !hasOnlySafeCookies(origin, safeCookies))
+    ) {
       const resp = new Response(origin.body, origin);
       resp.headers.set("Cache-Control", PRIVATE_NO_CACHE);
       resp.headers.delete("CDN-Cache-Control");

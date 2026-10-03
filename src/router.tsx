@@ -2,10 +2,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createRouter, type SearchParser, type SearchSerializer } from "@tanstack/react-router";
 import { routeTree } from "./routeTree.gen";
 
-const queryClient = new QueryClient({
-  defaultOptions: { queries: { staleTime: 60_000 } },
-});
-
 /**
  * Plain URLSearchParams search params instead of TanStack's JSON format, so commerce filter URLs
  * such as `?filter.size=M&filter.size=L` round-trip unchanged (v7's createDecoRouter did the same).
@@ -34,6 +30,11 @@ const stringifySearch: SearchSerializer = (search) => {
 };
 
 export function getRouter() {
+  // One QueryClient per router: the server creates a router per request, so a visitor's cart and user
+  // never reach another visitor's render. The browser creates one router, so it keeps one client.
+  const queryClient = new QueryClient({
+    defaultOptions: { queries: { staleTime: 60_000 } },
+  });
   return createRouter({
     routeTree,
     context: { queryClient },

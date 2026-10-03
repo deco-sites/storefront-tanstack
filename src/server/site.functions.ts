@@ -5,40 +5,61 @@
  */
 import { createServerFn } from "@tanstack/react-start";
 import { getRequest, getResponse } from "@tanstack/react-start/server";
-import submitAddress, { type AddressOp } from "../actions/address/submit";
-import subscribeNewsletter, {
-  type SubscribeNewsletterProps,
-} from "../actions/newsletter/subscribe";
-import subscribeNotifyMe, { type NotifyMeProps } from "../actions/notifyMe/subscribe";
+import { z } from "zod";
+import submitAddress from "../actions/address/submit";
+import subscribeNewsletter from "../actions/newsletter/subscribe";
+import subscribeNotifyMe from "../actions/notifyMe/subscribe";
 import simulateShipping from "../actions/shipping/simulate";
 import submitWishlist from "../actions/wishlist/submit";
 import loadAddresses from "../loaders/address";
 import loadWishlist from "../loaders/wishlist";
+import { markPrivate } from "./private-response";
 
-export const getWishlistServerFn = createServerFn({ method: "GET" }).handler(() =>
-  loadWishlist(undefined, getRequest()),
-);
+const addressInput = z.object({
+  id: z.string().optional(),
+  label: z.string().optional(),
+  recipient: z.string().optional(),
+  streetAddress: z.string().optional(),
+  addressLocality: z.string().optional(),
+  addressRegion: z.string().optional(),
+  postalCode: z.string().optional(),
+  addressCountry: z.string().optional(),
+  isDefault: z.boolean().optional(),
+});
+
+const addressOp = z.discriminatedUnion("op", [
+  z.object({ op: z.literal("save"), address: addressInput }),
+  z.object({ op: z.literal("remove"), id: z.string() }),
+  z.object({ op: z.literal("setDefault"), id: z.string() }),
+]);
+
+// The shopper's own wishlist and addresses: never shared, so never cached (src/server/edge-cache.ts).
+export const getWishlistServerFn = createServerFn({ method: "GET" }).handler(() => {
+  markPrivate();
+  return loadWishlist(undefined, getRequest());
+});
 
 export const toggleWishlistServerFn = createServerFn({ method: "POST" })
-  .inputValidator((input: { productID: string; productGroupID: string }) => input)
+  .inputValidator(z.object({ productID: z.string(), productGroupID: z.string() }))
   .handler(({ data }) => submitWishlist(data, getRequest(), getResponse().headers));
 
-export const getAddressesServerFn = createServerFn({ method: "GET" }).handler(() =>
-  loadAddresses(getRequest()),
-);
+export const getAddressesServerFn = createServerFn({ method: "GET" }).handler(() => {
+  markPrivate();
+  return loadAddresses(getRequest());
+});
 
 export const submitAddressServerFn = createServerFn({ method: "POST" })
-  .inputValidator((input: AddressOp) => input)
+  .inputValidator(addressOp)
   .handler(({ data }) => submitAddress(data, getRequest(), getResponse().headers));
 
 export const subscribeNewsletterServerFn = createServerFn({ method: "POST" })
-  .inputValidator((input: SubscribeNewsletterProps) => input)
+  .inputValidator(z.object({ email: z.string() }))
   .handler(({ data }) => subscribeNewsletter(data, getRequest(), getResponse().headers));
 
 export const notifyMeServerFn = createServerFn({ method: "POST" })
-  .inputValidator((input: NotifyMeProps) => input)
+  .inputValidator(z.object({ skuId: z.string(), email: z.string(), name: z.string().optional() }))
   .handler(({ data }) => subscribeNotifyMe(data));
 
 export const simulateShippingServerFn = createServerFn({ method: "POST" })
-  .inputValidator((input: { postalCode: string }) => input)
+  .inputValidator(z.object({ postalCode: z.string() }))
   .handler(({ data }) => simulateShipping(data));

@@ -40,7 +40,9 @@ export default withEdgeCache(serverEntry, {
     const regionCode = request.headers.get("cf-region-code") ?? cf?.regionCode ?? "";
     return {
       device,
-      ...(cookies.customerAccessToken ? { loggedIn: true } : {}),
+      // Signed-in shoppers carry the Shopify customer token cookie (src/platform/user/user.actions.ts):
+      // their pages are never stored in or served from the shared cache.
+      ...(cookies.secure_customer_sig ? { loggedIn: true } : {}),
       ...(regionCode ? { regionId: regionCode } : {}),
     };
   },
