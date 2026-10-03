@@ -41,9 +41,10 @@ Compare exits non-zero on any pixel difference, any size difference, any snapsho
   - JSON-LD from both sources.
   - The final URL.
   - The sorted set of third-party request URLs, which shows which analytics/CDN calls happen.
+  - `analytics`: every call the page makes to the analytics SDK (`window.stonks.view` pageviews, on load and on SPA navigation, and `stonks.event` for each forwarded `DECO.events` event such as `view_item_list`, `view_item`, `add_to_cart`, with its params). See the determinism table.
 - **flows × viewports.** A small step language: `goto`, `click`, `fill`, `type`, `press`, `select`, `check`, `hover`, `waitFor`, `waitForURL`, `settle`, `capture`, `url`, `attr`, `text`, `count`. Steps can be limited with `viewports`. Each `capture` writes a PNG, and `url`/`attr`/`text` values go into the snapshot. Two examples:
   - The checkout handoff URL is snapshotted as the minicart's Begin Checkout `href`.
-  - SPA navigations are covered too, so request scope on client-side navigation is exercised.
+  - SPA navigations are covered too, so data loading on client-side navigation is exercised.
 - **texts.** Raw responses such as `robots.txt` and `sitemap.xml`. Status, headers and body are stored, except that HTML bodies are omitted.
 
 The app origin is replaced with `{origin}` in every snapshot, so a target on another host/port compares cleanly.
@@ -54,7 +55,7 @@ The app origin is replaced with `{origin}` in every snapshot, so a target on ano
 |---|---|
 | Server-side upstream data (Shopify Storefront GraphQL, etc.) | `parity/runtime/worker-shim.js` is prepended to `src/worker-entry.ts` by `parity/vite.config.ts`. When `PARITY_UPSTREAM` is set, it rewrites every non-local `fetch()` in the worker to the record/replay proxy (`parity/lib/upstream.mjs`). Recordings live in `parity/baseline/upstream.json` and are keyed by method + URL + body hash, per case, in order. That ordering lets stateful sequences replay exactly, e.g. cart create → add line → cart query. |
 | Browser third-party requests (Shopify CDN images, decoims assets, fonts) | One HAR per case, `parity/baseline/har/<case>.har`, replayed with `routeFromHAR` (`notFound: fallback`). A catch-all route aborts any third-party request the HAR does not have and lists it under `harMisses` in the snapshot. Two Playwright 1.59 problems shape this: with `notFound: abort` an unmatched request hangs instead of failing, and `.har.zip` archives hang `routeFromHAR` on Node 26. That is why the HARs are plain JSON. Requests to the app origin are never served from the HAR. |
-| Analytics beacons (`*.lilstts.com`) | Aborted on both sides (`thirdParty.block`). |
+| Analytics (`*.lilstts.com`) | The SDK script (`analyticsStub.script`) is fulfilled with a recorder that exposes the same `window.stonks.{view,event}` API and appends each call to the snapshot's `analytics` array. Collector beacons are aborted on both sides (`thirdParty.block`), so nothing is sent. |
 | Server clock / randomness | The shim freezes `Date` to `fixedTime` and seeds `Math.random` (`PARITY_NOW`, `PARITY_SEED`). |
 | Browser clock / randomness | `context.clock.setFixedTime(fixedTime)`. A seeded `Math.random` is injected through `addInitScript`. |
 | Carousel autoplay / countdown ticks | `setInterval` with a delay of 1s or more never fires (`parity/lib/determinism.js`). |
@@ -83,3 +84,9 @@ The v8 site must:
 Then run `npm run parity:compare -- --target <url>`. While compare runs, it serves the replay proxy on port 4280.
 
 Expected, approved differences go through D9/D13 and are not baked into the harness. For example, the `x-powered-by: deco@7.x` header will differ. Add such headers to `ignoreHeaders` only once they are approved.
+
+## Tailwind and the harness
+
+Tailwind v4 detects class names in every non-ignored file of the repo, so text in `parity/` (selectors, step names) would otherwise add CSS to the site build and change pixels. `src/styles/app.css` therefore has `@source not "../../parity";`. The migrated site needs the same exclusion. `x-cache-version` (the git sha of the build) is snapshotted as `<build-id>`: its presence is checked, its value is not.
+
+Analytics snapshot shape: `{ views, events }`. `views` lists pageviews in order. `events` is the sorted, de-duplicated set of `{name, path, props}`: view-triggered events (e.g. `view_item_list`) fire from IntersectionObservers, so their count and order vary with scroll timing, while which events fire with which payloads is stable.

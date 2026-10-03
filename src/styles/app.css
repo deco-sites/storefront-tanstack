@@ -1,4 +1,6 @@
 @import "tailwindcss";
+/* parity harness (dev-only) must not feed Tailwind class detection */
+@source not "../../parity";
 @plugin "daisyui";
 @plugin "daisyui/theme" {
   name: "light";

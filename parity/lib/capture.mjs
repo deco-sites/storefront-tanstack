@@ -15,12 +15,15 @@ function escapeRe(s) {
   return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
+const MASKED_HEADERS = new Set(["x-cache-version"]);
+
 export function headerSnapshot(headers, ignore) {
   const skip = new Set([...VOLATILE_HEADERS_DEFAULT, ...(ignore ?? [])].map((h) => h.toLowerCase()));
   const out = {};
   for (const k of Object.keys(headers).map((h) => h.toLowerCase()).sort()) {
     if (skip.has(k)) continue;
-    out[k] = headers[k];
+    // Per-build id (git sha of the build): presence is asserted, value masked.
+    out[k] = MASKED_HEADERS.has(k) ? "<build-id>" : headers[k];
   }
   const sc = headers["set-cookie"];
   if (sc) out["set-cookie(names)"] = sc.split("\n").map((c) => c.split("=")[0].trim()).sort();
@@ -58,6 +61,28 @@ function extractSeoInPage(html) {
     }
   });
   return { head, jsonLd };
+}
+
+/** Stand-in for the lilstts SDK (window.stonks): records calls instead of sending beacons. */
+const ANALYTICS_STUB = `(() => {
+  const rec = (e) => { try { window.__parityAnalytics(e); } catch {} };
+  const sorted = (o) => o && typeof o === "object" ? Object.fromEntries(Object.keys(o).sort().map((k) => [k, o[k]])) : o;
+  window.stonks = {
+    view: (props) => rec({ type: "view", path: location.pathname + location.search, props: sorted(props) }),
+    event: (name, props) => rec({ type: "event", name, path: location.pathname + location.search, props: sorted(props) }),
+  };
+})();`;
+
+/**
+ * Analytics calls -> snapshot. Pageviews keep their order (one per load / SPA
+ * navigation). Events are compared as a sorted, de-duplicated set: view-type
+ * events fire from IntersectionObservers, so their count and order depend on
+ * scroll timing, while *which* events fire with *which* payloads is the contract.
+ */
+function analyticsSnapshot(calls) {
+  const views = calls.filter((c) => c.type === "view").map((c) => ({ path: c.path, props: c.props }));
+  const events = [...new Set(calls.filter((c) => c.type === "event").map((c) => JSON.stringify({ name: c.name, path: c.path, props: c.props })))].sort().map((s) => JSON.parse(s));
+  return { views, events };
 }
 
 function normalize(value, origin) {
@@ -210,6 +235,15 @@ export async function runCase({ browser, manifest, kase, baseURL, mode, harPath,
   for (const pattern of manifest.thirdParty?.block ?? []) {
     await ctx.route(pattern, (route) => route.abort("blockedbyclient"));
   }
+  // 0th: the analytics SDK script is replaced by a recorder exposing the same
+  // `window.stonks.{view,event}` API, so the analytics contract (pageviews on
+  // load + SPA navigations, DECO.events forwarded with params) is snapshotted
+  // without any beacon leaving the browser.
+  const analytics = [];
+  if (manifest.analyticsStub?.script) {
+    await ctx.exposeBinding("__parityAnalytics", (_src, entry) => { analytics.push(entry); });
+    await ctx.route(manifest.analyticsStub.script, (route) => route.fulfill({ status: 200, contentType: "application/javascript", body: ANALYTICS_STUB }));
+  }
   ctx.on("request", (r) => {
     if (!isThirdParty(r.url())) return;
     const u = new URL(r.url());
@@ -314,6 +348,7 @@ export async function runCase({ browser, manifest, kase, baseURL, mode, harPath,
       }
     }
   } finally {
+    if (manifest.analyticsStub?.script) snapshot.analytics = analyticsSnapshot(analytics);
     snapshot.thirdPartyRequests = [...thirdParty].sort();
     if (harMisses.size) snapshot.harMisses = [...harMisses].sort();
     await ctx.close(); // flushes HAR in record mode
