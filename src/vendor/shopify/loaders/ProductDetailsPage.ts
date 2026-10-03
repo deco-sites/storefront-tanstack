@@ -1,5 +1,5 @@
 // Vendored from @decocms/apps-shopify (loaders/ProductDetailsPage.ts) by @decocms/blocks-migrate. It's your code now.
-import type { ProductDetailsPage } from "@decocms/apps-commerce/types";
+import type { ProductDetailsPage } from "../../commerce/types";
 import { getShopifyClient } from "../client";
 import { GetProduct } from "../utils/storefront/queries";
 import { type ProductShopify, toProductPage } from "../utils/transform";

@@ -1,59 +1,40 @@
-// Vendored from @decocms/apps-shopify (client.ts) by @decocms/blocks-migrate. It's your code now.
-import { createGraphqlClient, type GraphQLClient } from "./utils/graphql";
+// Vendored from @decocms/apps-shopify 7.20.7 (client.ts), then rewritten over the next-major upstream
+// client, `createShopifyClient` (/next/upstream-clients#call-a-client). It's your code now.
+//
+// The loaders, cart and sign-in flows in src/vendor/shopify keep calling `getShopifyClient().query(…)`
+// as they did in v7; underneath, every request goes through the Storefront API endpoint of the
+// instrumented client (provider "shopify", one operation label per GraphQL document).
+import { createShopifyClient, type ShopifyClient } from "@decocms/apps-shopify";
+import { env } from "cloudflare:workers";
+import { buildQuery, type GraphQLClient, type QueryDefinition } from "./utils/graphql";
 
-export interface ShopifyConfig {
-	storeName: string;
-	storefrontAccessToken: string;
-	publicUrl?: string;
+/** The Storefront API version every query in utils/storefront/queries.ts was written against. */
+const API_VERSION = "2025-04";
+
+let client: ShopifyClient | undefined;
+
+/** Settings come from the environment where the site creates the client (rule 3 of /next/upstream-clients#write-a-client). */
+function shopify(): ShopifyClient {
+  if (client) return client;
+  const storeName = env.SHOPIFY_STORE_NAME;
+  const storefrontAccessToken = env.SHOPIFY_STOREFRONT_ACCESS_TOKEN;
+  if (!storeName || !storefrontAccessToken) {
+    throw new Error(
+      "Shopify not configured: set SHOPIFY_STORE_NAME and SHOPIFY_STOREFRONT_ACCESS_TOKEN",
+    );
+  }
+  client = createShopifyClient({ storeName, storefrontAccessToken, apiVersion: API_VERSION });
+  return client;
 }
 
-let _client: GraphQLClient | null = null;
-let _config: ShopifyConfig | null = null;
-let _fetch: typeof fetch | undefined;
-
-/**
- * Override the fetch function used by the Shopify GraphQL client.
- * Use this to plug in instrumented fetch for logging/tracing.
- *
- * @example
- * ```ts
- * import { createInstrumentedFetch } from "@decocms/blocks/sdk/instrumentedFetch";
- * import { setShopifyFetch } from "@decocms/apps/shopify";
- * setShopifyFetch(createInstrumentedFetch("shopify"));
- * ```
- */
-export function setShopifyFetch(fetchFn: typeof fetch) {
-	_fetch = fetchFn;
-	if (_config) configureShopify(_config);
-}
-
-export function configureShopify(config: ShopifyConfig) {
-	_config = config;
-	_client = createGraphqlClient(
-		`https://${config.storeName}.myshopify.com/api/2025-04/graphql.json`,
-		{
-			"X-Shopify-Storefront-Access-Token": config.storefrontAccessToken,
-		},
-		_fetch,
-	);
-}
-
+/** The Storefront API, with the v7 calling convention (a document or a fragment-composed definition). */
 export function getShopifyClient(): GraphQLClient {
-	if (!_client || !_config) {
-		throw new Error(
-			"Shopify not configured. Call configureShopify() first or check deco-shopify.json block.",
-		);
-	}
-	return _client;
-}
-
-export function getShopifyConfig(): ShopifyConfig {
-	if (!_config) {
-		throw new Error("Shopify not configured.");
-	}
-	return _config;
-}
-
-export function getBaseUrl(): string {
-	return _config?.publicUrl || "";
+  return {
+    query<T>(query: string | QueryDefinition, variables?: Record<string, unknown>): Promise<T> {
+      return shopify().storefront.query<T>(
+        typeof query === "string" ? query : buildQuery(query),
+        variables,
+      );
+    },
+  };
 }

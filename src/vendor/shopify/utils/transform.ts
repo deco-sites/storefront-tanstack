@@ -7,8 +7,8 @@ import type {
 	ProductDetailsPage,
 	PropertyValue,
 	UnitPriceSpecification,
-} from "@decocms/apps-commerce/types";
-import { DEFAULT_IMAGE } from "@decocms/apps-commerce/utils/constants";
+} from "../../commerce/types";
+import { DEFAULT_IMAGE } from "../../commerce/utils/constants";
 
 type MoneyV2 = { amount: string; currencyCode: string };
 type ImageShopify = { url: string; altText?: string | null };

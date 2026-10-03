@@ -5,7 +5,7 @@ import Section, {
 } from "../../components/ui/Section";
 import Slider from "../../components/ui/Slider";
 import { clx } from "~/sdk/clx";
-import { useDevice } from "@decocms/blocks/sdk/useDevice";
+import { useDevice } from "~/sdk/device";
 import { type LoadingFallbackProps } from "~/types/deco";
 import { Link } from "@tanstack/react-router";
 /** @titleBy label */

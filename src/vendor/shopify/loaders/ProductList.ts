@@ -1,5 +1,5 @@
 // Vendored from @decocms/apps-shopify (loaders/ProductList.ts) by @decocms/blocks-migrate. It's your code now.
-import type { Product } from "@decocms/apps-commerce/types";
+import type { Product } from "../../commerce/types";
 import { getShopifyClient } from "../client";
 import { ProductsByCollection, SearchProducts } from "../utils/storefront/queries";
 import { type ProductShopify, toProduct } from "../utils/transform";

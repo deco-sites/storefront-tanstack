@@ -1,70 +1,20 @@
-// Vendored from @decocms/apps-shopify (utils/graphql.ts) by @decocms/blocks-migrate. It's your code now.
-import type { InstrumentedFetchInit } from "@decocms/blocks/sdk/instrumentedFetch";
-import { extractGraphqlOperationName } from "./graphqlOperationName";
+// Vendored from @decocms/apps-shopify 7.20.7 (utils/graphql.ts). The request itself is sent by the
+// next-major client (see ../client.ts); what stays here is how the queries are written. It's your code now.
 
 export function gql(strings: TemplateStringsArray, ...values: unknown[]): string {
-	return strings.reduce((acc, str, i) => acc + str + (values[i] ?? ""), "");
+  return strings.reduce((acc, str, i) => acc + str + (values[i] ?? ""), "");
 }
 
 export interface QueryDefinition {
-	fragments?: string[];
-	query: string;
+  fragments?: string[];
+  query: string;
 }
 
 export function buildQuery(def: QueryDefinition): string {
-	const fragments = def.fragments?.join("\n") ?? "";
-	return fragments ? `${fragments}\n${def.query}` : def.query;
+  const fragments = def.fragments?.join("\n") ?? "";
+  return fragments ? `${fragments}\n${def.query}` : def.query;
 }
 
 export interface GraphQLClient {
-	query<T>(query: string | QueryDefinition, variables?: Record<string, unknown>): Promise<T>;
-}
-
-export function createGraphqlClient(
-	endpoint: string,
-	headers: Record<string, string>,
-	fetchFn?: typeof fetch,
-): GraphQLClient {
-	const _fetch = fetchFn ?? globalThis.fetch;
-	return {
-		async query<T>(
-			queryOrDef: string | QueryDefinition,
-			variables?: Record<string, unknown>,
-		): Promise<T> {
-			const query = typeof queryOrDef === "string" ? queryOrDef : buildQuery(queryOrDef);
-
-			// Stamp the GraphQL operation as init.operation so the framework's
-			// span name becomes `shopify.<OperationName>` instead of the
-			// generic `shopify.storefront.graphql` from the URL router. The
-			// extra field is silently dropped by plain `fetch` and read by
-			// any `InstrumentedFetch` configured via `setShopifyFetch`.
-			const operation = extractGraphqlOperationName(query);
-			const init: InstrumentedFetchInit = {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-					...headers,
-				},
-				body: JSON.stringify({ query, variables }),
-				...(operation ? { operation } : {}),
-			};
-			const response = await _fetch(endpoint, init);
-
-			if (!response.ok) {
-				throw new Error(`Shopify GraphQL error: ${response.status} ${response.statusText}`);
-			}
-
-			const json = (await response.json()) as { data?: T; errors?: Array<{ message: string }> };
-
-			if (json.errors?.length) {
-				throw new Error(`Shopify GraphQL errors: ${json.errors.map((e) => e.message).join(", ")}`);
-			}
-
-			if (json.data === undefined) {
-				throw new Error("Shopify GraphQL response missing data");
-			}
-
-			return json.data;
-		},
-	};
+  query<T>(query: string | QueryDefinition, variables?: Record<string, unknown>): Promise<T>;
 }
