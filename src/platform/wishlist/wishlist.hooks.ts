@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { invoke } from "../../runtime";
+import { getWishlistServerFn, toggleWishlistServerFn } from "../../server/site.functions";
 import { EMPTY_WISHLIST, type WishlistState } from "./wishlist.types";
 
 export const WISHLIST_QUERY_KEY = ["wishlist"] as const;
@@ -7,8 +7,7 @@ export const WISHLIST_QUERY_KEY = ["wishlist"] as const;
 export function useWishlist() {
   const query = useQuery({
     queryKey: WISHLIST_QUERY_KEY,
-    queryFn: (): Promise<WishlistState> =>
-      invoke.site.loaders.wishlist() as Promise<WishlistState>,
+    queryFn: (): Promise<WishlistState> => getWishlistServerFn(),
     staleTime: 60_000,
     placeholderData: EMPTY_WISHLIST,
   });
@@ -32,7 +31,7 @@ export function useToggleWishlist() {
   const qc = useQueryClient();
   return useMutation({
     mutationFn: (input: ToggleWishlistInput): Promise<WishlistState> =>
-      invoke.site.actions.wishlist.submit(input) as Promise<WishlistState>,
+      toggleWishlistServerFn({ data: input }),
     onMutate: async (input) => {
       await qc.cancelQueries({ queryKey: WISHLIST_QUERY_KEY });
       const prev = qc.getQueryData<WishlistState>(WISHLIST_QUERY_KEY) ??

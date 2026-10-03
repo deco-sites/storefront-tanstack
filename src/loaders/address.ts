@@ -1,12 +1,10 @@
-import { RequestContext } from "@decocms/blocks/sdk/requestContext";
 import { usePlatform } from "../apps/site";
 import {
   type AddressBookState,
-  EMPTY_ADDRESS_BOOK,
 } from "../platform/address/address.types";
 import { readAddressCookie } from "../platform/address/cookie";
 
-async function loader(): Promise<AddressBookState> {
+async function loader(req: Request): Promise<AddressBookState> {
   const platform = usePlatform();
 
   if (platform === "vtex") {
@@ -17,8 +15,7 @@ async function loader(): Promise<AddressBookState> {
   }
 
   // Default: cookie-backed so the demo works without a backend.
-  const req = RequestContext.current?.request;
-  return req ? readAddressCookie(req) : EMPTY_ADDRESS_BOOK;
+  return readAddressCookie(req);
 }
 
 export default loader;

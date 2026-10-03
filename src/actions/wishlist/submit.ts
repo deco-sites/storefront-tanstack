@@ -1,7 +1,5 @@
-import { RequestContext } from "@decocms/blocks/sdk/requestContext";
 import { usePlatform } from "../../apps/site";
 import {
-  EMPTY_WISHLIST,
   type WishlistState,
 } from "../../platform/wishlist";
 import {
@@ -16,11 +14,11 @@ interface Props {
 
 async function action(
   props: Props,
-  req?: Request,
+  request: Request,
+  responseHeaders: Headers,
 ): Promise<WishlistState> {
   if (!props?.productID) throw new Error("productID is required");
 
-  const request = req ?? RequestContext.current?.request;
   const platform = usePlatform();
 
   if (platform === "vtex") {
@@ -39,17 +37,14 @@ async function action(
   }
 
   // Default: cookie-backed so the demo persists per-browser without a backend.
-  const current = request ? readWishlistCookie(request) : EMPTY_WISHLIST;
+  const current = readWishlistCookie(request);
   const next: WishlistState = current.productIDs.includes(props.productID)
     ? {
       productIDs: current.productIDs.filter((id) => id !== props.productID),
     }
     : { productIDs: [...current.productIDs, props.productID] };
 
-  RequestContext.responseHeaders.append(
-    "Set-Cookie",
-    serializeWishlistCookie(next),
-  );
+  responseHeaders.append("Set-Cookie", serializeWishlistCookie(next));
   return next;
 }
 
