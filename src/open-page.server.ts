@@ -22,7 +22,7 @@ export async function openPage(href: string, request: Request) {
   const url = new URL(href, request.url);
   // Blocks read the page URL (pageState().url) and its request: it must stay on this site's origin.
   if (url.origin !== new URL(request.url).origin) throw notFound();
-  const c = client(request);
+  const c = await client(request);
   const [pages, pagesError] = await c.list<StoredPage>("page");
   if (pagesError) throw pagesError;
   const [redirects, redirectsError] = await c.list<Redirect>("redirect");

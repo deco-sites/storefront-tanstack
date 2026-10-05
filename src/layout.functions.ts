@@ -1,11 +1,9 @@
-/** Site-wide settings the root layout reads from content: the `Analytics` saved block (/next/analytics). */
+/** Site-wide settings the root layout reads: the `analytics` section of the `CMS` block (/next/analytics). */
 import { createServerFn } from "@tanstack/react-start";
-import { getRequest } from "@tanstack/react-start/server";
-import type { Analytics } from "@decocms/blocks";
-import { client } from "./cms";
+import { cms } from "./cms";
 
+/** Read from the production release, never a draft: a draft can't change the site's analytics. */
 export const loadLayout = createServerFn({ method: "GET" }).handler(async () => {
-  const [analytics, error] = await client(getRequest()).resolve<Analytics>("Analytics");
-  if (error) console.error(error);
-  return { analytics: analytics ?? { enabled: false } };
+  const { analytics } = await cms.settings();
+  return { analytics };
 });

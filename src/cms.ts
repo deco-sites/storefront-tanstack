@@ -6,7 +6,7 @@
  * without a deploy and loads the drafts the site editor previews (/next/hosted#cloudflare-workers);
  * without them it serves the content module, the content of the commit this build was made from.
  */
-import { createCMS, draftPointer } from "@decocms/blocks";
+import { createCMS } from "@decocms/blocks";
 import { env } from "cloudflare:workers";
 import blocks from "../.deco";
 import content from "../.deco/blocks.gen";
@@ -40,8 +40,12 @@ if (import.meta.hot) {
   });
 }
 
-/** The client for this request: the draft a `?__draft=` link or the draft cookie points at, or the release. */
-export const client = (request: Request) => {
-  const pointer = draftPointer(request);
+/**
+ * The client for this request: the draft a `?__draft=` link or the draft cookie points at, or the
+ * release. On a host outside the `CMS` block's preview hosts the draft is ignored and the request
+ * gets the release (/next/releases-and-drafts#allow-previews-per-host).
+ */
+export const client = async (request: Request) => {
+  const pointer = await cms.draftPointer(request);
   return pointer ? cms.forDraft(pointer) : cms.forRelease();
 };

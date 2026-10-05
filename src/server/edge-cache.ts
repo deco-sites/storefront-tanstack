@@ -18,7 +18,7 @@
  *   editor's preview — through `Content-Security-Policy: frame-ancestors`, and by nothing else;
  * - `vite dev` skips the edge cache, so a content edit shows on the next load.
  */
-import { draftPointer } from "@decocms/blocks";
+import { cms } from "../cms";
 import {
   type CacheProfileName,
   cacheHeaders,
@@ -170,8 +170,8 @@ function dedupeSetCookies(response: Response): void {
 }
 
 /** A draft preview (`?__draft=` or the draft cookie, read the framework's way): never cached. */
-function isDraft(request: Request, url: URL): boolean {
-  return url.searchParams.has("__draft") || draftPointer(request) !== null;
+async function isDraft(request: Request, url: URL): Promise<boolean> {
+  return url.searchParams.has("__draft") || (await cms.draftPointer(request)) !== null;
 }
 
 function isServerFn(url: URL): boolean {
@@ -305,7 +305,7 @@ export function withEdgeCache(serverEntry: Handler, options: EdgeCacheOptions): 
       !import.meta.env.DEV &&
       request.method === "GET" &&
       !BYPASS_PATHS.some((p) => url.pathname.startsWith(p)) &&
-      !isDraft(request, url);
+      !(await isDraft(request, url));
     // A private profile still goes through the path below, which never stores it (`edge.isPublic`
     // is false) and never serves it from the cache: only public profiles are looked up.
 

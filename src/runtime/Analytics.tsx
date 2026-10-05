@@ -1,8 +1,8 @@
 /**
- * Page views and commerce events, configured by the built-in `analytics` block (/next/analytics)
- * and sent with One Dollar Stats' own tracker script, the documented alternative to
- * `AnalyticsScript` (/next/analytics#one-dollar-stats: "use their tracker script on your site").
- * The block's `collector` and `enabled` drive it, so editors keep control of both.
+ * Page views and commerce events, configured by the `analytics` section of the `CMS` settings
+ * block (/next/analytics) and sent with One Dollar Stats' own tracker script, the documented
+ * alternative to `AnalyticsScript` (/next/analytics#one-dollar-stats: "use their tracker script on your site").
+ * The section's `collector` and `enabled` drive it, so editors keep control of both.
  *
  * This is the same tracker, collector and call sequence v7's OneDollarStats component used:
  * auto-collect is off, the site sends the first page view and one per navigation itself, and it
@@ -23,7 +23,7 @@ declare global {
 
 /** One Dollar Stats' tracker build for Deco sites (exposes `window.stonks`). */
 const TRACKER_SCRIPT = "https://s.lilstts.com/deco.js";
-/** One Dollar Stats' collector, used when the block leaves `collector` out. */
+/** One Dollar Stats' collector, used when the section leaves `collector` out. */
 const DEFAULT_COLLECTOR = "https://d.lilstts.com/events";
 
 /** The tracker's per-field limit. */

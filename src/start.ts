@@ -3,11 +3,11 @@
  * site editor's preview keeps showing the draft while an editor navigates (/next/hosted-drafts#tanstack-start).
  */
 import { createMiddleware, createStart } from "@tanstack/react-start";
-import { draftCookie } from "@decocms/blocks";
+import { cms } from "./cms";
 
 const draftCookieMiddleware = createMiddleware().server(async ({ request, next }) => {
   const result = await next();
-  const cookie = draftCookie(request);
+  const cookie = await cms.draftCookie(request);
   if (cookie) result.response.headers.append("Set-Cookie", cookie);
   return result;
 });
