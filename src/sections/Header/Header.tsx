@@ -22,7 +22,6 @@ import {
   SIDEMENU_DRAWER_ID,
 } from "../../constants";
 import { useDevice } from "~/sdk/device";
-import { type LoadingFallbackProps } from "~/types/deco";
 export interface Logo {
   src: ImageWidget;
   alt: string;
@@ -219,9 +218,6 @@ function Header({
     </header>
   );
 }
-export const LoadingFallback = (props: LoadingFallbackProps<Props>) => (
-  <Header {...props as any} loading="lazy" />
-);
 export default Header;
 
 export const eager = true;

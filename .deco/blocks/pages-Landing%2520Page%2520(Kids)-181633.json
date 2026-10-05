@@ -3,49 +3,34 @@
   "path": "/kids",
   "sections": [
     {
-      "__resolveType": "website/sections/Rendering/Lazy.tsx",
-      "section": {
-        "__resolveType": "commerce/sections/Seo/SeoPLPV2.tsx",
-        "jsonLD": {
-          "__resolveType": "lazy",
-          "value": {
-            "__resolveType": "PLP Loader"
-          }
+      "__resolveType": "commerce/sections/Seo/SeoPLPV2.tsx",
+      "jsonLD": {
+        "__resolveType": "lazy",
+        "value": {
+          "__resolveType": "PLP Loader"
         }
       }
     },
     {
-      "__resolveType": "website/sections/Rendering/Lazy.tsx",
-      "section": {
-        "__resolveType": "Header"
-      }
+      "__resolveType": "Header"
     },
     {
-      "__resolveType": "website/sections/Rendering/Lazy.tsx",
-      "section": {
-        "__resolveType": "site/sections/Product/SearchResult.tsx",
-        "page": {
-          "__resolveType": "shopify/loaders/ProductListingPage.ts",
-          "count": 12,
-          "query": "kids"
-        },
-        "layout": {
-          "pagination": "show-more"
-        },
-        "startingPage": 1
-      }
+      "__resolveType": "site/sections/Product/SearchResult.tsx",
+      "page": {
+        "__resolveType": "shopify/loaders/ProductListingPage.ts",
+        "count": 12,
+        "query": "kids"
+      },
+      "layout": {
+        "pagination": "show-more"
+      },
+      "startingPage": 1
     },
     {
-      "__resolveType": "website/sections/Rendering/Lazy.tsx",
-      "section": {
-        "__resolveType": "site/sections/Newsletter/Newsletter.tsx"
-      }
+      "__resolveType": "site/sections/Newsletter/Newsletter.tsx"
     },
     {
-      "__resolveType": "website/sections/Rendering/Lazy.tsx",
-      "section": {
-        "__resolveType": "Footer"
-      }
+      "__resolveType": "Footer"
     }
   ],
   "seo": {

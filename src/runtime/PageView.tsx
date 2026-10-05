@@ -4,17 +4,13 @@
  * through the view registry.
  *
  * The markup around each section is v7's, so pages look and behave exactly as before: a
- * `<section>` with the section's id and `data-manifest-key`, an error boundary, and for sections
- * saved inside v7's Lazy wrapper, its placeholder while loading and its fade-in once loaded.
+ * `<section>` with the section's id and `data-manifest-key`, and an error boundary.
  */
 import { Component, type ErrorInfo, type ReactNode, Suspense } from "react";
 import { Await } from "@tanstack/react-router";
 import type { BlockDescriptor } from "../model";
-import type { BlockHint } from "../open-page.server";
 import { type Device, DeviceProvider } from "../sdk/device";
 import { views } from "../views";
-
-const FADE_IN_CSS = "@keyframes decoFadeIn{from{opacity:0}to{opacity:1}}";
 
 function sectionId(component: string): string {
   return component
@@ -44,32 +40,12 @@ class SectionErrorBoundary extends Component<
   }
 }
 
-function DefaultSectionFallback() {
-  return <div className="w-full h-48 bg-base-200 animate-pulse rounded" />;
-}
-
-/** What a section saved inside v7's Lazy wrapper shows until it streams in. */
-function DeferredPlaceholder({ hint }: { hint: BlockHint }) {
-  if (!hint.deferred || !hint.component) return null;
-  const view = views[hint.component];
-  const Fallback = view?.LoadingFallback;
-  return (
-    <section id={sectionId(hint.component)} data-manifest-key={hint.component} data-deferred="true">
-      {Fallback ? <Fallback /> : <DefaultSectionFallback />}
-    </section>
-  );
-}
-
 function SectionView({ block }: { block: BlockDescriptor }) {
   const view = views[block.component];
   if (!view) return null;
   const View = view.default;
   return (
-    <section
-      id={sectionId(block.component)}
-      data-manifest-key={block.component}
-      style={block.deferred ? { animation: "decoFadeIn 0.3s ease-out" } : undefined}
-    >
+    <section id={sectionId(block.component)} data-manifest-key={block.component}>
       <SectionErrorBoundary sectionKey={block.component}>
         <View {...block.props} />
       </SectionErrorBoundary>
@@ -86,17 +62,14 @@ function BlockView({ block }: { block: BlockDescriptor | BlockDescriptor[] }) {
 
 export interface PageBlock {
   key: string;
-  hint: BlockHint;
   value: Promise<{ value: BlockDescriptor | BlockDescriptor[] | undefined; failed: boolean }>;
 }
 
 export function PageView({ blocks, device }: { blocks: PageBlock[]; device?: Device }) {
-  const hasDeferred = blocks.some((block) => block.hint.deferred);
   return (
     <DeviceProvider value={device}>
-      {hasDeferred && <style dangerouslySetInnerHTML={{ __html: FADE_IN_CSS }} />}
       {blocks.map((block) => (
-        <Suspense key={block.key} fallback={<DeferredPlaceholder hint={block.hint} />}>
+        <Suspense key={block.key} fallback={null}>
           <Await promise={block.value}>
             {({ value }) => (value ? <BlockView block={value} /> : null)}
           </Await>

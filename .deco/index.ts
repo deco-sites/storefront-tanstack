@@ -120,14 +120,6 @@ const theme = (
   _props: Omit<ThemeProps, "font"> & { font?: Lazy<NonNullable<ThemeProps["font"]>> },
 ): BlockDescriptor | undefined => undefined;
 
-/**
- * v7's Lazy wrapper loaded its section after the page. A block streams on its own here
- * (/next/tanstack-start-descriptors#3-match-the-url-to-a-page), so the wrapper returns its section,
- * marked so the page keeps v7's fade-in.
- */
-const lazySection = (props: { section?: BlockDescriptor }): BlockDescriptor | undefined =>
-  props.section && { ...props.section, deferred: true };
-
 /** v7's `resolved`: a value saved as is. Only the header's search suggestions use it, saved as `null`. */
 const resolved = (props: { data: Suggestion | null }): Suggestion | null => props.data;
 
@@ -153,9 +145,6 @@ export default {
   // Matchers
   "website/matchers/device.ts": device,
   "website/matchers/random.ts": random,
-
-  // v7's Lazy wrapper
-  "website/sections/Rendering/Lazy.tsx": lazySection,
 
   // Sections
   "site/sections/Animation/Animation.tsx": animation,

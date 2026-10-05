@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import type { ProductListingPage } from "../../vendor/commerce/types";
 import Filters from "./Filters";
 import Icon from "../ui/Icon";
@@ -9,9 +10,17 @@ export interface Props {
 }
 
 export default function SearchFilterDrawer({ id, filters, baseUrl }: Props) {
+  // Picking a filter navigates to a new URL with the section still mounted: close the drawer, so the
+  // filtered results show, as they did in v7.
+  const toggle = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    if (toggle.current) toggle.current.checked = false;
+  }, [baseUrl]);
+
   return (
     <>
       <input
+        ref={toggle}
         type="checkbox"
         id={id}
         className="peer/filter-drawer sr-only"

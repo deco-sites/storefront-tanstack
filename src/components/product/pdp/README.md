@@ -174,6 +174,5 @@ new fields.
 3. Write a composition component (`<Area>Hero` here) that handles analytics and layout.
 4. Write the section file in `src/sections/<Area>/` that declares the admin-facing
    `Props` with English JSDoc and delegates to the composition.
-5. Export `LoadingFallback` from the section file when the section is async.
-6. `npm run generate:schema && npm run typecheck && npm run build`.
-7. Verify in the admin preview that the new `Props` groups render.
+5. `npm run generate:schema && npm run typecheck && npm run build`.
+6. Verify in the admin preview that the new `Props` groups render.

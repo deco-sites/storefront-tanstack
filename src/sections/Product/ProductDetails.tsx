@@ -10,7 +10,6 @@ import type { DiscountBadgeConfig } from "../../components/product/pdp/ProductDi
 import type { GalleryConfig } from "../../components/product/pdp/ProductGallery";
 import type { VariantSelectorConfig } from "../../components/product/pdp/ProductVariantSelector";
 import Breadcrumb from "../../components/ui/Breadcrumb";
-import Section from "../../components/ui/Section";
 
 export interface CopyConfig extends HeroCopyConfig {
   /**
@@ -97,5 +96,3 @@ export default function ProductDetails({
     </div>
   );
 }
-
-export const LoadingFallback = () => <Section.Placeholder height="635px" />;

@@ -31,8 +31,6 @@ import * as WhatsApp from "./sections/Social/WhatsApp";
 
 export interface SectionView {
   default: ComponentType<any>;
-  /** What a section saved inside v7's Lazy wrapper shows while it loads. */
-  LoadingFallback?: ComponentType<any>;
 }
 
 export const views: Record<string, SectionView> = {

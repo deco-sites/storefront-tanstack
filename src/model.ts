@@ -14,8 +14,6 @@ export type BlockDescriptor = {
   /** The section's props: JSON from content and loader results. Loose, so loader data can carry them to the browser. */
   // biome-ignore lint/suspicious/noExplicitAny: each view types its own props
   props: Record<string, any>;
-  /** The section was saved inside v7's Lazy wrapper: it renders the same, with v7's fade-in style. */
-  deferred?: boolean;
 };
 
 /** The page SEO the site's head builder reads (src/head.ts). Every field is optional. */

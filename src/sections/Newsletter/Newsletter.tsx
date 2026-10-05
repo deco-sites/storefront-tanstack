@@ -176,5 +176,3 @@ export default function Newsletter({ notices, form }: Props) {
     </Section.Container>
   );
 }
-
-export const LoadingFallback = () => <Section.Placeholder height="412px" />;

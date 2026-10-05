@@ -6,7 +6,6 @@ import Section, {
 } from "../../components/ui/Section";
 import { useOffer } from "../../vendor/commerce/sdk/useOffer";
 import { useSendEvent } from "../../sdk/useSendEvent";
-import { type LoadingFallbackProps } from "~/types/deco";
 /** @titleBy title */
 interface Tab {
   title: string;
@@ -56,14 +55,3 @@ export default function TabbedProductShelf(
     </Section.Container>
   );
 }
-export const LoadingFallback = (
-  { title, cta }: LoadingFallbackProps<Props>,
-) => (
-  <Section.Container>
-    <Section.Header title={title} cta={cta} />
-
-    <Section.Tabbed>
-      <Section.Placeholder height="471px" />
-    </Section.Tabbed>
-  </Section.Container>
-);

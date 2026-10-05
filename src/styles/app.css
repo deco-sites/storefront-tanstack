@@ -11,9 +11,10 @@
 @source not "../blocks";
 @source not "../../.deco/index.ts";
 @source not "../../.deco/schema.gen.json";
-/* Utilities v7's stylesheet had from files the migration removed (the v7 generated metadata and
-   home route fallback): kept so the stylesheet stays exactly what the site shipped. */
-@source inline("lowercase normal-case text-4xl text-base-content/40 tooltip");
+/* Utilities v7's stylesheet had from code the migration removed (the v7 generated metadata, the
+   home route fallback, and the sections' LoadingFallback placeholders for v7's Lazy wrapper): kept
+   so the stylesheet stays exactly what the site shipped. */
+@source inline("lowercase normal-case text-4xl text-base-content/40 tooltip h-[120px] sm:h-[200px] sm:min-h-[600px] hero");
 @plugin "daisyui";
 @plugin "daisyui/theme" {
   name: "light";
@@ -95,7 +96,8 @@ ol.carousel {
   @media (width >= 1536px) { max-width: 1536px; }
 }
 
-/* Deferred section visibility — reduces layout shift while loading */
+/* v7's rules for its Lazy wrapper's placeholders. Nothing renders them since content no longer
+   uses the wrapper; kept so the stylesheet stays exactly what the site shipped. */
 section[data-deferred="true"] {
   content-visibility: auto;
   contain-intrinsic-size: auto 300px;

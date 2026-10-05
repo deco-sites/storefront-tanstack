@@ -9,7 +9,6 @@ import { useSendEvent } from "../../sdk/useSendEvent";
 import DeviceVisible, {
   type VisibilityConfig,
 } from "../../components/ui/DeviceVisible";
-import { type LoadingFallbackProps } from "~/types/deco";
 export interface Props extends SectionHeaderProps, VisibilityConfig {
   products: Product[] | null;
 }
@@ -45,11 +44,3 @@ export default function ProductShelf(
     </DeviceVisible>
   );
 }
-export const LoadingFallback = (
-  { title, cta }: LoadingFallbackProps<Props>,
-) => (
-  <Section.Container>
-    <Section.Header title={title} cta={cta} />
-    <Section.Placeholder height="471px" />;
-  </Section.Container>
-);

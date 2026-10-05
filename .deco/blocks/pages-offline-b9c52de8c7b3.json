@@ -3,14 +3,11 @@
   "path": "/offline",
   "sections": [
     {
-      "__resolveType": "website/sections/Rendering/Lazy.tsx",
-      "section": {
-        "__resolveType": "commerce/sections/Seo/SeoPLPV2.tsx",
-        "jsonLD": {
-          "__resolveType": "lazy",
-          "value": {
-            "__resolveType": "PLP Loader"
-          }
+      "__resolveType": "commerce/sections/Seo/SeoPLPV2.tsx",
+      "jsonLD": {
+        "__resolveType": "lazy",
+        "value": {
+          "__resolveType": "PLP Loader"
         }
       }
     },

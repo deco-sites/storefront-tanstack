@@ -11,32 +11,14 @@ import { withPage } from "./request-state.server";
 import { detectDevice } from "./sdk/device";
 import { type CacheProfileName, detectCacheProfile } from "./server/cache-profiles";
 
-/** v7's Lazy wrapper, under its v7 name (.deco/index.ts). */
-const LAZY_TYPES = new Set(["website/sections/Rendering/Lazy.tsx"]);
-
-/** What the page knows about a block before it resolves: enough to show the right placeholder. */
-export interface BlockHint {
-  /** The section type saved, when the block is a section. */
-  component?: string;
-  /** Saved inside v7's Lazy wrapper. */
-  deferred: boolean;
+/** The section type saved, read before the block resolves, when the block is a section. */
+function componentOf(stored: unknown): string | undefined {
+  if (!stored || typeof stored !== "object") return undefined;
+  return (stored as Block).__resolveType;
 }
 
-function hintOf(stored: unknown): BlockHint {
-  if (!stored || typeof stored !== "object") return { deferred: false };
-  const block = stored as Block;
-  if (LAZY_TYPES.has(block.__resolveType)) {
-    const inner = block.section as Block | undefined;
-    return { component: inner?.__resolveType, deferred: true };
-  }
-  return { component: block.__resolveType, deferred: false };
-}
-
-/**
- * Opens the page at `href` for `request`. `clientNavigation` is true when the browser asked for it
- * through the server function rather than as a document.
- */
-export async function openPage(href: string, request: Request, { clientNavigation = false } = {}) {
+/** Opens the page at `href` for `request`. */
+export async function openPage(href: string, request: Request) {
   const url = new URL(href, request.url);
   // Blocks read the page URL (pageState().url) and its request: it must stay on this site's origin.
   if (url.origin !== new URL(request.url).origin) throw notFound();
@@ -64,25 +46,17 @@ export async function openPage(href: string, request: Request, { clientNavigatio
     const sections = Array.isArray(page.sections) ? page.sections : [page.sections];
     // Reading the saved blocks runs nothing: it only expands saved-block references.
     const stored = await Promise.all(sections.map((block) => c.resolve(block, { run: false })));
-    const blocks = sections.map((block, index) => {
-      const hint = hintOf(stored[index]?.[0]);
-      return {
-        // v7's keys, so sections keep or reset their state across client-side navigations exactly
-        // as before: a section that stays on the page keeps its state, and one that was saved inside
-        // the Lazy wrapper remounts on the first navigation away from the server-rendered page.
-        key:
-          hint.deferred && !clientNavigation
-            ? `deferred-${url.pathname}-${hint.component}-${index}`
-            : `${hint.component ?? "block"}-${index}`,
-        hint,
-        value: c
-          .resolve<BlockDescriptor | BlockDescriptor[] | undefined>(block)
-          .then(([value, blockError]) => {
-            if (blockError) console.error(blockError);
-            return { value: value ?? undefined, failed: blockError !== null };
-          }),
-      };
-    });
+    const blocks = sections.map((block, index) => ({
+      // v7's keys, so a section that stays on the page keeps its state across client-side
+      // navigations exactly as before.
+      key: `${componentOf(stored[index]?.[0]) ?? "block"}-${index}`,
+      value: c
+        .resolve<BlockDescriptor | BlockDescriptor[] | undefined>(block)
+        .then(([value, blockError]) => {
+          if (blockError) console.error(blockError);
+          return { value: value ?? undefined, failed: blockError !== null };
+        }),
+    }));
 
     // Every block has started before SEO is awaited.
     const [seo, seoError] = await c.resolve<PageSeo | undefined>(page.seo);
