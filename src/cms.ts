@@ -3,8 +3,9 @@
  * reads content with (/next/tanstack-start-descriptors#2-create-the-cms).
  *
  * With `DECO_SITE` and `DECO_SITE_TOKEN` set, it serves releases published in the hosted Deco CMS
- * without a deploy and loads the drafts the site editor previews (/next/hosted#cloudflare-workers);
- * without them it serves the content module, the content of the commit this build was made from.
+ * without a deploy (/next/hosted#cloudflare-workers); without them it serves the content module, the
+ * content of the commit this build was made from. Drafts need neither: `cms.forDraft` fetches what
+ * the draft's branch changed from the Studio the pointer names (/next/hosted-drafts).
  */
 import { createCMS } from "@decocms/blocks";
 import { env } from "cloudflare:workers";
