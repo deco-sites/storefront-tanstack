@@ -41,11 +41,18 @@ export async function startSite({ port, env, log }) {
   // Fresh Cache API / KV state every start so edge-cache HIT/MISS never
   // depends on a previous run.
   fs.rmSync(path.join(ROOT, ".wrangler/state"), { recursive: true, force: true });
+  // Pin request.cf to the location the baseline was recorded with (regionCode SP feeds the
+  // X-Cache-Segment `r=` part). Left alone, the local Workers runtime uses node_modules/.mf/cf.json,
+  // fetched for whatever network the machine is on and refetched once it is 30 days old. Miniflare
+  // also refetches a pinned file older than 30 days, so copy it fresh on every start.
+  const cfPath = path.join(ROOT, ".wrangler/parity-cf.json");
+  fs.mkdirSync(path.dirname(cfPath), { recursive: true });
+  fs.copyFileSync(path.join(ROOT, "parity/runtime/cf.json"), cfPath);
   const child = spawn("npx", ["vite", "preview", "--config", "parity/vite.config.ts", "--port", String(port), "--strictPort"], {
     cwd: ROOT,
     detached: true,
     stdio: ["ignore", "pipe", "pipe"],
-    env: { ...process.env, NODE_ENV: "production" },
+    env: { ...process.env, NODE_ENV: "production", CLOUDFLARE_CF_FETCH_PATH: cfPath },
   });
   children.add(child.pid);
   const logFile = fs.createWriteStream(path.join(ROOT, "parity/.server.log"), { flags: "a" });
