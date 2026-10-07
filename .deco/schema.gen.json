@@ -1,6 +1,7 @@
 {
   "major": 1,
-  "version": "8.1.0-next.4",
+  "blocksMajor": 8,
+  "version": "8.1.0-next.6",
   "namespace": "site",
   "site": "storefront-tanstack",
   "manifest": {
