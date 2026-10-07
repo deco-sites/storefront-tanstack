@@ -10,6 +10,8 @@
 //   export const clientOnly = true  → skip SSR (client-only rendering)
 //   export const seo = true         → SEO section (provides page head data)
 //   export function LoadingFallback → skeleton shown while section loads
+//   export const renderJson = false → drop section from ?renderJson (mobile)
+//   export const renderJson = (p)=> → project props for ?renderJson (mobile)
 
 import * as _sync0 from "../src/sections/Footer/Footer";
 import * as _sync1 from "../src/sections/Header/Header";
@@ -35,12 +37,16 @@ import { LoadingFallback as _fb16 } from "../src/sections/Social/WhatsApp";
 export interface SectionMetaEntry {
   eager?: boolean;
   neverDefer?: boolean;
+  deferred?: boolean;
   cache?: string;
   layout?: boolean;
   sync?: boolean;
   clientOnly?: boolean;
   seo?: boolean;
   hasLoadingFallback?: boolean;
+  fallbackProps?: string[];
+  renderJson?: false;
+  hasRenderJson?: boolean;
 }
 
 export const sectionMeta: Record<string, SectionMetaEntry> = {
@@ -95,3 +101,5 @@ export const loadingFallbacks: Record<string, React.ComponentType<any>> = {
   "site/sections/Social/WhatsApp.tsx": _fb16,
   "site/sections/Theme/Theme.tsx": _sync2.LoadingFallback,
 };
+
+export const renderJsons: Record<string, any> = {};

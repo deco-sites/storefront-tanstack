@@ -10,6 +10,12 @@ import appCss from "../styles/app.css?url";
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   beforeLoad: async ({ context }) => {
+    // Cart and user are per-buyer: never resolve them during SSR. Cacheable
+    // pages are rendered without the buyer's cookies (the worker strips them so
+    // the edge-cached HTML can't carry anyone's data), so an SSR prefetch would
+    // dehydrate an empty cart/anonymous user and the client would trust it.
+    // In the browser the hooks fetch them for real.
+    if (typeof window === "undefined") return;
     const tasks: Promise<unknown>[] = [];
     if (!context.queryClient.getQueryData(CART_QUERY_KEY)) {
       tasks.push(

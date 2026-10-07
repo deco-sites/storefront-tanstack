@@ -4,7 +4,9 @@ import { addItems, getCart, updateItems } from "@decocms/apps-shopify";
 import { shopifyCartToCartState } from "./cart.shopify";
 import type { CartState } from "./cart.types";
 
-export const getCartServerFn = createServerFn({ method: "GET" }).handler(
+// POST, not GET: the worker edge-caches GET server functions (and strips the
+// buyer's cookies from them), which would always answer an empty cart.
+export const getCartServerFn = createServerFn({ method: "POST" }).handler(
   async (): Promise<CartState> => {
     const request = getRequest();
     const response = getResponse();
