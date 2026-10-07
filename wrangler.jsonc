@@ -40,7 +40,8 @@
   //   }
   // ],
   // Telemetry (/next/telemetry#choose-where-telemetry-goes): with DECO_SITE and DECO_SITE_TOKEN set,
-  // the hosted Deco CMS collector; otherwise the standard OTEL_EXPORTER_OTLP_ENDPOINT, the same
+  // the hosted Deco CMS collector; otherwise the standard OTEL_EXPORTER_OTLP_ENDPOINT (src/cms.ts reads
+  // it and OTEL_EXPORTER_OTLP_HEADERS and passes them to createCMS), the same
   // collector v7 sent to (its DECO_OTEL_*_ENDPOINT vars). The SDK appends /v1/metrics, /v1/logs and
   // /v1/traces. The auth header goes as a secret, the value v7 kept in DECO_OTEL_AUTH_TOKEN:
   //   wrangler secret put OTEL_EXPORTER_OTLP_HEADERS   # authorization=Bearer <token>

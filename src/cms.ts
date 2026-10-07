@@ -12,21 +12,49 @@ import { env } from "cloudflare:workers";
 import blocks from "../.deco";
 import content from "../.deco/blocks.gen";
 
-const site = env.DECO_SITE as string | undefined;
-const token = env.DECO_SITE_TOKEN as string | undefined;
+// The token needs the site (createCMS throws on a token alone), and hosted releases stay off until
+// both are set, as before.
+const hosted = Boolean(env.DECO_SITE && env.DECO_SITE_TOKEN);
+const site = hosted ? (env.DECO_SITE as string) : undefined;
+const token = hosted ? (env.DECO_SITE_TOKEN as string) : undefined;
+
+/** `k1=v1,k2=v2` with URL-encoded values, the format of `OTEL_EXPORTER_OTLP_HEADERS`. */
+const otlpHeaders = (raw: string | undefined) => {
+  const headers: Record<string, string> = {};
+  for (const pair of raw?.split(",") ?? []) {
+    const at = pair.indexOf("=");
+    if (at <= 0) continue;
+    try {
+      headers[decodeURIComponent(pair.slice(0, at).trim())] = decodeURIComponent(
+        pair.slice(at + 1).trim(),
+      );
+    } catch {
+      // A malformed pair is skipped.
+    }
+  }
+  return headers;
+};
+
+const otlpEndpoint = env.OTEL_EXPORTER_OTLP_ENDPOINT as string | undefined;
 
 const options = {
   blocks,
   site,
   token,
-  // The hosted collector when the site is connected; otherwise the standard OTEL_EXPORTER_OTLP_*
-  // variables, if set (/next/telemetry#choose-where-telemetry-goes). `vite dev` sends nothing, so
-  // local work never reaches the production collector wrangler.jsonc points at.
+  // The hosted collector when the site is connected (the token sends there); otherwise the standard
+  // OTEL_EXPORTER_OTLP_ENDPOINT/HEADERS, if set (/next/telemetry#choose-where-telemetry-goes). The SDK
+  // reads no environment variables, so the site passes them. `vite dev` sends nothing, so local work
+  // never reaches the production collector wrangler.jsonc points at.
   ...(import.meta.env.DEV
     ? { telemetry: false as const }
-    : site && token
-      ? { telemetry: { site, token } }
-      : {}),
+    : hosted || !otlpEndpoint
+      ? {}
+      : {
+          telemetry: {
+            endpoint: otlpEndpoint,
+            headers: otlpHeaders(env.OTEL_EXPORTER_OTLP_HEADERS as string | undefined),
+          },
+        }),
 };
 
 export const cms = createCMS({ ...options, content });

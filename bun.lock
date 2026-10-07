@@ -5,8 +5,8 @@
     "": {
       "name": "storefront-tanstack",
       "dependencies": {
-        "@decocms/apps-shopify": "^8.1.0-next.6",
-        "@decocms/blocks": "^8.1.0-next.6",
+        "@decocms/apps-shopify": "^8.1.0-next.7",
+        "@decocms/blocks": "^8.1.0-next.7",
         "@tanstack/react-query": "5.90.21",
         "@tanstack/react-router": "1.166.7",
         "@tanstack/react-start": "1.166.8",
@@ -98,9 +98,9 @@
 
     "@cspotcode/source-map-support": ["@cspotcode/source-map-support@0.8.1", "", { "dependencies": { "@jridgewell/trace-mapping": "0.3.9" } }, "sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw=="],
 
-    "@decocms/apps-shopify": ["@decocms/apps-shopify@8.1.0-next.6", "", { "dependencies": { "@decocms/blocks": "8.1.0-next.6" } }, "sha512-UASp0EzidxygEcwUhuN4yEFaQPeMK0fqjHjzaVpbk/ZB1lwkvHu3ixogxa7vPoM1mj1GOvmT56Pqy6WlkiL+vA=="],
+    "@decocms/apps-shopify": ["@decocms/apps-shopify@8.1.0-next.7", "", { "dependencies": { "@decocms/blocks": "8.1.0-next.7" } }, "sha512-CFd9WyM7ttZj9KOEQC3K7Rg/8PJ86nAp3B7+r4KJiJOqCJxaeUsxQEFzwp33cUNL+EXdaNZa/qyIlthii3s7CA=="],
 
-    "@decocms/blocks": ["@decocms/blocks@8.1.0-next.6", "", { "dependencies": { "ajv": "^8.20.0", "zod": "^4.4.3" }, "peerDependencies": { "react": "^19.0.0", "typescript": "^5.0.0" }, "bin": { "deco": "bin/deco.js" } }, "sha512-EL4ThGoFpJKE3Y15xs+i6uktmy/HUqMkjHXAoYop3JLaZunshdgUhNTDRYX66ryBS0x93RBt5aZ0jtm2NO/MbA=="],
+    "@decocms/blocks": ["@decocms/blocks@8.1.0-next.7", "", { "dependencies": { "ajv": "^8.20.0", "zod": "^4.4.3" }, "peerDependencies": { "react": "^19.0.0", "typescript": "^5.0.0" }, "bin": { "deco": "bin/deco.js" } }, "sha512-ULmBDjpBCjM/w0HikMtgZXHYA46WANE8wvqSbcvfaFGhV8CrpCAtAbSEB8ya/IfOYGd4sVhAFlz+CNarzTBZIA=="],
 
     "@emnapi/core": ["@emnapi/core@1.10.0", "", { "dependencies": { "@emnapi/wasi-threads": "1.2.1", "tslib": "^2.4.0" } }, "sha512-yq6OkJ4p82CAfPl0u9mQebQHKPJkY7WrIuk205cTYnYe+k2Z8YBh11FrbRG/H6ihirqcacOgl2BIO8oyMQLeXw=="],
 
