@@ -13,7 +13,11 @@
  *   as `loadPage`'s does); every other one (cart, user, wishlist, addresses, the layout) is private;
  * - v7's admin endpoints (`/deco/*`, `/live/*`, `/.decofile`) don't exist any more and answer 404;
  * - fingerprinted assets are served as immutable;
- * - `POST /_cache/purge` with `Authorization: Bearer $PURGE_TOKEN` drops paths from the cache;
+ * - the cache key's `__v` (and the X-Cache-Version header) is `<build>.<revision>`: the build's
+ *   timestamp and the content revision this instance serves, or the build alone when the revision
+ *   can't be read;
+ * - `POST /_cache/purge` with `Authorization: Bearer $PURGE_TOKEN` drops paths from the cache (the
+ *   current revision's entries);
  * - a page loaded into a frame (`Sec-Fetch-Dest: iframe`) may be embedded by deco Studio — the site
  *   editor's preview — through `Content-Security-Policy: frame-ancestors`, and by nothing else;
  * - `vite dev` skips the edge cache, so a content edit shows on the next load.
@@ -127,6 +131,22 @@ function buildHash(env: Env): string {
   return typeof __BUILD_HASH__ !== "undefined" ? __BUILD_HASH__ : "";
 }
 
+/**
+ * The cache version, `<build>.<revision>`: the build plus the content revision this instance serves,
+ * read from the release client, so a newly published release gets new entries. When the revision
+ * can't be read, the build alone.
+ */
+async function cacheVersion(env: Env): Promise<string> {
+  const build = buildHash(env);
+  let revision = "";
+  try {
+    revision = await cms.forRelease().revision();
+  } catch {
+    // The content didn't load: key on the build only.
+  }
+  return [build, revision].filter(Boolean).join(".");
+}
+
 function hashSegment(seg: SegmentKey): string {
   const parts: string[] = [seg.device];
   if (seg.loggedIn) parts.push("auth");
@@ -208,7 +228,7 @@ export function withEdgeCache(serverEntry: Handler, options: EdgeCacheOptions): 
     response.headers.append("Link", `<${options.cssHref}>; rel=preload; as=style`);
   }
 
-  function cacheKey(request: Request, env: Env, segment: SegmentKey): Request {
+  function cacheKey(request: Request, version: string, segment: SegmentKey): Request {
     const url = new URL(request.url);
     for (const key of [...url.searchParams.keys()]) {
       if (TRACKING_PARAMS.has(key.toLowerCase())) url.searchParams.delete(key);
@@ -217,7 +237,6 @@ export function withEdgeCache(serverEntry: Handler, options: EdgeCacheOptions): 
       const payload = url.searchParams.get("payload");
       if (payload) url.searchParams.set("payload", canonicalizeServerFnPayload(payload));
     }
-    const version = buildHash(env);
     if (version) url.searchParams.set("__v", version);
     // Programmatic fetches (no navigation) get their own entries, as in v7.
     if (!isServerFn(url) && request.headers.get("sec-fetch-dest") === "empty")
@@ -255,11 +274,12 @@ export function withEdgeCache(serverEntry: Handler, options: EdgeCacheOptions): 
     }
     const purged: string[] = [];
     const origin = new URL(request.url).origin;
+    // The current revision's entries: older revisions' keys are no longer looked up.
+    const version = await cacheVersion(env);
     for (const path of body.paths) {
       for (const segment of segments) {
         for (const programmatic of [false, true]) {
           const url = new URL(path, origin);
-          const version = buildHash(env);
           if (version) url.searchParams.set("__v", version);
           if (programmatic) url.searchParams.set("__fetch", "1");
           url.searchParams.set("__seg", hashSegment(segment));
@@ -349,7 +369,8 @@ export function withEdgeCache(serverEntry: Handler, options: EdgeCacheOptions): 
       return resp;
     }
 
-    const key = cacheKey(request, env, segment);
+    const version = await cacheVersion(env);
+    const key = cacheKey(request, version, segment);
     const cache = edgeCache();
     const edge = edgeCacheConfig(profile);
 
@@ -360,7 +381,6 @@ export function withEdgeCache(serverEntry: Handler, options: EdgeCacheOptions): 
       out.headers.set("X-Cache", xCache);
       out.headers.set("X-Cache-Profile", profile);
       out.headers.set("X-Cache-Segment", hashSegment(segment));
-      const version = buildHash(env);
       if (version) out.headers.set("X-Cache-Version", version);
       if (extra) for (const [k, v] of Object.entries(extra)) out.headers.set(k, v);
       appendResourceHints(out);

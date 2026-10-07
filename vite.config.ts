@@ -1,6 +1,5 @@
 import { cloudflare } from "@cloudflare/vite-plugin";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
-import { execSync } from "node:child_process";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite";
@@ -8,15 +7,13 @@ import path from "path";
 
 const srcDir = path.resolve(__dirname, "src");
 
-/** The build's id for edge-cache keys and the X-Cache-Version header: the commit, as v7 stamped it. */
+/**
+ * The build's id for edge-cache keys and the X-Cache-Version header: the time this build ran, so every
+ * build (even two of the same commit) gets its own cache entries.
+ */
 function buildHash(command: string): string {
   if (command !== "build") return "dev";
-  if (process.env.WORKERS_CI_COMMIT_SHA) return process.env.WORKERS_CI_COMMIT_SHA.slice(0, 12);
-  try {
-    return execSync("git rev-parse --short=12 HEAD", { stdio: ["ignore", "pipe", "ignore"] }).toString().trim();
-  } catch {
-    return Date.now().toString(36);
-  }
+  return Date.now().toString(36);
 }
 
 export default defineConfig({
