@@ -1,5 +1,5 @@
-// Vendored from @decocms/blocks 7.20.7 (src/hooks/Image.tsx). Image helpers are site code in the next major; this
-// copy keeps the exact CDN URLs v7 produced. It's your code now.
+// Vendored from @decocms/blocks 7.20.7 (src/hooks/Image.tsx), CDN URLs updated to 7.77.1 (the version main runs).
+// Image helpers are site code in the next major; this copy keeps the exact CDN URLs v7 produces. It's your code now.
 import type { ImgHTMLAttributes } from "react";
 import { forwardRef } from "react";
 
@@ -9,19 +9,23 @@ import { forwardRef } from "react";
 
 const DECO_CACHE_URL = "https://assets.decocache.com/";
 const S3_URL = "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/";
+// decoims.com, the image CDN before assets.decocms.com. Saved content is full of these URLs; passing one as `src=`
+// to a Cloudflare Deco CDN makes it fetch itself (508 Loop Detected), so it is stripped for the Cloudflare ones.
+const DECOIMS_PREFIX_RE = /^https:\/\/decoims\.com\//;
+const CLOUDFLARE_CDNS = new Set(["assets.decocms.com", "decoims.com"]);
 
 // -------------------------------------------------------------------------
 // Configurable CDN domain
 // -------------------------------------------------------------------------
 
-let imageCdnDomain = "decoims.com";
+let imageCdnDomain = "assets.decocms.com";
 
 /**
  * Register the image CDN domain used by `getOptimizedMediaUrl`.
  * Call once in your site's setup.ts before any page loads.
  *
  * Available domains:
- * - `decoims.com` (Cloudflare, default — best compression, same edge as Workers)
+ * - `assets.decocms.com` (Cloudflare, default — best compression, same edge as Workers)
  * - `deco-assets.edgedeco.com` (Azion IMS)
  * - `deco-assets.decoazn.com` (Azion IMS, legacy)
  */
@@ -117,6 +121,7 @@ export function getOptimizedMediaUrl(opts: OptimizationOptions): string {
   }
 
   let imageSource = originalSrc.replace(DECO_CACHE_URL, "").replace(S3_URL, "").split("?")[0];
+  if (CLOUDFLARE_CDNS.has(imageCdnDomain)) imageSource = imageSource.replace(DECOIMS_PREFIX_RE, "");
 
   // Already on the image CDN — strip the host so we don't proxy through ourselves.
   const cdnPrefix = `https://${imageCdnDomain}/`;
