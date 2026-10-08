@@ -107,7 +107,10 @@ export default function ProductHero({
       )}
     >
       <div className="sm:col-span-3">
-        <ProductGallery images={images} config={galleryConfig} />
+        {/* Keyed by the variant: v7 remounted the section on every navigation (its Lazy wrapper
+            was keyed by page path). Slider.JS watches the slides it found on mount, so a reused
+            gallery turns its "previous" arrow on at the first image after a variant change. */}
+        <ProductGallery key={product.productID} images={images} config={galleryConfig} />
       </div>
 
       <div className="sm:col-span-2 flex flex-col">

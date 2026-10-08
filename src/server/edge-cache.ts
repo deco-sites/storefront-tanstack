@@ -18,8 +18,10 @@
  *   can't be read;
  * - `POST /_cache/purge` with `Authorization: Bearer $PURGE_TOKEN` drops paths from the cache (the
  *   current revision's entries);
- * - a page loaded into a frame (`Sec-Fetch-Dest: iframe`) may be embedded by deco Studio — the site
- *   editor's preview — through `Content-Security-Policy: frame-ancestors`, and by nothing else;
+ * - every HTML response may be framed by deco Studio — the site editor's preview — and by nothing
+ *   else, through `Content-Security-Policy: frame-ancestors` (no `X-Frame-Options`), as v7 does;
+ * - every response the worker sends without a CDN-Cache-Control, or with `X-Cache: BYPASS`, gets
+ *   `CDN-Cache-Control: no-store`, so Cloudflare's own CDN never caches what this wrapper didn't;
  * - `vite dev` skips the edge cache, so a content edit shows on the next load.
  */
 import { cms } from "../cms";
@@ -62,7 +64,6 @@ export interface EdgeCacheOptions {
 
 const SECURITY_HEADERS: Record<string, string> = {
   "X-Content-Type-Options": "nosniff",
-  "X-Frame-Options": "SAMEORIGIN",
   "Referrer-Policy": "strict-origin-when-cross-origin",
   "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
   "X-XSS-Protection": "1; mode=block",
@@ -72,10 +73,11 @@ const SECURITY_HEADERS: Record<string, string> = {
 
 /**
  * Who may frame the site: deco Studio, whose site editor previews the storefront in an iframe (v7's
- * `DECO_ADMIN_FRAME_ANCESTORS`), plus a Studio running on this machine in `vite dev`. Sent only to
- * frame loads, in place of `X-Frame-Options: SAMEORIGIN`, which would refuse Studio's origin; a
- * top-level page keeps v7's headers. A browser caches a framed page apart from the same page opened
- * directly (its HTTP cache is keyed by the top-level site), so the two never swap headers.
+ * `DECO_ADMIN_FRAME_ANCESTORS`), plus a Studio running on this machine in `vite dev`. Sent on every
+ * HTML response as an enforced `Content-Security-Policy: frame-ancestors`, with no
+ * `X-Frame-Options`, as v7's `createDecoWorkerEntry` does (`DEFAULT_FRAME_ANCESTORS_CSP`): CSP
+ * `frame-ancestors` supersedes X-Frame-Options and, unlike SAMEORIGIN, can allow Studio's origin
+ * while refusing every other site.
  */
 const FRAME_ANCESTORS = [
   "'self'",
@@ -207,6 +209,7 @@ export function withEdgeCache(serverEntry: Handler, options: EdgeCacheOptions): 
   const safeCookies = new Set(options.safeCookies ?? DEFAULT_SAFE_COOKIES);
   const securityHeaders: Record<string, string> = {
     ...SECURITY_HEADERS,
+    "Content-Security-Policy": `frame-ancestors ${FRAME_ANCESTORS.join(" ")}`,
     ...(options.csp.length > 0
       ? { "Content-Security-Policy-Report-Only": options.csp.join("; ") }
       : {}),
@@ -492,17 +495,28 @@ export function withEdgeCache(serverEntry: Handler, options: EdgeCacheOptions): 
 
   return {
     async fetch(request, env, ctx) {
-      const response = await handle(request, env, ctx);
+      let response = await handle(request, env, ctx);
+      // CDN-Cache-Control is decided here, at the single exit, as v7 does: a response the wrapper
+      // declined to cache (`X-Cache: BYPASS`) or that no branch gave one (a private page such as
+      // /login or /account, a server function, a redirect, an asset) tells the CDN `no-store`. Only
+      // the cacheable path's own value (`dress`) is kept.
+      if (
+        response.headers.get("X-Cache") === "BYPASS" ||
+        !response.headers.has("CDN-Cache-Control")
+      ) {
+        try {
+          response.headers.set("CDN-Cache-Control", "no-store");
+        } catch {
+          // Immutable headers (a response passed through as fetched): copy it first.
+          response = new Response(response.body, response);
+          response.headers.set("CDN-Cache-Control", "no-store");
+        }
+      }
       dedupeSetCookies(response);
       if (!(response.headers.get("content-type") ?? "").includes("text/html")) return response;
       const out = new Response(response.body, response);
       for (const [k, v] of Object.entries(securityHeaders)) {
         if (!out.headers.has(k)) out.headers.set(k, v);
-      }
-      const dest = request.headers.get("sec-fetch-dest");
-      if (dest === "iframe" || dest === "frame") {
-        out.headers.delete("X-Frame-Options");
-        out.headers.set("Content-Security-Policy", `frame-ancestors ${FRAME_ANCESTORS.join(" ")}`);
       }
       return out;
     },
