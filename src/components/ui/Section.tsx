@@ -60,28 +60,10 @@ function Container({ className: _class, ...props }: React.JSX.IntrinsicElements[
   );
 }
 
-function Placeholder(
-  { height, className: _class }: { height: string; className?: string },
-) {
-  return (
-    <div
-      style={{
-        height,
-        containIntrinsicSize: height,
-        contentVisibility: "auto",
-      }}
-      className={clx("flex justify-center items-center", _class)}
-    >
-      <span className="loading loading-spinner" />
-    </div>
-  );
-}
-
 function Section() {}
 
 Section.Container = Container;
 Section.Header = Header;
 Section.Tabbed = Tabbed;
-Section.Placeholder = Placeholder;
 
 export default Section;

@@ -5,7 +5,7 @@ import Slider from "../../components/ui/Slider";
 import { clx } from "~/sdk/clx";
 import { useId } from "react";
 import { useSendEvent } from "../../sdk/useSendEvent";
-import { useDevice } from "@decocms/blocks/sdk/useDevice";
+import { useDevice } from "~/sdk/device";
 // useSetEarlyHints was a Deco Fresh-only hook; edge hints are now set via cacheHeaders.
 const useSetEarlyHints = () => () => {};
 
@@ -204,18 +204,3 @@ function Carousel({ images = [], preload, interval }: Props) {
 export default Carousel;
 
 export const cache = "listing";
-
-export function LoadingFallback() {
-  // Reserve the carousel's real footprint to avoid CLS: the banner is a
-  // full-width hero at min-h-[660px] on mobile and ~600px (1440x600 image) on
-  // desktop. The previous fallback was a product-grid skeleton — wrong shape
-  // and far shorter than the banner, causing a large layout shift on load.
-  return (
-    <div
-      className="w-screen min-h-[660px] sm:min-h-[600px] bg-base-200 flex items-center justify-center"
-      style={{ contentVisibility: "auto", containIntrinsicSize: "660px" }}
-    >
-      <span className="loading loading-spinner" />
-    </div>
-  );
-}

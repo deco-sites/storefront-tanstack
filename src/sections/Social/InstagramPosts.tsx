@@ -5,7 +5,6 @@ import Section, {
 import Slider from "../../components/ui/Slider";
 import { clx } from "~/sdk/clx";
 import { type SectionProps } from "~/types/deco";
-import { type LoadingFallbackProps } from "~/types/deco";
 export interface Data {
   id: string;
   permalink: string;
@@ -136,10 +135,4 @@ function InstagramPosts({
     </Section.Container>
   );
 }
-export const LoadingFallback = ({ title }: LoadingFallbackProps<Props>) => (
-  <Section.Container>
-    <Section.Header title={title} />
-    <Section.Placeholder height="635px" />
-  </Section.Container>
-);
 export default InstagramPosts;

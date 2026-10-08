@@ -1,4 +1,20 @@
 @import "tailwindcss";
+/* parity harness (dev-only) must not feed Tailwind class detection */
+@source not "../../parity";
+/* Code that came out of the v7 packages (vendored loaders and commerce types, the page renderer,
+   root document and edge cache), the block map and the generated schema. In v7 it lived in
+   node_modules, where Tailwind never looked, so scanning it would add utilities the site never
+   shipped; the classes it uses that the site styles are in the stylesheet already. */
+@source not "../vendor";
+@source not "../runtime";
+@source not "../server";
+@source not "../blocks";
+@source not "../../.deco/index.ts";
+@source not "../../.deco/schema.gen.json";
+/* Utilities v7's stylesheet had from code the migration removed (the v7 generated metadata, the
+   home route fallback, and the sections' LoadingFallback placeholders for v7's Lazy wrapper): kept
+   so the stylesheet stays exactly what the site shipped. */
+@source inline("lowercase normal-case text-4xl text-base-content/40 tooltip h-[120px] sm:h-[200px] sm:min-h-[600px] hero");
 @plugin "daisyui";
 @plugin "daisyui/theme" {
   name: "light";
@@ -80,7 +96,8 @@ ol.carousel {
   @media (width >= 1536px) { max-width: 1536px; }
 }
 
-/* Deferred section visibility — reduces layout shift while loading */
+/* v7's rules for its Lazy wrapper's placeholders. Nothing renders them since content no longer
+   uses the wrapper; kept so the stylesheet stays exactly what the site shipped. */
 section[data-deferred="true"] {
   content-visibility: auto;
   contain-intrinsic-size: auto 300px;

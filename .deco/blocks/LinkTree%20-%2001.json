@@ -3,28 +3,22 @@
     "items": [
       {
         "href": "https://www.deco.cx/",
-        "icon": "Deco",
         "label": "you can add links here"
       },
       {
         "href": "https://www.deco.cx/",
-        "icon": "Discount",
         "label": "by editing on the left side panel"
       },
       {
         "href": "https://www.deco.cx/",
-        "icon": "ChevronLeft",
         "label": "<- try it by clicking on \"Links\""
       },
       {
         "href": "https://deco.cx/discord",
-        "icon": "Discord",
-        "label": "join our community — discord server",
-        "strokeWidth": 10
+        "label": "join our community — discord server"
       },
       {
         "href": "https://www.deco.cx/",
-        "icon": "ChevronDown",
         "label": "don't forget to change the social links"
       }
     ],
@@ -39,29 +33,10 @@
             "color": "#1ae000"
           }
         ]
-      },
-      "backgroundColors": {
-        "hover": [
-          {
-            "color": "#6b6b6b"
-          },
-          {
-            "color": "#c4c4c4"
-          }
-        ],
-        "neutral": [
-          {
-            "color": "#919191"
-          },
-          {
-            "color": "#cccccc"
-          }
-        ]
       }
     }
   },
   "header": {
-    "link": "https://deco.cx",
     "logo": {
       "img": "https://decoims.com/storefront-tanstack/cabf6d48-b0b2-4f97-9712-cb21b957e0eb/1742560273744-3fa15eff-add9-4974-864c-7f952bca5180.png",
       "width": 150,

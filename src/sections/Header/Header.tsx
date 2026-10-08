@@ -1,5 +1,5 @@
 import type { HTMLWidget, ImageWidget } from "~/types/widgets";
-import type { SiteNavigationElement } from "@decocms/apps-commerce/types";
+import type { SiteNavigationElement } from "../../vendor/commerce/types";
 import Image from "~/components/ui/Image";
 import Alert from "../../components/header/Alert";
 import Bag from "../../components/header/Bag";
@@ -21,8 +21,7 @@ import {
   SIDEMENU_CONTAINER_ID,
   SIDEMENU_DRAWER_ID,
 } from "../../constants";
-import { useDevice } from "@decocms/blocks/sdk/useDevice";
-import { type LoadingFallbackProps } from "~/types/deco";
+import { useDevice } from "~/sdk/device";
 export interface Logo {
   src: ImageWidget;
   alt: string;
@@ -219,9 +218,6 @@ function Header({
     </header>
   );
 }
-export const LoadingFallback = (props: LoadingFallbackProps<Props>) => (
-  <Header {...props as any} loading="lazy" />
-);
 export default Header;
 
 export const eager = true;

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import type { HTMLWidget } from "~/types/widgets";
-import Section from "../../components/ui/Section";
 
 export interface Props {
   /**
@@ -130,5 +129,4 @@ function CampaignTimer({
     </div>
   );
 }
-export const LoadingFallback = () => <Section.Placeholder height="635px" />;
 export default CampaignTimer;
