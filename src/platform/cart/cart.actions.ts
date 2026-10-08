@@ -9,7 +9,9 @@ import { getCart } from "../../vendor/shopify/loaders/cart";
 import { shopifyCartToCartState } from "./cart.shopify";
 import { type CartState, EMPTY_CART } from "./cart.types";
 
-export const getCartServerFn = createServerFn({ method: "GET" }).handler(
+// POST, not GET: the worker edge-caches GET server functions (and strips the
+// buyer's cookies from them), which would always answer an empty cart.
+export const getCartServerFn = createServerFn({ method: "POST" }).handler(
   async (): Promise<CartState> => {
     markPrivate();
     const request = getRequest();

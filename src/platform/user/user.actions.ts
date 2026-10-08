@@ -46,7 +46,9 @@ const persistAccessToken = (accessToken: string) => {
   });
 };
 
-export const getUserServerFn = createServerFn({ method: "GET" }).handler(
+// POST, not GET: the worker edge-caches GET server functions (and strips the
+// buyer's cookies from them), which would always answer "logged out".
+export const getUserServerFn = createServerFn({ method: "POST" }).handler(
   async (): Promise<Person | null> => {
     markPrivate();
     const request = getRequest();
