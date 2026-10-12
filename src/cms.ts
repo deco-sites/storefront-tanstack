@@ -41,6 +41,9 @@ const options = {
   blocks,
   site,
   token,
+  // `vite dev` never swaps in a hosted release, so local files win (/next/hosted). Since 8.1.0 the
+  // SDK no longer reads NODE_ENV for this; the site passes it.
+  dev: import.meta.env.DEV,
   // The hosted collector when the site is connected (the token sends there); otherwise the standard
   // OTEL_EXPORTER_OTLP_ENDPOINT/HEADERS, if set (/next/telemetry#choose-where-telemetry-goes). The SDK
   // reads no environment variables, so the site passes them. `vite dev` sends nothing, so local work
