@@ -121,6 +121,10 @@
         }
       },
       "loaders": {
+        "website/sections/Seo/SeoV2.tsx": {
+          "$ref": "#/definitions/d2Vic2l0ZS9zZWN0aW9ucy9TZW8vU2VvVjIudHN4",
+          "namespace": "website"
+        },
         "shopify/loaders/ProductDetailsPage.ts": {
           "$ref": "#/definitions/c2hvcGlmeS9sb2FkZXJzL1Byb2R1Y3REZXRhaWxzUGFnZS50cw==",
           "namespace": "shopify"
@@ -229,10 +233,6 @@
         }
       },
       "content": {
-        "website/sections/Seo/SeoV2.tsx": {
-          "$ref": "#/definitions/d2Vic2l0ZS9zZWN0aW9ucy9TZW8vU2VvVjIudHN4",
-          "namespace": "website"
-        },
         "cms-settings": {
           "$ref": "#/definitions/Y21zLXNldHRpbmdz",
           "namespace": "deco"
@@ -388,6 +388,22 @@
             "nullable": true,
             "title": "Description"
           },
+          "canonical": {
+            "type": "string",
+            "nullable": true,
+            "title": "Canonical URL"
+          },
+          "favicon": {
+            "type": "string",
+            "nullable": true,
+            "title": "Favicon",
+            "format": "image-uri"
+          },
+          "noIndexing": {
+            "type": "boolean",
+            "nullable": true,
+            "title": "No Indexing"
+          },
           "titleTemplate": {
             "type": "string",
             "nullable": true,
@@ -398,25 +414,31 @@
             "nullable": true,
             "title": "Description Template"
           },
-          "image": {
-            "type": "string",
-            "nullable": true,
-            "title": "Image"
-          },
-          "canonical": {
-            "type": "string",
-            "nullable": true,
-            "title": "Canonical"
-          },
-          "noIndexing": {
-            "type": "boolean",
-            "nullable": true,
-            "title": "No Indexing"
-          },
           "type": {
             "type": "string",
             "nullable": true,
-            "title": "Type"
+            "title": "Page Type"
+          },
+          "image": {
+            "type": "string",
+            "nullable": true,
+            "title": "OG Image",
+            "format": "image-uri"
+          },
+          "themeColor": {
+            "type": "string",
+            "nullable": true,
+            "title": "Theme Color",
+            "format": "color"
+          },
+          "jsonLDs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": {}
+            },
+            "nullable": true,
+            "title": "JSON-LD Structured Data"
           }
         }
       },
@@ -3329,19 +3351,44 @@
                 ]
               }
             },
-            "title": "Json LD"
+            "title": "Data Source"
           },
           "title": {
             "type": "string",
             "nullable": true,
-            "title": "Title"
+            "title": "Title Override"
           },
           "description": {
             "type": "string",
             "nullable": true,
-            "title": "Description"
+            "title": "Description Override"
+          },
+          "noIndexing": {
+            "type": "boolean",
+            "nullable": true,
+            "title": "Disable indexing"
+          },
+          "configJsonLD": {
+            "type": "object",
+            "properties": {
+              "removeVideos": {
+                "type": "boolean",
+                "nullable": true,
+                "title": "Remove videos (deprecated)",
+                "description": "No effect: listing structured data is an ItemList, which carries no videos."
+              },
+              "ignoreStructuredData": {
+                "type": "boolean",
+                "nullable": true,
+                "title": "Ignore Structured Data",
+                "description": "By default, Structured Data (JSON-LD) is sent to everyone. Turn this on to omit it for regular visitors while crawlers and bots still receive the full Structured Data. When this block is the page's SEO source, the product fetch is also skipped for visitors, so the page loads faster. Some integrations may rely on Structured Data being present for all users."
+              }
+            },
+            "nullable": true,
+            "title": "Structured Data"
           }
-        }
+        },
+        "description": "v7's `commerce/sections/Seo/SeoPLPV2.tsx`."
       },
       "Y29tbWVyY2Uvc2VjdGlvbnMvU2VvL1Nlb1BMUFYyLnRzeA==": {
         "title": "commerce/sections/Seo/SeoPLPV2.tsx",
@@ -3421,28 +3468,36 @@
                 ]
               }
             },
-            "title": "Json LD"
+            "title": "Data Source"
           },
-          "jsonLDs": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "additionalProperties": {}
-            },
+          "omitVariants": {
+            "type": "boolean",
             "nullable": true,
-            "title": "Json L Ds"
+            "title": "Omit variants"
           },
           "title": {
             "type": "string",
             "nullable": true,
-            "title": "Title"
+            "title": "Title Override"
           },
           "description": {
             "type": "string",
             "nullable": true,
-            "title": "Description"
+            "title": "Description Override"
+          },
+          "noIndexing": {
+            "type": "boolean",
+            "nullable": true,
+            "title": "Disable indexing"
+          },
+          "ignoreStructuredData": {
+            "type": "boolean",
+            "nullable": true,
+            "title": "Ignore Structured Data",
+            "description": "By default, Structured Data (JSON-LD) is sent to everyone. Turn this on to omit it for regular visitors while crawlers and bots still receive the full Structured Data. When this block is the page's SEO source, the product fetch is also skipped for visitors, so the page loads faster. Some integrations may rely on Structured Data being present for all users."
           }
-        }
+        },
+        "description": "v7's `commerce/sections/Seo/SeoPDPV2.tsx`."
       },
       "Y29tbWVyY2Uvc2VjdGlvbnMvU2VvL1Nlb1BEUFYyLnRzeA==": {
         "title": "commerce/sections/Seo/SeoPDPV2.tsx",
@@ -9376,6 +9431,9 @@
             "$ref": "#/definitions/Resolvable"
           },
           {
+            "$ref": "#/definitions/d2Vic2l0ZS9zZWN0aW9ucy9TZW8vU2VvVjIudHN4"
+          },
+          {
             "$ref": "#/definitions/c2hvcGlmeS9sb2FkZXJzL1Byb2R1Y3REZXRhaWxzUGFnZS50cw=="
           },
           {
@@ -9453,9 +9511,6 @@
         "anyOf": [
           {
             "$ref": "#/definitions/Resolvable"
-          },
-          {
-            "$ref": "#/definitions/d2Vic2l0ZS9zZWN0aW9ucy9TZW8vU2VvVjIudHN4"
           },
           {
             "$ref": "#/definitions/Y21zLXNldHRpbmdz"
