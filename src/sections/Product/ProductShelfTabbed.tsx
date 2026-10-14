@@ -1,12 +1,11 @@
-import type { Product } from "@decocms/apps-commerce/types";
-import { mapProductToAnalyticsItem } from "@decocms/apps-commerce/utils/productToAnalyticsItem";
+import type { Product } from "../../vendor/commerce/types";
+import { mapProductToAnalyticsItem } from "../../vendor/commerce/utils/productToAnalyticsItem";
 import ProductSlider from "../../components/product/ProductSlider";
 import Section, {
   Props as SectionHeaderProps,
 } from "../../components/ui/Section";
-import { useOffer } from "@decocms/apps-commerce/sdk/useOffer";
+import { useOffer } from "../../vendor/commerce/sdk/useOffer";
 import { useSendEvent } from "../../sdk/useSendEvent";
-import { type LoadingFallbackProps } from "~/types/deco";
 /** @titleBy title */
 interface Tab {
   title: string;
@@ -56,14 +55,3 @@ export default function TabbedProductShelf(
     </Section.Container>
   );
 }
-export const LoadingFallback = (
-  { title, cta }: LoadingFallbackProps<Props>,
-) => (
-  <Section.Container>
-    <Section.Header title={title} cta={cta} />
-
-    <Section.Tabbed>
-      <Section.Placeholder height="471px" />
-    </Section.Tabbed>
-  </Section.Container>
-);

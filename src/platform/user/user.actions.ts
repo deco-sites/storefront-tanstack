@@ -5,20 +5,18 @@ import {
   getRequestProtocol,
   setCookie,
 } from "@tanstack/react-start/server";
-import {
-  getShopifyClient,
-  signIn as shopifySignIn,
-  signUp as shopifySignUp,
-  userLoader as shopifyUserLoader,
-} from "@decocms/apps-shopify";
+import { z } from "zod";
+import { markPrivate } from "../../server/private-response";
+import { getShopifyClient } from "../../vendor/shopify/client";
+import shopifySignIn from "../../vendor/shopify/actions/user/signIn";
+import shopifySignUp from "../../vendor/shopify/actions/user/signUp";
+import shopifyUserLoader from "../../vendor/shopify/loaders/user";
 import type { Person } from "./user.types";
 
 const CUSTOMER_COOKIE = "secure_customer_sig";
 const ONE_WEEK_S = 7 * 24 * 60 * 60;
 
-const toPerson = (
-  u: Awaited<ReturnType<typeof shopifyUserLoader>>,
-): Person | null => {
+const toPerson = (u: Awaited<ReturnType<typeof shopifyUserLoader>>): Person | null => {
   if (!u) return null;
   return {
     "@id": u["@id"],
@@ -52,6 +50,7 @@ const persistAccessToken = (accessToken: string) => {
 // buyer's cookies from them), which would always answer "logged out".
 export const getUserServerFn = createServerFn({ method: "POST" }).handler(
   async (): Promise<Person | null> => {
+    markPrivate();
     const request = getRequest();
     const u = await shopifyUserLoader(request.headers);
     return toPerson(u);
@@ -59,7 +58,7 @@ export const getUserServerFn = createServerFn({ method: "POST" }).handler(
 );
 
 export const signInServerFn = createServerFn({ method: "POST" })
-  .inputValidator((input: { email: string; password: string }) => input)
+  .inputValidator(z.object({ email: z.string(), password: z.string() }))
   .handler(async (ctx): Promise<Person | null> => {
     const request = getRequest();
     // Don't pass responseHeaders — we set the cookie ourselves below so the
@@ -69,11 +68,9 @@ export const signInServerFn = createServerFn({ method: "POST" })
       password: ctx.data.password,
       requestHeaders: request.headers,
     });
-    const token = result?.customerAccessTokenCreate?.customerAccessToken
-      ?.accessToken;
+    const token = result?.customerAccessTokenCreate?.customerAccessToken?.accessToken;
     if (!token) {
-      const msg = result?.customerAccessTokenCreate?.customerUserErrors?.[0]
-        ?.message;
+      const msg = result?.customerAccessTokenCreate?.customerUserErrors?.[0]?.message;
       throw new Error(msg ?? "Invalid email or password");
     }
     persistAccessToken(token);
@@ -83,12 +80,12 @@ export const signInServerFn = createServerFn({ method: "POST" })
 
 export const signUpServerFn = createServerFn({ method: "POST" })
   .inputValidator(
-    (input: {
-      email: string;
-      password: string;
-      firstName?: string;
-      lastName?: string;
-    }) => input,
+    z.object({
+      email: z.string(),
+      password: z.string(),
+      firstName: z.string().optional(),
+      lastName: z.string().optional(),
+    }),
   )
   .handler(async (ctx): Promise<Person | null> => {
     const request = getRequest();
@@ -109,8 +106,7 @@ export const signUpServerFn = createServerFn({ method: "POST" })
       password: ctx.data.password,
       requestHeaders: request.headers,
     });
-    const token = signin?.customerAccessTokenCreate?.customerAccessToken
-      ?.accessToken;
+    const token = signin?.customerAccessTokenCreate?.customerAccessToken?.accessToken;
     if (!token) {
       throw new Error("Account created, but auto sign-in failed.");
     }
@@ -145,13 +141,12 @@ interface RecoverResult {
 }
 
 export const recoverPasswordServerFn = createServerFn({ method: "POST" })
-  .inputValidator((input: { email: string }) => input)
+  .inputValidator(z.object({ email: z.string() }))
   .handler(async (ctx): Promise<{ ok: true }> => {
     const client = getShopifyClient();
-    const data = await client.query<RecoverResult>(
-      RECOVER_PASSWORD_MUTATION,
-      { email: ctx.data.email },
-    );
+    const data = await client.query<RecoverResult>(RECOVER_PASSWORD_MUTATION, {
+      email: ctx.data.email,
+    });
     const errs = data?.customerRecover?.customerUserErrors;
     if (errs?.length) {
       throw new Error(errs[0].message ?? "Could not send recovery email.");

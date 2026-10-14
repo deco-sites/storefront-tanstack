@@ -1,6 +1,5 @@
 import type { ImageWidget } from "~/types/widgets";
 import { Picture, Source } from "~/components/ui/Picture";
-import Section from "../../components/ui/Section";
 
 export interface Props {
   image: {
@@ -142,7 +141,5 @@ function ShoppableBanner(props: Props) {
     </div>
   );
 }
-
-export const LoadingFallback = () => <Section.Placeholder height="635px" />;
 
 export default ShoppableBanner;

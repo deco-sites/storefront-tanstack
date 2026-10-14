@@ -8,4 +8,4 @@ export {
   FACTORS,
   type ImageProps,
   type FitOptions,
-} from "@decocms/blocks/hooks";
+} from "../../vendor/blocks/Image";

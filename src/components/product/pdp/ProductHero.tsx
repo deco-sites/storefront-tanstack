@@ -1,6 +1,6 @@
-import type { ProductDetailsPage } from "@decocms/apps-commerce/types";
-import { useOffer } from "@decocms/apps-commerce/sdk/useOffer";
-import { mapProductToAnalyticsItem } from "@decocms/apps-commerce/utils/productToAnalyticsItem";
+import type { ProductDetailsPage } from "../../../vendor/commerce/types";
+import { useOffer } from "../../../vendor/commerce/sdk/useOffer";
+import { mapProductToAnalyticsItem } from "../../../vendor/commerce/utils/productToAnalyticsItem";
 import { useRouterState } from "@tanstack/react-router";
 import { useSendEvent } from "../../../sdk/useSendEvent";
 import { clx } from "~/sdk/clx";
@@ -107,7 +107,10 @@ export default function ProductHero({
       )}
     >
       <div className="sm:col-span-3">
-        <ProductGallery images={images} config={galleryConfig} />
+        {/* Keyed by the variant: v7 remounted the section on every navigation (its Lazy wrapper
+            was keyed by page path). Slider.JS watches the slides it found on mount, so a reused
+            gallery turns its "previous" arrow on at the first image after a variant change. */}
+        <ProductGallery key={product.productID} images={images} config={galleryConfig} />
       </div>
 
       <div className="sm:col-span-2 flex flex-col">

@@ -1,0 +1,3 @@
+# Shopify Storefront GraphQL documents, kept byte-for-byte as v7 sent them: Prettier reformats
+# gql templates, which changes the request bodies (and the parity harness's upstream recordings).
+src/vendor/shopify/utils/storefront/queries.ts

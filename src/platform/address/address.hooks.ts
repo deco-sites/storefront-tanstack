@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { invoke } from "../../runtime";
-import type { AddressInput } from "../../actions/address/submit";
+import { getAddressesServerFn, submitAddressServerFn } from "../../server/site.functions";
+import type { AddressInput, AddressOp } from "../../actions/address/submit";
 import { type AddressBookState, EMPTY_ADDRESS_BOOK } from "./address.types";
 
 export const ADDRESS_QUERY_KEY = ["addresses"] as const;
@@ -8,8 +8,7 @@ export const ADDRESS_QUERY_KEY = ["addresses"] as const;
 export function useAddresses() {
   const query = useQuery({
     queryKey: ADDRESS_QUERY_KEY,
-    queryFn: (): Promise<AddressBookState> =>
-      invoke.site.loaders.address() as Promise<AddressBookState>,
+    queryFn: (): Promise<AddressBookState> => getAddressesServerFn(),
     staleTime: 60_000,
     placeholderData: EMPTY_ADDRESS_BOOK,
   });
@@ -24,14 +23,12 @@ export function useAddresses() {
 // Mutations reconcile via onSuccess (the server assigns ids and enforces the
 // single-default invariant, so an optimistic guess would be unreliable).
 function useAddressMutation<TInput>(
-  toOp: (input: TInput) => unknown,
+  toOp: (input: TInput) => AddressOp,
 ) {
   const qc = useQueryClient();
   return useMutation({
     mutationFn: (input: TInput): Promise<AddressBookState> =>
-      invoke.site.actions.address.submit(toOp(input)) as Promise<
-        AddressBookState
-      >,
+      submitAddressServerFn({ data: toOp(input) }),
     onSuccess: (state) => qc.setQueryData(ADDRESS_QUERY_KEY, state),
   });
 }

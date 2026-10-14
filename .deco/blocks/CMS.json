@@ -1,0 +1,6 @@
+{
+  "__resolveType": "cms-settings",
+  "analytics": {
+    "collector": "https://d.lilstts.com/events"
+  }
+}
