@@ -96,3 +96,15 @@ Both are applied to the baseline and the new capture at compare time, so approvi
 Tailwind v4 detects class names in every non-ignored file of the repo, so text in `parity/` (selectors, step names) would otherwise add CSS to the site build and change pixels. `src/styles/app.css` therefore has `@source not "../../parity";`. The migrated site needs the same exclusion. `x-cache-version` (the git sha of the build) is snapshotted as `<build-id>`: its presence is checked, its value is not.
 
 Analytics snapshot shape: `{ views, events }`. `views` lists pageviews in order. `events` is the sorted, de-duplicated set of `{name, path, props}`: view-triggered events (e.g. `view_item_list`) fire from IntersectionObservers, so their count and order vary with scroll timing, while which events fire with which payloads is stable.
+
+## Live comparison against production code (`parity/dual.mjs`)
+
+The baseline above replays recordings made on the v7 build, so it can't see a difference in what the two builds ask the upstream for. `dual.mjs` covers that: it serves the main build (another worktree) and this build side by side, both against the live upstream through a forwarding proxy (the shim still freezes the clock and seeds `Math.random`), and captures every case on main and then immediately on this build, so live data can't drift between the two. There is no baseline and no mask.
+
+```sh
+npm run parity:build                    # in both worktrees
+node parity/dual.mjs --prod-root ../main-worktree --out ~/.cache/parity-dual
+node parity/dual.mjs --prod-root ../main-worktree --control   # main vs main: proves determinism
+```
+
+It runs the cases of `pages.json` plus `dual-cases.json` (PDPs of products in today's store, every internal link saved in `.deco/blocks`, flows on live products). A flow step that can't run is skipped on both sides, and the skipped steps, status, final URL and flow values are compared along with the pixels (pixelmatch threshold 0, `includeAA`). Diff images and `summary.md` go to `--out`.

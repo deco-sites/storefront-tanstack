@@ -1,0 +1,49 @@
+{
+  "$comment": "Extra cases for parity/dual.mjs (live prod vs PR). The products in pages.json no longer exist in the live store, so these cover the PDP template with real products, every internal link saved in .deco/blocks, and the flows on live products. Not part of the recorded baseline.",
+  "pages": [
+    { "id": "pdp-rio-raincoat", "path": "/products/rio-raincoat-48014289928369" },
+    { "id": "pdp-onsen-waffle-robe", "path": "/products/onsen-waffle-robe-48014290813105" },
+    { "id": "pdp-largo-sunglasses-2nd-color", "path": "/products/largo-sunglasses-48014291271857" },
+    { "id": "pdp-no-variant-id", "path": "/products/sol-linen-poncho" },
+    { "id": "pdp-skuid-param", "path": "/products/rio-raincoat-48014289928369?skuId=48014289961137" },
+    { "id": "link-deals", "path": "/deals" },
+    { "id": "link-valentines-day", "path": "/valentines-day" },
+    { "id": "link-activities", "path": "/activities" },
+    { "id": "link-feminino", "path": "/feminino" },
+    { "id": "link-search-shoes", "path": "/s?q=shoes&page=0" },
+    { "id": "plp-page-2", "path": "/shirts?page=2" },
+    { "id": "collections-all", "path": "/collections/all" }
+  ],
+  "flows": [
+    { "id": "live-pdp-variant-select", "steps": [
+      { "goto": "/products/rio-raincoat-48014289928369" },
+      { "click": "a[aria-label^='Size: ']:not([aria-current]) >> visible=true" },
+      { "waitForURL": "**/products/**" },
+      { "url": "variantUrl" },
+      { "capture": "variant" },
+      { "click": "a[aria-label^='Color: ']:not([aria-current]) >> visible=true" },
+      { "url": "variant2Url" },
+      { "capture": "variant2" }
+    ] },
+    { "id": "live-add-to-cart-minicart", "steps": [
+      { "goto": "/products/onsen-waffle-robe-48014290813105" },
+      { "click": "button:has-text('Add to cart') >> visible=true" },
+      { "waitFor": "button:has-text('Added!') >> visible=true" },
+      { "settle": true, "scroll": false },
+      { "capture": "added", "fullPage": false, "scroll": false },
+      { "click": "label[aria-label='open cart'] >> visible=true" },
+      { "waitFor": "aside[aria-label=Cart] a:has-text('Begin Checkout') >> visible=true" },
+      { "settle": true, "scroll": false },
+      { "capture": "minicart", "fullPage": false, "scroll": false },
+      { "text": { "name": "cartBadge", "selector": "label[aria-label='open cart'] .badge >> visible=true" } }
+    ] },
+    { "id": "live-home-to-pdp-spa-nav", "steps": [
+      { "goto": "/" },
+      { "settle": true },
+      { "click": "a[href^='/products/'] >> visible=true" },
+      { "waitForURL": "**/products/**" },
+      { "url": "pdpUrl" },
+      { "capture": "pdp" }
+    ] }
+  ]
+}
