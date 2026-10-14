@@ -62,16 +62,6 @@ const options = {
 
 export const cms = createCMS({ ...options, content });
 
-// In `vite dev`, `deco serve` (the site editor's local server) rewrites the content module on every
-// save. The new content goes into the same CMS (createCMS adopts it for the same content root), so
-// this module stays as it is: re-running it made the first request after each save fail with
-// "client is not a function" from a server function still holding the old module.
-if (import.meta.hot) {
-  import.meta.hot.accept("../.deco/blocks.gen", (next) => {
-    if (next) createCMS({ ...options, content: next.default });
-  });
-}
-
 /**
  * The client for this request: the draft a `?__draft=` link or the draft cookie points at, or the
  * release. On a host outside the `CMS` block's preview hosts the draft is ignored and the request

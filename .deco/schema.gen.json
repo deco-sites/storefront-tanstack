@@ -1,7 +1,7 @@
 {
   "major": 1,
   "blocksMajor": 8,
-  "version": "8.1.1",
+  "version": "8.2.3",
   "namespace": "site",
   "site": "storefront-tanstack",
   "manifest": {
@@ -284,12 +284,12 @@
           "titleTemplate": {
             "type": "string",
             "nullable": true,
-            "title": "TitleTemplate"
+            "title": "Title Template"
           },
           "descriptionTemplate": {
             "type": "string",
             "nullable": true,
-            "title": "DescriptionTemplate"
+            "title": "Description Template"
           },
           "image": {
             "type": "string",
@@ -304,7 +304,7 @@
           "noIndexing": {
             "type": "boolean",
             "nullable": true,
-            "title": "NoIndexing"
+            "title": "No Indexing"
           },
           "type": {
             "type": "string",
@@ -391,12 +391,12 @@
           "titleTemplate": {
             "type": "string",
             "nullable": true,
-            "title": "TitleTemplate"
+            "title": "Title Template"
           },
           "descriptionTemplate": {
             "type": "string",
             "nullable": true,
-            "title": "DescriptionTemplate"
+            "title": "Description Template"
           },
           "image": {
             "type": "string",
@@ -411,7 +411,7 @@
           "noIndexing": {
             "type": "boolean",
             "nullable": true,
-            "title": "NoIndexing"
+            "title": "No Indexing"
           },
           "type": {
             "type": "string",
@@ -461,14 +461,14 @@
           },
           "pageInfo": {
             "$ref": "#/definitions/c3JjL3ZlbmRvci9jb21tZXJjZS90eXBlcy50cw==@PageInfo",
-            "title": "PageInfo"
+            "title": "Page Info"
           },
           "sortOptions": {
             "type": "array",
             "items": {
               "$ref": "#/definitions/c3JjL3ZlbmRvci9jb21tZXJjZS90eXBlcy50cw==@SortOption"
             },
-            "title": "SortOptions"
+            "title": "Sort Options"
           },
           "seo": {
             "$ref": "#/definitions/c3JjL3ZlbmRvci9jb21tZXJjZS90eXBlcy50cw==@Seo",
@@ -503,13 +503,13 @@
             "type": "string",
             "nullable": true,
             "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.",
-            "title": "AdditionalType"
+            "title": "Additional Type"
           },
           "alternateName": {
             "type": "string",
             "nullable": true,
             "description": "An alias for the item.",
-            "title": "AlternateName"
+            "title": "Alternate Name"
           },
           "description": {
             "type": "string",
@@ -521,7 +521,7 @@
             "type": "string",
             "nullable": true,
             "description": "A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.",
-            "title": "DisambiguatingDescription"
+            "title": "Disambiguating Description"
           },
           "identifier": {
             "type": "string",
@@ -550,13 +550,13 @@
             "type": "string",
             "nullable": true,
             "description": "URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.",
-            "title": "SameAs"
+            "title": "Same As"
           },
           "subjectOf": {
             "type": "string",
             "nullable": true,
             "description": "A CreativeWork or Event about this Thing.",
-            "title": "SubjectOf"
+            "title": "Subject Of"
           },
           "url": {
             "type": "string",
@@ -595,13 +595,13 @@
                   "type": "string",
                   "nullable": true,
                   "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.",
-                  "title": "AdditionalType"
+                  "title": "Additional Type"
                 },
                 "alternateName": {
                   "type": "string",
                   "nullable": true,
                   "description": "An alias for the item.",
-                  "title": "AlternateName"
+                  "title": "Alternate Name"
                 },
                 "description": {
                   "type": "string",
@@ -613,7 +613,7 @@
                   "type": "string",
                   "nullable": true,
                   "description": "A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.",
-                  "title": "DisambiguatingDescription"
+                  "title": "Disambiguating Description"
                 },
                 "identifier": {
                   "type": "string",
@@ -642,13 +642,13 @@
                   "type": "string",
                   "nullable": true,
                   "description": "URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.",
-                  "title": "SameAs"
+                  "title": "Same As"
                 },
                 "subjectOf": {
                   "type": "string",
                   "nullable": true,
                   "description": "A CreativeWork or Event about this Thing.",
-                  "title": "SubjectOf"
+                  "title": "Subject Of"
                 },
                 "url": {
                   "type": "string",
@@ -663,12 +663,12 @@
               ]
             },
             "description": "For itemListElement values, you can use simple strings (e.g. \"Peter\", \"Paul\", \"Mary\"), existing entities, or use ListItem.\n\nText values are best if the elements in the list are plain strings. Existing entities are best for a simple, unordered list of existing things in your data. ListItem is used with ordered lists when you want to provide additional context about the element in that list or when the same item might be in different places in different lists.\n\nNote: The order of elements in your mark-up is not sufficient for indicating the order or elements. Use ListItem with a 'position' property in such cases.",
-            "title": "ItemListElement"
+            "title": "Item List Element"
           },
           "numberOfItems": {
             "type": "number",
             "description": "The number of items in an ItemList. Note that some descriptions might not fully describe all items in a list (e.g., multi-page pagination); in such cases, the numberOfItems would be for the entire list.",
-            "title": "NumberOfItems"
+            "title": "Number Of Items"
           }
         },
         "required": [
@@ -689,25 +689,25 @@
             "type": "string",
             "nullable": true,
             "description": "Media type typically expressed using a MIME format (see IANA site and MDN reference)",
-            "title": "EncodingFormat"
+            "title": "Encoding Format"
           },
           "embedUrl": {
             "type": "string",
             "nullable": true,
             "description": "A URL pointing to a player for a specific video.",
-            "title": "EmbedUrl"
+            "title": "Embed Url"
           },
           "contentUrl": {
             "type": "string",
             "nullable": true,
             "description": "Actual bytes of the media object, for example the image file or video file.",
-            "title": "ContentUrl"
+            "title": "Content Url"
           },
           "thumbnailUrl": {
             "type": "string",
             "nullable": true,
             "description": "A thumbnail image relevant to the Thing",
-            "title": "ThumbnailUrl"
+            "title": "Thumbnail Url"
           },
           "name": {
             "type": "string",
@@ -725,13 +725,13 @@
             "type": "string",
             "nullable": true,
             "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.",
-            "title": "AdditionalType"
+            "title": "Additional Type"
           },
           "alternateName": {
             "type": "string",
             "nullable": true,
             "description": "An alias for the item.",
-            "title": "AlternateName"
+            "title": "Alternate Name"
           },
           "description": {
             "type": "string",
@@ -743,7 +743,7 @@
             "type": "string",
             "nullable": true,
             "description": "A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.",
-            "title": "DisambiguatingDescription"
+            "title": "Disambiguating Description"
           },
           "identifier": {
             "type": "string",
@@ -772,13 +772,13 @@
             "type": "string",
             "nullable": true,
             "description": "URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.",
-            "title": "SameAs"
+            "title": "Same As"
           },
           "subjectOf": {
             "type": "string",
             "nullable": true,
             "description": "A CreativeWork or Event about this Thing.",
-            "title": "SubjectOf"
+            "title": "Subject Of"
           }
         }
       },
@@ -789,7 +789,7 @@
             "type": "string",
             "nullable": true,
             "description": "date when video was published first time, format ISO 8601: https://en.wikipedia.org/wiki/ISO_8601",
-            "title": "UploadDate"
+            "title": "Upload Date"
           },
           "duration": {
             "type": "string",
@@ -801,25 +801,25 @@
             "type": "string",
             "nullable": true,
             "description": "Media type typically expressed using a MIME format (see IANA site and MDN reference)",
-            "title": "EncodingFormat"
+            "title": "Encoding Format"
           },
           "embedUrl": {
             "type": "string",
             "nullable": true,
             "description": "A URL pointing to a player for a specific video.",
-            "title": "EmbedUrl"
+            "title": "Embed Url"
           },
           "contentUrl": {
             "type": "string",
             "nullable": true,
             "description": "Actual bytes of the media object, for example the image file or video file.",
-            "title": "ContentUrl"
+            "title": "Content Url"
           },
           "thumbnailUrl": {
             "type": "string",
             "nullable": true,
             "description": "A thumbnail image relevant to the Thing",
-            "title": "ThumbnailUrl"
+            "title": "Thumbnail Url"
           },
           "name": {
             "type": "string",
@@ -837,13 +837,13 @@
             "type": "string",
             "nullable": true,
             "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.",
-            "title": "AdditionalType"
+            "title": "Additional Type"
           },
           "alternateName": {
             "type": "string",
             "nullable": true,
             "description": "An alias for the item.",
-            "title": "AlternateName"
+            "title": "Alternate Name"
           },
           "description": {
             "type": "string",
@@ -855,7 +855,7 @@
             "type": "string",
             "nullable": true,
             "description": "A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.",
-            "title": "DisambiguatingDescription"
+            "title": "Disambiguating Description"
           },
           "identifier": {
             "type": "string",
@@ -884,13 +884,13 @@
             "type": "string",
             "nullable": true,
             "description": "URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.",
-            "title": "SameAs"
+            "title": "Same As"
           },
           "subjectOf": {
             "type": "string",
             "nullable": true,
             "description": "A CreativeWork or Event about this Thing.",
-            "title": "SubjectOf"
+            "title": "Subject Of"
           }
         }
       },
@@ -1017,13 +1017,13 @@
             },
             "nullable": true,
             "description": "A property-value pair representing an additional characteristics of the entitity, e.g. a product feature or another characteristic for which there is no matching property in schema.org.\n\nNote: Publishers should be aware that applications designed to use specific schema.org properties (e.g. https://schema.org/width, https://schema.org/color, https://schema.org/gtin13, ...) will typically expect such data to be provided using those properties, rather than using the generic property/value mechanism.",
-            "title": "AdditionalProperty"
+            "title": "Additional Property"
           },
           "aggregateRating": {
             "$ref": "#/definitions/c3JjL3ZlbmRvci9jb21tZXJjZS90eXBlcy50cw==@AggregateRating",
             "nullable": true,
             "description": "The overall rating, based on a collection of reviews or ratings, of the item.",
-            "title": "AggregateRating"
+            "title": "Aggregate Rating"
           },
           "award": {
             "type": "string",
@@ -1053,7 +1053,7 @@
             "type": "string",
             "nullable": true,
             "description": "Indicates the {@link https://schema.org/productGroupID productGroupID} for a {@link https://schema.org/ProductGroup ProductGroup} that this product {@link https://schema.org/isVariantOf isVariantOf}.",
-            "title": "InProductGroupWithID"
+            "title": "In Product Group With ID"
           },
           "isRelatedTo": {
             "anyOf": [
@@ -1072,7 +1072,7 @@
               }
             ],
             "nullable": true,
-            "title": "IsRelatedTo"
+            "title": "Is Related To"
           },
           "isSimilarTo": {
             "anyOf": [
@@ -1092,13 +1092,13 @@
             ],
             "nullable": true,
             "description": "A pointer to another, functionally similar product (or multiple products).",
-            "title": "IsSimilarTo"
+            "title": "Is Similar To"
           },
           "isVariantOf": {
             "$ref": "#/definitions/c3JjL3ZlbmRvci9jb21tZXJjZS90eXBlcy50cw==@ProductGroup",
             "nullable": true,
             "description": "Indicates the kind of product that this is a variant of. In the case of {@link https://schema.org/ProductModel ProductModel}, this is a pointer (from a ProductModel) to a base product from which this product is a variant. It is safe to infer that the variant inherits all product features from the base model, unless defined locally. This is not transitive. In the case of a {@link https://schema.org/ProductGroup ProductGroup}, the group description also serves as a template, representing a set of Products that vary on explicitly defined, specific dimensions only (so it defines both a set of variants, as well as which values distinguish amongst those variants). When used with {@link https://schema.org/ProductGroup ProductGroup}, this property can apply to any {@link https://schema.org/Product Product} included in the group.",
-            "title": "IsVariantOf"
+            "title": "Is Variant Of"
           },
           "offers": {
             "$ref": "#/definitions/c3JjL3ZlbmRvci9jb21tZXJjZS90eXBlcy50cw==@AggregateOffer",
@@ -1109,19 +1109,19 @@
           "productID": {
             "type": "string",
             "description": "The product identifier, such as ISBN. For example: `meta itemprop=\"productID\" content=\"isbn:123-456-789\"`.",
-            "title": "ProductID"
+            "title": "Product ID"
           },
           "productionDate": {
             "type": "string",
             "nullable": true,
             "description": "The date of production of the item, e.g. vehicle.",
-            "title": "ProductionDate"
+            "title": "Production Date"
           },
           "releaseDate": {
             "type": "string",
             "nullable": true,
             "description": "The release date of a product or product model. This can be used to distinguish the exact variant of a product.",
-            "title": "ReleaseDate"
+            "title": "Release Date"
           },
           "review": {
             "type": "array",
@@ -1155,7 +1155,7 @@
             ],
             "nullable": true,
             "description": "A pointer to another product (or multiple products) for which this product is an accessory or spare part.",
-            "title": "IsAccessoryOrSparePartFor"
+            "title": "Is Accessory Or Spare Part For"
           },
           "questions": {
             "type": "array",
@@ -1181,13 +1181,13 @@
             "type": "string",
             "nullable": true,
             "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.",
-            "title": "AdditionalType"
+            "title": "Additional Type"
           },
           "alternateName": {
             "type": "string",
             "nullable": true,
             "description": "An alias for the item.",
-            "title": "AlternateName"
+            "title": "Alternate Name"
           },
           "description": {
             "type": "string",
@@ -1199,7 +1199,7 @@
             "type": "string",
             "nullable": true,
             "description": "A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.",
-            "title": "DisambiguatingDescription"
+            "title": "Disambiguating Description"
           },
           "identifier": {
             "type": "string",
@@ -1228,13 +1228,13 @@
             "type": "string",
             "nullable": true,
             "description": "URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.",
-            "title": "SameAs"
+            "title": "Same As"
           },
           "subjectOf": {
             "type": "string",
             "nullable": true,
             "description": "A CreativeWork or Event about this Thing.",
-            "title": "SubjectOf"
+            "title": "Subject Of"
           },
           "url": {
             "type": "string",
@@ -1255,31 +1255,31 @@
             "type": "number",
             "nullable": true,
             "description": "The upper value of some characteristic or property.",
-            "title": "MaxValue"
+            "title": "Max Value"
           },
           "minValue": {
             "type": "number",
             "nullable": true,
             "description": "The lower value of some characteristic or property.",
-            "title": "MinValue"
+            "title": "Min Value"
           },
           "propertyID": {
             "type": "string",
             "nullable": true,
             "description": "A commonly used identifier for the characteristic represented by the property, e.g. a manufacturer or a standard code for a property. propertyID can be (1) a prefixed string, mainly meant to be used with standards for product properties; (2) a site-specific, non-prefixed string (e.g. the primary key of the property or the vendor-specific id of the property), or (3) a URL indicating the type of the property, either pointing to an external vocabulary, or a Web resource that describes the property (e.g. a glossary entry). Standards bodies should promote a standard prefix for the identifiers of properties from their standards.",
-            "title": "PropertyID"
+            "title": "Property ID"
           },
           "unitCode": {
             "type": "string",
             "nullable": true,
             "description": "The unit of measurement given using the UN/CEFACT Common Code (3 characters) or a URL. Other codes than the UN/CEFACT Common Code may be used with a prefix followed by a colon.",
-            "title": "UnitCode"
+            "title": "Unit Code"
           },
           "unitText": {
             "type": "string",
             "nullable": true,
             "description": "A string or text indicating the unit of measurement. Useful if you cannot provide a standard unit code for {@link unitCode unitCode}.",
-            "title": "UnitText"
+            "title": "Unit Text"
           },
           "value": {
             "type": "string",
@@ -1291,7 +1291,7 @@
             "type": "string",
             "nullable": true,
             "description": "A secondary value that provides additional information on the original value, e.g. a reference temperature or a type of measurement.",
-            "title": "ValueReference"
+            "title": "Value Reference"
           },
           "name": {
             "type": "string",
@@ -1309,13 +1309,13 @@
             "type": "string",
             "nullable": true,
             "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.",
-            "title": "AdditionalType"
+            "title": "Additional Type"
           },
           "alternateName": {
             "type": "string",
             "nullable": true,
             "description": "An alias for the item.",
-            "title": "AlternateName"
+            "title": "Alternate Name"
           },
           "description": {
             "type": "string",
@@ -1327,7 +1327,7 @@
             "type": "string",
             "nullable": true,
             "description": "A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.",
-            "title": "DisambiguatingDescription"
+            "title": "Disambiguating Description"
           },
           "identifier": {
             "type": "string",
@@ -1356,13 +1356,13 @@
             "type": "string",
             "nullable": true,
             "description": "URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.",
-            "title": "SameAs"
+            "title": "Same As"
           },
           "subjectOf": {
             "type": "string",
             "nullable": true,
             "description": "A CreativeWork or Event about this Thing.",
-            "title": "SubjectOf"
+            "title": "Subject Of"
           },
           "url": {
             "type": "string",
@@ -1379,37 +1379,37 @@
             "type": "number",
             "nullable": true,
             "description": "The count of total number of ratings.",
-            "title": "RatingCount"
+            "title": "Rating Count"
           },
           "reviewCount": {
             "type": "number",
             "nullable": true,
             "description": "The count of total number of reviews.",
-            "title": "ReviewCount"
+            "title": "Review Count"
           },
           "ratingValue": {
             "type": "number",
             "nullable": true,
             "description": "The rating for the content.",
-            "title": "RatingValue"
+            "title": "Rating Value"
           },
           "bestRating": {
             "type": "number",
             "nullable": true,
             "description": "The highest value allowed in this rating system.",
-            "title": "BestRating"
+            "title": "Best Rating"
           },
           "worstRating": {
             "type": "number",
             "nullable": true,
             "description": "The lowest value allowed in this rating system.",
-            "title": "WorstRating"
+            "title": "Worst Rating"
           },
           "ratingExplanation": {
             "type": "string",
             "nullable": true,
             "description": "A short explanation (e.g. one to two sentences) providing background context and other information that led to the conclusion expressed in the rating. This is particularly applicable to ratings associated with \"fact check\" markup using ClaimReview.",
-            "title": "RatingExplanation"
+            "title": "Rating Explanation"
           }
         }
       },
@@ -1438,13 +1438,13 @@
             "type": "string",
             "nullable": true,
             "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.",
-            "title": "AdditionalType"
+            "title": "Additional Type"
           },
           "alternateName": {
             "type": "string",
             "nullable": true,
             "description": "An alias for the item.",
-            "title": "AlternateName"
+            "title": "Alternate Name"
           },
           "description": {
             "type": "string",
@@ -1456,7 +1456,7 @@
             "type": "string",
             "nullable": true,
             "description": "A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.",
-            "title": "DisambiguatingDescription"
+            "title": "Disambiguating Description"
           },
           "identifier": {
             "type": "string",
@@ -1485,13 +1485,13 @@
             "type": "string",
             "nullable": true,
             "description": "URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.",
-            "title": "SameAs"
+            "title": "Same As"
           },
           "subjectOf": {
             "type": "string",
             "nullable": true,
             "description": "A CreativeWork or Event about this Thing.",
-            "title": "SubjectOf"
+            "title": "Subject Of"
           },
           "url": {
             "type": "string",
@@ -1521,12 +1521,12 @@
               }
             ],
             "description": "Indicates a {@link https://schema.org/Product Product} that is a member of this {@link https://schema.org/ProductGroup ProductGroup} (or {@link https://schema.org/ProductModel ProductModel}).",
-            "title": "HasVariant"
+            "title": "Has Variant"
           },
           "productGroupID": {
             "type": "string",
             "description": "Indicates a textual identifier for a ProductGroup.",
-            "title": "ProductGroupID"
+            "title": "Product Group ID"
           },
           "additionalProperty": {
             "type": "array",
@@ -1534,7 +1534,7 @@
               "$ref": "#/definitions/c3JjL3ZlbmRvci9jb21tZXJjZS90eXBlcy50cw==@PropertyValue"
             },
             "description": "A property-value pair representing an additional characteristics of the entitity, e.g. a product feature or another characteristic for which there is no matching property in schema.org.\n\nNote: Publishers should be aware that applications designed to use specific schema.org properties (e.g. https://schema.org/width, https://schema.org/color, https://schema.org/gtin13, ...) will typically expect such data to be provided using those properties, rather than using the generic property/value mechanism.",
-            "title": "AdditionalProperty"
+            "title": "Additional Property"
           },
           "model": {
             "type": "string",
@@ -1558,13 +1558,13 @@
             "type": "string",
             "nullable": true,
             "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.",
-            "title": "AdditionalType"
+            "title": "Additional Type"
           },
           "alternateName": {
             "type": "string",
             "nullable": true,
             "description": "An alias for the item.",
-            "title": "AlternateName"
+            "title": "Alternate Name"
           },
           "description": {
             "type": "string",
@@ -1576,7 +1576,7 @@
             "type": "string",
             "nullable": true,
             "description": "A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.",
-            "title": "DisambiguatingDescription"
+            "title": "Disambiguating Description"
           },
           "identifier": {
             "type": "string",
@@ -1605,13 +1605,13 @@
             "type": "string",
             "nullable": true,
             "description": "URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.",
-            "title": "SameAs"
+            "title": "Same As"
           },
           "subjectOf": {
             "type": "string",
             "nullable": true,
             "description": "A CreativeWork or Event about this Thing.",
-            "title": "SubjectOf"
+            "title": "Subject Of"
           },
           "url": {
             "type": "string",
@@ -1645,13 +1645,13 @@
             "type": "string",
             "nullable": true,
             "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.",
-            "title": "AdditionalType"
+            "title": "Additional Type"
           },
           "alternateName": {
             "type": "string",
             "nullable": true,
             "description": "An alias for the item.",
-            "title": "AlternateName"
+            "title": "Alternate Name"
           },
           "description": {
             "type": "string",
@@ -1663,7 +1663,7 @@
             "type": "string",
             "nullable": true,
             "description": "A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.",
-            "title": "DisambiguatingDescription"
+            "title": "Disambiguating Description"
           },
           "identifier": {
             "type": "string",
@@ -1692,13 +1692,13 @@
             "type": "string",
             "nullable": true,
             "description": "URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.",
-            "title": "SameAs"
+            "title": "Same As"
           },
           "subjectOf": {
             "type": "string",
             "nullable": true,
             "description": "A CreativeWork or Event about this Thing.",
-            "title": "SubjectOf"
+            "title": "Subject Of"
           },
           "url": {
             "type": "string",
@@ -1713,13 +1713,13 @@
             },
             "nullable": true,
             "description": "A property-value pair representing an additional characteristics of the entitity, e.g. a product feature or another characteristic for which there is no matching property in schema.org.\n\nNote: Publishers should be aware that applications designed to use specific schema.org properties (e.g. https://schema.org/width, https://schema.org/color, https://schema.org/gtin13, ...) will typically expect such data to be provided using those properties, rather than using the generic property/value mechanism.",
-            "title": "AdditionalProperty"
+            "title": "Additional Property"
           },
           "aggregateRating": {
             "$ref": "#/definitions/c3JjL3ZlbmRvci9jb21tZXJjZS90eXBlcy50cw==@AggregateRating",
             "nullable": true,
             "description": "The overall rating, based on a collection of reviews or ratings, of the item.",
-            "title": "AggregateRating"
+            "title": "Aggregate Rating"
           },
           "award": {
             "type": "string",
@@ -1749,7 +1749,7 @@
             "type": "string",
             "nullable": true,
             "description": "Indicates the {@link https://schema.org/productGroupID productGroupID} for a {@link https://schema.org/ProductGroup ProductGroup} that this product {@link https://schema.org/isVariantOf isVariantOf}.",
-            "title": "InProductGroupWithID"
+            "title": "In Product Group With ID"
           },
           "isRelatedTo": {
             "anyOf": [
@@ -1768,7 +1768,7 @@
               }
             ],
             "nullable": true,
-            "title": "IsRelatedTo"
+            "title": "Is Related To"
           },
           "isSimilarTo": {
             "anyOf": [
@@ -1788,7 +1788,7 @@
             ],
             "nullable": true,
             "description": "A pointer to another, functionally similar product (or multiple products).",
-            "title": "IsSimilarTo"
+            "title": "Is Similar To"
           },
           "offers": {
             "$ref": "#/definitions/c3JjL3ZlbmRvci9jb21tZXJjZS90eXBlcy50cw==@AggregateOffer",
@@ -1799,19 +1799,19 @@
           "productID": {
             "type": "string",
             "description": "The product identifier, such as ISBN. For example: `meta itemprop=\"productID\" content=\"isbn:123-456-789\"`.",
-            "title": "ProductID"
+            "title": "Product ID"
           },
           "productionDate": {
             "type": "string",
             "nullable": true,
             "description": "The date of production of the item, e.g. vehicle.",
-            "title": "ProductionDate"
+            "title": "Production Date"
           },
           "releaseDate": {
             "type": "string",
             "nullable": true,
             "description": "The release date of a product or product model. This can be used to distinguish the exact variant of a product.",
-            "title": "ReleaseDate"
+            "title": "Release Date"
           },
           "review": {
             "type": "array",
@@ -1845,7 +1845,7 @@
             ],
             "nullable": true,
             "description": "A pointer to another product (or multiple products) for which this product is an accessory or spare part.",
-            "title": "IsAccessoryOrSparePartFor"
+            "title": "Is Accessory Or Spare Part For"
           },
           "questions": {
             "type": "array",
@@ -1867,17 +1867,17 @@
           "highPrice": {
             "type": "number",
             "description": "The highest price of all offers available.\n\nUsage guidelines:\n- Use values from 0123456789 (Unicode 'DIGIT ZERO' (U+0030) to 'DIGIT NINE' (U+0039)) rather than superficially similiar Unicode symbols.\n- Use '.' (Unicode 'FULL STOP' (U+002E)) rather than ',' to indicate a decimal point. Avoid using these symbols as a readability separator.",
-            "title": "HighPrice"
+            "title": "High Price"
           },
           "lowPrice": {
             "type": "number",
             "description": "The lowest price of all offers available.\n\nUsage guidelines:\n- Use values from 0123456789 (Unicode 'DIGIT ZERO' (U+0030) to 'DIGIT NINE' (U+0039)) rather than superficially similiar Unicode symbols.\n- Use '.' (Unicode 'FULL STOP' (U+002E)) rather than ',' to indicate a decimal point. Avoid using these symbols as a readability separator.",
-            "title": "LowPrice"
+            "title": "Low Price"
           },
           "offerCount": {
             "type": "number",
             "description": "The number of offers for the product.",
-            "title": "OfferCount"
+            "title": "Offer Count"
           },
           "offers": {
             "type": "array",
@@ -1891,13 +1891,13 @@
             "type": "string",
             "nullable": true,
             "description": "The currency of the price, or a price component when attached to {@link https://schema.org/PriceSpecification PriceSpecification} and its subtypes.\n\nUse standard formats: {@link http://en.wikipedia.org/wiki/ISO_4217 ISO 4217 currency format} e.g. \"USD\"; {@link https://en.wikipedia.org/wiki/List_of_cryptocurrencies Ticker symbol} for cryptocurrencies e.g. \"BTC\"; well known names for {@link https://en.wikipedia.org/wiki/Local_exchange_trading_system Local Exchange Tradings Systems} (LETS) and other currency types e.g. \"Ithaca HOUR\".",
-            "title": "PriceCurrency"
+            "title": "Price Currency"
           },
           "hasMerchantReturnPolicy": {
             "$ref": "#/definitions/c3JjL3ZlbmRvci9jb21tZXJjZS90eXBlcy50cw==@MerchantReturnPolicy",
             "nullable": true,
             "description": "Specifies a MerchantReturnPolicy that may be applicable.",
-            "title": "HasMerchantReturnPolicy"
+            "title": "Has Merchant Return Policy"
           }
         },
         "required": [
@@ -1936,7 +1936,7 @@
           "inventoryLevel": {
             "$ref": "#/definitions/c3JjL3ZlbmRvci9jb21tZXJjZS90eXBlcy50cw==@QuantitativeValue",
             "description": "The current approximate inventory level for the item or items.",
-            "title": "InventoryLevel"
+            "title": "Inventory Level"
           },
           "itemCondition": {
             "type": "string",
@@ -1948,7 +1948,7 @@
             ],
             "nullable": true,
             "description": "A predefined value from OfferItemCondition specifying the condition of the product or service, or the products or services included in the offer. Also used for product return policies to specify the condition of products accepted for returns.",
-            "title": "ItemCondition"
+            "title": "Item Condition"
           },
           "price": {
             "type": "number",
@@ -1959,7 +1959,7 @@
             "type": "string",
             "nullable": true,
             "description": "The currency of the price, or a price component when attached to {@link https://schema.org/PriceSpecification PriceSpecification} and its subtypes.\n\nUse standard formats: {@link http://en.wikipedia.org/wiki/ISO_4217 ISO 4217 currency format} e.g. \"USD\"; {@link https://en.wikipedia.org/wiki/List_of_cryptocurrencies Ticker symbol} for cryptocurrencies e.g. \"BTC\"; well known names for {@link https://en.wikipedia.org/wiki/Local_exchange_trading_system Local Exchange Tradings Systems} (LETS) and other currency types e.g. \"Ithaca HOUR\".",
-            "title": "PriceCurrency"
+            "title": "Price Currency"
           },
           "priceSpecification": {
             "type": "array",
@@ -1967,13 +1967,13 @@
               "$ref": "#/definitions/c3JjL3ZlbmRvci9jb21tZXJjZS90eXBlcy50cw==@UnitPriceSpecification"
             },
             "description": "One or more detailed price specifications, indicating the unit price and delivery or payment charges.",
-            "title": "PriceSpecification"
+            "title": "Price Specification"
           },
           "priceValidUntil": {
             "type": "string",
             "nullable": true,
             "description": "The date after which the price is no longer available.",
-            "title": "PriceValidUntil"
+            "title": "Price Valid Until"
           },
           "seller": {
             "type": "string",
@@ -1985,7 +1985,7 @@
             "type": "string",
             "nullable": true,
             "description": "Name of the seller",
-            "title": "SellerName"
+            "title": "Seller Name"
           },
           "sku": {
             "type": "string",
@@ -2000,7 +2000,7 @@
             },
             "nullable": true,
             "description": "Used by some ecommerce sites to retrieve the sku of products that are part of the BuyAndWin promotion",
-            "title": "GiftSkuIds"
+            "title": "Gift Sku Ids"
           },
           "teasers": {
             "type": "array",
@@ -2015,7 +2015,7 @@
             "$ref": "#/definitions/c3JjL3ZlbmRvci9jb21tZXJjZS90eXBlcy50cw==@MerchantReturnPolicy",
             "nullable": true,
             "description": "Specifies a MerchantReturnPolicy that may be applicable.",
-            "title": "HasMerchantReturnPolicy"
+            "title": "Has Merchant Return Policy"
           },
           "name": {
             "type": "string",
@@ -2033,13 +2033,13 @@
             "type": "string",
             "nullable": true,
             "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.",
-            "title": "AdditionalType"
+            "title": "Additional Type"
           },
           "alternateName": {
             "type": "string",
             "nullable": true,
             "description": "An alias for the item.",
-            "title": "AlternateName"
+            "title": "Alternate Name"
           },
           "description": {
             "type": "string",
@@ -2051,7 +2051,7 @@
             "type": "string",
             "nullable": true,
             "description": "A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.",
-            "title": "DisambiguatingDescription"
+            "title": "Disambiguating Description"
           },
           "identifier": {
             "type": "string",
@@ -2080,13 +2080,13 @@
             "type": "string",
             "nullable": true,
             "description": "URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.",
-            "title": "SameAs"
+            "title": "Same As"
           },
           "subjectOf": {
             "type": "string",
             "nullable": true,
             "description": "A CreativeWork or Event about this Thing.",
-            "title": "SubjectOf"
+            "title": "Subject Of"
           },
           "url": {
             "type": "string",
@@ -2127,7 +2127,7 @@
             ],
             "nullable": true,
             "description": "Identifies a price component (for example, a line item on an invoice), part of the total price for an offer.",
-            "title": "PriceComponentType"
+            "title": "Price Component Type"
           },
           "priceType": {
             "type": "string",
@@ -2140,19 +2140,19 @@
               "https://schema.org/SRP"
             ],
             "description": "Defines the type of a price specified for an offered product, for example a list price, a (temporary) sale price or a manufacturer suggested retail price. If multiple prices are specified for an offer the {@link https://schema.org/priceType priceType} property can be used to identify the type of each such specified price. The value of priceType can be specified as a value from enumeration PriceTypeEnumeration or as a free form text string for price types that are not already predefined in PriceTypeEnumeration.",
-            "title": "PriceType"
+            "title": "Price Type"
           },
           "billingDuration": {
             "type": "number",
             "nullable": true,
             "description": "Specifies for how long this price (or price component) will be billed. Can be used, for example, to model the contractual duration of a subscription or payment plan. Type can be either a Duration or a Number (in which case the unit of measurement, for example month, is specified by the unitCode property).",
-            "title": "BillingDuration"
+            "title": "Billing Duration"
           },
           "billingIncrement": {
             "type": "number",
             "nullable": true,
             "description": "This property specifies the minimal quantity and rounding increment that will be the basis for the billing. The unit of measurement is specified by the unitCode property.",
-            "title": "BillingIncrement"
+            "title": "Billing Increment"
           },
           "name": {
             "type": "string",
@@ -2170,13 +2170,13 @@
             "type": "string",
             "nullable": true,
             "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.",
-            "title": "AdditionalType"
+            "title": "Additional Type"
           },
           "alternateName": {
             "type": "string",
             "nullable": true,
             "description": "An alias for the item.",
-            "title": "AlternateName"
+            "title": "Alternate Name"
           },
           "description": {
             "type": "string",
@@ -2188,7 +2188,7 @@
             "type": "string",
             "nullable": true,
             "description": "A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.",
-            "title": "DisambiguatingDescription"
+            "title": "Disambiguating Description"
           },
           "identifier": {
             "type": "string",
@@ -2217,13 +2217,13 @@
             "type": "string",
             "nullable": true,
             "description": "URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.",
-            "title": "SameAs"
+            "title": "Same As"
           },
           "subjectOf": {
             "type": "string",
             "nullable": true,
             "description": "A CreativeWork or Event about this Thing.",
-            "title": "SubjectOf"
+            "title": "Subject Of"
           },
           "url": {
             "type": "string",
@@ -2235,7 +2235,7 @@
             "$ref": "#/definitions/c3JjL3ZlbmRvci9jb21tZXJjZS90eXBlcy50cw==@QuantitativeValue",
             "nullable": true,
             "description": "The interval and unit of measurement of ordering quantities for which the offer or price specification is valid. This allows e.g. specifying that a certain freight charge is valid only for a certain quantity.",
-            "title": "EligibleQuantity"
+            "title": "Eligible Quantity"
           },
           "price": {
             "type": "number",
@@ -2246,7 +2246,7 @@
             "type": "string",
             "nullable": true,
             "description": "The currency of the price, or a price component when attached to {@link https://schema.org/PriceSpecification PriceSpecification} and its subtypes.\n\nUse standard formats: {@link http://en.wikipedia.org/wiki/ISO_4217 ISO 4217 currency format} e.g. \"USD\"; {@link https://en.wikipedia.org/wiki/List_of_cryptocurrencies Ticker symbol} for cryptocurrencies e.g. \"BTC\"; well known names for {@link https://en.wikipedia.org/wiki/Local_exchange_trading_system Local Exchange Tradings Systems} (LETS) and other currency types e.g. \"Ithaca HOUR\".",
-            "title": "PriceCurrency"
+            "title": "Price Currency"
           }
         },
         "required": [
@@ -2262,7 +2262,7 @@
             "title": "Name"
           },
           "generalValues": {
-            "title": "GeneralValues"
+            "title": "General Values"
           },
           "conditions": {
             "$ref": "#/definitions/c3JjL3ZlbmRvci9jb21tZXJjZS90eXBlcy50cw==@TeasersConditions",
@@ -2284,7 +2284,7 @@
         "properties": {
           "minimumQuantity": {
             "type": "number",
-            "title": "MinimumQuantity"
+            "title": "Minimum Quantity"
           },
           "parameters": {
             "type": "array",
@@ -2338,12 +2338,12 @@
             "type": "number",
             "nullable": true,
             "description": "Specifies either a fixed return date or the number of days (from the delivery date) that a product can be returned. Used when the returnPolicyCategory property is specified as MerchantReturnFiniteReturnWindow. Supersedes productReturnDays",
-            "title": "MerchantReturnDays"
+            "title": "Merchant Return Days"
           },
           "applicableCountry": {
             "type": "string",
             "description": "A country where a particular merchant return policy applies to, for example the two-letter ISO 3166-1 alpha-2 country code.",
-            "title": "ApplicableCountry"
+            "title": "Applicable Country"
           },
           "returnFees": {
             "type": "string",
@@ -2356,7 +2356,7 @@
             ],
             "nullable": true,
             "description": "The type of return fees for purchased products (for any return reason).",
-            "title": "ReturnFees"
+            "title": "Return Fees"
           },
           "returnMethod": {
             "type": "string",
@@ -2368,7 +2368,7 @@
             ],
             "nullable": true,
             "description": "The type of return method offered, specified from an enumeration.",
-            "title": "ReturnMethod"
+            "title": "Return Method"
           },
           "returnPolicyCategory": {
             "type": "string",
@@ -2379,13 +2379,13 @@
               "https://schema.org/MerchantReturnUnspecified"
             ],
             "description": "Specifies an applicable return policy (from an enumeration).",
-            "title": "ReturnPolicyCategory"
+            "title": "Return Policy Category"
           },
           "returnShippingFeesAmount": {
             "$ref": "#/definitions/c3JjL3ZlbmRvci9jb21tZXJjZS90eXBlcy50cw==@MonetaryAmount",
             "nullable": true,
             "description": "Amount of shipping costs for product returns (for any reason). Applicable when property returnFees equals ReturnShippingFees.",
-            "title": "ReturnShippingFeesAmount"
+            "title": "Return Shipping Fees Amount"
           },
           "name": {
             "type": "string",
@@ -2403,13 +2403,13 @@
             "type": "string",
             "nullable": true,
             "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.",
-            "title": "AdditionalType"
+            "title": "Additional Type"
           },
           "alternateName": {
             "type": "string",
             "nullable": true,
             "description": "An alias for the item.",
-            "title": "AlternateName"
+            "title": "Alternate Name"
           },
           "description": {
             "type": "string",
@@ -2421,7 +2421,7 @@
             "type": "string",
             "nullable": true,
             "description": "A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.",
-            "title": "DisambiguatingDescription"
+            "title": "Disambiguating Description"
           },
           "identifier": {
             "type": "string",
@@ -2450,13 +2450,13 @@
             "type": "string",
             "nullable": true,
             "description": "URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.",
-            "title": "SameAs"
+            "title": "Same As"
           },
           "subjectOf": {
             "type": "string",
             "nullable": true,
             "description": "A CreativeWork or Event about this Thing.",
-            "title": "SubjectOf"
+            "title": "Subject Of"
           },
           "url": {
             "type": "string",
@@ -2481,22 +2481,22 @@
           "maxValue": {
             "type": "number",
             "description": "The upper value of some characteristic or property.",
-            "title": "MaxValue"
+            "title": "Max Value"
           },
           "minValue": {
             "type": "number",
             "description": "The lower value of some characteristic or property.",
-            "title": "MinValue"
+            "title": "Min Value"
           },
           "validFrom": {
             "type": "string",
             "description": "The date when the item becomes valid.",
-            "title": "ValidFrom"
+            "title": "Valid From"
           },
           "validThrough": {
             "type": "string",
             "description": "The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.",
-            "title": "ValidThrough"
+            "title": "Valid Through"
           },
           "value": {
             "anyOf": [
@@ -2532,13 +2532,13 @@
             "type": "string",
             "nullable": true,
             "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.",
-            "title": "AdditionalType"
+            "title": "Additional Type"
           },
           "alternateName": {
             "type": "string",
             "nullable": true,
             "description": "An alias for the item.",
-            "title": "AlternateName"
+            "title": "Alternate Name"
           },
           "description": {
             "type": "string",
@@ -2550,7 +2550,7 @@
             "type": "string",
             "nullable": true,
             "description": "A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.",
-            "title": "DisambiguatingDescription"
+            "title": "Disambiguating Description"
           },
           "identifier": {
             "type": "string",
@@ -2579,13 +2579,13 @@
             "type": "string",
             "nullable": true,
             "description": "URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.",
-            "title": "SameAs"
+            "title": "Same As"
           },
           "subjectOf": {
             "type": "string",
             "nullable": true,
             "description": "A CreativeWork or Event about this Thing.",
-            "title": "SubjectOf"
+            "title": "Subject Of"
           },
           "url": {
             "type": "string",
@@ -2624,19 +2624,19 @@
             "type": "string",
             "nullable": true,
             "description": "The date that the order was created, in ISO 8601 date format.",
-            "title": "DateCreated"
+            "title": "Date Created"
           },
           "datePublished": {
             "type": "string",
             "nullable": true,
             "description": "The date that the review was published, in ISO 8601 date format.",
-            "title": "DatePublished"
+            "title": "Date Published"
           },
           "itemReviewed": {
             "type": "string",
             "nullable": true,
             "description": "The item that is being reviewed/rated.",
-            "title": "ItemReviewed"
+            "title": "Item Reviewed"
           },
           "negativeNotes": {
             "type": "array",
@@ -2645,7 +2645,7 @@
             },
             "nullable": true,
             "description": "Indicates, in the context of a {@link https://schema.org/Review Review} (e.g. framed as 'pro' vs 'con' considerations), negative considerations - either as unstructured text, or a list.",
-            "title": "NegativeNotes"
+            "title": "Negative Notes"
           },
           "positiveNotes": {
             "type": "array",
@@ -2654,31 +2654,31 @@
             },
             "nullable": true,
             "description": "Indicates, in the context of a {@link https://schema.org/Review Review} (e.g. framed as 'pro' vs 'con' considerations), positive considerations - either as unstructured text, or a list.",
-            "title": "PositiveNotes"
+            "title": "Positive Notes"
           },
           "reviewAspect": {
             "type": "string",
             "nullable": true,
             "description": "This Review or Rating is relevant to this part or facet of the itemReviewed.",
-            "title": "ReviewAspect"
+            "title": "Review Aspect"
           },
           "reviewHeadline": {
             "type": "string",
             "nullable": true,
             "description": "Emphasis part of the review",
-            "title": "ReviewHeadline"
+            "title": "Review Headline"
           },
           "reviewBody": {
             "type": "string",
             "nullable": true,
             "description": "The actual body of the review.",
-            "title": "ReviewBody"
+            "title": "Review Body"
           },
           "reviewRating": {
             "$ref": "#/definitions/c3JjL3ZlbmRvci9jb21tZXJjZS90eXBlcy50cw==@AggregateRating",
             "nullable": true,
             "description": "The rating given in this review. Note that reviews can themselves be rated. The `reviewRating` applies to rating given by the review. The {@link https://schema.org/aggregateRating aggregateRating} property applies to the review itself, as a creative work.",
-            "title": "ReviewRating"
+            "title": "Review Rating"
           },
           "tags": {
             "type": "array",
@@ -2720,13 +2720,13 @@
             "type": "string",
             "nullable": true,
             "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.",
-            "title": "AdditionalType"
+            "title": "Additional Type"
           },
           "alternateName": {
             "type": "string",
             "nullable": true,
             "description": "An alias for the item.",
-            "title": "AlternateName"
+            "title": "Alternate Name"
           },
           "description": {
             "type": "string",
@@ -2738,7 +2738,7 @@
             "type": "string",
             "nullable": true,
             "description": "A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.",
-            "title": "DisambiguatingDescription"
+            "title": "Disambiguating Description"
           },
           "identifier": {
             "type": "string",
@@ -2767,13 +2767,13 @@
             "type": "string",
             "nullable": true,
             "description": "URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.",
-            "title": "SameAs"
+            "title": "Same As"
           },
           "subjectOf": {
             "type": "string",
             "nullable": true,
             "description": "A CreativeWork or Event about this Thing.",
-            "title": "SubjectOf"
+            "title": "Subject Of"
           },
           "url": {
             "type": "string",
@@ -2802,7 +2802,7 @@
             "type": "boolean",
             "nullable": true,
             "description": "Indicates that the author is a real buyer",
-            "title": "VerifiedBuyer"
+            "title": "Verified Buyer"
           },
           "location": {
             "type": "string",
@@ -2820,13 +2820,13 @@
             "type": "string",
             "nullable": true,
             "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.",
-            "title": "AdditionalType"
+            "title": "Additional Type"
           },
           "alternateName": {
             "type": "string",
             "nullable": true,
             "description": "An alias for the item.",
-            "title": "AlternateName"
+            "title": "Alternate Name"
           },
           "description": {
             "type": "string",
@@ -2838,7 +2838,7 @@
             "type": "string",
             "nullable": true,
             "description": "A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.",
-            "title": "DisambiguatingDescription"
+            "title": "Disambiguating Description"
           },
           "identifier": {
             "type": "string",
@@ -2867,13 +2867,13 @@
             "type": "string",
             "nullable": true,
             "description": "URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.",
-            "title": "SameAs"
+            "title": "Same As"
           },
           "subjectOf": {
             "type": "string",
             "nullable": true,
             "description": "A CreativeWork or Event about this Thing.",
-            "title": "SubjectOf"
+            "title": "Subject Of"
           }
         }
       },
@@ -2963,13 +2963,13 @@
         "properties": {
           "answerCount": {
             "type": "number",
-            "title": "AnswerCount"
+            "title": "Answer Count"
           },
           "acceptedAnswer": {
             "$ref": "#/definitions/c3JjL3ZlbmRvci9jb21tZXJjZS90eXBlcy50cw==@Answer",
             "nullable": true,
             "description": "The answer(s) that has been accepted as best",
-            "title": "AcceptedAnswer"
+            "title": "Accepted Answer"
           },
           "suggestedAnswer": {
             "type": "array",
@@ -2978,7 +2978,7 @@
             },
             "nullable": true,
             "description": "List of answer(s)",
-            "title": "SuggestedAnswer"
+            "title": "Suggested Answer"
           },
           "name": {
             "type": "string",
@@ -2992,13 +2992,13 @@
             "type": "string",
             "nullable": true,
             "description": "The date that the question was published, in ISO 8601 date format.",
-            "title": "DateModified"
+            "title": "Date Modified"
           },
           "datePublished": {
             "type": "string",
             "nullable": true,
             "description": "The date that the question was published, in ISO 8601 date format.",
-            "title": "DatePublished"
+            "title": "Date Published"
           },
           "author": {
             "type": "array",
@@ -3019,13 +3019,13 @@
             "type": "string",
             "nullable": true,
             "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.",
-            "title": "AdditionalType"
+            "title": "Additional Type"
           },
           "alternateName": {
             "type": "string",
             "nullable": true,
             "description": "An alias for the item.",
-            "title": "AlternateName"
+            "title": "Alternate Name"
           },
           "description": {
             "type": "string",
@@ -3037,7 +3037,7 @@
             "type": "string",
             "nullable": true,
             "description": "A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.",
-            "title": "DisambiguatingDescription"
+            "title": "Disambiguating Description"
           },
           "identifier": {
             "type": "string",
@@ -3066,13 +3066,13 @@
             "type": "string",
             "nullable": true,
             "description": "URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.",
-            "title": "SameAs"
+            "title": "Same As"
           },
           "subjectOf": {
             "type": "string",
             "nullable": true,
             "description": "A CreativeWork or Event about this Thing.",
-            "title": "SubjectOf"
+            "title": "Subject Of"
           },
           "url": {
             "type": "string",
@@ -3098,13 +3098,13 @@
             "type": "string",
             "nullable": true,
             "description": "The date that the anwser was published, in ISO 8601 date format.",
-            "title": "DateModified"
+            "title": "Date Modified"
           },
           "datePublished": {
             "type": "string",
             "nullable": true,
             "description": "The date that the anwser was published, in ISO 8601 date format.",
-            "title": "DatePublished"
+            "title": "Date Published"
           },
           "author": {
             "type": "array",
@@ -3131,13 +3131,13 @@
             "type": "string",
             "nullable": true,
             "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.",
-            "title": "AdditionalType"
+            "title": "Additional Type"
           },
           "alternateName": {
             "type": "string",
             "nullable": true,
             "description": "An alias for the item.",
-            "title": "AlternateName"
+            "title": "Alternate Name"
           },
           "description": {
             "type": "string",
@@ -3149,7 +3149,7 @@
             "type": "string",
             "nullable": true,
             "description": "A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.",
-            "title": "DisambiguatingDescription"
+            "title": "Disambiguating Description"
           },
           "identifier": {
             "type": "string",
@@ -3178,13 +3178,13 @@
             "type": "string",
             "nullable": true,
             "description": "URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.",
-            "title": "SameAs"
+            "title": "Same As"
           },
           "subjectOf": {
             "type": "string",
             "nullable": true,
             "description": "A CreativeWork or Event about this Thing.",
-            "title": "SubjectOf"
+            "title": "Subject Of"
           },
           "url": {
             "type": "string",
@@ -3202,17 +3202,17 @@
         "properties": {
           "currentPage": {
             "type": "number",
-            "title": "CurrentPage"
+            "title": "Current Page"
           },
           "nextPage": {
             "type": "string",
             "nullable": true,
-            "title": "NextPage"
+            "title": "Next Page"
           },
           "previousPage": {
             "type": "string",
             "nullable": true,
-            "title": "PreviousPage"
+            "title": "Previous Page"
           },
           "records": {
             "type": "number",
@@ -3222,7 +3222,7 @@
           "recordPerPage": {
             "type": "number",
             "nullable": true,
-            "title": "RecordPerPage"
+            "title": "Record Per Page"
           },
           "pageTypes": {
             "type": "array",
@@ -3241,7 +3241,7 @@
               ]
             },
             "nullable": true,
-            "title": "PageTypes"
+            "title": "Page Types"
           }
         },
         "required": [
@@ -3285,7 +3285,7 @@
           "noIndexing": {
             "type": "boolean",
             "nullable": true,
-            "title": "NoIndexing"
+            "title": "No Indexing"
           }
         },
         "required": [
@@ -3329,7 +3329,7 @@
                 ]
               }
             },
-            "title": "JsonLD"
+            "title": "Json LD"
           },
           "title": {
             "type": "string",
@@ -3369,7 +3369,7 @@
         "properties": {
           "breadcrumbList": {
             "$ref": "#/definitions/c3JjL3ZlbmRvci9jb21tZXJjZS90eXBlcy50cw==@BreadcrumbList",
-            "title": "BreadcrumbList"
+            "title": "Breadcrumb List"
           },
           "product": {
             "$ref": "#/definitions/c3JjL3ZlbmRvci9jb21tZXJjZS90eXBlcy50cw==@Product",
@@ -3421,7 +3421,7 @@
                 ]
               }
             },
-            "title": "JsonLD"
+            "title": "Json LD"
           },
           "jsonLDs": {
             "type": "array",
@@ -3430,7 +3430,7 @@
               "additionalProperties": {}
             },
             "nullable": true,
-            "title": "JsonLDs"
+            "title": "Json L Ds"
           },
           "title": {
             "type": "string",
@@ -3606,7 +3606,7 @@
                   "type": "string"
                 },
                 "nullable": true,
-                "title": "ProductTypes"
+                "title": "Product Types"
               },
               "productVendors": {
                 "type": "array",
@@ -3614,17 +3614,17 @@
                   "type": "string"
                 },
                 "nullable": true,
-                "title": "ProductVendors"
+                "title": "Product Vendors"
               },
               "priceMin": {
                 "type": "number",
                 "nullable": true,
-                "title": "PriceMin"
+                "title": "Price Min"
               },
               "priceMax": {
                 "type": "number",
                 "nullable": true,
-                "title": "PriceMax"
+                "title": "Price Max"
               },
               "variantOptions": {
                 "type": "array",
@@ -3646,7 +3646,7 @@
                   ]
                 },
                 "nullable": true,
-                "title": "VariantOptions"
+                "title": "Variant Options"
               }
             },
             "nullable": true,
@@ -3700,7 +3700,7 @@
           "collectionName": {
             "type": "string",
             "nullable": true,
-            "title": "CollectionName"
+            "title": "Collection Name"
           },
           "count": {
             "type": "number",
@@ -3732,7 +3732,7 @@
           "pageOffset": {
             "type": "number",
             "nullable": true,
-            "title": "PageOffset"
+            "title": "Page Offset"
           },
           "page": {
             "type": "number",
@@ -3742,17 +3742,17 @@
           "startCursor": {
             "type": "string",
             "nullable": true,
-            "title": "StartCursor"
+            "title": "Start Cursor"
           },
           "endCursor": {
             "type": "string",
             "nullable": true,
-            "title": "EndCursor"
+            "title": "End Cursor"
           },
           "pageHref": {
             "type": "string",
             "nullable": true,
-            "title": "PageHref"
+            "title": "Page Href"
           }
         }
       },
@@ -4732,7 +4732,7 @@
               "titleBy": "alt"
             },
             "nullable": true,
-            "title": "PaymentMethods"
+            "title": "Payment Methods"
           },
           "policies": {
             "type": "array",
@@ -4817,7 +4817,7 @@
                         "type": "string",
                         "nullable": true,
                         "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.",
-                        "title": "AdditionalType"
+                        "title": "Additional Type"
                       },
                       "identifier": {
                         "type": "string",
@@ -4840,25 +4840,25 @@
                               "type": "string",
                               "nullable": true,
                               "description": "Media type typically expressed using a MIME format (see IANA site and MDN reference)",
-                              "title": "EncodingFormat"
+                              "title": "Encoding Format"
                             },
                             "embedUrl": {
                               "type": "string",
                               "nullable": true,
                               "description": "A URL pointing to a player for a specific video.",
-                              "title": "EmbedUrl"
+                              "title": "Embed Url"
                             },
                             "contentUrl": {
                               "type": "string",
                               "nullable": true,
                               "description": "Actual bytes of the media object, for example the image file or video file.",
-                              "title": "ContentUrl"
+                              "title": "Content Url"
                             },
                             "thumbnailUrl": {
                               "type": "string",
                               "nullable": true,
                               "description": "A thumbnail image relevant to the Thing",
-                              "title": "ThumbnailUrl"
+                              "title": "Thumbnail Url"
                             },
                             "name": {
                               "type": "string",
@@ -4876,13 +4876,13 @@
                               "type": "string",
                               "nullable": true,
                               "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.",
-                              "title": "AdditionalType"
+                              "title": "Additional Type"
                             },
                             "alternateName": {
                               "type": "string",
                               "nullable": true,
                               "description": "An alias for the item.",
-                              "title": "AlternateName"
+                              "title": "Alternate Name"
                             },
                             "description": {
                               "type": "string",
@@ -4894,7 +4894,7 @@
                               "type": "string",
                               "nullable": true,
                               "description": "A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.",
-                              "title": "DisambiguatingDescription"
+                              "title": "Disambiguating Description"
                             },
                             "identifier": {
                               "type": "string",
@@ -4920,7 +4920,7 @@
                                     "type": "string",
                                     "nullable": true,
                                     "description": "date when video was published first time, format ISO 8601: https://en.wikipedia.org/wiki/ISO_8601",
-                                    "title": "UploadDate"
+                                    "title": "Upload Date"
                                   },
                                   "duration": {
                                     "type": "string",
@@ -4932,25 +4932,25 @@
                                     "type": "string",
                                     "nullable": true,
                                     "description": "Media type typically expressed using a MIME format (see IANA site and MDN reference)",
-                                    "title": "EncodingFormat"
+                                    "title": "Encoding Format"
                                   },
                                   "embedUrl": {
                                     "type": "string",
                                     "nullable": true,
                                     "description": "A URL pointing to a player for a specific video.",
-                                    "title": "EmbedUrl"
+                                    "title": "Embed Url"
                                   },
                                   "contentUrl": {
                                     "type": "string",
                                     "nullable": true,
                                     "description": "Actual bytes of the media object, for example the image file or video file.",
-                                    "title": "ContentUrl"
+                                    "title": "Content Url"
                                   },
                                   "thumbnailUrl": {
                                     "type": "string",
                                     "nullable": true,
                                     "description": "A thumbnail image relevant to the Thing",
-                                    "title": "ThumbnailUrl"
+                                    "title": "Thumbnail Url"
                                   },
                                   "name": {
                                     "type": "string",
@@ -4968,13 +4968,13 @@
                                     "type": "string",
                                     "nullable": true,
                                     "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.",
-                                    "title": "AdditionalType"
+                                    "title": "Additional Type"
                                   },
                                   "alternateName": {
                                     "type": "string",
                                     "nullable": true,
                                     "description": "An alias for the item.",
-                                    "title": "AlternateName"
+                                    "title": "Alternate Name"
                                   },
                                   "description": {
                                     "type": "string",
@@ -4986,7 +4986,7 @@
                                     "type": "string",
                                     "nullable": true,
                                     "description": "A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.",
-                                    "title": "DisambiguatingDescription"
+                                    "title": "Disambiguating Description"
                                   },
                                   "identifier": {
                                     "type": "string",
@@ -5015,13 +5015,13 @@
                                     "type": "string",
                                     "nullable": true,
                                     "description": "URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.",
-                                    "title": "SameAs"
+                                    "title": "Same As"
                                   },
                                   "subjectOf": {
                                     "type": "string",
                                     "nullable": true,
                                     "description": "A CreativeWork or Event about this Thing.",
-                                    "title": "SubjectOf"
+                                    "title": "Subject Of"
                                   }
                                 }
                               },
@@ -5032,13 +5032,13 @@
                               "type": "string",
                               "nullable": true,
                               "description": "URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.",
-                              "title": "SameAs"
+                              "title": "Same As"
                             },
                             "subjectOf": {
                               "type": "string",
                               "nullable": true,
                               "description": "A CreativeWork or Event about this Thing.",
-                              "title": "SubjectOf"
+                              "title": "Subject Of"
                             }
                           }
                         },
@@ -5067,7 +5067,7 @@
                               "type": "string",
                               "nullable": true,
                               "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.",
-                              "title": "AdditionalType"
+                              "title": "Additional Type"
                             },
                             "identifier": {
                               "type": "string",
@@ -5090,25 +5090,25 @@
                                     "type": "string",
                                     "nullable": true,
                                     "description": "Media type typically expressed using a MIME format (see IANA site and MDN reference)",
-                                    "title": "EncodingFormat"
+                                    "title": "Encoding Format"
                                   },
                                   "embedUrl": {
                                     "type": "string",
                                     "nullable": true,
                                     "description": "A URL pointing to a player for a specific video.",
-                                    "title": "EmbedUrl"
+                                    "title": "Embed Url"
                                   },
                                   "contentUrl": {
                                     "type": "string",
                                     "nullable": true,
                                     "description": "Actual bytes of the media object, for example the image file or video file.",
-                                    "title": "ContentUrl"
+                                    "title": "Content Url"
                                   },
                                   "thumbnailUrl": {
                                     "type": "string",
                                     "nullable": true,
                                     "description": "A thumbnail image relevant to the Thing",
-                                    "title": "ThumbnailUrl"
+                                    "title": "Thumbnail Url"
                                   },
                                   "name": {
                                     "type": "string",
@@ -5126,13 +5126,13 @@
                                     "type": "string",
                                     "nullable": true,
                                     "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.",
-                                    "title": "AdditionalType"
+                                    "title": "Additional Type"
                                   },
                                   "alternateName": {
                                     "type": "string",
                                     "nullable": true,
                                     "description": "An alias for the item.",
-                                    "title": "AlternateName"
+                                    "title": "Alternate Name"
                                   },
                                   "description": {
                                     "type": "string",
@@ -5144,7 +5144,7 @@
                                     "type": "string",
                                     "nullable": true,
                                     "description": "A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.",
-                                    "title": "DisambiguatingDescription"
+                                    "title": "Disambiguating Description"
                                   },
                                   "identifier": {
                                     "type": "string",
@@ -5170,7 +5170,7 @@
                                           "type": "string",
                                           "nullable": true,
                                           "description": "date when video was published first time, format ISO 8601: https://en.wikipedia.org/wiki/ISO_8601",
-                                          "title": "UploadDate"
+                                          "title": "Upload Date"
                                         },
                                         "duration": {
                                           "type": "string",
@@ -5182,25 +5182,25 @@
                                           "type": "string",
                                           "nullable": true,
                                           "description": "Media type typically expressed using a MIME format (see IANA site and MDN reference)",
-                                          "title": "EncodingFormat"
+                                          "title": "Encoding Format"
                                         },
                                         "embedUrl": {
                                           "type": "string",
                                           "nullable": true,
                                           "description": "A URL pointing to a player for a specific video.",
-                                          "title": "EmbedUrl"
+                                          "title": "Embed Url"
                                         },
                                         "contentUrl": {
                                           "type": "string",
                                           "nullable": true,
                                           "description": "Actual bytes of the media object, for example the image file or video file.",
-                                          "title": "ContentUrl"
+                                          "title": "Content Url"
                                         },
                                         "thumbnailUrl": {
                                           "type": "string",
                                           "nullable": true,
                                           "description": "A thumbnail image relevant to the Thing",
-                                          "title": "ThumbnailUrl"
+                                          "title": "Thumbnail Url"
                                         },
                                         "name": {
                                           "type": "string",
@@ -5218,13 +5218,13 @@
                                           "type": "string",
                                           "nullable": true,
                                           "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.",
-                                          "title": "AdditionalType"
+                                          "title": "Additional Type"
                                         },
                                         "alternateName": {
                                           "type": "string",
                                           "nullable": true,
                                           "description": "An alias for the item.",
-                                          "title": "AlternateName"
+                                          "title": "Alternate Name"
                                         },
                                         "description": {
                                           "type": "string",
@@ -5236,7 +5236,7 @@
                                           "type": "string",
                                           "nullable": true,
                                           "description": "A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.",
-                                          "title": "DisambiguatingDescription"
+                                          "title": "Disambiguating Description"
                                         },
                                         "identifier": {
                                           "type": "string",
@@ -5265,13 +5265,13 @@
                                           "type": "string",
                                           "nullable": true,
                                           "description": "URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.",
-                                          "title": "SameAs"
+                                          "title": "Same As"
                                         },
                                         "subjectOf": {
                                           "type": "string",
                                           "nullable": true,
                                           "description": "A CreativeWork or Event about this Thing.",
-                                          "title": "SubjectOf"
+                                          "title": "Subject Of"
                                         }
                                       }
                                     },
@@ -5282,13 +5282,13 @@
                                     "type": "string",
                                     "nullable": true,
                                     "description": "URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.",
-                                    "title": "SameAs"
+                                    "title": "Same As"
                                   },
                                   "subjectOf": {
                                     "type": "string",
                                     "nullable": true,
                                     "description": "A CreativeWork or Event about this Thing.",
-                                    "title": "SubjectOf"
+                                    "title": "Subject Of"
                                   }
                                 }
                               },
@@ -5317,7 +5317,7 @@
                                     "type": "string",
                                     "nullable": true,
                                     "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.",
-                                    "title": "AdditionalType"
+                                    "title": "Additional Type"
                                   },
                                   "identifier": {
                                     "type": "string",
@@ -5340,25 +5340,25 @@
                                           "type": "string",
                                           "nullable": true,
                                           "description": "Media type typically expressed using a MIME format (see IANA site and MDN reference)",
-                                          "title": "EncodingFormat"
+                                          "title": "Encoding Format"
                                         },
                                         "embedUrl": {
                                           "type": "string",
                                           "nullable": true,
                                           "description": "A URL pointing to a player for a specific video.",
-                                          "title": "EmbedUrl"
+                                          "title": "Embed Url"
                                         },
                                         "contentUrl": {
                                           "type": "string",
                                           "nullable": true,
                                           "description": "Actual bytes of the media object, for example the image file or video file.",
-                                          "title": "ContentUrl"
+                                          "title": "Content Url"
                                         },
                                         "thumbnailUrl": {
                                           "type": "string",
                                           "nullable": true,
                                           "description": "A thumbnail image relevant to the Thing",
-                                          "title": "ThumbnailUrl"
+                                          "title": "Thumbnail Url"
                                         },
                                         "name": {
                                           "type": "string",
@@ -5376,13 +5376,13 @@
                                           "type": "string",
                                           "nullable": true,
                                           "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.",
-                                          "title": "AdditionalType"
+                                          "title": "Additional Type"
                                         },
                                         "alternateName": {
                                           "type": "string",
                                           "nullable": true,
                                           "description": "An alias for the item.",
-                                          "title": "AlternateName"
+                                          "title": "Alternate Name"
                                         },
                                         "description": {
                                           "type": "string",
@@ -5394,7 +5394,7 @@
                                           "type": "string",
                                           "nullable": true,
                                           "description": "A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.",
-                                          "title": "DisambiguatingDescription"
+                                          "title": "Disambiguating Description"
                                         },
                                         "identifier": {
                                           "type": "string",
@@ -5420,7 +5420,7 @@
                                                 "type": "string",
                                                 "nullable": true,
                                                 "description": "date when video was published first time, format ISO 8601: https://en.wikipedia.org/wiki/ISO_8601",
-                                                "title": "UploadDate"
+                                                "title": "Upload Date"
                                               },
                                               "duration": {
                                                 "type": "string",
@@ -5432,25 +5432,25 @@
                                                 "type": "string",
                                                 "nullable": true,
                                                 "description": "Media type typically expressed using a MIME format (see IANA site and MDN reference)",
-                                                "title": "EncodingFormat"
+                                                "title": "Encoding Format"
                                               },
                                               "embedUrl": {
                                                 "type": "string",
                                                 "nullable": true,
                                                 "description": "A URL pointing to a player for a specific video.",
-                                                "title": "EmbedUrl"
+                                                "title": "Embed Url"
                                               },
                                               "contentUrl": {
                                                 "type": "string",
                                                 "nullable": true,
                                                 "description": "Actual bytes of the media object, for example the image file or video file.",
-                                                "title": "ContentUrl"
+                                                "title": "Content Url"
                                               },
                                               "thumbnailUrl": {
                                                 "type": "string",
                                                 "nullable": true,
                                                 "description": "A thumbnail image relevant to the Thing",
-                                                "title": "ThumbnailUrl"
+                                                "title": "Thumbnail Url"
                                               },
                                               "name": {
                                                 "type": "string",
@@ -5468,13 +5468,13 @@
                                                 "type": "string",
                                                 "nullable": true,
                                                 "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.",
-                                                "title": "AdditionalType"
+                                                "title": "Additional Type"
                                               },
                                               "alternateName": {
                                                 "type": "string",
                                                 "nullable": true,
                                                 "description": "An alias for the item.",
-                                                "title": "AlternateName"
+                                                "title": "Alternate Name"
                                               },
                                               "description": {
                                                 "type": "string",
@@ -5486,7 +5486,7 @@
                                                 "type": "string",
                                                 "nullable": true,
                                                 "description": "A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.",
-                                                "title": "DisambiguatingDescription"
+                                                "title": "Disambiguating Description"
                                               },
                                               "identifier": {
                                                 "type": "string",
@@ -5515,13 +5515,13 @@
                                                 "type": "string",
                                                 "nullable": true,
                                                 "description": "URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.",
-                                                "title": "SameAs"
+                                                "title": "Same As"
                                               },
                                               "subjectOf": {
                                                 "type": "string",
                                                 "nullable": true,
                                                 "description": "A CreativeWork or Event about this Thing.",
-                                                "title": "SubjectOf"
+                                                "title": "Subject Of"
                                               }
                                             }
                                           },
@@ -5532,13 +5532,13 @@
                                           "type": "string",
                                           "nullable": true,
                                           "description": "URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.",
-                                          "title": "SameAs"
+                                          "title": "Same As"
                                         },
                                         "subjectOf": {
                                           "type": "string",
                                           "nullable": true,
                                           "description": "A CreativeWork or Event about this Thing.",
-                                          "title": "SubjectOf"
+                                          "title": "Subject Of"
                                         }
                                       }
                                     },
@@ -5567,7 +5567,7 @@
                                           "type": "string",
                                           "nullable": true,
                                           "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.",
-                                          "title": "AdditionalType"
+                                          "title": "Additional Type"
                                         },
                                         "identifier": {
                                           "type": "string",
@@ -5590,25 +5590,25 @@
                                                 "type": "string",
                                                 "nullable": true,
                                                 "description": "Media type typically expressed using a MIME format (see IANA site and MDN reference)",
-                                                "title": "EncodingFormat"
+                                                "title": "Encoding Format"
                                               },
                                               "embedUrl": {
                                                 "type": "string",
                                                 "nullable": true,
                                                 "description": "A URL pointing to a player for a specific video.",
-                                                "title": "EmbedUrl"
+                                                "title": "Embed Url"
                                               },
                                               "contentUrl": {
                                                 "type": "string",
                                                 "nullable": true,
                                                 "description": "Actual bytes of the media object, for example the image file or video file.",
-                                                "title": "ContentUrl"
+                                                "title": "Content Url"
                                               },
                                               "thumbnailUrl": {
                                                 "type": "string",
                                                 "nullable": true,
                                                 "description": "A thumbnail image relevant to the Thing",
-                                                "title": "ThumbnailUrl"
+                                                "title": "Thumbnail Url"
                                               },
                                               "name": {
                                                 "type": "string",
@@ -5626,13 +5626,13 @@
                                                 "type": "string",
                                                 "nullable": true,
                                                 "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.",
-                                                "title": "AdditionalType"
+                                                "title": "Additional Type"
                                               },
                                               "alternateName": {
                                                 "type": "string",
                                                 "nullable": true,
                                                 "description": "An alias for the item.",
-                                                "title": "AlternateName"
+                                                "title": "Alternate Name"
                                               },
                                               "description": {
                                                 "type": "string",
@@ -5644,7 +5644,7 @@
                                                 "type": "string",
                                                 "nullable": true,
                                                 "description": "A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.",
-                                                "title": "DisambiguatingDescription"
+                                                "title": "Disambiguating Description"
                                               },
                                               "identifier": {
                                                 "type": "string",
@@ -5670,7 +5670,7 @@
                                                       "type": "string",
                                                       "nullable": true,
                                                       "description": "date when video was published first time, format ISO 8601: https://en.wikipedia.org/wiki/ISO_8601",
-                                                      "title": "UploadDate"
+                                                      "title": "Upload Date"
                                                     },
                                                     "duration": {
                                                       "type": "string",
@@ -5682,25 +5682,25 @@
                                                       "type": "string",
                                                       "nullable": true,
                                                       "description": "Media type typically expressed using a MIME format (see IANA site and MDN reference)",
-                                                      "title": "EncodingFormat"
+                                                      "title": "Encoding Format"
                                                     },
                                                     "embedUrl": {
                                                       "type": "string",
                                                       "nullable": true,
                                                       "description": "A URL pointing to a player for a specific video.",
-                                                      "title": "EmbedUrl"
+                                                      "title": "Embed Url"
                                                     },
                                                     "contentUrl": {
                                                       "type": "string",
                                                       "nullable": true,
                                                       "description": "Actual bytes of the media object, for example the image file or video file.",
-                                                      "title": "ContentUrl"
+                                                      "title": "Content Url"
                                                     },
                                                     "thumbnailUrl": {
                                                       "type": "string",
                                                       "nullable": true,
                                                       "description": "A thumbnail image relevant to the Thing",
-                                                      "title": "ThumbnailUrl"
+                                                      "title": "Thumbnail Url"
                                                     },
                                                     "name": {
                                                       "type": "string",
@@ -5718,13 +5718,13 @@
                                                       "type": "string",
                                                       "nullable": true,
                                                       "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.",
-                                                      "title": "AdditionalType"
+                                                      "title": "Additional Type"
                                                     },
                                                     "alternateName": {
                                                       "type": "string",
                                                       "nullable": true,
                                                       "description": "An alias for the item.",
-                                                      "title": "AlternateName"
+                                                      "title": "Alternate Name"
                                                     },
                                                     "description": {
                                                       "type": "string",
@@ -5736,7 +5736,7 @@
                                                       "type": "string",
                                                       "nullable": true,
                                                       "description": "A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.",
-                                                      "title": "DisambiguatingDescription"
+                                                      "title": "Disambiguating Description"
                                                     },
                                                     "identifier": {
                                                       "type": "string",
@@ -5765,13 +5765,13 @@
                                                       "type": "string",
                                                       "nullable": true,
                                                       "description": "URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.",
-                                                      "title": "SameAs"
+                                                      "title": "Same As"
                                                     },
                                                     "subjectOf": {
                                                       "type": "string",
                                                       "nullable": true,
                                                       "description": "A CreativeWork or Event about this Thing.",
-                                                      "title": "SubjectOf"
+                                                      "title": "Subject Of"
                                                     }
                                                   }
                                                 },
@@ -5782,13 +5782,13 @@
                                                 "type": "string",
                                                 "nullable": true,
                                                 "description": "URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.",
-                                                "title": "SameAs"
+                                                "title": "Same As"
                                               },
                                               "subjectOf": {
                                                 "type": "string",
                                                 "nullable": true,
                                                 "description": "A CreativeWork or Event about this Thing.",
-                                                "title": "SubjectOf"
+                                                "title": "Subject Of"
                                               }
                                             }
                                           },
@@ -5817,7 +5817,7 @@
                                                 "type": "string",
                                                 "nullable": true,
                                                 "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.",
-                                                "title": "AdditionalType"
+                                                "title": "Additional Type"
                                               },
                                               "identifier": {
                                                 "type": "string",
@@ -5840,25 +5840,25 @@
                                                       "type": "string",
                                                       "nullable": true,
                                                       "description": "Media type typically expressed using a MIME format (see IANA site and MDN reference)",
-                                                      "title": "EncodingFormat"
+                                                      "title": "Encoding Format"
                                                     },
                                                     "embedUrl": {
                                                       "type": "string",
                                                       "nullable": true,
                                                       "description": "A URL pointing to a player for a specific video.",
-                                                      "title": "EmbedUrl"
+                                                      "title": "Embed Url"
                                                     },
                                                     "contentUrl": {
                                                       "type": "string",
                                                       "nullable": true,
                                                       "description": "Actual bytes of the media object, for example the image file or video file.",
-                                                      "title": "ContentUrl"
+                                                      "title": "Content Url"
                                                     },
                                                     "thumbnailUrl": {
                                                       "type": "string",
                                                       "nullable": true,
                                                       "description": "A thumbnail image relevant to the Thing",
-                                                      "title": "ThumbnailUrl"
+                                                      "title": "Thumbnail Url"
                                                     },
                                                     "name": {
                                                       "type": "string",
@@ -5876,13 +5876,13 @@
                                                       "type": "string",
                                                       "nullable": true,
                                                       "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.",
-                                                      "title": "AdditionalType"
+                                                      "title": "Additional Type"
                                                     },
                                                     "alternateName": {
                                                       "type": "string",
                                                       "nullable": true,
                                                       "description": "An alias for the item.",
-                                                      "title": "AlternateName"
+                                                      "title": "Alternate Name"
                                                     },
                                                     "description": {
                                                       "type": "string",
@@ -5894,7 +5894,7 @@
                                                       "type": "string",
                                                       "nullable": true,
                                                       "description": "A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.",
-                                                      "title": "DisambiguatingDescription"
+                                                      "title": "Disambiguating Description"
                                                     },
                                                     "identifier": {
                                                       "type": "string",
@@ -5920,7 +5920,7 @@
                                                             "type": "string",
                                                             "nullable": true,
                                                             "description": "date when video was published first time, format ISO 8601: https://en.wikipedia.org/wiki/ISO_8601",
-                                                            "title": "UploadDate"
+                                                            "title": "Upload Date"
                                                           },
                                                           "duration": {
                                                             "type": "string",
@@ -5932,25 +5932,25 @@
                                                             "type": "string",
                                                             "nullable": true,
                                                             "description": "Media type typically expressed using a MIME format (see IANA site and MDN reference)",
-                                                            "title": "EncodingFormat"
+                                                            "title": "Encoding Format"
                                                           },
                                                           "embedUrl": {
                                                             "type": "string",
                                                             "nullable": true,
                                                             "description": "A URL pointing to a player for a specific video.",
-                                                            "title": "EmbedUrl"
+                                                            "title": "Embed Url"
                                                           },
                                                           "contentUrl": {
                                                             "type": "string",
                                                             "nullable": true,
                                                             "description": "Actual bytes of the media object, for example the image file or video file.",
-                                                            "title": "ContentUrl"
+                                                            "title": "Content Url"
                                                           },
                                                           "thumbnailUrl": {
                                                             "type": "string",
                                                             "nullable": true,
                                                             "description": "A thumbnail image relevant to the Thing",
-                                                            "title": "ThumbnailUrl"
+                                                            "title": "Thumbnail Url"
                                                           },
                                                           "name": {
                                                             "type": "string",
@@ -5968,13 +5968,13 @@
                                                             "type": "string",
                                                             "nullable": true,
                                                             "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.",
-                                                            "title": "AdditionalType"
+                                                            "title": "Additional Type"
                                                           },
                                                           "alternateName": {
                                                             "type": "string",
                                                             "nullable": true,
                                                             "description": "An alias for the item.",
-                                                            "title": "AlternateName"
+                                                            "title": "Alternate Name"
                                                           },
                                                           "description": {
                                                             "type": "string",
@@ -5986,7 +5986,7 @@
                                                             "type": "string",
                                                             "nullable": true,
                                                             "description": "A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.",
-                                                            "title": "DisambiguatingDescription"
+                                                            "title": "Disambiguating Description"
                                                           },
                                                           "identifier": {
                                                             "type": "string",
@@ -6015,13 +6015,13 @@
                                                             "type": "string",
                                                             "nullable": true,
                                                             "description": "URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.",
-                                                            "title": "SameAs"
+                                                            "title": "Same As"
                                                           },
                                                           "subjectOf": {
                                                             "type": "string",
                                                             "nullable": true,
                                                             "description": "A CreativeWork or Event about this Thing.",
-                                                            "title": "SubjectOf"
+                                                            "title": "Subject Of"
                                                           }
                                                         }
                                                       },
@@ -6032,13 +6032,13 @@
                                                       "type": "string",
                                                       "nullable": true,
                                                       "description": "URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.",
-                                                      "title": "SameAs"
+                                                      "title": "Same As"
                                                     },
                                                     "subjectOf": {
                                                       "type": "string",
                                                       "nullable": true,
                                                       "description": "A CreativeWork or Event about this Thing.",
-                                                      "title": "SubjectOf"
+                                                      "title": "Subject Of"
                                                     }
                                                   }
                                                 },
@@ -6092,7 +6092,7 @@
                   "type": "string",
                   "nullable": true,
                   "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.",
-                  "title": "AdditionalType"
+                  "title": "Additional Type"
                 },
                 "identifier": {
                   "type": "string",
@@ -6115,25 +6115,25 @@
                         "type": "string",
                         "nullable": true,
                         "description": "Media type typically expressed using a MIME format (see IANA site and MDN reference)",
-                        "title": "EncodingFormat"
+                        "title": "Encoding Format"
                       },
                       "embedUrl": {
                         "type": "string",
                         "nullable": true,
                         "description": "A URL pointing to a player for a specific video.",
-                        "title": "EmbedUrl"
+                        "title": "Embed Url"
                       },
                       "contentUrl": {
                         "type": "string",
                         "nullable": true,
                         "description": "Actual bytes of the media object, for example the image file or video file.",
-                        "title": "ContentUrl"
+                        "title": "Content Url"
                       },
                       "thumbnailUrl": {
                         "type": "string",
                         "nullable": true,
                         "description": "A thumbnail image relevant to the Thing",
-                        "title": "ThumbnailUrl"
+                        "title": "Thumbnail Url"
                       },
                       "name": {
                         "type": "string",
@@ -6151,13 +6151,13 @@
                         "type": "string",
                         "nullable": true,
                         "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.",
-                        "title": "AdditionalType"
+                        "title": "Additional Type"
                       },
                       "alternateName": {
                         "type": "string",
                         "nullable": true,
                         "description": "An alias for the item.",
-                        "title": "AlternateName"
+                        "title": "Alternate Name"
                       },
                       "description": {
                         "type": "string",
@@ -6169,7 +6169,7 @@
                         "type": "string",
                         "nullable": true,
                         "description": "A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.",
-                        "title": "DisambiguatingDescription"
+                        "title": "Disambiguating Description"
                       },
                       "identifier": {
                         "type": "string",
@@ -6195,7 +6195,7 @@
                               "type": "string",
                               "nullable": true,
                               "description": "date when video was published first time, format ISO 8601: https://en.wikipedia.org/wiki/ISO_8601",
-                              "title": "UploadDate"
+                              "title": "Upload Date"
                             },
                             "duration": {
                               "type": "string",
@@ -6207,25 +6207,25 @@
                               "type": "string",
                               "nullable": true,
                               "description": "Media type typically expressed using a MIME format (see IANA site and MDN reference)",
-                              "title": "EncodingFormat"
+                              "title": "Encoding Format"
                             },
                             "embedUrl": {
                               "type": "string",
                               "nullable": true,
                               "description": "A URL pointing to a player for a specific video.",
-                              "title": "EmbedUrl"
+                              "title": "Embed Url"
                             },
                             "contentUrl": {
                               "type": "string",
                               "nullable": true,
                               "description": "Actual bytes of the media object, for example the image file or video file.",
-                              "title": "ContentUrl"
+                              "title": "Content Url"
                             },
                             "thumbnailUrl": {
                               "type": "string",
                               "nullable": true,
                               "description": "A thumbnail image relevant to the Thing",
-                              "title": "ThumbnailUrl"
+                              "title": "Thumbnail Url"
                             },
                             "name": {
                               "type": "string",
@@ -6243,13 +6243,13 @@
                               "type": "string",
                               "nullable": true,
                               "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.",
-                              "title": "AdditionalType"
+                              "title": "Additional Type"
                             },
                             "alternateName": {
                               "type": "string",
                               "nullable": true,
                               "description": "An alias for the item.",
-                              "title": "AlternateName"
+                              "title": "Alternate Name"
                             },
                             "description": {
                               "type": "string",
@@ -6261,7 +6261,7 @@
                               "type": "string",
                               "nullable": true,
                               "description": "A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.",
-                              "title": "DisambiguatingDescription"
+                              "title": "Disambiguating Description"
                             },
                             "identifier": {
                               "type": "string",
@@ -6290,13 +6290,13 @@
                               "type": "string",
                               "nullable": true,
                               "description": "URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.",
-                              "title": "SameAs"
+                              "title": "Same As"
                             },
                             "subjectOf": {
                               "type": "string",
                               "nullable": true,
                               "description": "A CreativeWork or Event about this Thing.",
-                              "title": "SubjectOf"
+                              "title": "Subject Of"
                             }
                           }
                         },
@@ -6307,13 +6307,13 @@
                         "type": "string",
                         "nullable": true,
                         "description": "URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.",
-                        "title": "SameAs"
+                        "title": "Same As"
                       },
                       "subjectOf": {
                         "type": "string",
                         "nullable": true,
                         "description": "A CreativeWork or Event about this Thing.",
-                        "title": "SubjectOf"
+                        "title": "Subject Of"
                       }
                     }
                   },
@@ -6572,7 +6572,7 @@
                     "subTitle": {
                       "type": "string",
                       "description": "Image text subtitle",
-                      "title": "SubTitle"
+                      "title": "Sub Title"
                     },
                     "label": {
                       "type": "string",
@@ -6731,7 +6731,7 @@
               },
               "altText": {
                 "type": "string",
-                "title": "AltText"
+                "title": "Alt Text"
               }
             },
             "required": [
@@ -6978,7 +6978,7 @@
                 "type": "string",
                 "format": "color",
                 "description": "color to be used in title and description",
-                "title": "TextColor"
+                "title": "Text Color"
               }
             },
             "required": [
@@ -7043,7 +7043,7 @@
                     "type": "string",
                     "format": "color",
                     "description": "color to be used in link's text",
-                    "title": "TextColor"
+                    "title": "Text Color"
                   },
                   "gradientColors": {
                     "type": "object",
@@ -7070,7 +7070,7 @@
                     "required": [
                       "neutral"
                     ],
-                    "title": "GradientColors"
+                    "title": "Gradient Colors"
                   }
                 },
                 "required": [
@@ -7110,13 +7110,13 @@
                   "type": "string",
                   "nullable": true,
                   "format": "color",
-                  "title": "IconColor"
+                  "title": "Icon Color"
                 },
                 "strokeWidth": {
                   "type": "number",
                   "nullable": true,
                   "description": "width of the SVG line",
-                  "title": "StrokeWidth"
+                  "title": "Stroke Width"
                 }
               },
               "required": [
@@ -7141,7 +7141,7 @@
                 "type": "string",
                 "nullable": true,
                 "format": "color",
-                "title": "BackgroundColor"
+                "title": "Background Color"
               }
             },
             "title": "Background"
@@ -7843,7 +7843,7 @@
             "type": "number",
             "nullable": true,
             "hide": "true",
-            "title": "TabIndex"
+            "title": "Tab Index"
           },
           "title": {
             "type": "string",
@@ -8115,7 +8115,7 @@
           "facebookToken": {
             "type": "string",
             "description": "Get it in Facebook app. Expires every 90 days.",
-            "title": "FacebookToken"
+            "title": "Facebook Token"
           },
           "nposts": {
             "type": "number",
@@ -8201,7 +8201,7 @@
           "styleSheet": {
             "type": "string",
             "nullable": true,
-            "title": "StyleSheet"
+            "title": "Style Sheet"
           }
         },
         "required": [
@@ -8221,7 +8221,7 @@
             "nullable": true,
             "description": "Set the prefers-color-scheme media query. To support dark mode, create two instances of this block and set this option to light/dark in each instance",
             "default": "light",
-            "title": "ColorScheme"
+            "title": "Color Scheme"
           },
           "mainColors": {
             "type": "object",
@@ -8282,7 +8282,7 @@
               }
             },
             "nullable": true,
-            "title": "MainColors"
+            "title": "Main Colors"
           },
           "complementaryColors": {
             "type": "object",
@@ -8362,7 +8362,7 @@
             },
             "nullable": true,
             "description": "These will be auto-generated to a readable color if not set",
-            "title": "ComplementaryColors"
+            "title": "Complementary Colors"
           },
           "buttonStyle": {
             "type": "object",
@@ -8430,7 +8430,7 @@
               "--animation-btn"
             ],
             "nullable": true,
-            "title": "ButtonStyle"
+            "title": "Button Style"
           },
           "otherStyles": {
             "type": "object",
@@ -8474,7 +8474,7 @@
               "--tab-radius"
             ],
             "nullable": true,
-            "title": "OtherStyles"
+            "title": "Other Styles"
           },
           "mode": {
             "type": "string",

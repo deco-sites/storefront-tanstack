@@ -1,4 +1,5 @@
 import { cloudflare } from "@cloudflare/vite-plugin";
+import { decoContent } from "@decocms/blocks/vite";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
@@ -40,18 +41,9 @@ export default defineConfig({
         return { define: { __BUILD_HASH__: JSON.stringify(buildHash(command)) } };
       },
     },
-    {
-      // `deco serve` (the site editor's local server) rewrites .deco/blocks.gen.ts on every save.
-      // Only the worker imports it, so Vite swaps it on the server and leaves open pages as they
-      // were: reload them, so the editor's preview (and any tab) shows the saved content.
-      name: "site-content-reload",
-      apply: "serve",
-      hotUpdate({ file, server }) {
-        if (this.environment.name !== "ssr") return;
-        if (path.resolve(file) !== path.resolve(__dirname, ".deco/blocks.gen.ts")) return;
-        server.environments.client.hot.send({ type: "full-reload" });
-      },
-    },
+    // `vite dev`: a block saved in the site editor (`deco serve`) goes into the CMS src/cms.ts
+    // created, and open pages reload once the server has it.
+    decoContent(),
     {
       name: "site-manual-chunks",
       config(_cfg, { command }) {
