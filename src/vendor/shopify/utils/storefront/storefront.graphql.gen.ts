@@ -127,4 +127,5 @@ export type ShopMetafieldsArgs = {
 
 // Order/Admin types
 export type CountryCode = string;
+export type LanguageCode = string;
 export type Maybe<T> = T | null;

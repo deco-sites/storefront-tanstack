@@ -8,8 +8,8 @@ import { createShopifyClient, type ShopifyClient } from "@decocms/apps-shopify";
 import { env } from "cloudflare:workers";
 import { buildQuery, type GraphQLClient, type QueryDefinition } from "./utils/graphql";
 
-/** The Storefront API version every query in utils/storefront/queries.ts was written against. */
-const API_VERSION = "2025-04";
+/** The Storefront API version production (@decocms/apps-shopify 7.77.1) calls; utils/storefront/queries.ts is that version's copy. */
+const API_VERSION = "2026-04";
 
 let client: ShopifyClient | undefined;
 

@@ -3808,6 +3808,20 @@
             "type": "string",
             "nullable": true,
             "title": "Page Href"
+          },
+          "languageCode": {
+            "type": "string",
+            "nullable": true,
+            "title": "Language Code",
+            "description": "Language code for the storefront API",
+            "example": "\"EN\" for English, \"FR\" for French, etc."
+          },
+          "countryCode": {
+            "type": "string",
+            "nullable": true,
+            "title": "Country Code",
+            "description": "Country code for the storefront API. Must match an active market in Shopify Admin.",
+            "example": "\"US\" for United States, \"FR\" for France, etc."
           }
         }
       },

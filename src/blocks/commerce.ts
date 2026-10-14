@@ -12,12 +12,44 @@ import productDetailsPageLoader, {
 } from "../vendor/shopify/loaders/ProductDetailsPage";
 import { pageState } from "../request-state.server";
 
+/** The loader inputs v7 filled from the page's query string when the saved block left them unset. */
+const QUERY_STRING_INPUTS = [
+  "query",
+  "collectionName",
+  "startCursor",
+  "endCursor",
+  "pageHref",
+  "languageCode",
+  "countryCode",
+] as const;
+const NUMERIC_QUERY_STRING_INPUTS = ["count", "pageOffset"] as const;
+
 /**
- * Shopify's product listing page reads filters, sort and pagination from the page URL, which a block
- * function doesn't get as an argument: it reads it from the page being rendered.
+ * Shopify's product listing page, called the way production (v7) calls it: with the saved inputs,
+ * the page's query-string values for inputs left unset (`page` excepted, numbers for `count` and
+ * `pageOffset`), and no URL argument. Without a URL the loader reads `https://localhost`, so a
+ * listing that isn't a search names no collection, Shopify rejects the query, the loader resolves to
+ * null and the section shows "Not Found!" (what production renders on /shirts and /s?q=shirt).
  */
-export const shopifyProductListingPage = (props: ProductListingPageProps) =>
-  productListingPageLoader(props, pageState().url);
+export const shopifyProductListingPage = (props: ProductListingPageProps) => {
+  const search = pageState().url.searchParams;
+  const input: Record<string, unknown> & ProductListingPageProps = { ...props };
+  for (const key of QUERY_STRING_INPUTS) {
+    const value = search.get(key);
+    if (input[key] === undefined && value !== null) input[key] = value;
+  }
+  for (const key of NUMERIC_QUERY_STRING_INPUTS) {
+    const value = search.get(key);
+    if (input[key] === undefined && value !== null && Number.isFinite(Number(value))) {
+      input[key] = Number(value);
+    }
+  }
+  // v7 resolved a failing commerce loader to null (logging the error), so the section got no page.
+  return productListingPageLoader(input).catch((error: unknown) => {
+    console.error('[CMS] Commerce loader "shopify/loaders/ProductListingPage.ts" failed:', error);
+    return null;
+  });
+};
 
 /** v7's commerce extension wrappers. No extensions are saved, so each returns its data as is. */
 export const listingPageExtensions = (props: {
