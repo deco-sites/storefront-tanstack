@@ -11,7 +11,9 @@
  *   visitors, drafts and non-GET requests bypass it;
  * - a GET server function is cached only when it loads a page (its payload carries the page path,
  *   as `loadPage`'s does); every other one (cart, user, wishlist, addresses, the layout) is private;
- * - v7's admin endpoints (`/deco/*`, `/live/*`, `/.decofile`) don't exist any more and answer 404;
+ * - v7's admin endpoints (`/deco/*`, `/live/*`, `/.decofile`) don't exist any more and answer 404,
+ *   except v7's health check `/deco/_liveness`, which still answers `OK` (deploy probes and uptime
+ *   monitors poll it);
  * - fingerprinted assets are served as immutable;
  * - the cache key's `__v` (and the X-Cache-Version header) is `<build>.<revision>`: the build's
  *   timestamp and the content revision this instance serves, or the build alone when the revision
@@ -94,6 +96,8 @@ const BYPASS_PATHS = ["/_build"];
  * catch-all page route as a cacheable category page.
  */
 const REMOVED_ADMIN_PATHS = ["/deco/", "/live/", "/.decofile"];
+/** v7's health check: deploy probes (blue/green auto-promotion) and uptime monitors poll it. */
+const LIVENESS_PATH = "/deco/_liveness";
 const STATIC_PATHS = ["/fonts/"];
 const FINGERPRINTED_ASSET_RE = /(?:\/_build)?\/assets\/.*-[a-zA-Z0-9_-]{8,}\.\w+$/;
 /** Tracking params that never change a page, left out of its cache key (v7's list). */
@@ -180,12 +184,37 @@ function withoutSafeCookies(response: Response, safe: Set<string>): Response {
   return copy;
 }
 
-/** Keeps the last Set-Cookie of each name: several layers may set the same cookie. */
+/**
+ * A Set-Cookie's identity: name + Domain + Path, the way the browser keys its cookie jar (RFC 6265
+ * §5.3), so two headers that differ in scope address two different cookies. The domain is
+ * case-insensitive and a leading dot is ignored; the path is compared as sent. v7's #642.
+ */
+function setCookieIdentity(setCookie: string): string {
+  const [nameValue = "", ...attrs] = setCookie.split(";");
+  const eq = nameValue.indexOf("=");
+  const name = eq > 0 ? nameValue.slice(0, eq).trim() : nameValue.trim();
+  let domain = "";
+  let path = "";
+  for (const attr of attrs) {
+    const sep = attr.indexOf("=");
+    const key = (sep >= 0 ? attr.slice(0, sep) : attr).trim().toLowerCase();
+    const value = sep >= 0 ? attr.slice(sep + 1).trim() : "";
+    if (key === "domain") domain = value.replace(/^\./, "").toLowerCase();
+    else if (key === "path") path = value;
+  }
+  return `${name}\u0000${domain}\u0000${path}`;
+}
+
+/**
+ * Keeps the last Set-Cookie of each cookie (name + Domain + Path): several layers may set the same
+ * cookie. Keying on the name alone collapsed a sign-out that clears one cookie under several scopes
+ * (host-only, `Domain=www.host`, `Domain=parent`) into a single clear, leaving the others signed in.
+ */
 function dedupeSetCookies(response: Response): void {
   const cookies = response.headers.getSetCookie();
   if (cookies.length <= 1) return;
   const last = new Map<string, string>();
-  for (const c of cookies) last.set(c.slice(0, Math.max(0, c.indexOf("="))).trim() || c, c);
+  for (const c of cookies) last.set(setCookieIdentity(c), c);
   if (last.size === cookies.length) return;
   response.headers.delete("set-cookie");
   for (const c of last.values()) response.headers.append("set-cookie", c);
@@ -301,6 +330,16 @@ export function withEdgeCache(serverEntry: Handler, options: EdgeCacheOptions): 
     const url = new URL(request.url);
 
     if (url.pathname === "/_cache/purge" && request.method === "POST") return purge(request, env);
+
+    if (url.pathname === LIVENESS_PATH) {
+      return new Response("OK", {
+        headers: {
+          "Content-Type": "text/plain",
+          "Cache-Control": PRIVATE_NO_CACHE,
+          "X-Cache": "BYPASS",
+        },
+      });
+    }
 
     if (REMOVED_ADMIN_PATHS.some((p) => url.pathname.startsWith(p))) {
       return new Response("Not Found", {
