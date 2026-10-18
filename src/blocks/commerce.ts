@@ -25,14 +25,16 @@ const QUERY_STRING_INPUTS = [
 const NUMERIC_QUERY_STRING_INPUTS = ["count", "pageOffset"] as const;
 
 /**
- * Shopify's product listing page, called the way production (v7) calls it: with the saved inputs,
- * the page's query-string values for inputs left unset (`page` excepted, numbers for `count` and
- * `pageOffset`), and no URL argument. Without a URL the loader reads `https://localhost`, so a
- * listing that isn't a search names no collection, Shopify rejects the query, the loader resolves to
- * null and the section shows "Not Found!" (what production renders on /shirts and /s?q=shirt).
+ * Shopify's product listing page: the saved inputs, the page's query-string values for inputs left
+ * unset (`page` excepted, numbers for `count` and `pageOffset`), as v7 filled them, and the page URL,
+ * which v7 never passed. Without it the loader read `https://localhost`, so a listing that isn't a
+ * search named no collection and production shows "Not Found!" on /shirts and /s?q=shirt; the v8
+ * migration kept that, and this passes the URL again, so the loader reads the collection from the
+ * path and the search, filters, sort and cursors from the query string.
  */
 export const shopifyProductListingPage = (props: ProductListingPageProps) => {
-  const search = pageState().url.searchParams;
+  const url = pageState().url;
+  const search = url.searchParams;
   const input: Record<string, unknown> & ProductListingPageProps = { ...props };
   for (const key of QUERY_STRING_INPUTS) {
     const value = search.get(key);
@@ -45,7 +47,7 @@ export const shopifyProductListingPage = (props: ProductListingPageProps) => {
     }
   }
   // v7 resolved a failing commerce loader to null (logging the error), so the section got no page.
-  return productListingPageLoader(input).catch((error: unknown) => {
+  return productListingPageLoader(input, url).catch((error: unknown) => {
     console.error('[CMS] Commerce loader "shopify/loaders/ProductListingPage.ts" failed:', error);
     return null;
   });
