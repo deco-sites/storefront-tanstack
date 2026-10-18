@@ -11,6 +11,7 @@ import ProductDiscountBadge, {
 } from "./ProductDiscountBadge";
 import ProductGallery, {
   filterImagesForVariant,
+  withVariantImageFirst,
   type GalleryConfig,
 } from "./ProductGallery";
 import ProductPrice from "./ProductPrice";
@@ -92,9 +93,14 @@ export default function ProductHero({
 
   // Filter against the variant name (e.g. "Tote Bag — Yellow"), not the
   // parent family name in `title` — otherwise no per-variant filtering happens.
-  const images = filterImagesForVariant(
-    isVariantOf?.image ?? product.image ?? [],
-    product.name,
+  // Shopify exposes the selected variant's own photo as `product.image[0]`;
+  // lead the gallery with it so switching color swaps the main image.
+  const images = withVariantImageFirst(
+    filterImagesForVariant(
+      isVariantOf?.image ?? product.image ?? [],
+      product.name,
+    ),
+    product.image?.[0],
   );
 
   return (
