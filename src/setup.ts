@@ -151,6 +151,12 @@ registerCommerceLoaders({
 
 // -- Site-local actions (registered via additive invoke handler registry) --
 import { registerInvokeHandlers } from "@decocms/blocks-admin";
+import { siteLoaders } from "../.deco/loaders.gen";
+
+// Expose site loaders on /deco/invoke (client `invoke.site.loaders.*`, e.g.
+// the wishlist query). `registerCommerceLoaders` only feeds the CMS resolve
+// path, so without this every client invoke of a site loader 404s.
+registerInvokeHandlers(siteLoaders);
 
 registerInvokeHandlers({
   "site/actions/wishlist/submit.ts": async (props, req) =>
