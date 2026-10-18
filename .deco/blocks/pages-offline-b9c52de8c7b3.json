@@ -3,10 +3,10 @@
   "path": "/offline",
   "sections": [
     {
-      "__resolveType": "website/sections/Rendering/Lazy.tsx",
-      "section": {
-        "__resolveType": "commerce/sections/Seo/SeoPLPV2.tsx",
-        "jsonLD": {
+      "__resolveType": "commerce/sections/Seo/SeoPLPV2.tsx",
+      "jsonLD": {
+        "__resolveType": "lazy",
+        "value": {
           "__resolveType": "PLP Loader"
         }
       }
@@ -17,8 +17,7 @@
     {
       "__resolveType": "site/sections/Product/ProductShelf.tsx",
       "title": "Oh no! You are offline!",
-      "products": null,
-      "description": "Maybe take some time to explore"
+      "products": null
     },
     {
       "__resolveType": "Footer"

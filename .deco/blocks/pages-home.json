@@ -100,81 +100,64 @@
       }
     },
     {
-      "__resolveType": "website/sections/Rendering/Lazy.tsx",
-      "section": {
-        "__resolveType": "site/sections/Product/ProductShelfTabbed.tsx",
-        "title": "Hottest Deals",
-        "tabs": [
-          {
-            "products": {
-              "__resolveType": "shopify/loaders/ProductList.ts",
-              "props": {
-                "sort": "",
-                "query": "hat and bag",
-                "count": 10
-              },
-              "filters": {
-                "tags": [],
-                "productTypes": [],
-                "productVendors": [],
-                "variantOptions": []
-              }
+      "__resolveType": "site/sections/Product/ProductShelfTabbed.tsx",
+      "title": "Hottest Deals",
+      "tabs": [
+        {
+          "products": {
+            "__resolveType": "shopify/loaders/ProductList.ts",
+            "props": {
+              "sort": "",
+              "query": "hat and bag",
+              "count": 10
             },
-            "title": "Accessories"
+            "filters": {
+              "tags": [],
+              "productTypes": [],
+              "productVendors": [],
+              "variantOptions": []
+            }
           },
-          {
-            "products": {
-              "__resolveType": "shopify/loaders/ProductList.ts",
-              "props": {
-                "sort": "",
-                "query": "Shirts",
-                "count": 10
-              },
-              "filters": {
-                "tags": [],
-                "productTypes": [],
-                "productVendors": [],
-                "variantOptions": []
-              }
+          "title": "Accessories"
+        },
+        {
+          "products": {
+            "__resolveType": "shopify/loaders/ProductList.ts",
+            "props": {
+              "sort": "",
+              "query": "Shirts",
+              "count": 10
             },
-            "title": "Fashion"
+            "filters": {
+              "tags": [],
+              "productTypes": [],
+              "productVendors": [],
+              "variantOptions": []
+            }
           },
-          {
-            "products": {
-              "__resolveType": "shopify/loaders/ProductList.ts",
-              "props": {
-                "sort": "",
-                "query": "stickers",
-                "count": 10
-              },
-              "filters": {
-                "tags": [],
-                "productTypes": [],
-                "productVendors": [],
-                "variantOptions": []
-              }
+          "title": "Fashion"
+        },
+        {
+          "products": {
+            "__resolveType": "shopify/loaders/ProductList.ts",
+            "props": {
+              "sort": "",
+              "query": "stickers",
+              "count": 10
             },
-            "title": "Stickers"
-          }
-        ]
-      }
+            "filters": {
+              "tags": [],
+              "productTypes": [],
+              "productVendors": [],
+              "variantOptions": []
+            }
+          },
+          "title": "Stickers"
+        }
+      ]
     },
     {
-      "__resolveType": "site/sections/Newsletter/Newsletter.tsx",
-      "label": "Sign up",
-      "placeholder": "Email address",
-      "empty": {
-        "title": "Get top deals, latest trends, and more.",
-        "description": "Receive our news and promotions in advance. Enjoy and get 10% off your first purchase. For more information click here."
-      },
-      "success": {
-        "title": "Thank you for subscribing!",
-        "description": "You’re now signed up to receive the latest news, trends, and exclusive promotions directly to your inbox. Stay tuned!"
-      },
-      "failed": {
-        "title": "Oops!. Something went wrong!",
-        "description": "Something went wrong. Please try again. If the problem persists, please contact us."
-      }
+      "__resolveType": "site/sections/Newsletter/Newsletter.tsx"
     },
     {
       "__resolveType": "Footer"

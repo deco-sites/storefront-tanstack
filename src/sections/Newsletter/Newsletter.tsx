@@ -1,8 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import Icon from "../../components/ui/Icon";
 import Section from "../../components/ui/Section";
-import { invoke } from "../../runtime";
-import type { SubscribeNewsletterResult } from "../../actions/newsletter/subscribe";
+import { subscribeNewsletterServerFn } from "../../server/site.functions";
 import { clx } from "~/sdk/clx";
 
 export interface NoticeProps {
@@ -83,9 +82,7 @@ const DEFAULT_NOTICES = {
 } satisfies Required<NoticeConfig>;
 
 async function subscribeNewsletter(email: string): Promise<void> {
-  const result = (await invoke.site.actions.newsletter.subscribe({
-    email,
-  })) as SubscribeNewsletterResult | undefined;
+  const result = await subscribeNewsletterServerFn({ data: { email } });
   if (!result?.success) {
     throw new Error("Newsletter subscription failed");
   }
@@ -179,5 +176,3 @@ export default function Newsletter({ notices, form }: Props) {
     </Section.Container>
   );
 }
-
-export const LoadingFallback = () => <Section.Placeholder height="412px" />;

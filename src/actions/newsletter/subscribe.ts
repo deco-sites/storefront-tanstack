@@ -1,4 +1,3 @@
-import { RequestContext } from "@decocms/blocks/sdk/requestContext";
 import { usePlatform } from "../../apps/site";
 import { readNewsletterCookie, serializeNewsletterCookie } from "../../loaders/_cookie";
 
@@ -13,16 +12,16 @@ export interface SubscribeNewsletterResult {
 
 async function action(
   props: SubscribeNewsletterProps,
-  req?: Request,
+  request: Request,
+  responseHeaders: Headers,
 ): Promise<SubscribeNewsletterResult> {
   const email = props?.email?.trim();
-  // The invoke endpoint is publicly POST-able, so validate here too (not just
+  // The server function is publicly POST-able, so validate here too (not just
   // via the form's type=email). Keep it minimal — a basic shape check.
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     throw new Error("a valid email is required");
   }
 
-  const request = req ?? RequestContext.current?.request;
   const platform = usePlatform();
 
   if (platform === "vtex") {
@@ -40,10 +39,10 @@ async function action(
 
   // Default: cookie-backed so the demo persists per-browser without a backend.
   // Idempotent — re-subscribing the same email is a no-op success.
-  const emails = request ? readNewsletterCookie(request) : [];
+  const emails = readNewsletterCookie(request);
   if (!emails.includes(email)) emails.push(email);
 
-  RequestContext.responseHeaders.append("Set-Cookie", serializeNewsletterCookie(emails));
+  responseHeaders.append("Set-Cookie", serializeNewsletterCookie(emails));
   return { success: true, email };
 }
 

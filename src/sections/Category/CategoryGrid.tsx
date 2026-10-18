@@ -5,8 +5,7 @@ import Section, {
 } from "../../components/ui/Section";
 import Slider from "../../components/ui/Slider";
 import { clx } from "~/sdk/clx";
-import { useDevice } from "@decocms/blocks/sdk/useDevice";
-import { type LoadingFallbackProps } from "~/types/deco";
+import { useDevice } from "~/sdk/device";
 import { Link } from "@tanstack/react-router";
 /** @titleBy label */
 export interface Item {
@@ -68,12 +67,4 @@ function CategoryGrid({ title, cta, items }: Props) {
     </Section.Container>
   );
 }
-export const LoadingFallback = (
-  { title, cta }: LoadingFallbackProps<Props>,
-) => (
-  <Section.Container>
-    <Section.Header title={title} cta={cta} />
-    <Section.Placeholder height="212px" />;
-  </Section.Container>
-);
 export default CategoryGrid;

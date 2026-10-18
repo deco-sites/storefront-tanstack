@@ -3,7 +3,7 @@ import {
   getSrcSet,
   type FitOptions,
   type ImageProps,
-} from "@decocms/blocks/hooks";
+} from "../../vendor/blocks/Image";
 
 export interface PictureSourceProps {
   src: string;

@@ -1,12 +1,21 @@
 import { cloudflare } from "@cloudflare/vite-plugin";
+import { decoContent } from "@decocms/blocks/vite";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
-import { decoVitePlugin } from "@decocms/tanstack/vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite";
 import path from "path";
 
 const srcDir = path.resolve(__dirname, "src");
+
+/**
+ * The build's id for edge-cache keys and the X-Cache-Version header: the time this build ran, so every
+ * build (even two of the same commit) gets its own cache entries.
+ */
+function buildHash(command: string): string {
+  if (command !== "build") return "dev";
+  return Date.now().toString(36);
+}
 
 export default defineConfig({
   server: {
@@ -26,7 +35,15 @@ export default defineConfig({
       },
     }),
     tailwindcss(),
-    decoVitePlugin(),
+    {
+      name: "site-build-hash",
+      config(_cfg, { command }) {
+        return { define: { __BUILD_HASH__: JSON.stringify(buildHash(command)) } };
+      },
+    },
+    // `vite dev`: a block saved in the site editor (`deco serve`) goes into the CMS src/cms.ts
+    // created, and open pages reload once the server has it.
+    decoContent(),
     {
       name: "site-manual-chunks",
       config(_cfg, { command }) {
@@ -46,20 +63,6 @@ export default defineConfig({
             },
           },
         };
-      },
-    },
-    {
-      name: "deco-stub-meta-gen",
-      enforce: "pre" as const,
-      resolveId(id, importer, options) {
-        if (!options?.ssr && importer && id.includes("meta.gen")) {
-          return "\0stub:meta-gen";
-        }
-      },
-      load(id) {
-        if (id === "\0stub:meta-gen") {
-          return "export default {};";
-        }
       },
     },
   ],

@@ -1,6 +1,5 @@
 import Image from "~/components/ui/Image";
 import type { ImageWidget } from "~/types/widgets";
-import S from "../../components/ui/Section";
 import { type Section } from "~/types/deco";
 export interface Props {
   section: Section;
@@ -30,5 +29,4 @@ function ShelfWithImage({ section, image }: Props) {
     </div>
   );
 }
-export const LoadingFallback = () => <S.Placeholder height="640px" />;
 export default ShelfWithImage;
