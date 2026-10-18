@@ -91,6 +91,8 @@ Expected, approved differences go through D9/D13. Once approved, they are encode
 
 Both are applied to the baseline and the new capture at compare time, so approving a difference needs no re-record.
 
+`approvedDecisions` records product-owner decisions that keep v8 identical to production on purpose. Today: `listing-match-prod` (product owner, 2026-10-17: "Match prod now, fix right after"). The migration calls the Shopify listing loader without the page URL, as production does, so listing, search and catch-all pages show "Not Found!" on both; the follow-up PR `fix/listing-page-url` passes the page URL again right after the v8 cutover.
+
 ## Tailwind and the harness
 
 Tailwind v4 detects class names in every non-ignored file of the repo, so text in `parity/` (selectors, step names) would otherwise add CSS to the site build and change pixels. `src/styles/app.css` therefore has `@source not "../../parity";`. The migrated site needs the same exclusion. `x-cache-version` (the git sha of the build) is snapshotted as `<build-id>`: its presence is checked, its value is not.
