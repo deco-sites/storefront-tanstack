@@ -159,3 +159,16 @@ export function filterImagesForVariant(
   );
   return matches.length > 0 ? matches : images;
 }
+
+/** Move the variant's own image to the front of the gallery (or prepend it). */
+export function withVariantImageFirst(
+  images: ImageObject[],
+  variantImage: ImageObject | undefined,
+): ImageObject[] {
+  if (!variantImage?.url) return images;
+  const key = (url?: string) => url?.split("?")[0];
+  const target = key(variantImage.url);
+  const rest = images.filter((img) => key(img.url) !== target);
+  const match = images.find((img) => key(img.url) === target) ?? variantImage;
+  return [match, ...rest];
+}
