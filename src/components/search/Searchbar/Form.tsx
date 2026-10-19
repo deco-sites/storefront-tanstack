@@ -1,17 +1,17 @@
 /**
- * Search form. Submits to /s?q=<term>; as the user types, suggestions are
- * fetched via HTMX (kept for now — the suggestions migration is its own task).
+ * Search form. Submits to /s?q=<term>; as the user types (debounced), product
+ * suggestions are fetched through the commerce product-list loader on
+ * /deco/invoke and rendered below the input.
  */
-import { useEffect, useId, useRef } from "react";
-import { Suggestion } from "@decocms/apps-commerce/types";
+import { useEffect, useRef, useState } from "react";
+import type { Product, Suggestion } from "@decocms/apps-commerce/types";
 import {
   SEARCHBAR_INPUT_FORM_ID,
   SEARCHBAR_POPUP_ID,
 } from "../../../constants";
-import { useComponent } from "../../../sections/Component";
+import { invoke } from "../../../runtime";
 import Icon from "../../ui/Icon";
-import { Props as SuggestionProps } from "./Suggestions";
-import { asResolved } from "~/types/deco";
+import Suggestions from "./Suggestions";
 import { type Resolved } from "~/types/deco";
 
 // When user clicks on the search button, navigate it to
@@ -30,13 +30,61 @@ export interface SearchbarProps {
   loader: Resolved<Suggestion | null>;
 }
 
-const Suggestions = "./Suggestions.tsx";
+const SUGGESTIONS_COUNT = 6;
+const SUGGESTIONS_DELAY_MS = 300;
+
+// Shopify's ProductList loader returns urls like "undefined/products/<slug>"
+// when it has no store origin; keep only the path so links resolve.
+const fixUrl = (url?: string) => url?.replace(/^.*?(?=\/products\/)/, "");
+
+const fetchSuggestion = async (query: string): Promise<Suggestion> => {
+  const products = (await invoke.shopify.loaders.ProductList({
+    props: { query, count: SUGGESTIONS_COUNT },
+  })) as Product[] | null;
+  return {
+    searches: [],
+    products: (products ?? []).map((product) => ({
+      ...product,
+      url: fixUrl(product.url),
+      isVariantOf: product.isVariantOf && {
+        ...product.isVariantOf,
+        hasVariant: product.isVariantOf.hasVariant.map((v) => ({
+          ...v,
+          url: fixUrl(v.url),
+        })),
+      },
+    })),
+  };
+};
 
 export default function Searchbar(
-  { placeholder = "What are you looking for?", loader }: SearchbarProps,
+  { placeholder = "What are you looking for?" }: SearchbarProps,
 ) {
-  const slot = useId();
   const inputRef = useRef<HTMLInputElement>(null);
+  const [term, setTerm] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [suggestion, setSuggestion] = useState<Suggestion | null>(null);
+
+  useEffect(() => {
+    const query = term.trim();
+    if (!query) {
+      setSuggestion(null);
+      setLoading(false);
+      return;
+    }
+    let cancelled = false;
+    const timer = setTimeout(() => {
+      setLoading(true);
+      fetchSuggestion(query)
+        .then((result) => !cancelled && setSuggestion(result))
+        .catch(() => !cancelled && setSuggestion(null))
+        .finally(() => !cancelled && setLoading(false));
+    }, SUGGESTIONS_DELAY_MS);
+    return () => {
+      cancelled = true;
+      clearTimeout(timer);
+    };
+  }, [term]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -89,8 +137,9 @@ export default function Searchbar(
           form={SEARCHBAR_INPUT_FORM_ID}
           tabIndex={-1}
         >
-          <span className="loading loading-spinner loading-xs hidden [.htmx-request_&]:inline" />
-          <Icon id="search" className="inline [.htmx-request_&]:hidden" />
+          {loading
+            ? <span className="loading loading-spinner loading-xs" />
+            : <Icon id="search" className="inline" />}
         </button>
         <input
           ref={inputRef}
@@ -100,13 +149,7 @@ export default function Searchbar(
           name={NAME}
           placeholder={placeholder}
           autoComplete="off"
-          hx-target={`#${slot}`}
-          hx-post={loader && useComponent<SuggestionProps>(Suggestions, {
-            loader: asResolved(loader),
-          })}
-          hx-trigger={`input changed delay:300ms, ${NAME}`}
-          hx-indicator={`#${SEARCHBAR_INPUT_FORM_ID}`}
-          hx-swap="innerHTML"
+          onChange={(e) => setTerm(e.currentTarget.value)}
         />
         <label
           className="join-item btn btn-ghost btn-square hidden sm:inline-flex no-animation"
@@ -118,7 +161,9 @@ export default function Searchbar(
       </form>
 
       {/* Suggestions slot */}
-      <div id={slot} />
+      <div>
+        {suggestion && <Suggestions suggestion={suggestion} />}
+      </div>
     </div>
   );
 }
