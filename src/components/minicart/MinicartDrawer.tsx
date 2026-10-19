@@ -9,6 +9,11 @@ export default function MinicartDrawer() {
         id={MINICART_DRAWER_ID}
         className="peer/minicart sr-only"
         aria-hidden="true"
+        tabIndex={-1}
+        // Pinned to the viewport: clicking a label focuses this checkbox, and
+        // an off-flow sr-only input at the end of the DOM would make the
+        // browser scroll the page down to it.
+        style={{ position: "fixed", top: 0, left: 0 }}
       />
       <label
         htmlFor={MINICART_DRAWER_ID}
