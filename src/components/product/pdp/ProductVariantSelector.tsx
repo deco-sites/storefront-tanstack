@@ -77,6 +77,23 @@ function Swatch({ value, checked }: { value: string; checked: boolean }) {
   );
 }
 
+const OMIT = new Set(["category", "cluster", "RefId", "descriptionHtml"]);
+const specs = (p: Product) =>
+  (p.additionalProperty ?? []).filter((a) => a.name && !OMIT.has(a.name));
+
+/** Variant with `attrName = value` that keeps the current product's other attributes. */
+function findSibling(variants: Product[], current: Product, attrName: string, value: string) {
+  const wanted = new Map(specs(current).map((a) => [a.name, a.value]));
+  wanted.set(attrName, value);
+  return variants.find((v) => {
+    const props = specs(v);
+    return [...wanted].every(([n, val]) => {
+      const prop = props.find((a) => a.name === n);
+      return !prop || prop.value === val;
+    }) && props.some((a) => a.name === attrName && a.value === value);
+  });
+}
+
 export default function ProductVariantSelector({
   product,
   config,
@@ -109,7 +126,9 @@ export default function ProductVariantSelector({
             {showLabels ? <span className="text-sm">{attrName}</span> : null}
             <ul className="flex flex-row gap-4">
               {entries.map(([value, link]) => {
-                const href = relative(link);
+                const href = relative(
+                  findSibling(hasVariant, product, attrName, value)?.url ?? link,
+                );
                 const checked = onSelect
                   ? href === currentProductPath
                   : href === currentPath || href === currentProductPath;
