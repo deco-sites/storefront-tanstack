@@ -1,4 +1,4 @@
-import { useId } from "react";
+import { useEffect, useId } from "react";
 import type { ImageObject } from "@decocms/apps-commerce/types";
 import Image from "~/components/ui/Image";
 import { clx } from "~/sdk/clx";
@@ -42,6 +42,15 @@ export default function ProductGallery({ images, config }: Props) {
   const aspectRatio = config?.aspectRatio ?? `${DEFAULT_WIDTH} / ${DEFAULT_HEIGHT}`;
   const enableZoom = config?.enableZoom ?? true;
   const preloadFirstImage = config?.preloadFirstImage ?? true;
+
+  // On variant change the lead (variant) photo moves to slot 0, but scroll-snap
+  // keeps the previously shown slide in view. Jump back to slot 0 without
+  // remounting, so already-loaded <img>s stay painted (no white flash).
+  const leadUrl = images[0]?.url;
+  useEffect(() => {
+    const slider = document.getElementById(id)?.querySelector<HTMLElement>("[data-slider]");
+    slider?.scrollTo({ left: 0, top: 0, behavior: "instant" });
+  }, [id, leadUrl]);
 
   if (!images.length) return null;
 
