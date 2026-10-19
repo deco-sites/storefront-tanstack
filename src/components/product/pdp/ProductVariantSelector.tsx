@@ -118,7 +118,7 @@ export default function ProductVariantSelector({
                     <Link
                       // Runtime-computed variant URL — catch-all route resolves it.
                       to={href as string}
-                      preload={preloadStrategy === false ? false : preloadStrategy}
+                      preload={onSelect || preloadStrategy === false ? false : preloadStrategy}
                       aria-label={`${attrName}: ${value}`}
                       aria-current={checked ? "page" : undefined}
                       className="block cursor-pointer"
