@@ -20,6 +20,21 @@ export const Route = createFileRoute("/$")({
   notFoundComponent: NotFoundPage,
 });
 
+// Deferred sections are cached client-side by `pagePath`, which has no query
+// string — so after a sort/filter navigation the listing came back from that
+// cache unchanged. Key the renderer by path + search, and strip the search
+// again before asking the server (it matches the CMS page by path alone).
+const searchOf = (pageUrl?: string) => {
+  try {
+    return pageUrl ? new URL(pageUrl, "http://localhost").search : "";
+  } catch {
+    return "";
+  }
+};
+
+const loadDeferredSection: typeof deferredSectionLoader = (args) =>
+  deferredSectionLoader({ ...args, pagePath: args.pagePath.split("?")[0] || "/" });
+
 function CmsPage() {
   const data = Route.useLoaderData() as Record<string, any> | null;
   if (!data) return <NotFoundPage />;
@@ -29,9 +44,9 @@ function CmsPage() {
       sections={data.resolvedSections ?? []}
       deferredSections={data.deferredSections ?? []}
       deferredPromises={data.deferredPromises}
-      pagePath={data.pagePath}
+      pagePath={`${data.pagePath ?? "/"}${searchOf(data.pageUrl)}`}
       pageUrl={data.pageUrl}
-      loadDeferredSectionFn={deferredSectionLoader}
+      loadDeferredSectionFn={loadDeferredSection}
     />
   );
 }
