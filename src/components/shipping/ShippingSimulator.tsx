@@ -44,15 +44,18 @@ export interface Props {
   copy?: ShippingCopy;
   /** Locale passed to Intl.NumberFormat. Default: browser locale. */
   locale?: string;
+  /** Store currency (ISO-4217). Overrides the currency returned by the simulation. */
+  currencyCode?: string;
 }
 
 const identity = (s: string) => s;
 
 function MethodRow(
-  { method, copy, locale }: {
+  { method, copy, locale, currencyCode }: {
     method: ShippingMethod;
     copy: Required<ShippingCopy>;
     locale?: string;
+    currencyCode?: string;
   },
 ) {
   return (
@@ -65,14 +68,14 @@ function MethodRow(
       <span className="text-sm font-semibold text-right">
         {method.price === 0
           ? copy.free
-          : formatPrice(method.price, method.currency, locale)}
+          : formatPrice(method.price, currencyCode ?? method.currency, locale)}
       </span>
     </li>
   );
 }
 
 export default function ShippingSimulator(
-  { postalCode = {}, copy = {}, locale }: Props,
+  { postalCode = {}, copy = {}, locale, currencyCode }: Props,
 ) {
   const {
     format = identity,
@@ -161,6 +164,7 @@ export default function ShippingSimulator(
               method={method}
               copy={resolvedCopy}
               locale={locale}
+              currencyCode={currencyCode}
             />
           ))}
           <span className="text-xs text-base-content/60 mt-3">
