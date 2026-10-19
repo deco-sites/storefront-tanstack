@@ -194,10 +194,10 @@ function Header({
   alerts = [],
   logo = {
     src:
-      "https://decoims.com/storefront-tanstack/3968031e-28b3-4593-8c7e-d54a706294a1/986b61d4-3847-4867-93c8-b550cb459cc7.png",
-    width: 100,
-    height: 16,
-    alt: "Logo",
+      "https://decoims.com/storefront-tanstack/49270f27-32c9-4da3-aef8-e154dd7bcdd1/1742560193760-ed9f7e80-86a8-4b72-9809-2e4e2e5f0e53.png",
+    width: 160,
+    height: 40,
+    alt: "Deco Storefront",
   },
   ...props
 }: Props) {
