@@ -69,7 +69,9 @@ export default function ProductHero({
     const match = variants.find((v) => relative(v.url) === href);
     if (!match) return;
     setSelected({ from: page.product, url: href });
-    window.history.replaceState(window.history.state, "", href);
+    // The router patches `history.replaceState` to trigger a navigation, so
+    // call the native one: only the address bar should change.
+    History.prototype.replaceState.call(window.history, window.history.state, "", href);
   };
   const { offers, isVariantOf } = product;
 
