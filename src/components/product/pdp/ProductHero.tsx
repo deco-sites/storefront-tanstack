@@ -1,7 +1,9 @@
 import type { ProductDetailsPage } from "@decocms/apps-commerce/types";
 import { useOffer } from "@decocms/apps-commerce/sdk/useOffer";
 import { mapProductToAnalyticsItem } from "@decocms/apps-commerce/utils/productToAnalyticsItem";
+import { useState } from "react";
 import { useRouterState } from "@tanstack/react-router";
+import { relative } from "../../../sdk/url";
 import { useSendEvent } from "../../../sdk/useSendEvent";
 import { clx } from "~/sdk/clx";
 import ProductActions, { type ActionsCopyConfig } from "./ProductActions";
@@ -47,7 +49,30 @@ export default function ProductHero({
 }: Props) {
   const isLoading = useRouterState({ select: (s) => s.isLoading });
 
-  const { breadcrumbList, product } = page;
+  const { breadcrumbList } = page;
+
+  // Variant switching happens in place: every sibling SKU is already in
+  // `isVariantOf.hasVariant`, so swapping it locally (and just rewriting the
+  // URL) avoids a full route navigation that re-runs the page loader and
+  // remounts header/footer/shelves. A reload of the new URL renders the same
+  // variant server-side.
+  const [selected, setSelected] = useState<{ from: typeof page.product; url: string } | null>(null);
+  const variants = page.product.isVariantOf?.hasVariant ?? [];
+  const selectedVariant = selected?.from === page.product
+    ? variants.find((v) => relative(v.url) === selected.url)
+    : undefined;
+  const product = selectedVariant
+    ? { ...selectedVariant, isVariantOf: page.product.isVariantOf }
+    : page.product;
+
+  const selectVariant = (href: string) => {
+    const match = variants.find((v) => relative(v.url) === href);
+    if (!match) return;
+    setSelected({ from: page.product, url: href });
+    // The router patches `history.replaceState` to trigger a navigation, so
+    // call the native one: only the address bar should change.
+    History.prototype.replaceState.call(window.history, window.history.state, "", href);
+  };
   const { offers, isVariantOf } = product;
 
   const title = isVariantOf?.name ?? product.name ?? "";
@@ -135,6 +160,7 @@ export default function ProductHero({
             <ProductVariantSelector
               product={product}
               config={variantSelectorConfig}
+              onSelect={selectVariant}
             />
           </div>
         ) : null}

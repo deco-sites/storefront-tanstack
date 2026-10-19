@@ -23,6 +23,11 @@ export interface VariantSelectorConfig {
 export interface Props {
   product: Product;
   config?: VariantSelectorConfig;
+  /**
+   * Switch to a sibling variant in place. When set, clicking a swatch calls it
+   * instead of navigating the router, so the page isn't re-loaded/re-mounted.
+   */
+  onSelect?: (href: string) => void;
 }
 
 const SWATCH_COLORS: Record<string, string | undefined> = {
@@ -72,7 +77,11 @@ function Swatch({ value, checked }: { value: string; checked: boolean }) {
   );
 }
 
-export default function ProductVariantSelector({ product, config }: Props) {
+export default function ProductVariantSelector({
+  product,
+  config,
+  onSelect,
+}: Props) {
   const id = useId();
   const preloadStrategy = config?.preloadStrategy ?? "intent";
   const showLabels = config?.showLabels ?? true;
@@ -101,18 +110,25 @@ export default function ProductVariantSelector({ product, config }: Props) {
             <ul className="flex flex-row gap-4">
               {entries.map(([value, link]) => {
                 const href = relative(link);
-                const checked =
-                  href === currentPath || href === currentProductPath;
+                const checked = onSelect
+                  ? href === currentProductPath
+                  : href === currentPath || href === currentProductPath;
                 return (
                   <li key={value}>
                     <Link
                       // Runtime-computed variant URL — catch-all route resolves it.
                       to={href as string}
-                      preload={preloadStrategy === false ? false : preloadStrategy}
+                      preload={onSelect || preloadStrategy === false ? false : preloadStrategy}
                       aria-label={`${attrName}: ${value}`}
                       aria-current={checked ? "page" : undefined}
                       className="block cursor-pointer"
                       activeOptions={{ exact: true }}
+                      onClick={(e) => {
+                        if (!onSelect || !href) return;
+                        if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+                        e.preventDefault();
+                        onSelect(href);
+                      }}
                     >
                       <Swatch value={value} checked={checked} />
                     </Link>
