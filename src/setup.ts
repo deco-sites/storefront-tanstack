@@ -149,10 +149,17 @@ registerCommerceLoaders({
   "site/loaders/address":     async () => (await import("./loaders/address")).default(),
 });
 
-// -- Site-local actions (registered via additive invoke handler registry) --
-import { registerInvokeHandlers } from "@decocms/blocks-admin";
+// -- Site-local loaders + actions on /deco/invoke --
+// Exposed through the getter-based registry (`setInvokeLoaders`), NOT
+// `registerInvokeHandlers`: `autoconfigApps` re-runs `setupApps()` on reinit /
+// decofile change, which calls `clearInvokeHandlers()` and wipes the additive
+// registry — so in production every `invoke.site.*` call 404'd ("Unknown
+// handler"). The getter registry is never cleared.
+import { setInvokeLoaders } from "@decocms/blocks-admin";
+import { siteLoaders } from "../.deco/loaders.gen";
 
-registerInvokeHandlers({
+const SITE_INVOKE_HANDLERS: Record<string, (props: any, req: Request) => Promise<any>> = {
+  ...siteLoaders,
   "site/actions/wishlist/submit.ts": async (props, req) =>
     (await import("./actions/wishlist/submit")).default(props, req),
   "site/actions/wishlist/submit": async (props, req) =>
@@ -173,4 +180,6 @@ registerInvokeHandlers({
     (await import("./actions/address/submit")).default(props, req),
   "site/actions/address/submit": async (props, req) =>
     (await import("./actions/address/submit")).default(props, req),
-});
+};
+
+setInvokeLoaders(() => SITE_INVOKE_HANDLERS);
