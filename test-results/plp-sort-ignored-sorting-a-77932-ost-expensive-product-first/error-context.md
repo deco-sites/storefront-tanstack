@@ -1,0 +1,453 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e6]:
+        - list [ref=e8]:
+          - listitem [ref=e9]:
+            - paragraph [ref=e11]:
+              - text: Hurry, offer ends soon! Save 10% today with code
+              - strong [ref=e12]: NEW10
+        - checkbox "Toggle searchbar Close search icon button"
+        - generic [ref=e13]:
+          - generic [ref=e14]:
+            - link "Store logo" [ref=e16] [cursor=pointer]:
+              - /url: /
+              - img "Deco Storefront" [ref=e17] [cursor=pointer]
+            - generic "search icon button" [ref=e18]:
+              - img [ref=e19]
+              - generic [ref=e21]: Search products, brands...
+            - generic [ref=e22]:
+              - link "Login" [ref=e23] [cursor=pointer]:
+                - /url: /login
+                - img [ref=e24] [cursor=pointer]
+                - generic [ref=e26] [cursor=pointer]: Sign in
+              - img [ref=e29] [cursor=pointer]
+          - list [ref=e32]:
+            - listitem [ref=e33]:
+              - link "Deals" [ref=e34] [cursor=pointer]:
+                - /url: /deals
+            - listitem [ref=e35]:
+              - link "Valentine's Day" [ref=e36] [cursor=pointer]:
+                - /url: /valentines-day
+            - listitem [ref=e37]:
+              - link "Women" [ref=e38] [cursor=pointer]:
+                - /url: /women
+            - listitem [ref=e39]:
+              - link "Men" [ref=e40] [cursor=pointer]:
+                - /url: /men
+            - listitem [ref=e41]:
+              - link "Clearance" [ref=e42] [cursor=pointer]:
+                - /url: /clearance
+            - listitem [ref=e43]:
+              - link "Activities" [ref=e44] [cursor=pointer]:
+                - /url: /activities
+      - generic [ref=e47]:
+        - list [ref=e49]:
+          - listitem [ref=e50]:
+            - link "Home" [ref=e51] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=e52]:
+            - link "accessories" [ref=e53] [cursor=pointer]:
+              - /url: /accessories
+        - checkbox [ref=e54]
+        - generic [ref=e55]:
+          - complementary [ref=e56]:
+            - generic [ref=e57]: Filters
+            - list [ref=e58]:
+              - listitem [ref=e59]:
+                - generic [ref=e60]: Availability
+                - list [ref=e61]:
+                  - link "In stock (8)" [ref=e62] [cursor=pointer]:
+                    - /url: /accessories?filter.v.availability=In+stock
+                    - checkbox [ref=e63] [cursor=pointer]
+                    - generic [ref=e64] [cursor=pointer]: In stock
+                    - generic [ref=e65] [cursor=pointer]: (8)
+                  - link "Out of stock" [ref=e66] [cursor=pointer]:
+                    - /url: /accessories?filter.v.availability=Out+of+stock
+                    - checkbox [ref=e67] [cursor=pointer]
+                    - generic [ref=e68] [cursor=pointer]: Out of stock
+              - listitem [ref=e69]:
+                - generic [ref=e70]: Product type
+                - list [ref=e71]:
+                  - link "Capybara wear (8)" [ref=e72] [cursor=pointer]:
+                    - /url: /accessories?filter.p.product_type=Capybara+wear
+                    - checkbox [ref=e73] [cursor=pointer]
+                    - generic [ref=e74] [cursor=pointer]: Capybara wear
+                    - generic [ref=e75] [cursor=pointer]: (8)
+              - listitem [ref=e76]:
+                - generic [ref=e77]: More filters
+                - list [ref=e78]:
+                  - link "capy-2026 (8)" [ref=e79] [cursor=pointer]:
+                    - /url: /accessories?filter.p.tag=capy-2026
+                    - checkbox [ref=e80] [cursor=pointer]
+                    - generic [ref=e81] [cursor=pointer]: capy-2026
+                    - generic [ref=e82] [cursor=pointer]: (8)
+                  - link "new (3)" [ref=e83] [cursor=pointer]:
+                    - /url: /accessories?filter.p.tag=new
+                    - checkbox [ref=e84] [cursor=pointer]
+                    - generic [ref=e85] [cursor=pointer]: new
+                    - generic [ref=e86] [cursor=pointer]: (3)
+                  - link "onsen (2)" [ref=e87] [cursor=pointer]:
+                    - /url: /accessories?filter.p.tag=onsen
+                    - checkbox [ref=e88] [cursor=pointer]
+                    - generic [ref=e89] [cursor=pointer]: onsen
+                    - generic [ref=e90] [cursor=pointer]: (2)
+                  - link "rio (3)" [ref=e91] [cursor=pointer]:
+                    - /url: /accessories?filter.p.tag=rio
+                    - checkbox [ref=e92] [cursor=pointer]
+                    - generic [ref=e93] [cursor=pointer]: rio
+                    - generic [ref=e94] [cursor=pointer]: (3)
+                  - link "sol (3)" [ref=e95] [cursor=pointer]:
+                    - /url: /accessories?filter.p.tag=sol
+                    - checkbox [ref=e96] [cursor=pointer]
+                    - generic [ref=e97] [cursor=pointer]: sol
+                    - generic [ref=e98] [cursor=pointer]: (3)
+              - listitem [ref=e99]:
+                - generic [ref=e100]: Brand
+                - list [ref=e101]:
+                  - link "deco (8)" [ref=e102] [cursor=pointer]:
+                    - /url: /accessories?filter.p.vendor=deco
+                    - checkbox [ref=e103] [cursor=pointer]
+                    - generic [ref=e104] [cursor=pointer]: deco
+                    - generic [ref=e105] [cursor=pointer]: (8)
+          - generic [ref=e106]:
+            - generic [ref=e108]:
+              - generic [ref=e109]: 12 of 8 results
+              - generic [ref=e110]: Sort by
+              - combobox "Sort by" [ref=e111]:
+                - option "relevance:desc"
+                - option "price:asc"
+                - option "price:desc" [selected]
+            - generic [ref=e112]:
+              - generic [ref=e113]:
+                - figure [ref=e114]:
+                  - link "view product" [ref=e115] [cursor=pointer]:
+                    - /url: /products/largo-sunglasses-48014291206321
+                    - img "Largo Sunglasses in Tortoise/Green, worn by Tião, an adult capybara, close-up." [ref=e116] [cursor=pointer]
+                    - img "Largo Sunglasses in Lime/Smoke, worn by Tião, an adult capybara, close-up." [ref=e117] [cursor=pointer]
+                  - generic [ref=e118]:
+                    - generic [ref=e119]: Notify me
+                    - generic [ref=e120]: 0 % off
+                  - button "Add to wishlist" [ref=e122] [cursor=pointer]:
+                    - img [ref=e123] [cursor=pointer]
+                - link "Largo Sunglasses R$ 289,00" [ref=e125] [cursor=pointer]:
+                  - /url: /products/largo-sunglasses-48014291206321
+                  - generic [ref=e126] [cursor=pointer]: Largo Sunglasses
+                  - generic [ref=e128] [cursor=pointer]: R$ 289,00
+                - list [ref=e129]:
+                  - listitem [ref=e130]:
+                    - 'radio "Color: Tortoise/Green" [checked] [ref=e131] [cursor=pointer]':
+                      - generic [ref=e132] [cursor=pointer]: Tortoise/Green
+                  - listitem [ref=e133]:
+                    - 'radio "Color: Lime/Smoke" [ref=e134] [cursor=pointer]':
+                      - generic [ref=e135] [cursor=pointer]: Lime/Smoke
+                - button "Add to Cart" [ref=e137] [cursor=pointer]
+              - generic [ref=e138]:
+                - figure [ref=e139]:
+                  - link "view product" [ref=e140] [cursor=pointer]:
+                    - /url: /products/yuzu-bucket-hat-48014290518193
+                    - img "Yuzu Bucket Hat in Yuzu, worn by Tião, an adult capybara, front view, a yuzu beside the paws." [ref=e141] [cursor=pointer]
+                    - img "Yuzu Bucket Hat in Steam White, worn by Tião, an adult capybara, close-up." [ref=e142] [cursor=pointer]
+                  - generic [ref=e143]:
+                    - generic [ref=e144]: Notify me
+                    - generic [ref=e145]: 0 % off
+                  - button "Add to wishlist" [ref=e147] [cursor=pointer]:
+                    - img [ref=e148] [cursor=pointer]
+                - link "Yuzu Bucket Hat R$ 189,00" [ref=e150] [cursor=pointer]:
+                  - /url: /products/yuzu-bucket-hat-48014290518193
+                  - generic [ref=e151] [cursor=pointer]: Yuzu Bucket Hat
+                  - generic [ref=e153] [cursor=pointer]: R$ 189,00
+                - list [ref=e154]:
+                  - listitem [ref=e155]:
+                    - 'radio "Color: Yuzu" [checked] [ref=e156] [cursor=pointer]':
+                      - generic [ref=e157] [cursor=pointer]: Yuzu
+                  - listitem [ref=e158]:
+                    - 'radio "Color: Steam White" [ref=e159] [cursor=pointer]':
+                      - generic [ref=e160] [cursor=pointer]: Steam White
+                  - listitem [ref=e161]:
+                    - 'radio "Color: Lilac" [ref=e162] [cursor=pointer]':
+                      - generic [ref=e163] [cursor=pointer]: Lilac
+                - button "Add to Cart" [ref=e165] [cursor=pointer]
+              - generic [ref=e166]:
+                - figure [ref=e167]:
+                  - link "view product" [ref=e168] [cursor=pointer]:
+                    - /url: /products/passeio-grazing-vest-48014291337393
+                    - img "Passeio Grazing Vest in Sand, worn by Tião, an adult capybara, three-quarter view." [ref=e169] [cursor=pointer]
+                    - img "Passeio Grazing Vest in Marigold, worn by Tião, an adult capybara, front view, a sprig of grass in the side pocket." [ref=e170] [cursor=pointer]
+                  - generic [ref=e171]:
+                    - generic [ref=e172]: Notify me
+                    - generic [ref=e173]: 0 % off
+                  - button "Add to wishlist" [ref=e175] [cursor=pointer]:
+                    - img [ref=e176] [cursor=pointer]
+                - link "Passeio Grazing Vest R$ 329,00" [ref=e178] [cursor=pointer]:
+                  - /url: /products/passeio-grazing-vest-48014291337393
+                  - generic [ref=e179] [cursor=pointer]: Passeio Grazing Vest
+                  - generic [ref=e181] [cursor=pointer]: R$ 329,00
+                - list [ref=e182]:
+                  - listitem [ref=e183]:
+                    - 'radio "Color: Sand" [checked] [ref=e184] [cursor=pointer]':
+                      - generic [ref=e185] [cursor=pointer]: Sand
+                  - listitem [ref=e186]:
+                    - 'radio "Color: Marigold" [ref=e187] [cursor=pointer]':
+                      - generic [ref=e188] [cursor=pointer]: Marigold
+                - button "Add to Cart" [ref=e190] [cursor=pointer]
+              - generic [ref=e191]:
+                - figure [ref=e192]:
+                  - link "view product" [ref=e193] [cursor=pointer]:
+                    - /url: /products/passo-four-paw-sandals-48014291534001
+                    - img "Passo Four-Paw Sandals in Terracotta, worn by Tião, an adult capybara, front view." [ref=e194] [cursor=pointer]
+                    - img "Passo Four-Paw Sandals in Charcoal, worn by Tião, an adult capybara, front view." [ref=e195] [cursor=pointer]
+                  - generic [ref=e196]:
+                    - generic [ref=e197]: Notify me
+                    - generic [ref=e198]: 0 % off
+                  - button "Add to wishlist" [ref=e200] [cursor=pointer]:
+                    - img [ref=e201] [cursor=pointer]
+                - link "Passo Four-Paw Sandals R$ 349,00" [ref=e203] [cursor=pointer]:
+                  - /url: /products/passo-four-paw-sandals-48014291534001
+                  - generic [ref=e204] [cursor=pointer]: Passo Four-Paw Sandals
+                  - generic [ref=e206] [cursor=pointer]: R$ 349,00
+                - list [ref=e207]:
+                  - listitem [ref=e208]:
+                    - 'radio "Color: Terracotta" [checked] [ref=e209] [cursor=pointer]':
+                      - generic [ref=e210] [cursor=pointer]: Terracotta
+                  - listitem [ref=e211]:
+                    - 'radio "Color: Charcoal" [ref=e212] [cursor=pointer]':
+                      - generic [ref=e213] [cursor=pointer]: Charcoal
+                - button "Add to Cart" [ref=e215] [cursor=pointer]
+              - generic [ref=e216]:
+                - figure [ref=e217]:
+                  - link "view product" [ref=e218] [cursor=pointer]:
+                    - /url: /products/sol-linen-poncho-48014290223281
+                    - img "Sol Linen Poncho in Sand, worn by Tião, an adult capybara, front view." [ref=e219] [cursor=pointer]
+                    - img "Sol Linen Poncho in Lime, worn by Tião, an adult capybara, three-quarter side view." [ref=e220] [cursor=pointer]
+                  - generic [ref=e221]:
+                    - generic [ref=e222]: Notify me
+                    - generic [ref=e223]: 0 % off
+                  - button "Add to wishlist" [ref=e225] [cursor=pointer]:
+                    - img [ref=e226] [cursor=pointer]
+                - link "Sol Linen Poncho R$ 389,00" [ref=e228] [cursor=pointer]:
+                  - /url: /products/sol-linen-poncho-48014290223281
+                  - generic [ref=e229] [cursor=pointer]: Sol Linen Poncho
+                  - generic [ref=e231] [cursor=pointer]: R$ 389,00
+                - list [ref=e232]:
+                  - listitem [ref=e233]:
+                    - 'radio "Color: Sand" [checked] [ref=e234] [cursor=pointer]':
+                      - generic [ref=e235] [cursor=pointer]: Sand
+                  - listitem [ref=e236]:
+                    - 'radio "Color: Lime" [ref=e237] [cursor=pointer]':
+                      - generic [ref=e238] [cursor=pointer]: Lime
+                  - listitem [ref=e239]:
+                    - 'radio "Color: Bone" [ref=e240] [cursor=pointer]':
+                      - generic [ref=e241] [cursor=pointer]: Bone
+                - button "Add to Cart" [ref=e243] [cursor=pointer]
+              - generic [ref=e244]:
+                - figure [ref=e245]:
+                  - link "view product" [ref=e246] [cursor=pointer]:
+                    - /url: /products/onsen-waffle-robe-48014290813105
+                    - img "Onsen Waffle Robe in Steam White, worn by Tião, an adult capybara, front view." [ref=e247] [cursor=pointer]
+                    - img "Onsen Waffle Robe in Lilac, worn by Tião, an adult capybara, front view." [ref=e248] [cursor=pointer]
+                  - generic [ref=e249]:
+                    - generic [ref=e250]: Notify me
+                    - generic [ref=e251]: 0 % off
+                  - button "Add to wishlist" [ref=e253] [cursor=pointer]:
+                    - img [ref=e254] [cursor=pointer]
+                - link "Onsen Waffle Robe R$ 689,00" [ref=e256] [cursor=pointer]:
+                  - /url: /products/onsen-waffle-robe-48014290813105
+                  - generic [ref=e257] [cursor=pointer]: Onsen Waffle Robe
+                  - generic [ref=e259] [cursor=pointer]: R$ 689,00
+                - list [ref=e260]:
+                  - listitem [ref=e261]:
+                    - 'radio "Color: Steam White" [checked] [ref=e262] [cursor=pointer]':
+                      - generic [ref=e263] [cursor=pointer]: Steam White
+                  - listitem [ref=e264]:
+                    - 'radio "Color: Lilac" [ref=e265] [cursor=pointer]':
+                      - generic [ref=e266] [cursor=pointer]: Lilac
+                - button "Add to Cart" [ref=e268] [cursor=pointer]
+              - generic [ref=e269]:
+                - figure [ref=e270]:
+                  - link "view product" [ref=e271] [cursor=pointer]:
+                    - /url: /products/rio-raincoat-48014289928369
+                    - img "Rio Raincoat in Deep Green, worn by Tião, an adult capybara, front view." [ref=e272] [cursor=pointer]
+                    - img "Rio Raincoat in Marigold, worn by Tião, an adult capybara, front view." [ref=e273] [cursor=pointer]
+                  - generic [ref=e274]:
+                    - generic [ref=e275]: Notify me
+                    - generic [ref=e276]: 0 % off
+                  - button "Add to wishlist" [ref=e278] [cursor=pointer]:
+                    - img [ref=e279] [cursor=pointer]
+                - link "Rio Raincoat R$ 589,00" [ref=e281] [cursor=pointer]:
+                  - /url: /products/rio-raincoat-48014289928369
+                  - generic [ref=e282] [cursor=pointer]: Rio Raincoat
+                  - generic [ref=e284] [cursor=pointer]: R$ 589,00
+                - list [ref=e285]:
+                  - listitem [ref=e286]:
+                    - 'radio "Color: Deep Green" [checked] [ref=e287] [cursor=pointer]':
+                      - generic [ref=e288] [cursor=pointer]: Deep Green
+                  - listitem [ref=e289]:
+                    - 'radio "Color: Marigold" [ref=e290] [cursor=pointer]':
+                      - generic [ref=e291] [cursor=pointer]: Marigold
+                  - listitem [ref=e292]:
+                    - 'radio "Color: Lime" [ref=e293] [cursor=pointer]':
+                      - generic [ref=e294] [cursor=pointer]: Lime
+                - button "Add to Cart" [ref=e296] [cursor=pointer]
+              - generic [ref=e297]:
+                - figure [ref=e298]:
+                  - link "view product" [ref=e299] [cursor=pointer]:
+                    - /url: /products/boia-swim-vest-48014291009713
+                    - img "Boia Swim Vest in Lime/Green, worn by Tião, an adult capybara, front view." [ref=e300] [cursor=pointer]
+                    - img "Boia Swim Vest in Pool Mint, worn by Tião, an adult capybara, front view." [ref=e301] [cursor=pointer]
+                  - generic [ref=e302]:
+                    - generic [ref=e303]: Notify me
+                    - generic [ref=e304]: 0 % off
+                  - button "Add to wishlist" [ref=e306] [cursor=pointer]:
+                    - img [ref=e307] [cursor=pointer]
+                - link "Boia Swim Vest R$ 449,00" [ref=e309] [cursor=pointer]:
+                  - /url: /products/boia-swim-vest-48014291009713
+                  - generic [ref=e310] [cursor=pointer]: Boia Swim Vest
+                  - generic [ref=e312] [cursor=pointer]: R$ 449,00
+                - list [ref=e313]:
+                  - listitem [ref=e314]:
+                    - 'radio "Color: Lime/Green" [checked] [ref=e315] [cursor=pointer]':
+                      - generic [ref=e316] [cursor=pointer]: Lime/Green
+                  - listitem [ref=e317]:
+                    - 'radio "Color: Pool Mint" [ref=e318] [cursor=pointer]':
+                      - generic [ref=e319] [cursor=pointer]: Pool Mint
+                - button "Add to Cart" [ref=e321] [cursor=pointer]
+      - generic [ref=e325]:
+        - generic [ref=e326]:
+          - generic [ref=e327]: Get top deals, latest trends, and more.
+          - generic [ref=e328]: Receive our news and promotions in advance. Enjoy and get 10% off your first purchase. For more information click here.
+        - generic [ref=e329]:
+          - textbox "Enter your email address" [ref=e330]
+          - button "Sign up" [ref=e331] [cursor=pointer]:
+            - generic [ref=e332] [cursor=pointer]: Sign up
+      - generic [ref=e335]:
+        - list [ref=e336]:
+          - listitem [ref=e337]:
+            - link "Our Company" [ref=e338] [cursor=pointer]:
+              - /url: "#"
+            - list [ref=e339]:
+              - listitem [ref=e340]:
+                - link "About us" [ref=e341] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e342]:
+                - link "Our blog" [ref=e343] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e344]:
+                - link "Stores" [ref=e345] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e346]:
+                - link "Work with us" [ref=e347] [cursor=pointer]:
+                  - /url: "#"
+          - listitem [ref=e348]:
+            - link "Orders & Purchases" [ref=e349] [cursor=pointer]:
+              - /url: "#"
+            - list [ref=e350]:
+              - listitem [ref=e351]:
+                - link "Check order status" [ref=e352] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e353]:
+                - link "Return and exchanges" [ref=e354] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e355]:
+                - link "Product retail" [ref=e356] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e357]:
+                - link "Gift cards" [ref=e358] [cursor=pointer]:
+                  - /url: "#"
+          - listitem [ref=e359]:
+            - link "Support & Services" [ref=e360] [cursor=pointer]:
+              - /url: "#"
+            - list [ref=e361]:
+              - listitem [ref=e362]:
+                - link "Support Center" [ref=e363] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e364]:
+                - link "Schedule a service" [ref=e365] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e366]:
+                - link "Contact us" [ref=e367] [cursor=pointer]:
+                  - /url: "#"
+          - listitem [ref=e368]:
+            - link "Support & Services" [ref=e369] [cursor=pointer]:
+              - /url: "#"
+            - list [ref=e370]:
+              - listitem [ref=e371]:
+                - link "Support Center" [ref=e372] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e373]:
+                - link "Schedule a service" [ref=e374] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e375]:
+                - link "Contact us" [ref=e376] [cursor=pointer]:
+                  - /url: "#"
+        - generic [ref=e377]:
+          - list [ref=e378]:
+            - listitem [ref=e379]:
+              - link "facebook" [ref=e380] [cursor=pointer]:
+                - /url: "#"
+                - img "facebook" [ref=e381] [cursor=pointer]
+            - listitem [ref=e382]:
+              - link "Instagram" [ref=e383] [cursor=pointer]:
+                - /url: "#"
+                - img "Instagram" [ref=e384] [cursor=pointer]
+            - listitem [ref=e385]:
+              - link "Pinterest" [ref=e386] [cursor=pointer]:
+                - /url: "#"
+                - img "Pinterest" [ref=e387] [cursor=pointer]
+            - listitem [ref=e388]:
+              - link "X" [ref=e389] [cursor=pointer]:
+                - /url: "#"
+                - img "X" [ref=e390] [cursor=pointer]
+          - list [ref=e391]:
+            - listitem [ref=e392]:
+              - img "Paypal" [ref=e393]
+            - listitem [ref=e394]:
+              - img "Mastercard" [ref=e395]
+            - listitem [ref=e396]:
+              - img "Maestro" [ref=e397]
+            - listitem [ref=e398]:
+              - img "Google Pay" [ref=e399]
+            - listitem [ref=e400]:
+              - img "Elo" [ref=e401]
+            - listitem [ref=e402]:
+              - img "Diners" [ref=e403]
+            - listitem [ref=e404]:
+              - img "Apple Pay" [ref=e405]
+            - listitem [ref=e406]:
+              - img "Amex" [ref=e407]
+            - listitem [ref=e408]:
+              - img "Visa" [ref=e409]
+        - separator [ref=e410]
+        - generic [ref=e411]:
+          - list [ref=e412]:
+            - listitem [ref=e413]:
+              - link "Privacy Policy" [ref=e414] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e415]:
+              - link "Terms and Conditions" [ref=e416] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e417]:
+              - link "Cookies Policy" [ref=e418] [cursor=pointer]:
+                - /url: "#"
+          - generic [ref=e419]:
+            - img [ref=e421]
+            - generic [ref=e422]: TM & © 2023 Deco Storefront, Inc.
+          - generic [ref=e423]:
+            - generic [ref=e424]: Powered by
+            - link "Powered by deco.cx" [ref=e425] [cursor=pointer]:
+              - /url: https://deco.cx?utm_source=storefront-tanstack
+              - generic [ref=e426] [cursor=pointer]: Powered by
+              - generic [ref=e427] [cursor=pointer]: deco.cx
+  - checkbox [ref=e428]
+  - complementary "Cart" [ref=e429]:
+    - generic [ref=e430]:
+      - generic [ref=e431]:
+        - heading "Your bag" [level=2] [ref=e432]
+        - img [ref=e434] [cursor=pointer]
+      - generic [ref=e436]:
+        - generic [ref=e437]: Your bag is empty
+        - generic [ref=e438] [cursor=pointer]: Choose products
+```
