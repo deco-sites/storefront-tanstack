@@ -45,11 +45,21 @@ export default function ProductGallery({ images, config }: Props) {
 
   // On variant change the lead (variant) photo moves to slot 0, but scroll-snap
   // keeps the previously shown slide in view. Jump back to slot 0 without
-  // remounting, so already-loaded <img>s stay painted (no white flash).
+  // remounting, so already-loaded <img>s stay painted (no white flash). Wait for
+  // the lead photo to decode first so slot 0 is never shown empty.
   const leadUrl = images[0]?.url;
   useEffect(() => {
     const slider = document.getElementById(id)?.querySelector<HTMLElement>("[data-slider]");
-    slider?.scrollTo({ left: 0, top: 0, behavior: "instant" });
+    if (!slider) return;
+    let cancelled = false;
+    const lead = slider.querySelector<HTMLImageElement>("img");
+    const ready = lead ? lead.decode().catch(() => {}) : Promise.resolve();
+    ready.then(() => {
+      if (!cancelled) slider.scrollTo({ left: 0, top: 0, behavior: "instant" });
+    });
+    return () => {
+      cancelled = true;
+    };
   }, [id, leadUrl]);
 
   if (!images.length) return null;
@@ -64,11 +74,7 @@ export default function ProductGallery({ images, config }: Props) {
           <div className="relative h-min grow">
             <Slider className="carousel carousel-center gap-6 w-full">
               {images.map((img, index) => (
-                <Slider.Item
-                  key={img.url ?? index}
-                  index={index}
-                  className="carousel-item w-full"
-                >
+                <Slider.Item key={img.url ?? index} index={index} className="carousel-item w-full">
                   <Image
                     className="w-full"
                     sizes="(max-width: 640px) 100vw, 40vw"
@@ -78,7 +84,9 @@ export default function ProductGallery({ images, config }: Props) {
                     width={DEFAULT_WIDTH}
                     height={DEFAULT_HEIGHT}
                     preload={preloadFirstImage && index === 0}
-                    loading={index === 0 ? "eager" : "lazy"}
+                    // Eager: variant photos are few and must be ready to paint
+                    // the moment a color is picked.
+                    loading="eager"
                   />
                 </Slider.Item>
               ))}
@@ -100,10 +108,7 @@ export default function ProductGallery({ images, config }: Props) {
 
             {enableZoom ? (
               <div className="absolute top-2 right-2 bg-base-100 rounded-full">
-                <label
-                  className="btn btn-ghost hidden sm:inline-flex"
-                  htmlFor={zoomId}
-                >
+                <label className="btn btn-ghost hidden sm:inline-flex" htmlFor={zoomId}>
                   <Icon id="pan_zoom" />
                 </label>
               </div>
@@ -145,7 +150,7 @@ export default function ProductGallery({ images, config }: Props) {
           id={zoomId}
           images={images}
           width={700}
-          height={Math.trunc(700 * DEFAULT_HEIGHT / DEFAULT_WIDTH)}
+          height={Math.trunc((700 * DEFAULT_HEIGHT) / DEFAULT_WIDTH)}
         />
       ) : null}
     </>
@@ -163,9 +168,7 @@ export function filterImagesForVariant(
 ): ImageObject[] {
   if (!images?.length) return [];
   if (!productName) return images;
-  const matches = images.filter((img) =>
-    productName.includes(img.alternateName || "")
-  );
+  const matches = images.filter((img) => productName.includes(img.alternateName || ""));
   return matches.length > 0 ? matches : images;
 }
 
