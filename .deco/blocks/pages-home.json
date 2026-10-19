@@ -49,7 +49,7 @@
     {
       "__resolveType": "site/sections/Product/ProductShelf.tsx",
       "title": "Discover Our Featured Picks",
-      "cta": "/mono",
+      "cta": "/s?q=a",
       "products": {
         "__resolveType": "Product List Loader"
       }
@@ -57,7 +57,7 @@
     {
       "__resolveType": "site/sections/Category/CategoryGrid.tsx",
       "title": "Departments",
-      "cta": "/all",
+      "cta": "/s?q=*",
       "items": [
         {
           "label": "Men",

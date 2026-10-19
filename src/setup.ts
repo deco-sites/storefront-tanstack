@@ -131,7 +131,16 @@ const wrappedShopifyPLP = async (props: any) => {
   return productListingPageLoader(props, pageUrl);
 };
 
+// The decofile points at this site-owned key, not SHOPIFY_PLP_KEY: on the
+// first request (reconfigureAppsOnce) and on every decofile reload, setupApps()
+// re-registers the raw app loader under SHOPIFY_PLP_KEY, silently replacing the
+// wrapper. Unwrapped, the loader sees `https://localhost`, queries a collection
+// with no handle and every PLP/search page renders "Not Found!".
+const SITE_PLP_KEY = "site/loaders/shopify/ProductListingPage";
+
 registerCommerceLoaders({
+  [SITE_PLP_KEY]: wrappedShopifyPLP,
+  [`${SITE_PLP_KEY}.ts`]: wrappedShopifyPLP,
   [SHOPIFY_PLP_KEY]: wrappedShopifyPLP,
   [`${SHOPIFY_PLP_KEY}.ts`]: wrappedShopifyPLP,
 });

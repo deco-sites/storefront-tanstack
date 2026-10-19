@@ -22,7 +22,7 @@
       "section": {
         "__resolveType": "site/sections/Product/SearchResult.tsx",
         "page": {
-          "__resolveType": "shopify/loaders/ProductListingPage.ts",
+          "__resolveType": "site/loaders/shopify/ProductListingPage.ts",
           "count": 12,
           "query": "kids"
         },

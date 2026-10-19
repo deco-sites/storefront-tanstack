@@ -1,6 +1,6 @@
 {
   "data": {
-    "__resolveType": "shopify/loaders/ProductListingPage.ts",
+    "__resolveType": "site/loaders/shopify/ProductListingPage.ts",
     "count": 12
   },
   "extensions": [],
