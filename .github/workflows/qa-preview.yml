@@ -1,0 +1,64 @@
+# Runs the QA regression suite (tests/qa — one test per bug the QA found and the board fixed)
+# against THIS pull request's deco preview, once the preview serves this exact commit.
+name: QA (preview)
+on:
+  pull_request:
+permissions:
+  contents: read
+  statuses: read
+concurrency:
+  group: qa-preview-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      SHA: ${{ github.event.pull_request.head.sha }}
+      PR: ${{ github.event.pull_request.number }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Wait for preview of this commit
+        id: preview
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          fallback="https://pr-${PR}-storefront-tanstack.deco-cx.workers.dev"
+          deadline=$(( $(date +%s) + 900 ))
+          while [ "$(date +%s)" -lt "$deadline" ]; do
+            url=$(gh api "repos/${GITHUB_REPOSITORY}/commits/${SHA}/statuses" \
+              --jq '[.[] | select(.context=="deco/preview" and .state=="success" and (.target_url // "") != "")][0].target_url // empty' 2>/dev/null || true)
+            url=${url:-$fallback}
+            url=${url%/}
+            version=$(curl -sS -o /dev/null -D - "$url/" --max-time 30 \
+              | tr -d '\r' | awk -F': ' 'tolower($1)=="x-cache-version"{print $2}' || true)
+            echo "$url -> x-cache-version=${version:-<none>} (want $SHA)"
+            if [ "$version" = "$SHA" ]; then
+              echo "url=$url" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            sleep 20
+          done
+          echo "::error::Preview for $SHA did not come up within 15 minutes"
+          exit 1
+      # The repo's own @playwright/test (devDependency), so CI runs the version the specs were
+      # written against — not a pinned copy that drifts from it.
+      - uses: oven-sh/setup-bun@v2
+      - name: Install dependencies and Playwright's browser
+        run: |
+          bun install --frozen-lockfile
+          bunx playwright install --with-deps chromium
+      - name: Run tests/qa against preview
+        env:
+          BASE_URL: ${{ steps.preview.outputs.url }}
+        run: bunx playwright test -c tests/qa/playwright.config.ts --reporter=html,list
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: qa-report-pr-${{ github.event.pull_request.number }}
+          path: playwright-report/
+          if-no-files-found: ignore
+          retention-days: 14
