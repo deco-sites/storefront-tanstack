@@ -31,3 +31,4 @@ vite.config.timestamp_*
 # IDE
 .vscode/
 .idea/
+test-results/

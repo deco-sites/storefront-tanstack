@@ -146,7 +146,7 @@ export default function ProductHero({
           copy={copy}
         />
 
-        <ProductShipping />
+        <ProductShipping currencyCode={offers?.priceCurrency} />
 
         <ProductDescription
           html={description}
