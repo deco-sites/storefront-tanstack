@@ -50,7 +50,7 @@
   },
   "devDependencies": {
     "@cloudflare/vite-plugin": "^1.27.0",
-    "@playwright/test": "^1.64.1",
+    "@playwright/test": "1.55",
     "@tailwindcss/vite": "^4.2.1",
     "@tanstack/router-cli": "1.166.7",
     "@types/react": "^19.2.14",
