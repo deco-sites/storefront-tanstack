@@ -138,7 +138,8 @@ export default function ProductHero({
       )}
     >
       <div className="sm:col-span-3">
-        <ProductGallery images={images} config={galleryConfig} />
+        {/* Remount on variant change so the slider resets to the lead (variant) photo. */}
+        <ProductGallery key={images[0]?.url} images={images} config={galleryConfig} />
       </div>
 
       <div className="sm:col-span-2 flex flex-col">
