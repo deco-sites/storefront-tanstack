@@ -33,7 +33,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     }
     await Promise.all(tasks);
   },
-  head: () => ({
+  head: ({ matches }) => ({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
@@ -42,10 +42,36 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     links: [
       { rel: "stylesheet", href: appCss },
       { rel: "icon", href: "/favicon.ico" },
+      ...canonicalFallback(matches),
     ],
   }),
   component: RootLayout,
 });
+
+/**
+ * CMS routes only emit <link rel="canonical"> when the page's SEO block sets
+ * one. Fall back to the current URL without query string (absolute when the
+ * CMS loader exposes the page origin) so every page declares a canonical.
+ */
+function canonicalFallback(
+  matches: Array<{ pathname: string; loaderData?: unknown }>,
+) {
+  const leaf = matches[matches.length - 1];
+  if (!leaf) return [];
+  const data = leaf.loaderData as
+    | { seo?: { canonical?: string }; pageUrl?: string }
+    | null
+    | undefined;
+  if (data?.seo?.canonical) return [];
+  let href = leaf.pathname;
+  if (data?.pageUrl) {
+    try {
+      const url = new URL(data.pageUrl);
+      href = url.origin + url.pathname;
+    } catch {}
+  }
+  return [{ rel: "canonical", href }];
+}
 
 function RootLayout() {
   return (
