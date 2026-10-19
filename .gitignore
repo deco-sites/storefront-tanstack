@@ -28,6 +28,12 @@ vite.config.timestamp_*
 .deco/metadata/*
 .deco/blocks.gen.json
 
+# Generated server bindings
+src/server/invoke.gen.ts
+
+# Test artifacts
+test-results/
+
 # IDE
 .vscode/
 .idea/
