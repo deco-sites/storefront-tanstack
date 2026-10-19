@@ -41,8 +41,39 @@ import "./setup/section-loaders";
 // swallows the error and skips Shopify, so its commerce loaders never register
 // and PDP/shelves resolve to null (works in `vite dev`, breaks in prod). Provide
 // the module statically so registration is build-safe.
+//
+// The PLP loader is swapped in the app's manifest (see wrappedShopifyPLP
+// below): setupApps() re-registers every manifest loader on the first request
+// and on decofile changes, which would clobber a one-off
+// registerCommerceLoaders() override and drop sort/filters/pagination.
+const SHOPIFY_PLP_KEY = "shopify/loaders/ProductListingPage";
+
 const APP_REGISTRY: AppRegistry = [
-  { ...SHOPIFY_REGISTRY_ENTRY, module: async () => shopifyMod as never },
+  {
+    ...SHOPIFY_REGISTRY_ENTRY,
+    module: async () =>
+      ({
+        ...shopifyMod,
+        configure: async (...args: Parameters<typeof shopifyMod.configure>) => {
+          const app = await shopifyMod.configure(...args);
+          if (!app) return app;
+          const loaders = app.manifest.loaders as Record<string, unknown>;
+          return {
+            ...app,
+            manifest: {
+              ...app.manifest,
+              loaders: {
+                ...loaders,
+                [SHOPIFY_PLP_KEY]: {
+                  ...(loaders[SHOPIFY_PLP_KEY] as object),
+                  default: (props: any) => wrappedShopifyPLP(props),
+                },
+              },
+            },
+          };
+        },
+      }) as never,
+  },
 ];
 
 // -- Framework setup (framework-generic options only) --
@@ -104,7 +135,7 @@ await autoconfigApps(generatedBlocks, APP_REGISTRY);
 import { RequestContext } from "@decocms/blocks/sdk/requestContext";
 import productListingPageLoader from "@decocms/apps-shopify/loaders/ProductListingPage";
 
-const SHOPIFY_PLP_KEY = "shopify/loaders/ProductListingPage";
+
 
 const PAGE_URL_HEADER = "x-deco-page-url";
 
@@ -126,11 +157,11 @@ const resolvePageUrl = (props: any): URL | undefined => {
   }
 };
 
-const wrappedShopifyPLP = async (props: any) => {
+async function wrappedShopifyPLP(props: any) {
   const pageUrl = resolvePageUrl(props);
   console.log("PLPDEBUG", pageUrl?.href, props?.__pageUrl);
   return productListingPageLoader(props, pageUrl);
-};
+}
 
 registerCommerceLoaders({
   [SHOPIFY_PLP_KEY]: wrappedShopifyPLP,
