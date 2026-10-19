@@ -49,6 +49,7 @@
     "react-dom": "^19.2.4"
   },
   "devDependencies": {
+    "@playwright/test": "^1.56.0",
     "@cloudflare/vite-plugin": "^1.27.0",
     "@tailwindcss/vite": "^4.2.1",
     "@tanstack/router-cli": "1.166.7",

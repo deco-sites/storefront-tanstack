@@ -14,8 +14,7 @@ export default function SearchFilterDrawer({ id, filters, baseUrl }: Props) {
       <input
         type="checkbox"
         id={id}
-        className="peer/filter-drawer sr-only"
-        aria-hidden="true"
+        className="peer/filter-drawer hidden"
       />
       <label
         htmlFor={id}
