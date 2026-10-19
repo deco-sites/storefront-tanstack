@@ -159,7 +159,6 @@ const resolvePageUrl = (props: any): URL | undefined => {
 
 async function wrappedShopifyPLP(props: any) {
   const pageUrl = resolvePageUrl(props);
-  console.log("PLPDEBUG", pageUrl?.href, props?.__pageUrl);
   return productListingPageLoader(props, pageUrl);
 }
 
