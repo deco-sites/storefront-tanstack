@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import type { AnalyticsItem, Product } from "@decocms/apps-commerce/types";
 import { clx } from "~/sdk/clx";
 import { useAddToCart } from "../../../platform/cart";
@@ -65,6 +66,8 @@ export default function ProductActions({
     },
   });
 
+  const inFlight = useRef(false);
+
   if (!isInStock) {
     return <OutOfStock productID={product.productID} />;
   }
@@ -82,9 +85,16 @@ export default function ProductActions({
       <button
         type="button"
         {...eventAttrs}
-        onClick={() =>
-          addToCart.mutate({ merchandiseId: product.productID, quantity: 1 })
-        }
+        onClick={() => {
+          // Synchronous guard: a double-click fires both clicks before the
+          // re-render that disables the button.
+          if (inFlight.current) return;
+          inFlight.current = true;
+          addToCart.mutate(
+            { merchandiseId: product.productID, quantity: 1 },
+            { onSettled: () => { inFlight.current = false; } },
+          );
+        }}
         disabled={addToCart.isPending}
         className={clx(
           "btn btn-primary no-animation",
