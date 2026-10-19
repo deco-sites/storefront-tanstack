@@ -24,7 +24,7 @@
         "page": {
           "__resolveType": "shopify/loaders/ProductListingPage.ts",
           "count": 12,
-          "query": "kids"
+          "collectionName": "rio"
         },
         "layout": {
           "columns": {

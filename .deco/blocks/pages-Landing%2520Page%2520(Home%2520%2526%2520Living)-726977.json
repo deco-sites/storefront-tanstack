@@ -24,8 +24,7 @@
         "page": {
           "__resolveType": "shopify/loaders/ProductListingPage.ts",
           "count": 12,
-          "collectionName": "Home & Living",
-          "query": "home & living"
+          "collectionName": "onsen"
         },
         "layout": {
           "columns": {
