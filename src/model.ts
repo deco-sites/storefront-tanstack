@@ -34,9 +34,3 @@ export interface StoredPage extends Route {
   /** A list of blocks, or one multivariate block that picks a whole list. */
   sections: Block[] | Block;
 }
-
-/** What the page block returns: `seo` and every block in `sections` resolved. */
-export interface ResolvedPage<T> extends Route {
-  seo?: PageSeo;
-  sections: T[];
-}

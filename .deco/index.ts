@@ -4,8 +4,8 @@
 // are"), and under no second name: the site editor lists every key of this map, so a short name
 // next to each v7 name showed every section twice in its pickers, where v7's editor showed it once.
 // Sections return descriptors (/next/rendering), which src/views.ts maps to components.
-import type { Blocks, Lazy, Route } from "@decocms/blocks";
-import type { BlockDescriptor, PageSeo } from "../src/model";
+import type { Blocks, Lazy } from "@decocms/blocks";
+import type { BlockDescriptor } from "../src/model";
 import type { Suggestion } from "../src/vendor/commerce/types";
 import {
   detailsPageExtensions,
@@ -22,12 +22,6 @@ import { loader as wishlistLoader } from "../src/sections/Product/Wishlist";
 import { loader as instagramPostsLoader } from "../src/sections/Social/InstagramPosts";
 import shopifyProductList from "../src/vendor/shopify/loaders/ProductList";
 import websiteGoogleFonts from "../src/vendor/website/loaders/fonts/googleFonts";
-
-/** The site's page: the built-in fields, with SEO for the site's head builder and descriptor sections. */
-interface StorePage extends Route {
-  seo?: PageSeo;
-  sections: BlockDescriptor[];
-}
 
 const animation = section<typeof import("../src/sections/Animation/Animation")>(
   "site/sections/Animation/Animation.tsx",
@@ -124,10 +118,6 @@ const theme = (
 const resolved = (props: { data: Suggestion | null }): Suggestion | null => props.data;
 
 export default {
-  // The built-in page, replaced so its sections are descriptors and its seo is the site's
-  // (/next/built-in-blocks#change-a-built-in). v7's website/pages/Page.tsx is a built-in alias.
-  page: (input: StorePage) => input,
-
   // SEO
   "website/sections/Seo/SeoV2.tsx": seo,
   "commerce/sections/Seo/SeoPLPV2.tsx": seoListingPage,
