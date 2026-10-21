@@ -13,7 +13,7 @@ import {
   shopifyProductDetailsPage,
   shopifyProductListingPage,
 } from "../src/blocks/commerce";
-import { device, random } from "../src/blocks/matchers";
+import { device } from "../src/blocks/matchers";
 import { type PropsOf, section } from "../src/blocks/section";
 import { seo, seoDetailsPage, seoListingPage } from "../src/blocks/seo";
 import { loader as categoryBannerLoader } from "../src/sections/Category/CategoryBanner";
@@ -144,7 +144,6 @@ export default {
 
   // Matchers
   "website/matchers/device.ts": device,
-  "website/matchers/random.ts": random,
 
   // Sections
   "site/sections/Animation/Animation.tsx": animation,

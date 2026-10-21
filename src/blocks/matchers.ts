@@ -9,8 +9,3 @@ export function device(props: { mobile?: boolean; tablet?: boolean; desktop?: bo
   const current = pageState().device;
   return Boolean(props[current]);
 }
-
-/** v7's `website/matchers/random.ts`: true for `traffic` (0 to 1) of the requests. */
-export function random(props: { traffic: number }): boolean {
-  return Math.random() < props.traffic;
-}
