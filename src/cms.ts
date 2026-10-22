@@ -11,6 +11,7 @@ import { createCMS } from "@decocms/blocks";
 import { env } from "cloudflare:workers";
 import blocks from "../.deco";
 import content from "../.deco/blocks.gen";
+import { forwardedAssignments } from "./server/assignments";
 
 // The token needs the site (createCMS throws on a token alone), and hosted releases stay off until
 // both are set, as before.
@@ -67,7 +68,9 @@ export const cms = createCMS({ ...options, content });
  * draft or release a `?__draft=` link or the draft cookie points at, with the preview's moment and
  * switched tests and campaigns), or the release. On a host outside the `CMS` block's preview hosts
  * the link is ignored and the request gets the release
- * (/next/releases-and-drafts#allow-previews-per-host).
+ * (/next/releases-and-drafts#allow-previews-per-host). Every test and campaign is as the worker
+ * decided it for the visitor (src/server/assignments.ts), the decision the edge cache keys on, so
+ * the page decides nothing again.
  */
 export const client = async (request: Request) =>
-  cms.client({ ...(await cms.readVersion(request)) });
+  cms.client({ ...(await cms.readVersion(request)), ...forwardedAssignments(request) });

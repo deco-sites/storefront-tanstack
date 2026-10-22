@@ -18,15 +18,22 @@
  * - the cache key's `__v` (and the X-Cache-Version header) is `<build>.<revision>`: the build's
  *   timestamp and the content revision this instance serves, or the build alone when the revision
  *   can't be read;
+ * - the cache key's `__a` is the request's A/B tests and campaigns (`assignmentsKey`, decided once
+ *   here for the visitor and handed to the page, src/server/assignments.ts): visitors on the same
+ *   side of every test share an entry, the other side gets its own, and the visitor's id is never in
+ *   the key. The visitor's first-visit cookie is added after the cache answered, so a stored copy
+ *   never carries it, and never on a preview;
  * - `POST /_cache/purge` with `Authorization: Bearer $PURGE_TOKEN` drops paths from the cache (the
- *   current revision's entries);
+ *   current revision's entries, for every assignments key a visitor can carry now);
  * - every HTML response may be framed by deco Studio — the site editor's preview — and by nothing
  *   else, through `Content-Security-Policy: frame-ancestors` (no `X-Frame-Options`), as v7 does;
  * - every response the worker sends without a CDN-Cache-Control, or with `X-Cache: BYPASS`, gets
  *   `CDN-Cache-Control: no-store`, so Cloudflare's own CDN never caches what this wrapper didn't;
  * - `vite dev` skips the edge cache, so a content edit shows on the next load.
  */
+import { liveAssignmentKeys } from "@decocms/tanstack/worker";
 import { cms } from "../cms";
+import { decideAssignments, withoutAssignments } from "./assignments";
 import {
   type CacheProfileName,
   cacheHeaders,
@@ -220,11 +227,6 @@ function dedupeSetCookies(response: Response): void {
   for (const c of last.values()) response.headers.append("set-cookie", c);
 }
 
-/** A draft preview (`?__draft=` or the draft cookie, read the framework's way): never cached. */
-async function isDraft(request: Request, url: URL): Promise<boolean> {
-  return url.searchParams.has("__draft") || (await cms.readVersion(request)) !== null;
-}
-
 function isServerFn(url: URL): boolean {
   return url.pathname.startsWith("/_serverFn/") || url.pathname.startsWith("/_server/");
 }
@@ -260,7 +262,12 @@ export function withEdgeCache(serverEntry: Handler, options: EdgeCacheOptions): 
     response.headers.append("Link", `<${options.cssHref}>; rel=preload; as=style`);
   }
 
-  function cacheKey(request: Request, version: string, segment: SegmentKey): Request {
+  function cacheKey(
+    request: Request,
+    version: string,
+    segment: SegmentKey,
+    assigned: string,
+  ): Request {
     const url = new URL(request.url);
     for (const key of [...url.searchParams.keys()]) {
       if (TRACKING_PARAMS.has(key.toLowerCase())) url.searchParams.delete(key);
@@ -274,6 +281,7 @@ export function withEdgeCache(serverEntry: Handler, options: EdgeCacheOptions): 
     if (!isServerFn(url) && request.headers.get("sec-fetch-dest") === "empty")
       url.searchParams.set("__fetch", "1");
     url.searchParams.set("__seg", hashSegment(segment));
+    if (assigned) url.searchParams.set("__a", assigned);
     return new Request(url.toString(), { method: "GET" });
   }
 
@@ -308,17 +316,22 @@ export function withEdgeCache(serverEntry: Handler, options: EdgeCacheOptions): 
     const origin = new URL(request.url).origin;
     // The current revision's entries: older revisions' keys are no longer looked up.
     const version = await cacheVersion(env);
+    // Every assignments key a live request can carry now (each subset of the saved tests, with the
+    // running campaigns and with none); `[""]` without tests or campaigns.
+    const assignments = await liveAssignmentKeys(cms);
     for (const path of body.paths) {
       for (const segment of segments) {
-        for (const programmatic of [false, true]) {
-          const url = new URL(path, origin);
-          if (version) url.searchParams.set("__v", version);
-          if (programmatic) url.searchParams.set("__fetch", "1");
-          url.searchParams.set("__seg", hashSegment(segment));
-          if (await cache.delete(new Request(url.toString(), { method: "GET" }))) {
-            purged.push(
-              `${path} (${[hashSegment(segment), programmatic ? "fetch" : null].filter(Boolean).join(", ")})`,
-            );
+        for (const assigned of assignments) {
+          for (const programmatic of [false, true]) {
+            const url = new URL(path, origin);
+            if (version) url.searchParams.set("__v", version);
+            if (programmatic) url.searchParams.set("__fetch", "1");
+            url.searchParams.set("__seg", hashSegment(segment));
+            if (assigned) url.searchParams.set("__a", assigned);
+            if (await cache.delete(new Request(url.toString(), { method: "GET" }))) {
+              const tags = [hashSegment(segment), assigned, programmatic ? "fetch" : null];
+              purged.push(`${path} (${tags.filter(Boolean).join(", ")})`);
+            }
           }
         }
       }
@@ -352,7 +365,7 @@ export function withEdgeCache(serverEntry: Handler, options: EdgeCacheOptions): 
       FINGERPRINTED_ASSET_RE.test(url.pathname) ||
       STATIC_PATHS.some((p) => url.pathname.startsWith(p))
     ) {
-      const origin = await serverEntry.fetch(request, env, ctx);
+      const origin = await serverEntry.fetch(withoutAssignments(request), env, ctx);
       if (origin.status !== 200) return origin;
       if ((origin.headers.get("content-type") ?? "").includes("text/html"))
         return new Response("Not Found", { status: 404 });
@@ -362,12 +375,37 @@ export function withEdgeCache(serverEntry: Handler, options: EdgeCacheOptions): 
       return resp;
     }
 
+    // A draft preview (`?__draft=` or the draft cookie, read the framework's way): never cached.
+    const version = await cms.readVersion(request);
+    // The tests and campaigns of this request, decided once for its visitor: the page renders them
+    // and the cache keys on them.
+    const decision = await decideAssignments(cms, request, version);
+    let response = await page(decision.request, env, ctx, {
+      draft: url.searchParams.has("__draft") || version !== null,
+      assigned: decision.key,
+    });
+    if (decision.cookie) {
+      // After the cache answered: a stored copy never carries a visitor's cookie, and a new visitor
+      // served from the cache still gets theirs.
+      response = new Response(response.body, response);
+      response.headers.append("Set-Cookie", decision.cookie);
+    }
+    return response;
+  }
+
+  async function page(
+    request: Request,
+    env: Env,
+    ctx: ExecutionContext,
+    { draft, assigned }: { draft: boolean; assigned: string },
+  ): Promise<Response> {
+    const url = new URL(request.url);
     const profile = profileOf(url);
     const cacheable =
       !import.meta.env.DEV &&
       request.method === "GET" &&
       !BYPASS_PATHS.some((p) => url.pathname.startsWith(p)) &&
-      !(await isDraft(request, url));
+      !draft;
     // A private profile still goes through the path below, which never stores it (`edge.isPublic`
     // is false) and never serves it from the cache: only public profiles are looked up.
 
@@ -412,7 +450,7 @@ export function withEdgeCache(serverEntry: Handler, options: EdgeCacheOptions): 
     }
 
     const version = await cacheVersion(env);
-    const key = cacheKey(request, version, segment);
+    const key = cacheKey(request, version, segment, assigned);
     const cache = edgeCache();
     const edge = edgeCacheConfig(profile);
 
