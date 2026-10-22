@@ -1,7 +1,7 @@
 {
   "major": 1,
   "blocksMajor": 8,
-  "version": "8.2.3",
+  "version": "8.6.0",
   "namespace": "site",
   "site": "storefront-tanstack",
   "manifest": {
@@ -183,10 +183,6 @@
           "$ref": "#/definitions/d2Vic2l0ZS9tYXRjaGVycy9kZXZpY2UudHM=",
           "namespace": "website"
         },
-        "website/matchers/random.ts": {
-          "$ref": "#/definitions/d2Vic2l0ZS9tYXRjaGVycy9yYW5kb20udHM=",
-          "namespace": "website"
-        },
         "always": {
           "$ref": "#/definitions/YWx3YXlz",
           "namespace": "deco"
@@ -195,8 +191,12 @@
           "$ref": "#/definitions/bmV2ZXI=",
           "namespace": "deco"
         },
-        "date": {
-          "$ref": "#/definitions/ZGF0ZQ==",
+        "experiment": {
+          "$ref": "#/definitions/ZXhwZXJpbWVudA==",
+          "namespace": "deco"
+        },
+        "campaign": {
+          "$ref": "#/definitions/Y2FtcGFpZ24=",
           "namespace": "deco"
         },
         "website/matchers/always.ts": {
@@ -211,7 +211,7 @@
       "pages": {
         "page": {
           "$ref": "#/definitions/cGFnZQ==",
-          "namespace": "site"
+          "namespace": "deco"
         },
         "website/pages/Page.tsx": {
           "$ref": "#/definitions/d2Vic2l0ZS9wYWdlcy9QYWdlLnRzeA==",
@@ -235,6 +235,14 @@
       "content": {
         "cms-settings": {
           "$ref": "#/definitions/Y21zLXNldHRpbmdz",
+          "namespace": "deco"
+        },
+        "split-traffic": {
+          "$ref": "#/definitions/c3BsaXQtdHJhZmZpYw==",
+          "namespace": "deco"
+        },
+        "calendar": {
+          "$ref": "#/definitions/Y2FsZW5kYXI=",
           "namespace": "deco"
         }
       }
@@ -265,102 +273,6 @@
         "properties": {
           "__resolveType": {
             "type": "string"
-          }
-        }
-      },
-      "c3JjL21vZGVsLnRz@PageSeo": {
-        "type": "object",
-        "properties": {
-          "title": {
-            "type": "string",
-            "nullable": true,
-            "title": "Title"
-          },
-          "description": {
-            "type": "string",
-            "nullable": true,
-            "title": "Description"
-          },
-          "titleTemplate": {
-            "type": "string",
-            "nullable": true,
-            "title": "Title Template"
-          },
-          "descriptionTemplate": {
-            "type": "string",
-            "nullable": true,
-            "title": "Description Template"
-          },
-          "image": {
-            "type": "string",
-            "nullable": true,
-            "title": "Image"
-          },
-          "canonical": {
-            "type": "string",
-            "nullable": true,
-            "title": "Canonical"
-          },
-          "noIndexing": {
-            "type": "boolean",
-            "nullable": true,
-            "title": "No Indexing"
-          },
-          "type": {
-            "type": "string",
-            "nullable": true,
-            "title": "Type"
-          }
-        },
-        "description": "The page SEO the site's head builder reads (src/head.ts). Every field is optional."
-      },
-      "cGFnZQ==": {
-        "title": "page",
-        "type": "object",
-        "required": [
-          "__resolveType",
-          "sections",
-          "name",
-          "path"
-        ],
-        "properties": {
-          "__resolveType": {
-            "type": "string",
-            "enum": [
-              "page"
-            ],
-            "default": "page"
-          },
-          "seo": {
-            "anyOf": [
-              {
-                "$ref": "#/definitions/Resolvable"
-              },
-              {
-                "$ref": "#/definitions/c3JjL21vZGVsLnRz@PageSeo",
-                "title": "Inline data"
-              },
-              {
-                "$ref": "#/definitions/d2Vic2l0ZS9zZWN0aW9ucy9TZW8vU2VvVjIudHN4"
-              }
-            ],
-            "nullable": true,
-            "title": "Seo"
-          },
-          "sections": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/__SECTION_REF__"
-            },
-            "title": "Sections"
-          },
-          "name": {
-            "type": "string",
-            "title": "Name"
-          },
-          "path": {
-            "type": "string",
-            "title": "Path"
           }
         }
       },
@@ -509,12 +421,6 @@
       "c3JjL3ZlbmRvci9jb21tZXJjZS90eXBlcy50cw==@BreadcrumbList": {
         "type": "object",
         "properties": {
-          "name": {
-            "type": "string",
-            "nullable": true,
-            "description": "The name of the item.",
-            "title": "Name"
-          },
           "@id": {
             "type": "string",
             "nullable": true,
@@ -568,6 +474,12 @@
             "nullable": true,
             "title": "Video"
           },
+          "name": {
+            "type": "string",
+            "nullable": true,
+            "description": "The name of the item.",
+            "title": "Name"
+          },
           "sameAs": {
             "type": "string",
             "nullable": true,
@@ -600,12 +512,6 @@
                   "type": "number",
                   "description": "The position of an item in a series or sequence of items.",
                   "title": "Position"
-                },
-                "name": {
-                  "type": "string",
-                  "nullable": true,
-                  "description": "The name of the item.",
-                  "title": "Name"
                 },
                 "@id": {
                   "type": "string",
@@ -659,6 +565,12 @@
                   },
                   "nullable": true,
                   "title": "Video"
+                },
+                "name": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "The name of the item.",
+                  "title": "Name"
                 },
                 "sameAs": {
                   "type": "string",
@@ -731,12 +643,6 @@
             "description": "A thumbnail image relevant to the Thing",
             "title": "Thumbnail Url"
           },
-          "name": {
-            "type": "string",
-            "nullable": true,
-            "description": "The name of the item.",
-            "title": "Name"
-          },
           "@id": {
             "type": "string",
             "nullable": true,
@@ -789,6 +695,12 @@
             },
             "nullable": true,
             "title": "Video"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true,
+            "description": "The name of the item.",
+            "title": "Name"
           },
           "sameAs": {
             "type": "string",
@@ -843,12 +755,6 @@
             "description": "A thumbnail image relevant to the Thing",
             "title": "Thumbnail Url"
           },
-          "name": {
-            "type": "string",
-            "nullable": true,
-            "description": "The name of the item.",
-            "title": "Name"
-          },
           "@id": {
             "type": "string",
             "nullable": true,
@@ -901,6 +807,12 @@
             },
             "nullable": true,
             "title": "Video"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true,
+            "description": "The name of the item.",
+            "title": "Name"
           },
           "sameAs": {
             "type": "string",
@@ -1187,12 +1099,6 @@
             "nullable": true,
             "title": "Questions"
           },
-          "name": {
-            "type": "string",
-            "nullable": true,
-            "description": "The name of the item.",
-            "title": "Name"
-          },
           "@id": {
             "type": "string",
             "nullable": true,
@@ -1245,6 +1151,12 @@
             },
             "nullable": true,
             "title": "Video"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true,
+            "description": "The name of the item.",
+            "title": "Name"
           },
           "sameAs": {
             "type": "string",
@@ -1315,12 +1227,6 @@
             "description": "A secondary value that provides additional information on the original value, e.g. a reference temperature or a type of measurement.",
             "title": "Value Reference"
           },
-          "name": {
-            "type": "string",
-            "nullable": true,
-            "description": "The name of the item.",
-            "title": "Name"
-          },
           "@id": {
             "type": "string",
             "nullable": true,
@@ -1373,6 +1279,12 @@
             },
             "nullable": true,
             "title": "Video"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true,
+            "description": "The name of the item.",
+            "title": "Name"
           },
           "sameAs": {
             "type": "string",
@@ -1444,12 +1356,6 @@
             "description": "Brand's image url",
             "title": "Logo"
           },
-          "name": {
-            "type": "string",
-            "nullable": true,
-            "description": "The name of the item.",
-            "title": "Name"
-          },
           "@id": {
             "type": "string",
             "nullable": true,
@@ -1502,6 +1408,12 @@
             },
             "nullable": true,
             "title": "Video"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true,
+            "description": "The name of the item.",
+            "title": "Name"
           },
           "sameAs": {
             "type": "string",
@@ -1564,12 +1476,6 @@
             "description": "docs https://schema.org/gtin",
             "title": "Model"
           },
-          "name": {
-            "type": "string",
-            "nullable": true,
-            "description": "The name of the item.",
-            "title": "Name"
-          },
           "@id": {
             "type": "string",
             "nullable": true,
@@ -1622,6 +1528,12 @@
             },
             "nullable": true,
             "title": "Video"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true,
+            "description": "The name of the item.",
+            "title": "Name"
           },
           "sameAs": {
             "type": "string",
@@ -1651,12 +1563,6 @@
       "c3JjL3ZlbmRvci9jb21tZXJjZS90eXBlcy50cw==@ProductLeaf": {
         "type": "object",
         "properties": {
-          "name": {
-            "type": "string",
-            "nullable": true,
-            "description": "The name of the item.",
-            "title": "Name"
-          },
           "@id": {
             "type": "string",
             "nullable": true,
@@ -1709,6 +1615,12 @@
             },
             "nullable": true,
             "title": "Video"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true,
+            "description": "The name of the item.",
+            "title": "Name"
           },
           "sameAs": {
             "type": "string",
@@ -2039,12 +1951,6 @@
             "description": "Specifies a MerchantReturnPolicy that may be applicable.",
             "title": "Has Merchant Return Policy"
           },
-          "name": {
-            "type": "string",
-            "nullable": true,
-            "description": "The name of the item.",
-            "title": "Name"
-          },
           "@id": {
             "type": "string",
             "nullable": true,
@@ -2097,6 +2003,12 @@
             },
             "nullable": true,
             "title": "Video"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true,
+            "description": "The name of the item.",
+            "title": "Name"
           },
           "sameAs": {
             "type": "string",
@@ -2176,12 +2088,6 @@
             "description": "This property specifies the minimal quantity and rounding increment that will be the basis for the billing. The unit of measurement is specified by the unitCode property.",
             "title": "Billing Increment"
           },
-          "name": {
-            "type": "string",
-            "nullable": true,
-            "description": "The name of the item.",
-            "title": "Name"
-          },
           "@id": {
             "type": "string",
             "nullable": true,
@@ -2234,6 +2140,12 @@
             },
             "nullable": true,
             "title": "Video"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true,
+            "description": "The name of the item.",
+            "title": "Name"
           },
           "sameAs": {
             "type": "string",
@@ -2409,12 +2321,6 @@
             "description": "Amount of shipping costs for product returns (for any reason). Applicable when property returnFees equals ReturnShippingFees.",
             "title": "Return Shipping Fees Amount"
           },
-          "name": {
-            "type": "string",
-            "nullable": true,
-            "description": "The name of the item.",
-            "title": "Name"
-          },
           "@id": {
             "type": "string",
             "nullable": true,
@@ -2467,6 +2373,12 @@
             },
             "nullable": true,
             "title": "Video"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true,
+            "description": "The name of the item.",
+            "title": "Name"
           },
           "sameAs": {
             "type": "string",
@@ -2538,12 +2450,6 @@
             "description": "The value of a QuantitativeValue (including Observation) or property value node.",
             "title": "Value"
           },
-          "name": {
-            "type": "string",
-            "nullable": true,
-            "description": "The name of the item.",
-            "title": "Name"
-          },
           "@id": {
             "type": "string",
             "nullable": true,
@@ -2596,6 +2502,12 @@
             },
             "nullable": true,
             "title": "Video"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true,
+            "description": "The name of the item.",
+            "title": "Name"
           },
           "sameAs": {
             "type": "string",
@@ -2726,12 +2638,6 @@
             "description": "Medias",
             "title": "Media"
           },
-          "name": {
-            "type": "string",
-            "nullable": true,
-            "description": "The name of the item.",
-            "title": "Name"
-          },
           "@id": {
             "type": "string",
             "nullable": true,
@@ -2784,6 +2690,12 @@
             },
             "nullable": true,
             "title": "Video"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true,
+            "description": "The name of the item.",
+            "title": "Name"
           },
           "sameAs": {
             "type": "string",
@@ -3137,12 +3049,6 @@
             "description": "Author of the",
             "title": "Author"
           },
-          "name": {
-            "type": "string",
-            "nullable": true,
-            "description": "The name of the item.",
-            "title": "Name"
-          },
           "@id": {
             "type": "string",
             "nullable": true,
@@ -3195,6 +3101,12 @@
             },
             "nullable": true,
             "title": "Video"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true,
+            "description": "The name of the item.",
+            "title": "Name"
           },
           "sameAs": {
             "type": "string",
@@ -4148,28 +4060,6 @@
           }
         }
       },
-      "d2Vic2l0ZS9tYXRjaGVycy9yYW5kb20udHM=": {
-        "title": "website/matchers/random.ts",
-        "description": "v7's `website/matchers/random.ts`: true for `traffic` (0 to 1) of the requests.",
-        "type": "object",
-        "required": [
-          "__resolveType",
-          "traffic"
-        ],
-        "properties": {
-          "__resolveType": {
-            "type": "string",
-            "enum": [
-              "website/matchers/random.ts"
-            ],
-            "default": "website/matchers/random.ts"
-          },
-          "traffic": {
-            "type": "number",
-            "title": "Traffic"
-          }
-        }
-      },
       "c2l0ZS9zZWN0aW9ucy9BbmltYXRpb24vQW5pbWF0aW9uLnRzeA==@Props": {
         "type": "object",
         "properties": {
@@ -4929,12 +4819,6 @@
                               "description": "A thumbnail image relevant to the Thing",
                               "title": "Thumbnail Url"
                             },
-                            "name": {
-                              "type": "string",
-                              "nullable": true,
-                              "description": "The name of the item.",
-                              "title": "Name"
-                            },
                             "@id": {
                               "type": "string",
                               "nullable": true,
@@ -5021,12 +4905,6 @@
                                     "description": "A thumbnail image relevant to the Thing",
                                     "title": "Thumbnail Url"
                                   },
-                                  "name": {
-                                    "type": "string",
-                                    "nullable": true,
-                                    "description": "The name of the item.",
-                                    "title": "Name"
-                                  },
                                   "@id": {
                                     "type": "string",
                                     "nullable": true,
@@ -5080,6 +4958,12 @@
                                     "nullable": true,
                                     "title": "Video"
                                   },
+                                  "name": {
+                                    "type": "string",
+                                    "nullable": true,
+                                    "description": "The name of the item.",
+                                    "title": "Name"
+                                  },
                                   "sameAs": {
                                     "type": "string",
                                     "nullable": true,
@@ -5096,6 +4980,12 @@
                               },
                               "nullable": true,
                               "title": "Video"
+                            },
+                            "name": {
+                              "type": "string",
+                              "nullable": true,
+                              "description": "The name of the item.",
+                              "title": "Name"
                             },
                             "sameAs": {
                               "type": "string",
@@ -5178,12 +5068,6 @@
                                     "nullable": true,
                                     "description": "A thumbnail image relevant to the Thing",
                                     "title": "Thumbnail Url"
-                                  },
-                                  "name": {
-                                    "type": "string",
-                                    "nullable": true,
-                                    "description": "The name of the item.",
-                                    "title": "Name"
                                   },
                                   "@id": {
                                     "type": "string",
@@ -5271,12 +5155,6 @@
                                           "description": "A thumbnail image relevant to the Thing",
                                           "title": "Thumbnail Url"
                                         },
-                                        "name": {
-                                          "type": "string",
-                                          "nullable": true,
-                                          "description": "The name of the item.",
-                                          "title": "Name"
-                                        },
                                         "@id": {
                                           "type": "string",
                                           "nullable": true,
@@ -5330,6 +5208,12 @@
                                           "nullable": true,
                                           "title": "Video"
                                         },
+                                        "name": {
+                                          "type": "string",
+                                          "nullable": true,
+                                          "description": "The name of the item.",
+                                          "title": "Name"
+                                        },
                                         "sameAs": {
                                           "type": "string",
                                           "nullable": true,
@@ -5346,6 +5230,12 @@
                                     },
                                     "nullable": true,
                                     "title": "Video"
+                                  },
+                                  "name": {
+                                    "type": "string",
+                                    "nullable": true,
+                                    "description": "The name of the item.",
+                                    "title": "Name"
                                   },
                                   "sameAs": {
                                     "type": "string",
@@ -5428,12 +5318,6 @@
                                           "nullable": true,
                                           "description": "A thumbnail image relevant to the Thing",
                                           "title": "Thumbnail Url"
-                                        },
-                                        "name": {
-                                          "type": "string",
-                                          "nullable": true,
-                                          "description": "The name of the item.",
-                                          "title": "Name"
                                         },
                                         "@id": {
                                           "type": "string",
@@ -5521,12 +5405,6 @@
                                                 "description": "A thumbnail image relevant to the Thing",
                                                 "title": "Thumbnail Url"
                                               },
-                                              "name": {
-                                                "type": "string",
-                                                "nullable": true,
-                                                "description": "The name of the item.",
-                                                "title": "Name"
-                                              },
                                               "@id": {
                                                 "type": "string",
                                                 "nullable": true,
@@ -5580,6 +5458,12 @@
                                                 "nullable": true,
                                                 "title": "Video"
                                               },
+                                              "name": {
+                                                "type": "string",
+                                                "nullable": true,
+                                                "description": "The name of the item.",
+                                                "title": "Name"
+                                              },
                                               "sameAs": {
                                                 "type": "string",
                                                 "nullable": true,
@@ -5596,6 +5480,12 @@
                                           },
                                           "nullable": true,
                                           "title": "Video"
+                                        },
+                                        "name": {
+                                          "type": "string",
+                                          "nullable": true,
+                                          "description": "The name of the item.",
+                                          "title": "Name"
                                         },
                                         "sameAs": {
                                           "type": "string",
@@ -5678,12 +5568,6 @@
                                                 "nullable": true,
                                                 "description": "A thumbnail image relevant to the Thing",
                                                 "title": "Thumbnail Url"
-                                              },
-                                              "name": {
-                                                "type": "string",
-                                                "nullable": true,
-                                                "description": "The name of the item.",
-                                                "title": "Name"
                                               },
                                               "@id": {
                                                 "type": "string",
@@ -5771,12 +5655,6 @@
                                                       "description": "A thumbnail image relevant to the Thing",
                                                       "title": "Thumbnail Url"
                                                     },
-                                                    "name": {
-                                                      "type": "string",
-                                                      "nullable": true,
-                                                      "description": "The name of the item.",
-                                                      "title": "Name"
-                                                    },
                                                     "@id": {
                                                       "type": "string",
                                                       "nullable": true,
@@ -5830,6 +5708,12 @@
                                                       "nullable": true,
                                                       "title": "Video"
                                                     },
+                                                    "name": {
+                                                      "type": "string",
+                                                      "nullable": true,
+                                                      "description": "The name of the item.",
+                                                      "title": "Name"
+                                                    },
                                                     "sameAs": {
                                                       "type": "string",
                                                       "nullable": true,
@@ -5846,6 +5730,12 @@
                                                 },
                                                 "nullable": true,
                                                 "title": "Video"
+                                              },
+                                              "name": {
+                                                "type": "string",
+                                                "nullable": true,
+                                                "description": "The name of the item.",
+                                                "title": "Name"
                                               },
                                               "sameAs": {
                                                 "type": "string",
@@ -5928,12 +5818,6 @@
                                                       "nullable": true,
                                                       "description": "A thumbnail image relevant to the Thing",
                                                       "title": "Thumbnail Url"
-                                                    },
-                                                    "name": {
-                                                      "type": "string",
-                                                      "nullable": true,
-                                                      "description": "The name of the item.",
-                                                      "title": "Name"
                                                     },
                                                     "@id": {
                                                       "type": "string",
@@ -6021,12 +5905,6 @@
                                                             "description": "A thumbnail image relevant to the Thing",
                                                             "title": "Thumbnail Url"
                                                           },
-                                                          "name": {
-                                                            "type": "string",
-                                                            "nullable": true,
-                                                            "description": "The name of the item.",
-                                                            "title": "Name"
-                                                          },
                                                           "@id": {
                                                             "type": "string",
                                                             "nullable": true,
@@ -6080,6 +5958,12 @@
                                                             "nullable": true,
                                                             "title": "Video"
                                                           },
+                                                          "name": {
+                                                            "type": "string",
+                                                            "nullable": true,
+                                                            "description": "The name of the item.",
+                                                            "title": "Name"
+                                                          },
                                                           "sameAs": {
                                                             "type": "string",
                                                             "nullable": true,
@@ -6096,6 +5980,12 @@
                                                       },
                                                       "nullable": true,
                                                       "title": "Video"
+                                                    },
+                                                    "name": {
+                                                      "type": "string",
+                                                      "nullable": true,
+                                                      "description": "The name of the item.",
+                                                      "title": "Name"
                                                     },
                                                     "sameAs": {
                                                       "type": "string",
@@ -6204,12 +6094,6 @@
                         "description": "A thumbnail image relevant to the Thing",
                         "title": "Thumbnail Url"
                       },
-                      "name": {
-                        "type": "string",
-                        "nullable": true,
-                        "description": "The name of the item.",
-                        "title": "Name"
-                      },
                       "@id": {
                         "type": "string",
                         "nullable": true,
@@ -6296,12 +6180,6 @@
                               "description": "A thumbnail image relevant to the Thing",
                               "title": "Thumbnail Url"
                             },
-                            "name": {
-                              "type": "string",
-                              "nullable": true,
-                              "description": "The name of the item.",
-                              "title": "Name"
-                            },
                             "@id": {
                               "type": "string",
                               "nullable": true,
@@ -6355,6 +6233,12 @@
                               "nullable": true,
                               "title": "Video"
                             },
+                            "name": {
+                              "type": "string",
+                              "nullable": true,
+                              "description": "The name of the item.",
+                              "title": "Name"
+                            },
                             "sameAs": {
                               "type": "string",
                               "nullable": true,
@@ -6371,6 +6255,12 @@
                         },
                         "nullable": true,
                         "title": "Video"
+                      },
+                      "name": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "The name of the item.",
+                        "title": "Name"
                       },
                       "sameAs": {
                         "type": "string",
@@ -8727,31 +8617,198 @@
           }
         }
       },
-      "ZGF0ZQ==": {
-        "title": "date",
-        "description": "True from start until end",
-        "icon": "calendar-event",
+      "ZXhwZXJpbWVudA==": {
+        "title": "experiment",
+        "description": "True for the visitors in a test of the saved block experiments",
+        "icon": "flask",
         "type": "object",
         "required": [
-          "__resolveType"
+          "__resolveType",
+          "name"
         ],
         "properties": {
           "__resolveType": {
             "type": "string",
             "enum": [
-              "date"
+              "experiment"
             ],
-            "default": "date"
+            "default": "experiment"
           },
-          "start": {
+          "name": {
             "type": "string",
-            "format": "date-time",
-            "title": "Start"
+            "title": "Test",
+            "description": "A test in the saved block experiments"
+          }
+        }
+      },
+      "Y2FtcGFpZ24=": {
+        "title": "campaign",
+        "description": "True while a campaign of the saved block campaigns is running",
+        "icon": "calendar-event",
+        "type": "object",
+        "required": [
+          "__resolveType",
+          "name"
+        ],
+        "properties": {
+          "__resolveType": {
+            "type": "string",
+            "enum": [
+              "campaign"
+            ],
+            "default": "campaign"
           },
-          "end": {
+          "name": {
             "type": "string",
-            "format": "date-time",
-            "title": "End"
+            "title": "Campaign",
+            "description": "A campaign in the saved block campaigns"
+          }
+        }
+      },
+      "cGFnZQ==": {
+        "title": "page",
+        "description": "A page at a URL",
+        "type": "object",
+        "required": [
+          "__resolveType",
+          "name",
+          "path",
+          "sections"
+        ],
+        "properties": {
+          "__resolveType": {
+            "type": "string",
+            "enum": [
+              "page"
+            ],
+            "default": "page"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "path": {
+            "type": "string",
+            "title": "Path"
+          },
+          "seo": {
+            "title": "SEO",
+            "anyOf": [
+              {
+                "$ref": "#/definitions/Resolvable"
+              },
+              {
+                "$ref": "#/definitions/d2Vic2l0ZS9zZWN0aW9ucy9TZW8vU2VvVjIudHN4"
+              }
+            ],
+            "nullable": true
+          },
+          "sections": {
+            "title": "Sections",
+            "anyOf": [
+              {
+                "type": "array",
+                "title": "Sections",
+                "items": {
+                  "$ref": "#/definitions/__SECTION_REF__"
+                }
+              },
+              {
+                "type": "object",
+                "title": "Variants",
+                "required": [
+                  "__resolveType"
+                ],
+                "properties": {
+                  "__resolveType": {
+                    "type": "string",
+                    "enum": [
+                      "multivariate"
+                    ]
+                  },
+                  "variants": {
+                    "type": "array",
+                    "title": "Variants",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "rule",
+                        "value"
+                      ],
+                      "properties": {
+                        "rule": {
+                          "title": "Rule",
+                          "$ref": "#/root/matchers"
+                        },
+                        "value": {
+                          "type": "object",
+                          "required": [
+                            "__resolveType",
+                            "value"
+                          ],
+                          "properties": {
+                            "__resolveType": {
+                              "type": "string",
+                              "enum": [
+                                "lazy"
+                              ],
+                              "default": "lazy"
+                            },
+                            "value": {
+                              "type": "array",
+                              "title": "Sections",
+                              "items": {
+                                "$ref": "#/definitions/__SECTION_REF__"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "title": "Variants (legacy)",
+                "required": [
+                  "__resolveType"
+                ],
+                "properties": {
+                  "__resolveType": {
+                    "type": "string",
+                    "enum": [
+                      "website/flags/multivariate.ts",
+                      "website/flags/multivariate/section.ts"
+                    ]
+                  },
+                  "variants": {
+                    "type": "array",
+                    "title": "Variants",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "rule",
+                        "value"
+                      ],
+                      "properties": {
+                        "rule": {
+                          "title": "Rule",
+                          "$ref": "#/root/matchers"
+                        },
+                        "value": {
+                          "type": "array",
+                          "title": "Sections",
+                          "items": {
+                            "$ref": "#/definitions/__SECTION_REF__"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
           }
         }
       },
@@ -8804,7 +8861,7 @@
       },
       "Y21zLXNldHRpbmdz": {
         "title": "cms-settings",
-        "description": "Preview hosts, telemetry and analytics: the saved block named CMS",
+        "description": "Telemetry and analytics: the saved block named CMS",
         "icon": "settings",
         "type": "object",
         "required": [
@@ -8817,20 +8874,6 @@
               "cms-settings"
             ],
             "default": "cms-settings"
-          },
-          "preview": {
-            "type": "object",
-            "title": "Preview",
-            "properties": {
-              "hosts": {
-                "type": "array",
-                "title": "Hosts",
-                "description": "Host patterns drafts may be previewed on, such as staging.example.com or *.example.com; empty turns previews off. Without it, every host (or the hosts code allows).",
-                "items": {
-                  "type": "string"
-                }
-              }
-            }
           },
           "telemetry": {
             "type": "object",
@@ -8902,14 +8945,76 @@
           }
         }
       },
+      "c3BsaXQtdHJhZmZpYw==": {
+        "title": "split-traffic",
+        "description": "A/B tests: each name with the percentage of visitors in it (0 off, 100 everyone); resolves to whether the visitor is in each. The type of the saved block experiments",
+        "icon": "flask",
+        "additionalProperties": {
+          "type": "integer",
+          "title": "Visitors in (%)",
+          "description": "0 turns the test off, 100 shows it to everyone",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "type": "object",
+        "required": [
+          "__resolveType"
+        ],
+        "properties": {
+          "__resolveType": {
+            "type": "string",
+            "enum": [
+              "split-traffic"
+            ],
+            "default": "split-traffic"
+          }
+        }
+      },
+      "Y2FsZW5kYXI=": {
+        "title": "calendar",
+        "description": "Campaigns: each name with its start and end; resolves to whether each is running now. The type of the saved block campaigns",
+        "icon": "calendar-event",
+        "additionalProperties": {
+          "type": "object",
+          "title": "Campaign dates",
+          "properties": {
+            "start": {
+              "type": "string",
+              "format": "date-time",
+              "title": "Start",
+              "description": "The campaign runs from this moment on: a date and time with your store's offset (empty: since always)"
+            },
+            "end": {
+              "type": "string",
+              "format": "date-time",
+              "title": "End",
+              "description": "The campaign stops at this moment: a date and time with your store's offset (empty: never)"
+            }
+          }
+        },
+        "type": "object",
+        "required": [
+          "__resolveType"
+        ],
+        "properties": {
+          "__resolveType": {
+            "type": "string",
+            "enum": [
+              "calendar"
+            ],
+            "default": "calendar"
+          }
+        }
+      },
       "d2Vic2l0ZS9wYWdlcy9QYWdlLnRzeA==": {
         "title": "website/pages/Page.tsx",
+        "description": "A page at a URL",
         "type": "object",
         "required": [
           "__resolveType",
-          "sections",
           "name",
-          "path"
+          "path",
+          "sections"
         ],
         "properties": {
           "__resolveType": {
@@ -8919,29 +9024,6 @@
             ],
             "default": "website/pages/Page.tsx"
           },
-          "seo": {
-            "anyOf": [
-              {
-                "$ref": "#/definitions/Resolvable"
-              },
-              {
-                "$ref": "#/definitions/c3JjL21vZGVsLnRz@PageSeo",
-                "title": "Inline data"
-              },
-              {
-                "$ref": "#/definitions/d2Vic2l0ZS9zZWN0aW9ucy9TZW8vU2VvVjIudHN4"
-              }
-            ],
-            "nullable": true,
-            "title": "Seo"
-          },
-          "sections": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/__SECTION_REF__"
-            },
-            "title": "Sections"
-          },
           "name": {
             "type": "string",
             "title": "Name"
@@ -8949,17 +9031,137 @@
           "path": {
             "type": "string",
             "title": "Path"
+          },
+          "seo": {
+            "title": "SEO",
+            "anyOf": [
+              {
+                "$ref": "#/definitions/Resolvable"
+              },
+              {
+                "$ref": "#/definitions/d2Vic2l0ZS9zZWN0aW9ucy9TZW8vU2VvVjIudHN4"
+              }
+            ],
+            "nullable": true
+          },
+          "sections": {
+            "title": "Sections",
+            "anyOf": [
+              {
+                "type": "array",
+                "title": "Sections",
+                "items": {
+                  "$ref": "#/definitions/__SECTION_REF__"
+                }
+              },
+              {
+                "type": "object",
+                "title": "Variants",
+                "required": [
+                  "__resolveType"
+                ],
+                "properties": {
+                  "__resolveType": {
+                    "type": "string",
+                    "enum": [
+                      "multivariate"
+                    ]
+                  },
+                  "variants": {
+                    "type": "array",
+                    "title": "Variants",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "rule",
+                        "value"
+                      ],
+                      "properties": {
+                        "rule": {
+                          "title": "Rule",
+                          "$ref": "#/root/matchers"
+                        },
+                        "value": {
+                          "type": "object",
+                          "required": [
+                            "__resolveType",
+                            "value"
+                          ],
+                          "properties": {
+                            "__resolveType": {
+                              "type": "string",
+                              "enum": [
+                                "lazy"
+                              ],
+                              "default": "lazy"
+                            },
+                            "value": {
+                              "type": "array",
+                              "title": "Sections",
+                              "items": {
+                                "$ref": "#/definitions/__SECTION_REF__"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "title": "Variants (legacy)",
+                "required": [
+                  "__resolveType"
+                ],
+                "properties": {
+                  "__resolveType": {
+                    "type": "string",
+                    "enum": [
+                      "website/flags/multivariate.ts",
+                      "website/flags/multivariate/section.ts"
+                    ]
+                  },
+                  "variants": {
+                    "type": "array",
+                    "title": "Variants",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "rule",
+                        "value"
+                      ],
+                      "properties": {
+                        "rule": {
+                          "title": "Rule",
+                          "$ref": "#/root/matchers"
+                        },
+                        "value": {
+                          "type": "array",
+                          "title": "Sections",
+                          "items": {
+                            "$ref": "#/definitions/__SECTION_REF__"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
           }
         }
       },
       "JGxpdmUvcGFnZXMvTGl2ZVBhZ2UudHN4": {
         "title": "$live/pages/LivePage.tsx",
+        "description": "A page at a URL",
         "type": "object",
         "required": [
           "__resolveType",
-          "sections",
           "name",
-          "path"
+          "path",
+          "sections"
         ],
         "properties": {
           "__resolveType": {
@@ -8969,29 +9171,6 @@
             ],
             "default": "$live/pages/LivePage.tsx"
           },
-          "seo": {
-            "anyOf": [
-              {
-                "$ref": "#/definitions/Resolvable"
-              },
-              {
-                "$ref": "#/definitions/c3JjL21vZGVsLnRz@PageSeo",
-                "title": "Inline data"
-              },
-              {
-                "$ref": "#/definitions/d2Vic2l0ZS9zZWN0aW9ucy9TZW8vU2VvVjIudHN4"
-              }
-            ],
-            "nullable": true,
-            "title": "Seo"
-          },
-          "sections": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/__SECTION_REF__"
-            },
-            "title": "Sections"
-          },
           "name": {
             "type": "string",
             "title": "Name"
@@ -8999,6 +9178,125 @@
           "path": {
             "type": "string",
             "title": "Path"
+          },
+          "seo": {
+            "title": "SEO",
+            "anyOf": [
+              {
+                "$ref": "#/definitions/Resolvable"
+              },
+              {
+                "$ref": "#/definitions/d2Vic2l0ZS9zZWN0aW9ucy9TZW8vU2VvVjIudHN4"
+              }
+            ],
+            "nullable": true
+          },
+          "sections": {
+            "title": "Sections",
+            "anyOf": [
+              {
+                "type": "array",
+                "title": "Sections",
+                "items": {
+                  "$ref": "#/definitions/__SECTION_REF__"
+                }
+              },
+              {
+                "type": "object",
+                "title": "Variants",
+                "required": [
+                  "__resolveType"
+                ],
+                "properties": {
+                  "__resolveType": {
+                    "type": "string",
+                    "enum": [
+                      "multivariate"
+                    ]
+                  },
+                  "variants": {
+                    "type": "array",
+                    "title": "Variants",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "rule",
+                        "value"
+                      ],
+                      "properties": {
+                        "rule": {
+                          "title": "Rule",
+                          "$ref": "#/root/matchers"
+                        },
+                        "value": {
+                          "type": "object",
+                          "required": [
+                            "__resolveType",
+                            "value"
+                          ],
+                          "properties": {
+                            "__resolveType": {
+                              "type": "string",
+                              "enum": [
+                                "lazy"
+                              ],
+                              "default": "lazy"
+                            },
+                            "value": {
+                              "type": "array",
+                              "title": "Sections",
+                              "items": {
+                                "$ref": "#/definitions/__SECTION_REF__"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "title": "Variants (legacy)",
+                "required": [
+                  "__resolveType"
+                ],
+                "properties": {
+                  "__resolveType": {
+                    "type": "string",
+                    "enum": [
+                      "website/flags/multivariate.ts",
+                      "website/flags/multivariate/section.ts"
+                    ]
+                  },
+                  "variants": {
+                    "type": "array",
+                    "title": "Variants",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "rule",
+                        "value"
+                      ],
+                      "properties": {
+                        "rule": {
+                          "title": "Rule",
+                          "$ref": "#/root/matchers"
+                        },
+                        "value": {
+                          "type": "array",
+                          "title": "Sections",
+                          "items": {
+                            "$ref": "#/definitions/__SECTION_REF__"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
           }
         }
       },
@@ -9488,16 +9786,16 @@
             "$ref": "#/definitions/d2Vic2l0ZS9tYXRjaGVycy9kZXZpY2UudHM="
           },
           {
-            "$ref": "#/definitions/d2Vic2l0ZS9tYXRjaGVycy9yYW5kb20udHM="
-          },
-          {
             "$ref": "#/definitions/YWx3YXlz"
           },
           {
             "$ref": "#/definitions/bmV2ZXI="
           },
           {
-            "$ref": "#/definitions/ZGF0ZQ=="
+            "$ref": "#/definitions/ZXhwZXJpbWVudA=="
+          },
+          {
+            "$ref": "#/definitions/Y2FtcGFpZ24="
           }
         ]
       },
@@ -9528,6 +9826,12 @@
           },
           {
             "$ref": "#/definitions/Y21zLXNldHRpbmdz"
+          },
+          {
+            "$ref": "#/definitions/c3BsaXQtdHJhZmZpYw=="
+          },
+          {
+            "$ref": "#/definitions/Y2FsZW5kYXI="
           }
         ]
       }
