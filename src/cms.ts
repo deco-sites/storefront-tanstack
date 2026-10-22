@@ -4,8 +4,8 @@
  *
  * With `DECO_SITE` and `DECO_SITE_TOKEN` set, it serves releases published in the hosted Deco CMS
  * without a deploy (/next/hosted#cloudflare-workers); without them it serves the content module, the
- * content of the commit this build was made from. Drafts need neither: `cms.forDraft` fetches what
- * the draft's branch changed from the Studio the pointer names (/next/hosted-drafts).
+ * content of the commit this build was made from. Drafts need neither: `cms.client({ version })` with a draft pointer
+ * fetches what the draft's branch changed from the Studio the pointer names (/next/hosted-drafts).
  */
 import { createCMS } from "@decocms/blocks";
 import { env } from "cloudflare:workers";
@@ -63,11 +63,11 @@ const options = {
 export const cms = createCMS({ ...options, content });
 
 /**
- * The client for this request: the draft a `?__draft=` link or the draft cookie points at, or the
- * release. On a host outside the `CMS` block's preview hosts the draft is ignored and the request
- * gets the release (/next/releases-and-drafts#allow-previews-per-host).
+ * The client for this request: `cms.client` with what a Studio link asks for (`cms.readVersion`: the
+ * draft or release a `?__draft=` link or the draft cookie points at, with the preview's moment and
+ * switched tests and campaigns), or the release. On a host outside the `CMS` block's preview hosts
+ * the link is ignored and the request gets the release
+ * (/next/releases-and-drafts#allow-previews-per-host).
  */
-export const client = async (request: Request) => {
-  const pointer = await cms.draftPointer(request);
-  return pointer ? cms.forDraft(pointer) : cms.forRelease();
-};
+export const client = async (request: Request) =>
+  cms.client({ ...(await cms.readVersion(request)) });

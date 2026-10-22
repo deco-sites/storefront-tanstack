@@ -146,7 +146,7 @@ async function cacheVersion(env: Env): Promise<string> {
   const build = buildHash(env);
   let revision = "";
   try {
-    revision = await cms.forRelease().revision();
+    revision = await cms.client().revision();
   } catch {
     // The content didn't load: key on the build only.
   }
@@ -222,7 +222,7 @@ function dedupeSetCookies(response: Response): void {
 
 /** A draft preview (`?__draft=` or the draft cookie, read the framework's way): never cached. */
 async function isDraft(request: Request, url: URL): Promise<boolean> {
-  return url.searchParams.has("__draft") || (await cms.draftPointer(request)) !== null;
+  return url.searchParams.has("__draft") || (await cms.readVersion(request)) !== null;
 }
 
 function isServerFn(url: URL): boolean {
