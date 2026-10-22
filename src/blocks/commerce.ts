@@ -29,10 +29,11 @@ const NUMERIC_QUERY_STRING_INPUTS = ["count", "pageOffset"] as const;
  * the page's query-string values for inputs left unset (`page` excepted, numbers for `count` and
  * `pageOffset`), and no URL argument. Without a URL the loader reads `https://localhost`, so a
  * listing that isn't a search names no collection, Shopify rejects the query, the loader resolves to
- * null and the section shows "Not Found!" (what production renders on /shirts). Search differs:
- * production (7.77.1) renders /s?q=shirt with the breadcrumb "Home > shirt", Filters and "12 of 0
- * results" over an empty grid, while this shows "Not Found!"; the product owner approved keeping
- * "Not Found!" on 2026-10-22.
+ * null and the section shows "Not Found!" (as the v7 build of main did in the parity baseline).
+ * Live production (7.77.1) differs on every listing route: /shirts, /stickers, /clearance, search
+ * (/s?q=shirt) and the catch-all show the breadcrumb, Filters and "12 of 0 results" over an empty
+ * grid, while this shows "Not Found!". Asked about search on 2026-10-22, the product owner kept
+ * "Not Found!".
  */
 export const shopifyProductListingPage = (props: ProductListingPageProps) => {
   const search = pageState().url.searchParams;

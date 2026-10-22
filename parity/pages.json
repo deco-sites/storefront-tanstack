@@ -61,7 +61,7 @@
     {
       "id": "listing-match-prod",
       "approval": "product owner, 2026-10-17: \"Match prod now, fix right after\"; product owner, 2026-10-22, on search showing \"Not Found!\" where production does not: \"Keep \\\"Not Found!\\\"\"",
-      "decision": "src/blocks/commerce.ts calls the Shopify listing loader without the page URL, as v7 did, so every listing, search and catch-all page in this PR shows \"Not Found!\". Search does not match production: production (deco 7.77.1, live at /s?q=shirt) shows the breadcrumb \"Home > shirt\", Filters and \"12 of 0 results\" with an empty grid. The product owner approved that difference on 2026-10-22 (\"Keep \\\"Not Found!\\\"\"). A follow-up PR (fix/listing-page-url) passes pageState().url again right after the v8 cutover; that PR's listing pages then differ from this baseline by design.",
+      "decision": "src/blocks/commerce.ts calls the Shopify listing loader without the page URL, as v7 did, so every listing, search and catch-all page in this PR shows \"Not Found!\", as the v7 build of main did in the parity baseline. Live production (deco 7.77.1) does not: on /s?q=shirt it shows the breadcrumb \"Home > shirt\", Filters and \"12 of 0 results\" with an empty grid, and /shirts, /stickers, /clearance and the catch-all show the same empty listing (checked 2026-10-22), not \"Not Found!\". The product owner approved the search difference on 2026-10-22 (\"Keep \\\"Not Found!\\\"\"). A follow-up PR (fix/listing-page-url) passes pageState().url again right after the v8 cutover; that PR's listing pages then differ from this baseline by design.",
       "cases": [
         "plp-shirts",
         "plp-stickers",
