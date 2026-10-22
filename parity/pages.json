@@ -56,12 +56,12 @@
     {"id": "home-mobile-cache", "approval": "Approved by the product owner on 2026-10-03 (v8 parity sign-off): see headers.cache-control above.", "cases": ["home@mobile"], "path": "headers.x-cache-segment", "baseline": "$absent", "actual": "mobile|r=SP"},
     {"id": "home-mobile-cache", "approval": "Approved by the product owner on 2026-10-03 (v8 parity sign-off): see headers.cache-control above.", "cases": ["home@mobile"], "path": "headers.x-cache-version", "baseline": "$absent", "actual": "<build-id>"}
   ],
-  "$approvedDecisionsComment": "Product-owner decisions that keep v8 identical to production on purpose (no field or pixel rule needed, since the pages match). Each cites the product owner's own words and date.",
+  "$approvedDecisionsComment": "Product-owner decisions about behaviour kept on purpose, including approved differences from production that need no field or pixel rule. Each cites the product owner's own words and date.",
   "approvedDecisions": [
     {
       "id": "listing-match-prod",
-      "approval": "product owner, 2026-10-17: \"Match prod now, fix right after\"",
-      "decision": "The migration keeps production's broken listing pages: src/blocks/commerce.ts calls the Shopify listing loader without the page URL, as v7 did, so every listing, search and catch-all page shows \"Not Found!\", identical to production (live at /s?q=shirt). A follow-up PR (fix/listing-page-url) passes pageState().url again right after the v8 cutover; that PR's listing pages then differ from this baseline by design.",
+      "approval": "product owner, 2026-10-17: \"Match prod now, fix right after\"; product owner, 2026-10-22, on search showing \"Not Found!\" where production does not: \"Keep \\\"Not Found!\\\"\"",
+      "decision": "src/blocks/commerce.ts calls the Shopify listing loader without the page URL, as v7 did, so every listing, search and catch-all page in this PR shows \"Not Found!\". Search does not match production: production (deco 7.77.1, live at /s?q=shirt) shows the breadcrumb \"Home > shirt\", Filters and \"12 of 0 results\" with an empty grid. The product owner approved that difference on 2026-10-22 (\"Keep \\\"Not Found!\\\"\"). A follow-up PR (fix/listing-page-url) passes pageState().url again right after the v8 cutover; that PR's listing pages then differ from this baseline by design.",
       "cases": [
         "plp-shirts",
         "plp-stickers",

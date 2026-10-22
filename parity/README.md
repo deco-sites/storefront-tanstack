@@ -91,7 +91,7 @@ Expected, approved differences go through D9/D13. Once approved, they are encode
 
 Both are applied to the baseline and the new capture at compare time, so approving a difference needs no re-record.
 
-`approvedDecisions` records product-owner decisions that keep v8 identical to production on purpose. Today: `listing-match-prod` (product owner, 2026-10-17: "Match prod now, fix right after"). The migration calls the Shopify listing loader without the page URL, as production does, so listing, search and catch-all pages show "Not Found!" on both; the follow-up PR `fix/listing-page-url` passes the page URL again right after the v8 cutover.
+`approvedDecisions` records product-owner decisions about listing behaviour kept on purpose. Today: `listing-match-prod` (product owner, 2026-10-17: "Match prod now, fix right after"). The migration calls the Shopify listing loader without the page URL, as production does, so listing, search and catch-all pages show "Not Found!". Search differs from production: production (deco 7.77.1) shows `/s?q=shirt` with the breadcrumb "Home > shirt", Filters and "12 of 0 results" over an empty grid, while v8 shows "Not Found!". The product owner approved keeping "Not Found!" on 2026-10-22 ("Keep \"Not Found!\""). The follow-up PR `fix/listing-page-url` passes the page URL again right after the v8 cutover.
 
 ## Tailwind and the harness
 
