@@ -32,8 +32,8 @@ const NUMERIC_QUERY_STRING_INPUTS = ["count", "pageOffset"] as const;
  * null and the section shows "Not Found!" (as the v7 build of main did in the parity baseline).
  * Live production (7.77.1) differs on every listing route: /shirts, /stickers, /clearance, search
  * (/s?q=shirt) and the catch-all show the breadcrumb, Filters and "12 of 0 results" over an empty
- * grid, while this shows "Not Found!". Asked about search on 2026-10-22, the product owner kept
- * "Not Found!".
+ * grid, while this shows "Not Found!". On 2026-10-22 the product owner kept "Not Found!" on
+ * search and on every listing and catch-all page.
  */
 export const shopifyProductListingPage = (props: ProductListingPageProps) => {
   const search = pageState().url.searchParams;
