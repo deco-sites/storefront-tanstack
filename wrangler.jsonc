@@ -41,8 +41,12 @@
   // ],
   "kv_namespaces": [
     {
+      // Every site needs its OWN namespace: index:live is one key per namespace,
+      // so sharing one makes a site's content overwrite another's. Control-plane
+      // sites get this filled in at creation; otherwise run
+      // `wrangler kv namespace create deco-kv-<site>` and paste the id here.
       "binding": "DECO_KV",
-      "id": "a205a78ee28c44c3910cf52a3482a65f"
+      "id": "REPLACE_WITH_SITE_KV_NAMESPACE_ID"
     },
     {
       "binding": "SITES_KV",
