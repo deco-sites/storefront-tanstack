@@ -12,7 +12,7 @@ import "./setup";
 import handler, { createServerEntry } from "@tanstack/react-start/server-entry";
 import { createDecoWorkerEntry } from "@decocms/tanstack";
 import { instrumentWorker } from "@decocms/blocks/sdk/otel";
-import { detectDevice } from "@decocms/blocks/sdk/useDevice";
+import { detectDevice } from "@decocms/compat-v7/device";
 import {
   handleMeta,
   handleDecofileRead,

@@ -1,4 +1,4 @@
-import { Suggestion } from "@decocms/apps-commerce/types";
+import { Suggestion } from "@decocms/compat-v7/commerce/types";
 import type { AppContext } from "../../../apps/site";
 import { clx } from "~/sdk/clx";
 import { ComponentProps } from "../../../sections/Component";
@@ -7,6 +7,7 @@ import Icon from "../../ui/Icon";
 import Slider from "../../ui/Slider";
 import { ACTION, NAME } from "./Form";
 import { type Resolved } from "~/types/deco";
+import { unportedInvoke } from "../../../migration-stubs";
 export interface Props {
   /**
    * @title Suggestions Integration
@@ -20,7 +21,7 @@ export const action = async (props: Props, req: Request, ctx: AppContext) => {
   };
   const form = await req.formData();
   const query = `${form.get(NAME ?? "q")}`;
-  const suggestion = await ctx.invoke(__resolveType, {
+  const suggestion = await unportedInvoke(__resolveType, {
     ...loaderProps,
     query,
   }) as Suggestion | null;
@@ -31,7 +32,7 @@ export const loader = async (props: Props, req: Request, ctx: AppContext) => {
     loader: { __resolveType: string } & Record<string, unknown>;
   };
   const query = new URL(req.url).searchParams.get(NAME ?? "q");
-  const suggestion = await ctx.invoke(__resolveType, {
+  const suggestion = await unportedInvoke(__resolveType, {
     ...loaderProps,
     query,
   }) as Suggestion | null;

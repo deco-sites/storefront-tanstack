@@ -1,9 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
 import Icon from "../../components/ui/Icon";
 import Section from "../../components/ui/Section";
-import { invoke } from "../../runtime";
 import type { SubscribeNewsletterResult } from "../../actions/newsletter/subscribe";
 import { clx } from "~/sdk/clx";
+import { $siteActionsNewsletterSubscribe } from "../../server/invoke.functions";
 
 export interface NoticeProps {
   /**
@@ -83,9 +83,9 @@ const DEFAULT_NOTICES = {
 } satisfies Required<NoticeConfig>;
 
 async function subscribeNewsletter(email: string): Promise<void> {
-  const result = (await invoke.site.actions.newsletter.subscribe({
+  const result = (await $siteActionsNewsletterSubscribe({ data: {
     email,
-  })) as SubscribeNewsletterResult | undefined;
+  } })) as SubscribeNewsletterResult | undefined;
   if (!result?.success) {
     throw new Error("Newsletter subscription failed");
   }

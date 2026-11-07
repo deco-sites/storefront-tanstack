@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { formatPrice } from "@decocms/apps-commerce/sdk/formatPrice";
-import { invoke } from "../../runtime";
+import { formatPrice } from "@decocms/compat-v7/commerce/sdk/formatPrice";
 import type {
   ShippingMethod,
   ShippingSimulation,
 } from "../../actions/shipping/simulate";
+import { $siteActionsShippingSimulate } from "../../server/invoke.functions";
 
 export interface PostalCodeFormat {
   /** Mask digits for display (e.g. "12345-678"). Default: identity. */
@@ -106,7 +106,7 @@ export default function ShippingSimulator(
     { postalCode: string }
   >({
     mutationFn: (input) =>
-      invoke.site.actions.shipping.simulate(input) as Promise<
+      $siteActionsShippingSimulate({ data: input }) as Promise<
         ShippingSimulation
       >,
   });

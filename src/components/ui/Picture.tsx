@@ -1,9 +1,5 @@
-import {
-  Image,
-  getSrcSet,
-  type FitOptions,
-  type ImageProps,
-} from "@decocms/blocks/hooks";
+import { Image, type ImageProps } from "@decocms/tanstack/react";
+import { getSrcSet, type FitOptions } from "@decocms/blocks/hooks";
 
 export interface PictureSourceProps {
   src: string;

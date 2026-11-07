@@ -1,5 +1,5 @@
 import { userLoader as shopifyUserLoader } from "@decocms/apps-shopify";
-import type { Person } from "@decocms/apps-commerce/types";
+import type { Person } from "@decocms/compat-v7/commerce/types";
 
 async function loader(
   _props?: unknown,

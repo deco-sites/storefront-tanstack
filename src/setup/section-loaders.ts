@@ -5,14 +5,9 @@
  * Complex loaders delegate to the section's own loader export.
  * Account sections use vtexAccountLoaders from @decocms/apps.
  */
-import {
-  registerSectionLoaders,
-  withDevice,
-  withMobile,
-  withSearchParam,
-  compose,
-} from "@decocms/blocks/cms";
+import { withDevice, withMobile, withSearchParam, compose } from "@decocms/compat-v7/sections";
 import { createCachedLoader } from "@decocms/blocks/sdk/cachedLoader";
+import type { RunSectionLoadersOptions } from "@decocms/compat-v7/sections";
 
 // Instagram's loader hits the Graph API (graph.instagram.com) on every request.
 // The feed changes slowly, so cache it with SWR (the "static" profile: ~5min
@@ -29,7 +24,7 @@ const cachedInstagramLoader = createCachedLoader(
   "static",
 );
 
-registerSectionLoaders({
+export const sectionLoaders: RunSectionLoadersOptions["loaders"] = {
   "site/sections/Newsletter/Newsletter.tsx": async (props: any, req: Request) => {
     const mod: any = await import("~/sections/Newsletter/Newsletter");
     return typeof mod.loader === "function" ? mod.loader(props, req) : props;
@@ -42,4 +37,4 @@ registerSectionLoaders({
     const mod: any = await import("~/sections/Product/SearchResult");
     return typeof mod.loader === "function" ? mod.loader(props, req) : props;
   },
-});
+};

@@ -25,7 +25,9 @@
     "clean": "rm -rf node_modules .cache dist .wrangler/state node_modules/.vite && npm install",
     "tailwind:lint": "tsx scripts/tailwind-lint.ts",
     "tailwind:fix": "tsx scripts/tailwind-lint.ts --fix",
-    "update": "bunx npm-check-updates -u -f '@decocms/*' && bun install"
+    "update": "bunx npm-check-updates -u -f '@decocms/*' && bun install",
+    "predev": "deco schema && deco content",
+    "prebuild": "deco schema && deco content && deco check"
   },
   "author": "deco.cx",
   "license": "MIT",

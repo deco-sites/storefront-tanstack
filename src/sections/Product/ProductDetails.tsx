@@ -1,4 +1,4 @@
-import type { ProductDetailsPage } from "@decocms/apps-commerce/types";
+import type { ProductDetailsPage } from "@decocms/compat-v7/commerce/types";
 import {
   BreadcrumbJsonLd,
   ProductJsonLd,

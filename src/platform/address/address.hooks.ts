@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { invoke } from "../../runtime";
 import type { AddressInput } from "../../actions/address/submit";
 import { type AddressBookState, EMPTY_ADDRESS_BOOK } from "./address.types";
+import { $siteActionsAddressSubmit, $siteLoadersAddress } from "../../server/invoke.functions";
 
 export const ADDRESS_QUERY_KEY = ["addresses"] as const;
 
@@ -9,7 +9,7 @@ export function useAddresses() {
   const query = useQuery({
     queryKey: ADDRESS_QUERY_KEY,
     queryFn: (): Promise<AddressBookState> =>
-      invoke.site.loaders.address() as Promise<AddressBookState>,
+      $siteLoadersAddress() as Promise<AddressBookState>,
     staleTime: 60_000,
     placeholderData: EMPTY_ADDRESS_BOOK,
   });
@@ -29,7 +29,7 @@ function useAddressMutation<TInput>(
   const qc = useQueryClient();
   return useMutation({
     mutationFn: (input: TInput): Promise<AddressBookState> =>
-      invoke.site.actions.address.submit(toOp(input)) as Promise<
+      $siteActionsAddressSubmit({ data: toOp(input) }) as Promise<
         AddressBookState
       >,
     onSuccess: (state) => qc.setQueryData(ADDRESS_QUERY_KEY, state),

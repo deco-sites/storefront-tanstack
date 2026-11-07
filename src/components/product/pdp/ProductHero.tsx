@@ -1,6 +1,6 @@
-import type { ProductDetailsPage } from "@decocms/apps-commerce/types";
-import { useOffer } from "@decocms/apps-commerce/sdk/useOffer";
-import { mapProductToAnalyticsItem } from "@decocms/apps-commerce/utils/productToAnalyticsItem";
+import type { ProductDetailsPage } from "@decocms/compat-v7/commerce/types";
+import { useOffer } from "@decocms/compat-v7/commerce/sdk/useOffer";
+import { mapProductToAnalyticsItem } from "@decocms/compat-v7/commerce/utils/productToAnalyticsItem";
 import { useState } from "react";
 import { useRouterState } from "@tanstack/react-router";
 import { relative } from "../../../sdk/url";

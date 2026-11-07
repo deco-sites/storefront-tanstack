@@ -1,4 +1,4 @@
-import type { SiteNavigationElement } from "@decocms/apps-commerce/types";
+import type { SiteNavigationElement } from "@decocms/compat-v7/commerce/types";
 import Image from "~/components/ui/Image";
 import {
   HEADER_HEIGHT_DESKTOP,
