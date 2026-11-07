@@ -2,7 +2,32 @@
 
 A [deco.cx](https://deco.cx) storefront built on **TanStack Start + React 19 + Cloudflare Workers**, with Shopify as the commerce backend.
 
-This is a **site repo** — it consumes the [`@decocms/start`](https://www.npmjs.com/package/@decocms/start) framework (CMS bridge, admin protocol, worker entry, edge caching) and [`@decocms/apps`](https://www.npmjs.com/package/@decocms/apps) (commerce loaders/actions). UI, sections, and routes live here.
+This is a **site repo** on Blocks v8: [`@decocms/tanstack`](https://www.npmjs.com/package/@decocms/tanstack) (worker entry, edge caching, CSP, document, images) and [`@decocms/blocks`](https://www.npmjs.com/package/@decocms/blocks) (the CMS). The content is **hosted**: the worker reads the site's latest release from the delivery CDN (`delivery.decocms.com`) at runtime, so publishing in the editor doesn't need a deploy. `.deco/index.ts` is the block map; `.deco/blocks/` is the content as it was migrated from v7 (the `deco check` input, and what the spike publishes). UI, sections, and routes live here.
+
+## Blocks v8 and the hosted CMS
+
+| | |
+|---|---|
+| Site | `DECO_SITE` var in `wrangler.jsonc` (the CMS site the content is read from) |
+| Token | `DECO_SITE_TOKEN` secret (optional; drafts, previews and hosted telemetry) |
+| Schema | `.deco/schema.gen.json`, written by `deco schema` (runs before `dev` and `build`); CI runs `deco schema --check` |
+| Content check | `deco check` (runs before `build`): every saved block of the site's latest release must fit the code's schema |
+| CSP | `csp` in `src/worker-entry.ts`: v7's report-only list, plus the binding's `frame-ancestors` |
+| A/B against a legacy origin | `abTestingRoutes` in `src/worker-entry.ts`, reading `SITES_KV` |
+
+### Spike: content on the spikes CDN prefix
+
+This branch is a **spike, not for merge**. `DECO_SITE` is `cas-sites-storefront-tanstack`, a site published only under the delivery CDN's `spikes/` prefix, and `src/cas-spike.ts` (imported first by the worker entry) points the CMS at that prefix when the `CAS_DELIVERY_ORIGIN` var is set. Without the var it does nothing.
+
+```sh
+bun install
+# deco check reads the spike release through the test-only DECO_DELIVERY_URL
+DECO_DELIVERY_URL=https://delivery.decocms.com/spikes/cas-sites/storefront-tanstack/v1 bun run build
+npx wrangler dev -c dist/server/wrangler.json --local --port 8812 \
+  --var CAS_DELIVERY_ORIGIN:https://delivery.decocms.com/spikes/cas-sites/storefront-tanstack/v1
+```
+
+To ship it: drop `src/cas-spike.ts` and its import, set `DECO_SITE` to the real site, and publish the content there.
 
 ## Stack
 
@@ -116,14 +141,13 @@ Open `http://localhost:5173`.
 |---|---|
 | `npm run dev` | Start Vite dev server |
 | `npm run dev:clean` | Wipe Vite/Wrangler/TanStack caches and start fresh |
-| `npm run build` | Generate blocks/schema/sections/loaders/routes, then `vite build` |
+| `npm run build` | `deco schema` and `deco check` (prebuild), then `tsr generate` and `vite build` |
 | `npm run preview` | Preview the production build locally |
 | `npm run deploy` | `npm run build` then `wrangler deploy` |
 | `npm run typecheck` | `tsc --noEmit` |
 | `npm run format` / `format:check` | Prettier on `src/**/*.{ts,tsx}` |
 | `npm run knip` / `knip:fix` | Find / auto-fix unused exports and files |
 | `npm run tailwind:lint` / `tailwind:fix` | Lint/auto-fix Tailwind class usage |
-| `npm run generate:*` | Re-run a single codegen step (blocks, schema, sections, loaders, routes, invoke) |
 
 ## Project layout
 
