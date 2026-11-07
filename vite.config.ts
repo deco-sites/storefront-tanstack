@@ -1,6 +1,6 @@
 import { cloudflare } from "@cloudflare/vite-plugin";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
-import { decoVitePlugin } from "@decocms/tanstack/vite";
+import { decoTanstack } from "@decocms/tanstack/vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite";
@@ -26,7 +26,8 @@ export default defineConfig({
       },
     }),
     tailwindcss(),
-    decoVitePlugin(),
+    // decoContent(), __BUILD_HASH__ (the CI's commit, else git's) and one copy of React and TanStack.
+    decoTanstack({ buildHash: process.env.WORKERS_CI_COMMIT_SHA }),
     {
       name: "site-manual-chunks",
       config(_cfg, { command }) {
@@ -48,20 +49,6 @@ export default defineConfig({
         };
       },
     },
-    {
-      name: "deco-stub-meta-gen",
-      enforce: "pre" as const,
-      resolveId(id, importer, options) {
-        if (!options?.ssr && importer && id.includes("meta.gen")) {
-          return "\0stub:meta-gen";
-        }
-      },
-      load(id) {
-        if (id === "\0stub:meta-gen") {
-          return "export default {};";
-        }
-      },
-    },
   ],
   build: {
     sourcemap: "hidden",
@@ -77,11 +64,6 @@ export default defineConfig({
         handler(level, log);
       },
     },
-  },
-  define: {
-    "process.env.DECO_SITE_NAME": JSON.stringify(
-      process.env.DECO_SITE_NAME || "storefront-tanstack"
-    ),
   },
   esbuild: {
     jsx: "automatic",

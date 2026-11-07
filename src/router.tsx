@@ -1,8 +1,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createDecoRouter } from "@decocms/tanstack/router";
-import { routeTree } from "./routeTree.gen";
-import "./setup";
 import { ImageUrlProvider } from "@decocms/tanstack/react";
+import { routeTree } from "./routeTree.gen";
 import { imageUrl } from "./imageUrl";
 
 export function getRouter() {
@@ -16,7 +15,9 @@ export function getRouter() {
     context: { queryClient },
     defaultPreload: "intent",
     Wrap: ({ children }) => (
-      <QueryClientProvider client={queryClient}><ImageUrlProvider value={imageUrl}>{children}</ImageUrlProvider></QueryClientProvider>
+      <QueryClientProvider client={queryClient}>
+        <ImageUrlProvider value={imageUrl}>{children}</ImageUrlProvider>
+      </QueryClientProvider>
     ),
   });
 }
