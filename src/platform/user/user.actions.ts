@@ -5,12 +5,10 @@ import {
   getRequestProtocol,
   setCookie,
 } from "@tanstack/react-start/server";
-import {
-  getShopifyClient,
-  signIn as shopifySignIn,
-  signUp as shopifySignUp,
-  userLoader as shopifyUserLoader,
-} from "@decocms/apps-shopify";
+import { getShopifyClient } from "../../vendor/shopify/client";
+import shopifySignIn from "../../vendor/shopify/actions/user/signIn";
+import shopifySignUp from "../../vendor/shopify/actions/user/signUp";
+import shopifyUserLoader from "../../vendor/shopify/loaders/user";
 import type { Person } from "./user.types";
 
 const CUSTOMER_COOKIE = "secure_customer_sig";

@@ -1,7 +1,8 @@
 import { createRootRouteWithContext } from "@tanstack/react-router";
 import type { QueryClient } from "@tanstack/react-query";
-import { DecoRootLayout } from "@decocms/tanstack";
-import OneDollarStats from "@decocms/apps-website/components/OneDollarStats";
+import { AnalyticsScript } from "@decocms/blocks/analytics";
+import { DecoDocument } from "@decocms/tanstack/react";
+import { loadLayout } from "../layout.functions";
 import { CART_QUERY_KEY, getCartServerFn } from "../platform/cart";
 import { getUserServerFn, USER_QUERY_KEY } from "../platform/user";
 import MinicartDrawer from "../components/minicart/MinicartDrawer";
@@ -33,6 +34,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     }
     await Promise.all(tasks);
   },
+  // v7's OneDollarStats, now the `analytics` section of the CMS settings (/next/analytics).
+  loader: () => loadLayout(),
+  staleTime: Number.POSITIVE_INFINITY,
   head: ({ matches }) => ({
     meta: [
       { charSet: "utf-8" },
@@ -74,10 +78,11 @@ function canonicalFallback(
 }
 
 function RootLayout() {
+  const { analytics } = Route.useLoaderData();
   return (
-    <DecoRootLayout lang="en" siteName="storefront-tanstack">
-      <OneDollarStats />
+    <DecoDocument site="storefront-tanstack" lang="en">
+      <AnalyticsScript {...analytics} />
       <MinicartDrawer />
-    </DecoRootLayout>
+    </DecoDocument>
   );
 }

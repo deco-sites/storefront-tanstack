@@ -1,9 +1,5 @@
-import { RequestContext } from "@decocms/blocks/sdk/requestContext";
 import { usePlatform } from "../../apps/site";
-import {
-  EMPTY_WISHLIST,
-  type WishlistState,
-} from "../../platform/wishlist";
+import { type WishlistState } from "../../platform/wishlist";
 import {
   readWishlistCookie,
   serializeWishlistCookie,
@@ -14,13 +10,15 @@ interface Props {
   productGroupID: string;
 }
 
+// v7 read the request and set cookies through RequestContext; v8 has none, so the server function
+// (src/server/invoke.functions.ts) passes both.
 async function action(
   props: Props,
-  req?: Request,
+  request: Request,
+  responseHeaders: Headers,
 ): Promise<WishlistState> {
   if (!props?.productID) throw new Error("productID is required");
 
-  const request = req ?? RequestContext.current?.request;
   const platform = usePlatform();
 
   if (platform === "vtex") {
@@ -39,14 +37,14 @@ async function action(
   }
 
   // Default: cookie-backed so the demo persists per-browser without a backend.
-  const current = request ? readWishlistCookie(request) : EMPTY_WISHLIST;
+  const current = readWishlistCookie(request);
   const next: WishlistState = current.productIDs.includes(props.productID)
     ? {
       productIDs: current.productIDs.filter((id) => id !== props.productID),
     }
     : { productIDs: [...current.productIDs, props.productID] };
 
-  RequestContext.responseHeaders.append(
+  responseHeaders.append(
     "Set-Cookie",
     serializeWishlistCookie(next),
   );

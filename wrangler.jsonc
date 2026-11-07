@@ -24,73 +24,28 @@
   "tail_consumers": [
     { "service": "deco-otel-tail" }
   ],
-  // Worker version (build SHA / deployment id) — surfaced as
-  // `service.version` on every span / log line by `instrumentWorker`.
+  // Worker version (build SHA / deployment id) — sent as `service.version` with the
+  // CMS's telemetry (src/cms.ts).
   "version_metadata": {
     "binding": "CF_VERSION_METADATA"
   },
-  // Cloudflare Analytics Engine dataset for high-cardinality counters
-  // (per-route request counts, cache hit/miss, request duration).
-  // Queryable via SQL from the CF dashboard. Replace YOUR_SITE_NAME with
-  // the actual site slug (must match DECO_SITE_NAME below).
-  // "analytics_engine_datasets": [
-  //   {
-  //     "binding": "DECO_METRICS",
-  //     "dataset": "deco_metrics_YOUR_SITE_NAME"
-  //   }
-  // ],
+  // SITES_KV: the A/B split against a legacy origin (src/worker-entry.ts, abTestingRoutes).
+  // v7's DECO_KV (fast deploy) is gone: content is hosted on the delivery CDN.
   "kv_namespaces": [
-    {
-      "binding": "DECO_KV",
-      "id": "a205a78ee28c44c3910cf52a3482a65f"
-    },
     {
       "binding": "SITES_KV",
       "id": "ad0b74fc4d9341c9af9149c4ab85132f"
     }
   ],
-  // Observability — three-channel model (Strategy B, see decocms/deco-start D-8).
-  //
-  // Identity:
-  //   `DECO_SITE_NAME` drives `service.name` on every span and log line.
-  //   `DECO_ENV_NAME`  drives `deployment.environment`.
-  //
-  // Three channels, each owning a different slice of the observability cube:
-  //
-  //   1. CF Destinations (`observability.{logs,traces}.destinations` below)
-  //      Sampled 1% logs + 1% traces. Bulk volume.
-  //   2. Direct-POST in-worker (`DECO_OTEL_*_ENDPOINT`, resolved at
-  //      `instrumentWorker` boot)
-  //        - METRICS_ENDPOINT → direct POST `/v1/metrics` (CF Destinations
-  //          doesn't support OTLP metrics). Buffered per-isolate, flushed
-  //          via `ctx.waitUntil` after every request.
-  //        - LOGS_ENDPOINT    → direct POST `/v1/logs` for framework
-  //          `logger.error(...)` only (100% capture, rate-limited).
-  //   3. Tail Worker (`tail_consumers` above → deco-otel-tail)
-  //      Catches uncaught throws, exceededCpu/Memory, raw console.error —
-  //      what direct-POST can't see and CF Destinations would sample away.
-  //
-  // Coverage matrix:
-  //   framework logger.error          → direct-POST       (100%, rate-limited)
-  //   framework span errors           → CF Destinations + tail (1% sampled + 100%)
-  //   uncaught throws                 → tail worker       (100%)
-  //   exceededCpu / exceededMemory    → tail worker       (100%)
-  //   raw console.error               → tail worker       (100%)
-  //   console.log / console.warn      → CF Destinations   (1% sampled)
-  //   OTel spans                      → CF Destinations   (1% sampled)
-  //   OTel metrics                    → direct-POST       (100%, buffered)
+  // Telemetry: the CMS's own (src/cms.ts). With the DECO_SITE_TOKEN secret it goes to the hosted
+  // collector; else, with the DECO_OTEL_AUTH_TOKEN secret, to v7's OTLP collector
+  // (otel-ingest.infra.deco.cx); else nowhere. The tail worker above still catches uncaught errors.
   "vars": {
     "DECO_SITE_NAME": "storefront-tanstack",
     "DECO_ENV_NAME": "production",
-    // Fast Deploy opt-in. Requires BOTH this flag AND the DECO_KV binding
-    // above; inert if either is missing. Set to "0" to disable.
-    "DECO_FAST_DEPLOY": "1",
-    "DECO_OTEL_METRICS_ENDPOINT": "https://otel-ingest.infra.deco.cx/v1/metrics",
-    "DECO_OTEL_LOGS_ENDPOINT": "https://otel-ingest.infra.deco.cx/v1/logs",
-    "DECO_OTEL_TRACES_ENDPOINT": "https://otel-ingest.infra.deco.cx/v1/traces",
-    "DECO_OTEL_ERROR_PROMOTION": "true",
-    "DECO_OTEL_ERROR_PROMOTION_RATE": "0.1",
-    "DECO_OTEL_LOGS_MIN_LEVEL": "debug"
-    // DECO_OTEL_AUTH_TOKEN goes as a secret: wrangler secret put DECO_OTEL_AUTH_TOKEN
+    // The hosted CMS site the content is read from (src/cms.ts): its latest release on
+    // delivery.decocms.com. SPIKE: the spike's own site, published under spikes/ (README, "Spike").
+    "DECO_SITE": "cas-sites-storefront-tanstack"
+    // DECO_SITE_TOKEN goes as a secret: wrangler secret put DECO_SITE_TOKEN
   }
 }

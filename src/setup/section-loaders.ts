@@ -3,43 +3,29 @@
  *
  * Simple patterns (device, mobile) use framework mixins.
  * Complex loaders delegate to the section's own loader export.
- * Account sections use vtexAccountLoaders from @decocms/apps.
  */
-import {
-  registerSectionLoaders,
-  withDevice,
-  withMobile,
-  withSearchParam,
-  compose,
-} from "@decocms/blocks/cms";
-import { createCachedLoader } from "@decocms/blocks/sdk/cachedLoader";
+import { withDevice, withMobile, withSearchParam, compose } from "@decocms/compat-v7/sections";
+import type { RunSectionLoadersOptions } from "@decocms/compat-v7/sections";
 
-// Instagram's loader hits the Graph API (graph.instagram.com) on every request.
-// The feed changes slowly, so cache it with SWR (the "static" profile: ~5min
-// fresh, served-if-error window) — keyed by props (token/nposts), not the URL.
-// This avoids calling Instagram per page view. (Route + edge caching for
-// pages is already provided by cmsRouteConfig's routeCacheDefaults and the
-// worker's detectCacheProfile.)
-const cachedInstagramLoader = createCachedLoader(
-  "instagram-posts",
-  async (props: any) => {
-    const mod: any = await import("~/sections/Social/InstagramPosts");
-    return typeof mod.loader === "function" ? mod.loader(props) : props;
-  },
-  "static",
-);
+// v7 cached Instagram's loader in memory (createCachedLoader, the "static" profile), which v8
+// doesn't have (/next/caching#upstream-data: an upstream cache is the site's own fetch). No saved
+// page renders InstagramPosts today, so its loader runs uncached; give its fetch a cache before
+// putting the section on a page.
+const instagramLoader = async (props: any) => {
+  const mod: any = await import("~/sections/Social/InstagramPosts");
+  return typeof mod.loader === "function" ? mod.loader(props) : props;
+};
 
-registerSectionLoaders({
+export const sectionLoaders: RunSectionLoadersOptions["loaders"] = {
   "site/sections/Newsletter/Newsletter.tsx": async (props: any, req: Request) => {
     const mod: any = await import("~/sections/Newsletter/Newsletter");
     return typeof mod.loader === "function" ? mod.loader(props, req) : props;
   },
-  "site/sections/Social/InstagramPosts.tsx": (props: any) =>
-    cachedInstagramLoader(props),
+  "site/sections/Social/InstagramPosts.tsx": instagramLoader,
   // SearchResult needs the request URL to rebase filter/sort/pagination links
   // (commerce loaders return URLs with the wrong origin/pathname).
   "site/sections/Product/SearchResult.tsx": async (props: any, req: Request) => {
     const mod: any = await import("~/sections/Product/SearchResult");
     return typeof mod.loader === "function" ? mod.loader(props, req) : props;
   },
-});
+};

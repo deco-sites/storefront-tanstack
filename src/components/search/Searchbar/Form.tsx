@@ -4,15 +4,15 @@
  * /deco/invoke and rendered below the input.
  */
 import { useEffect, useRef, useState } from "react";
-import type { Product, Suggestion } from "@decocms/apps-commerce/types";
+import type { Product, Suggestion } from "@decocms/compat-v7/commerce/types";
 import {
   SEARCHBAR_INPUT_FORM_ID,
   SEARCHBAR_POPUP_ID,
 } from "../../../constants";
-import { invoke } from "../../../runtime";
 import Icon from "../../ui/Icon";
 import Suggestions from "./Suggestions";
 import { type Resolved } from "~/types/deco";
+import { $shopifyLoadersProductList } from "../../../server/invoke.functions";
 
 // When user clicks on the search button, navigate it to
 export const ACTION = "/s";
@@ -38,9 +38,9 @@ const SUGGESTIONS_DELAY_MS = 300;
 const fixUrl = (url?: string) => url?.replace(/^.*?(?=\/products\/)/, "");
 
 const fetchSuggestion = async (query: string): Promise<Suggestion> => {
-  const products = (await invoke.shopify.loaders.ProductList({
+  const products = (await $shopifyLoadersProductList({ data: {
     props: { query, count: SUGGESTIONS_COUNT },
-  })) as Product[] | null;
+  } })) as Product[] | null;
   return {
     searches: [],
     products: (products ?? []).map((product) => ({

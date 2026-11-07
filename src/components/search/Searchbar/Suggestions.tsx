@@ -1,7 +1,5 @@
-import { Suggestion } from "@decocms/apps-commerce/types";
-import type { AppContext } from "../../../apps/site";
+import { Suggestion } from "@decocms/compat-v7/commerce/types";
 import { clx } from "~/sdk/clx";
-import { ComponentProps } from "../../../sections/Component";
 import ProductCard from "../../product/card/ProductCard";
 import Icon from "../../ui/Icon";
 import Slider from "../../ui/Slider";
@@ -14,31 +12,10 @@ export interface Props {
    */
   loader: Resolved<Suggestion | null>;
 }
-export const action = async (props: Props, req: Request, ctx: AppContext) => {
-  const { loader: { __resolveType, ...loaderProps } } = props as unknown as {
-    loader: { __resolveType: string } & Record<string, unknown>;
-  };
-  const form = await req.formData();
-  const query = `${form.get(NAME ?? "q")}`;
-  const suggestion = await ctx.invoke(__resolveType, {
-    ...loaderProps,
-    query,
-  }) as Suggestion | null;
-  return { suggestion };
-};
-export const loader = async (props: Props, req: Request, ctx: AppContext) => {
-  const { loader: { __resolveType, ...loaderProps } } = props as unknown as {
-    loader: { __resolveType: string } & Record<string, unknown>;
-  };
-  const query = new URL(req.url).searchParams.get(NAME ?? "q");
-  const suggestion = await ctx.invoke(__resolveType, {
-    ...loaderProps,
-    query,
-  }) as Suggestion | null;
-  return { suggestion };
-};
+// v7's loader and action here were never called (this is a component, not a section, and v7's
+// /deco/invoke never listed them): the search box (./Form.tsx) fetches the suggestions itself.
 function Suggestions(
-  { suggestion }: ComponentProps<typeof loader, typeof action>,
+  { suggestion }: { suggestion: Suggestion | null },
 ) {
   const { products, searches = [] } = suggestion ?? {};
   if (!products) return null;

@@ -3,8 +3,8 @@ import type { KnipConfig } from "knip";
 const config: KnipConfig = {
   entry: [
     "src/routes/**/*.{ts,tsx}",
-    "src/setup.ts",
-    "src/runtime.ts",
+    "src/worker-entry.ts",
+    ".deco/index.ts",
     "src/sections/**/*.{ts,tsx}",
     "vite.config.ts",
   ],

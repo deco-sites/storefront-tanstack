@@ -1,11 +1,11 @@
-import type { ProductListingPage } from "@decocms/apps-commerce/types";
+import type { ProductListingPage } from "@decocms/compat-v7/commerce/types";
 import {
   BreadcrumbJsonLd,
   PLPJsonLd,
-} from "@decocms/blocks/hooks";
-import { mapProductToAnalyticsItem } from "@decocms/apps-commerce/utils/productToAnalyticsItem";
+} from "~/vendor/blocks/JsonLd";
+import { mapProductToAnalyticsItem } from "@decocms/compat-v7/commerce/utils/productToAnalyticsItem";
 import { useId } from "react";
-import { useOffer } from "@decocms/apps-commerce/sdk/useOffer";
+import { useOffer } from "@decocms/compat-v7/commerce/sdk/useOffer";
 import { useRouterState } from "@tanstack/react-router";
 import { useSendEvent } from "../../sdk/useSendEvent";
 import { type SectionProps } from "~/types/deco";

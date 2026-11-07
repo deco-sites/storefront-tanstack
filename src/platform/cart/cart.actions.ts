@@ -1,6 +1,8 @@
 import { createServerFn } from "@tanstack/react-start";
 import { getRequest, getResponse } from "@tanstack/react-start/server";
-import { addItems, getCart, updateItems } from "@decocms/apps-shopify";
+import addItems from "../../vendor/shopify/actions/cart/addItems";
+import updateItems from "../../vendor/shopify/actions/cart/updateItems";
+import { getCart } from "../../vendor/shopify/loaders/cart";
 import { shopifyCartToCartState } from "./cart.shopify";
 import type { CartState } from "./cart.types";
 

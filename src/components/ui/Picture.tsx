@@ -1,9 +1,7 @@
-import {
-  Image,
-  getSrcSet,
-  type FitOptions,
-  type ImageProps,
-} from "@decocms/blocks/hooks";
+import { type Fit, srcSet } from "@decocms/blocks/image";
+import { Image, type ImageProps, useImageUrl } from "@decocms/tanstack/react";
+
+type FitOptions = Fit;
 
 export interface PictureSourceProps {
   src: string;
@@ -29,6 +27,7 @@ export function Picture({
   children,
   ...rest
 }: PictureProps) {
+  const imageUrl = useImageUrl();
   if (children) {
     // Legacy API: callers compose `<Source/>` + `<img/>` as children.
     return <picture {...rest}>{children}</picture>;
@@ -36,11 +35,15 @@ export function Picture({
   return (
     <picture>
       {sources?.map((source, i) => {
-        const srcSet = getSrcSet(source.src, source.width, source.height, source.fit ?? fit);
+        const sourceSet = srcSet(imageUrl, source.src, {
+          width: source.width,
+          height: source.height,
+          fit: source.fit ?? fit,
+        });
         return (
           <source
             key={i}
-            srcSet={srcSet}
+            srcSet={sourceSet}
             media={source.media}
             width={source.width}
             height={source.height}
@@ -77,10 +80,10 @@ export function Source({
   sizes,
   fetchPriority,
 }: SourceProps) {
-  const srcSet = getSrcSet(src, width, height, fit);
+  const sourceSet = srcSet(useImageUrl(), src, { width, height, fit });
   return (
     <source
-      srcSet={srcSet}
+      srcSet={sourceSet}
       media={media}
       width={width}
       height={height}

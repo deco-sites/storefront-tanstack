@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import type { AnalyticsItem, Product } from "@decocms/apps-commerce/types";
+import type { AnalyticsItem, Product } from "@decocms/compat-v7/commerce/types";
 import { clx } from "~/sdk/clx";
 import { useAddToCart } from "../../../platform/cart";
 import { useSendEvent } from "../../../sdk/useSendEvent";

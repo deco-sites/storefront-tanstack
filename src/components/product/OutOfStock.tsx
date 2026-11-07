@@ -1,8 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
-import type { Product } from "@decocms/apps-commerce/types";
-import { invoke } from "../../runtime";
+import type { Product } from "@decocms/compat-v7/commerce/types";
 import { useUser } from "../../platform/user";
 import type { NotifyMeResult } from "../../actions/notifyMe/subscribe";
+import { $siteActionsNotifyMeSubscribe } from "../../server/invoke.functions";
 
 export interface Props {
   productID: Product["productID"];
@@ -12,11 +12,11 @@ export default function OutOfStock({ productID }: Props) {
   const { user } = useUser();
   const notify = useMutation({
     mutationFn: async (input: { email: string; name?: string }) => {
-      const result = (await invoke.site.actions.notifyMe.subscribe({
+      const result = (await $siteActionsNotifyMeSubscribe({ data: {
         skuId: productID,
         email: input.email,
         name: input.name,
-      })) as NotifyMeResult | undefined;
+      } })) as NotifyMeResult | undefined;
       if (!result?.success) throw new Error("Notify request failed");
       return result;
     },
