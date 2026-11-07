@@ -10,6 +10,7 @@ import { notFound, redirect } from "@tanstack/react-router";
 import { setResponseHeader } from "@tanstack/react-start/server";
 import { type BlockDescriptor, loadSections, matchPage, type PageSeo } from "../.deco";
 import { client } from "./cms";
+import { setPageContext } from "./page-context.server";
 
 /** A page as saved: its sections and SEO are still blocks. */
 interface StoredPage extends Route {
@@ -84,6 +85,8 @@ export async function openPage(href: string, request: Request) {
   const moved = matchRoute(url, { routes: [], redirects });
   if (moved.kind === "redirect") throw redirect({ href: moved.location, statusCode: moved.status });
   if (match.kind !== "match") throw notFound();
+  // The page's URL and route params, for the blocks that read them (src/page-context.server.ts).
+  setPageContext(request, { url, params: match.params });
 
   const [page, pageError] = await c.resolve<StoredPage>(match.entry.name, { run: false });
   if (pageError) throw pageError;
@@ -104,5 +107,12 @@ export async function openPage(href: string, request: Request) {
   // A section whose loader failed kept its saved props: v7 sent this header, and the worker never
   // caches the page.
   if (degraded.length > 0) setResponseHeader(DEGRADED_HEADER, "1");
-  return { name: page.name, seo: seoFields(seo), sections, device: requestDevice(request) };
+  return {
+    name: page.name,
+    // The page Studio's "." shortcut opens (DecoDocument reads it from the loader data).
+    pathTemplate: match.entry.path,
+    seo: seoFields(seo),
+    sections,
+    device: requestDevice(request),
+  };
 }

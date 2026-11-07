@@ -6,12 +6,19 @@ import { getRequest } from "@tanstack/react-start/server";
 import * as matchers from "@decocms/compat-v7/matchers";
 import { matcherContext } from "@decocms/compat-v7/tanstack/server";
 import { type RunSectionLoadersOptions, runSectionLoaders } from "@decocms/compat-v7/sections";
+import type { Lazy } from "@decocms/blocks";
+import type { Suggestion } from "@decocms/compat-v7/commerce/types";
+import {
+  detailsPageExtensions,
+  listingPageExtensions,
+  shopifyProductDetailsPage,
+  shopifyProductListingPage,
+} from "../src/blocks/commerce";
+import { seo, seoDetailsPage, seoListingPage } from "../src/blocks/seo";
 import { loader as categoryBannerLoader } from "../src/sections/Category/CategoryBanner";
 import { loader as wishlistLoader } from "../src/sections/Product/Wishlist";
 import { sectionLoaders } from "../src/setup/section-loaders";
-import shopifyProductDetailsPage from "../src/vendor/shopify/loaders/ProductDetailsPage";
 import shopifyProductList from "../src/vendor/shopify/loaders/ProductList";
-import shopifyProductListingPage from "../src/vendor/shopify/loaders/ProductListingPage";
 import websiteGoogleFonts from "../src/vendor/website/loaders/fonts/googleFonts";
 
 /** What a section block returns: the component to render (its v7 type name) and its props (/next/rendering). */
@@ -75,7 +82,19 @@ const shelfWithImage = section<typeof import("../src/sections/Product/ShelfWithI
 const wishlist = section<typeof import("../src/sections/Product/Wishlist")>("site/sections/Product/Wishlist.tsx");
 const instagramPosts = section<typeof import("../src/sections/Social/InstagramPosts")>("site/sections/Social/InstagramPosts.tsx");
 const whatsApp = section<typeof import("../src/sections/Social/WhatsApp")>("site/sections/Social/WhatsApp.tsx");
-const theme = section<typeof import("../src/sections/Theme/Theme")>("site/sections/Theme/Theme.tsx");
+/**
+ * The theme section. v7 never rendered it on this site (no theme section reaches the HTML of any
+ * page; the colors and fonts come from src/styles/app.css). It stays a block so saved themes keep
+ * their form, and renders nothing, which keeps every page as it looks today. Its font is a lazy
+ * argument, so the Google Fonts loader doesn't run for it.
+ */
+type ThemeProps = PropsOf<typeof import("../src/sections/Theme/Theme")>;
+const theme = (
+  _props: Omit<ThemeProps, "font"> & { font?: Lazy<NonNullable<ThemeProps["font"]>> },
+): BlockDescriptor | undefined => undefined;
+
+/** v7's `resolved`: a value saved as is. Only the header's search suggestions use it, saved as `null`. */
+const resolved = (props: { data: Suggestion | null }): Suggestion | null => props.data;
 
 /** A section module's loader as the runner calls it: (props, request), never a v7 ctx. */
 const own = (
@@ -130,6 +149,14 @@ const matcherInput = () => {
 };
 
 export default {
+  // SEO
+  "website/sections/Seo/SeoV2.tsx": seo,
+  "commerce/sections/Seo/SeoPLPV2.tsx": seoListingPage,
+  "commerce/sections/Seo/SeoPDPV2.tsx": seoDetailsPage,
+  // Commerce data, over the vendored v7 Shopify loaders (src/blocks/commerce.ts)
+  "commerce/loaders/product/extensions/listingPage.ts": listingPageExtensions,
+  "commerce/loaders/product/extensions/detailsPage.ts": detailsPageExtensions,
+  resolved,
   "shopify/loaders/ProductDetailsPage.ts": shopifyProductDetailsPage,
   "shopify/loaders/ProductList.ts": shopifyProductList,
   "shopify/loaders/ProductListingPage.ts": shopifyProductListingPage,
