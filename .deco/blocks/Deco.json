@@ -7,26 +7,29 @@
     "--animation-btn": "0.25s"
   },
   "font": {
-    "__resolveType": "website/loaders/fonts/googleFonts.ts",
-    "fonts": [
-      {
-        "variations": [
-          {
-            "weight": "400"
-          },
-          {
-            "weight": "500"
-          },
-          {
-            "weight": "600"
-          },
-          {
-            "weight": "700"
-          }
-        ],
-        "family": "Inter"
-      }
-    ]
+    "__resolveType": "lazy",
+    "value": {
+      "__resolveType": "website/loaders/fonts/googleFonts.ts",
+      "fonts": [
+        {
+          "variations": [
+            {
+              "weight": "400"
+            },
+            {
+              "weight": "500"
+            },
+            {
+              "weight": "600"
+            },
+            {
+              "weight": "700"
+            }
+          ],
+          "family": "Inter"
+        }
+      ]
+    }
   },
   "colorScheme": "dark",
   "otherStyles": {
@@ -52,7 +55,6 @@
     "base-200": "#FAFAFA",
     "base-300": "#5C5C5C",
     "base-400": "#C9CFCF",
-    "base-500": "#616B6B",
     "base-content": "#000000"
   }
 }
