@@ -1,9 +1,7 @@
-import { RequestContext } from "@decocms/blocks/sdk/requestContext";
 import { usePlatform } from "../../apps/site";
 import {
   type Address,
   type AddressBookState,
-  EMPTY_ADDRESS_BOOK,
 } from "../../platform/address/address.types";
 import {
   readAddressCookie,
@@ -17,17 +15,19 @@ export type AddressOp =
   | { op: "remove"; id: string }
   | { op: "setDefault"; id: string };
 
+// v7 read the request and set cookies through RequestContext; v8 has none, so the server function
+// (src/server/invoke.functions.ts) passes both.
 async function action(
   props: AddressOp,
-  req?: Request,
+  request: Request,
+  responseHeaders: Headers,
 ): Promise<AddressBookState> {
   const platform = usePlatform();
   if (platform === "vtex" || platform === "wake") {
     // TODO(consumer): wire the real platform address endpoints here.
   }
 
-  const request = req ?? RequestContext.current?.request;
-  const current = request ? readAddressCookie(request) : EMPTY_ADDRESS_BOOK;
+  const current = readAddressCookie(request);
   let addresses = [...current.addresses];
 
   if (props.op === "save") {
@@ -61,7 +61,7 @@ async function action(
   }
 
   const next: AddressBookState = { addresses };
-  RequestContext.responseHeaders.append(
+  responseHeaders.append(
     "Set-Cookie",
     serializeAddressCookie(next),
   );

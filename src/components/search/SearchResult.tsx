@@ -2,7 +2,7 @@ import type { ProductListingPage } from "@decocms/compat-v7/commerce/types";
 import {
   BreadcrumbJsonLd,
   PLPJsonLd,
-} from "@decocms/blocks/hooks";
+} from "~/vendor/blocks/JsonLd";
 import { mapProductToAnalyticsItem } from "@decocms/compat-v7/commerce/utils/productToAnalyticsItem";
 import { useId } from "react";
 import { useOffer } from "@decocms/compat-v7/commerce/sdk/useOffer";

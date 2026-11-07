@@ -1,6 +1,7 @@
 // Vendored from @decocms/apps-shopify (utils/graphql.ts) by the deco-v7-to-v8-migration skill. It's your code now.
-import { type FetchFn, withFetchTimeout } from "@decocms/blocks/sdk/fetchTimeout";
-import type { InstrumentedFetchInit } from "@decocms/blocks/sdk/instrumentedFetch";
+import { type FetchFn, withFetchTimeout } from "../../blocks/fetchTimeout";
+/** v8's instrumented fetch reads the GraphQL operation from `init.operation` (@decocms/blocks/fetch). */
+type InstrumentedFetchInit = RequestInit & { operation?: string };
 import { extractGraphqlOperationName } from "./graphqlOperationName";
 
 export function gql(strings: TemplateStringsArray, ...values: unknown[]): string {

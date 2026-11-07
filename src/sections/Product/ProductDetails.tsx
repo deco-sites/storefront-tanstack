@@ -2,7 +2,7 @@ import type { ProductDetailsPage } from "@decocms/compat-v7/commerce/types";
 import {
   BreadcrumbJsonLd,
   ProductJsonLd,
-} from "@decocms/blocks/hooks";
+} from "~/vendor/blocks/JsonLd";
 import ProductHero, {
   type HeroCopyConfig,
 } from "../../components/product/pdp/ProductHero";

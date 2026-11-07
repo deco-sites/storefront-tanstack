@@ -1,5 +1,5 @@
 // Vendored from @decocms/apps-website (loaders/fonts/googleFonts.ts) by the deco-v7-to-v8-migration skill. It's your code now.
-import { withFetchTimeout } from "@decocms/blocks/sdk/fetchTimeout";
+import { withFetchTimeout } from "../../../blocks/fetchTimeout";
 import type { Font } from "../../types";
 
 const timeoutFetch = withFetchTimeout();

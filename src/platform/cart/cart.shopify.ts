@@ -1,4 +1,4 @@
-import type { ShopifyCart } from "@decocms/apps-shopify";
+import type { ShopifyCart } from "../../vendor/shopify/loaders/cart";
 import { EMPTY_CART, type CartItem, type CartState } from "./cart.types";
 
 const parseMoney = (m?: { amount: string; currencyCode: string }) =>

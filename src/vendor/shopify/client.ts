@@ -1,60 +1,29 @@
-// Vendored from @decocms/apps-shopify (client.ts) by the deco-v7-to-v8-migration skill. It's your code now.
-import type { FetchFn } from "@decocms/blocks/sdk/fetchTimeout";
+// Vendored from @decocms/apps-shopify 7.77.1 (client.ts) by the deco-v7-to-v8-migration skill. It's your code now.
+//
+// v7 configured this client once from the saved "deco-shopify" block (initShopifyFromBlocks) and
+// gave it the framework's instrumented fetch (setShopifyFetch). v8 has no app blocks: the store's
+// settings are code (src/clients/shopify.ts), and the client is created on first use with v8's
+// instrumented fetch (provider "shopify", the operation name from each document) over v7's 10 s
+// timeout. The GraphQL documents and the requests they send are v7's, byte for byte.
+import { createInstrumentedFetch } from "@decocms/blocks/fetch";
+import { shopifyConfig } from "../../clients/shopify";
+import { withFetchTimeout } from "../blocks/fetchTimeout";
 import { createGraphqlClient, type GraphQLClient } from "./utils/graphql";
 
 export interface ShopifyConfig {
 	storeName: string;
 	storefrontAccessToken: string;
-	publicUrl?: string;
 }
 
 let _client: GraphQLClient | null = null;
-let _config: ShopifyConfig | null = null;
-let _fetch: FetchFn | undefined;
-
-/**
- * Override the fetch function used by the Shopify GraphQL client.
- * Use this to plug in instrumented fetch for logging/tracing.
- *
- * @example
- * ```ts
- * import { createInstrumentedFetch } from "@decocms/blocks/sdk/instrumentedFetch";
- * import { setShopifyFetch } from "@decocms/apps/shopify";
- * setShopifyFetch(createInstrumentedFetch("shopify"));
- * ```
- */
-export function setShopifyFetch(fetchFn: FetchFn) {
-	_fetch = fetchFn;
-	if (_config) configureShopify(_config);
-}
-
-export function configureShopify(config: ShopifyConfig) {
-	_config = config;
-	_client = createGraphqlClient(
-		`https://${config.storeName}.myshopify.com/api/2026-04/graphql.json`,
-		{
-			"X-Shopify-Storefront-Access-Token": config.storefrontAccessToken,
-		},
-		_fetch,
-	);
-}
 
 export function getShopifyClient(): GraphQLClient {
-	if (!_client || !_config) {
-		throw new Error(
-			"Shopify not configured. Call configureShopify() first or check deco-shopify.json block.",
-		);
-	}
+	_client ??= createGraphqlClient(
+		`https://${shopifyConfig.storeName}.myshopify.com/api/2026-04/graphql.json`,
+		{
+			"X-Shopify-Storefront-Access-Token": shopifyConfig.storefrontAccessToken,
+		},
+		createInstrumentedFetch({ provider: "shopify", fetch: withFetchTimeout() }),
+	);
 	return _client;
-}
-
-export function getShopifyConfig(): ShopifyConfig {
-	if (!_config) {
-		throw new Error("Shopify not configured.");
-	}
-	return _config;
-}
-
-export function getBaseUrl(): string {
-	return _config?.publicUrl || "";
 }

@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import type { AddressInput } from "../../actions/address/submit";
+import type { AddressInput, AddressOp } from "../../actions/address/submit";
 import { type AddressBookState, EMPTY_ADDRESS_BOOK } from "./address.types";
 import { $siteActionsAddressSubmit, $siteLoadersAddress } from "../../server/invoke.functions";
 
@@ -24,7 +24,7 @@ export function useAddresses() {
 // Mutations reconcile via onSuccess (the server assigns ids and enforces the
 // single-default invariant, so an optimistic guess would be unreliable).
 function useAddressMutation<TInput>(
-  toOp: (input: TInput) => unknown,
+  toOp: (input: TInput) => AddressOp,
 ) {
   const qc = useQueryClient();
   return useMutation({
@@ -38,15 +38,15 @@ function useAddressMutation<TInput>(
 
 export function useSaveAddress() {
   return useAddressMutation<AddressInput>((address) => ({
-    op: "save",
+    op: "save" as const,
     address,
   }));
 }
 
 export function useRemoveAddress() {
-  return useAddressMutation<string>((id) => ({ op: "remove", id }));
+  return useAddressMutation<string>((id) => ({ op: "remove" as const, id }));
 }
 
 export function useSetDefaultAddress() {
-  return useAddressMutation<string>((id) => ({ op: "setDefault", id }));
+  return useAddressMutation<string>((id) => ({ op: "setDefault" as const, id }));
 }
