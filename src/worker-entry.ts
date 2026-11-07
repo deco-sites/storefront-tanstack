@@ -1,3 +1,6 @@
+// SPIKE: reads the hosted content from the spike's prefix on the delivery CDN when the
+// CAS_DELIVERY_ORIGIN var is set (src/cas-spike.ts; does nothing without it). Delete for production.
+import "./cas-spike";
 /**
  * The Worker (wrangler.jsonc "main"): TanStack Start behind `createDecoWorker`
  * (drafts, Studio framing, CMS redirects, the visitor), with this site's own
