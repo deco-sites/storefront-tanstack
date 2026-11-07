@@ -34,7 +34,7 @@
     "@decocms/apps-shopify": "^7.77.1",
     "@decocms/apps-vtex": "^7.77.1",
     "@decocms/apps-website": "^7.77.1",
-    "@decocms/blocks": "^7.77.1",
+    "@decocms/blocks": "8.10.0",
     "@decocms/blocks-admin": "^7.77.1",
     "@decocms/blocks-cli": "^7.77.1",
     "@decocms/tanstack": "^7.77.1",
