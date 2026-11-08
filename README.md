@@ -13,6 +13,8 @@ This is a **site repo** on Blocks v8: [`@decocms/tanstack`](https://www.npmjs.co
 | Schema | `.deco/schema.gen.json`, written by `deco schema` (runs before `dev` and `build`); CI runs `deco schema --check` |
 | Content check | `deco check` (runs before `build`): every saved block of the site's latest release must fit the code's schema |
 | CSP | `csp` in `src/worker-entry.ts`: v7's report-only list, plus the binding's `frame-ancestors` |
+| Content reads | Routing reads only the release index: `routes()` + `matchRoute` (`src/open-page.server.ts`), then the one matched page and the blocks it names. Nothing enumerates block bodies; the SDK has no `list()` (removed in 8.11) |
+| Sitemap | `/sitemap.xml` (`src/routes/sitemap[.]xml.ts`): `entries("page")` from the index, minus path templates (`:param`, `*`) and pages Studio marked `noIndex`; no page body is fetched. Products and collections stay in Shopify's sitemap |
 | A/B against a legacy origin | `abTestingRoutes` in `src/worker-entry.ts`, reading `SITES_KV` |
 
 ### Spike: content on the spikes CDN prefix
@@ -154,7 +156,7 @@ Open `http://localhost:5173`.
 ```
 src/
 ├── apps/                 # Site app composition (apps/site.ts)
-├── routes/               # TanStack Router file routes (__root, $, index, deco/*, account, login)
+├── routes/               # TanStack Router file routes (__root, $, index, sitemap.xml, deco/*, account, login)
 ├── sections/             # CMS-rendered sections (Header, Footer, Product, Newsletter, …)
 ├── components/           # UI components (header, minicart, product, search, ui, …)
 ├── platform/             # Domain state — TanStack Query hooks + createServerFn actions
