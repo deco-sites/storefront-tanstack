@@ -9,46 +9,46 @@
 
 import { createLoaderEntry } from "@decocms/blocks/sdk/cachedLoader";
 
-export const siteLoaders: Record<string, (props: any, request?: Request) => Promise<any>> = {
-  "site/actions/address/submit": async (props: any, request?: Request) => {
+export const siteLoaders: Record<string, (props: any, request?: Request, ctx?: any) => Promise<any>> = {
+  "site/actions/address/submit": async (props: any, request?: Request, ctx?: any) => {
     const mod = await import("../src/actions/address/submit");
-    return (mod.default as any)(props, request);
+    return (mod.default as any)(props, request, ctx);
   },
-  "site/actions/address/submit.ts": async (props: any, request?: Request) => {
+  "site/actions/address/submit.ts": async (props: any, request?: Request, ctx?: any) => {
     const mod = await import("../src/actions/address/submit");
-    return (mod.default as any)(props, request);
+    return (mod.default as any)(props, request, ctx);
   },
-  "site/actions/newsletter/subscribe": async (props: any, request?: Request) => {
+  "site/actions/newsletter/subscribe": async (props: any, request?: Request, ctx?: any) => {
     const mod = await import("../src/actions/newsletter/subscribe");
-    return (mod.default as any)(props, request);
+    return (mod.default as any)(props, request, ctx);
   },
-  "site/actions/newsletter/subscribe.ts": async (props: any, request?: Request) => {
+  "site/actions/newsletter/subscribe.ts": async (props: any, request?: Request, ctx?: any) => {
     const mod = await import("../src/actions/newsletter/subscribe");
-    return (mod.default as any)(props, request);
+    return (mod.default as any)(props, request, ctx);
   },
-  "site/actions/notifyMe/subscribe": async (props: any, request?: Request) => {
+  "site/actions/notifyMe/subscribe": async (props: any, request?: Request, ctx?: any) => {
     const mod = await import("../src/actions/notifyMe/subscribe");
-    return (mod.default as any)(props, request);
+    return (mod.default as any)(props, request, ctx);
   },
-  "site/actions/notifyMe/subscribe.ts": async (props: any, request?: Request) => {
+  "site/actions/notifyMe/subscribe.ts": async (props: any, request?: Request, ctx?: any) => {
     const mod = await import("../src/actions/notifyMe/subscribe");
-    return (mod.default as any)(props, request);
+    return (mod.default as any)(props, request, ctx);
   },
-  "site/actions/shipping/simulate": async (props: any, request?: Request) => {
+  "site/actions/shipping/simulate": async (props: any, request?: Request, ctx?: any) => {
     const mod = await import("../src/actions/shipping/simulate");
-    return (mod.default as any)(props, request);
+    return (mod.default as any)(props, request, ctx);
   },
-  "site/actions/shipping/simulate.ts": async (props: any, request?: Request) => {
+  "site/actions/shipping/simulate.ts": async (props: any, request?: Request, ctx?: any) => {
     const mod = await import("../src/actions/shipping/simulate");
-    return (mod.default as any)(props, request);
+    return (mod.default as any)(props, request, ctx);
   },
-  "site/actions/wishlist/submit": async (props: any, request?: Request) => {
+  "site/actions/wishlist/submit": async (props: any, request?: Request, ctx?: any) => {
     const mod = await import("../src/actions/wishlist/submit");
-    return (mod.default as any)(props, request);
+    return (mod.default as any)(props, request, ctx);
   },
-  "site/actions/wishlist/submit.ts": async (props: any, request?: Request) => {
+  "site/actions/wishlist/submit.ts": async (props: any, request?: Request, ctx?: any) => {
     const mod = await import("../src/actions/wishlist/submit");
-    return (mod.default as any)(props, request);
+    return (mod.default as any)(props, request, ctx);
   },
   "site/loaders/address": createLoaderEntry("site/loaders/address", () => import("../src/loaders/address")),
   "site/loaders/address.ts": createLoaderEntry("site/loaders/address", () => import("../src/loaders/address")),
