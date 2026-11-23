@@ -4,6 +4,6 @@
   "generators": {
     "invoke": {"v":2,"args":[],"cli":"7.77.1","deco":"@decocms/apps-commerce@7.77.1 @decocms/apps-shopify@7.77.1 @decocms/apps-vtex@7.77.1 @decocms/apps-website@7.77.1 @decocms/blocks@7.77.1 @decocms/blocks-admin@7.77.1 @decocms/blocks-cli@7.77.1 @decocms/tanstack@7.77.1","inputs":"fa8066c32053e39d6f88e9a9fc1621f3f15ce78fa3f9be75dcd3c2c84dbcea2a"},
     "loaders": {"v":2,"args":["--loaders-dir","src/loaders","--actions-dir","src/actions"],"cli":"7.77.1","deco":"@decocms/apps-commerce@7.77.1 @decocms/apps-shopify@7.77.1 @decocms/apps-vtex@7.77.1 @decocms/apps-website@7.77.1 @decocms/blocks@7.77.1 @decocms/blocks-admin@7.77.1 @decocms/blocks-cli@7.77.1 @decocms/tanstack@7.77.1","inputs":"21ae33912e96931233ac94134bea5eb3a4d07f442f727e85aa4ba8d015553ce1"},
-    "sections": {"v":2,"args":["--sections-dir","src/sections"],"cli":"7.77.1","deco":"@decocms/apps-commerce@7.77.1 @decocms/apps-shopify@7.77.1 @decocms/apps-vtex@7.77.1 @decocms/apps-website@7.77.1 @decocms/blocks@7.77.1 @decocms/blocks-admin@7.77.1 @decocms/blocks-cli@7.77.1 @decocms/tanstack@7.77.1","inputs":"f758aa79a2f4838d3297baf7fcaaa7972f710527fee80bea2954e27dc1b99be5"}
+    "sections": {"v":2,"args":["--sections-dir","src/sections"],"cli":"7.77.1","deco":"@decocms/apps-commerce@7.77.1 @decocms/apps-shopify@7.77.1 @decocms/apps-vtex@7.77.1 @decocms/apps-website@7.77.1 @decocms/blocks@7.77.1 @decocms/blocks-admin@7.77.1 @decocms/blocks-cli@7.77.1 @decocms/tanstack@7.77.1","inputs":"183b13ea37818feea3103b7d1f59f683ba630558154bc4c82e2485233181a957"}
   }
 }
